@@ -15,7 +15,7 @@ public class User {
 	private Date joinAt;
 	private Date updateAt;
 	private Date deleteAt;
-
+	
 	public User() {
 	}
 

@@ -5,6 +5,7 @@ import java.util.Date;
 public class Routine {
 	private int id;
 	private int userId;
+	private int originUserId;
 	private String writer;
 	private String title;
 	private String content;
@@ -17,8 +18,9 @@ public class Routine {
 	public Routine() {
 	}
 
-	public Routine(int userId, String writer, String title, String content, int likeCnt, int workoutTime) {
+	public Routine(int userId, int originUserId, String writer, String title, String content, int likeCnt, int workoutTime) {
 		this.userId = userId;
+		this.originUserId = originUserId;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
@@ -40,6 +42,14 @@ public class Routine {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	
+	public int getOriginUserId() {
+		return originUserId;
+	}
+
+	public void setOriginUserId(int originUserId) {
+		this.originUserId = originUserId;
 	}
 
 	public String getWriter() {
@@ -108,9 +118,9 @@ public class Routine {
 
 	@Override
 	public String toString() {
-		return "Routine [id=" + id + ", writer=" + writer + ", title=" + title + ", content=" + content + ", likeCnt="
-				+ likeCnt + ", workoutTime=" + workoutTime + ", createAt=" + createAt + ", updateAt=" + updateAt
-				+ ", deleteAt=" + deleteAt + "]";
+		return "Routine [id=" + id + ", userId=" + userId + ", originUserId=" + originUserId + ", writer=" + writer
+				+ ", title=" + title + ", content=" + content + ", likeCnt=" + likeCnt + ", workoutTime=" + workoutTime
+				+ ", createAt=" + createAt + ", updateAt=" + updateAt + ", deleteAt=" + deleteAt + "]";
 	}
 
 }
