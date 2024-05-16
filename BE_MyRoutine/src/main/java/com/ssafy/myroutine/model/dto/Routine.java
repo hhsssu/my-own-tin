@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Routine {
 	private int id;
+	private int userId;
 	private String writer;
 	private String title;
 	private String content;
@@ -16,7 +17,8 @@ public class Routine {
 	public Routine() {
 	}
 
-	public Routine(String writer, String title, String content, int likeCnt, int workoutTime) {
+	public Routine(int userId, String writer, String title, String content, int likeCnt, int workoutTime) {
+		this.userId = userId;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
@@ -30,6 +32,14 @@ public class Routine {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getWriter() {

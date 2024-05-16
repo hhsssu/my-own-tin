@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class Answer {
 	private int id;
+	private int userId;
+	private int questionId;
 	private String writer;
 	private String content;
 	private boolean isPicked;
@@ -14,7 +16,9 @@ public class Answer {
 	public Answer() {
 	}
 
-	public Answer(String writer, String content, boolean isPicked) {
+	public Answer(int userId, int questionId, String writer, String content, boolean isPicked) {
+		this.userId = userId;
+		this.questionId = questionId;
 		this.writer = writer;
 		this.content = content;
 		this.isPicked = isPicked;
@@ -26,6 +30,22 @@ public class Answer {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getQuestionId() {
+		return questionId;
+	}
+
+	public void setQuestionId(int questionId) {
+		this.questionId = questionId;
 	}
 
 	public String getWriter() {

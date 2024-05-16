@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Question {
 	private int id;
+	private int userId;
 	private String writer;
 	private String title;
 	private String content;
@@ -15,7 +16,8 @@ public class Question {
 	public Question() {
 	}
 
-	public Question(String writer, String title, String content, int likeCnt) {
+	public Question(int userId, String writer, String title, String content, int likeCnt) {
+		this.userId = userId;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
@@ -28,6 +30,14 @@ public class Question {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getWriter() {
