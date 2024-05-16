@@ -4,8 +4,36 @@
 	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.myroutine.model.dao.RoutineDao">
 
-
-
+	<!-- 루틴 등록 -->
+	<insert id="insert" parameterType="Routine">
+		INSERT INTO routines
+		VALUES (user_id = #{userId}, origin_user_id = #{originUserId}, writer = #{writer}, title = #{title}, content = #{content}, like_cnt = #{likeCnt}, workout_time = #{workoutTime})
+	</insert>
+	
+	<!-- 루틴 수정 -->
+	<update id="update" parameterType="Routine">
+		UPDATE routines
+		SET (수정될 내용)
+		WHERE routine_id = #{id}
+	</update>
+	
+	<!-- 루틴 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM routines
+		WHERE routine_id = #{id}
+	</delete>
+	
+	<!-- 루틴 조회 -->
+	<select id="select" parameterType="SearchCondition">
+		SELECT *
+		FROM routines
+		<if test="key != null">
+			WHERE ${key} LIKE CONCAT('%', #{word}, '%')
+		</if>
+		<if test="orderBy != null">
+			ORDER BY ${orderBy} ${orderByDir}
+		</if>
+	</select>
 
 
 </mapper>
