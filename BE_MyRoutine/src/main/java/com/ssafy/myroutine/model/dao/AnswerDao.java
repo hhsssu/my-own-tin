@@ -1,6 +1,6 @@
 package com.ssafy.myroutine.model.dao;
 
-public class AnswerDao {
+public interface AnswerDao {
 	
 	// 답변 등록
 	

@@ -1,6 +1,6 @@
 package com.ssafy.myroutine.model.dao;
 
-public class RoutineDao {
+public interface RoutineDao {
 	
 	// 루틴 등록
 	
