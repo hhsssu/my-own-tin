@@ -1,4 +1,4 @@
 package com.ssafy.myroutine.model.dto;
 
-public class Personality {
+public enum UserKeyword {
 }
