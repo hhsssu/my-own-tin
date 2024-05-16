@@ -4,8 +4,24 @@
 	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.myroutine.model.dao.AnswerDao">
 
-
-
+	<!-- 답변 등록 -->
+	<insert id="insert" parameterType="Answer">
+		INSERT INTO answers (user_id, question_id, writer, content, is_picked)
+		VALUES (#{userId}, #{questionId}, #{writer}, #{content}, #{isPicked})
+	</insert>
+	
+	<!-- 답변 수정 -->
+	<update id="update" parameterType="Answer">
+		UPDATE answers
+		SET (수정될 내용)
+		WHERE answer_id = #{id}
+	</update>
+	
+	<!-- 답변 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM answers
+		WHERE answer_id = #{id}
+	</delete>
 
 
 </mapper>
