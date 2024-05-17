@@ -7,7 +7,7 @@
 	<!-- 루틴 등록 -->
 	<insert id="insert" parameterType="Routine">
 		INSERT INTO routines
-		VALUES (user_id = #{userId}, origin_user_id = #{originUserId}, writer = #{writer}, title = #{title}, content = #{content}, like_cnt = #{likeCnt}, workout_time = #{workoutTime})
+		VALUES (#{userId}, #{originUserId}, #{writer}, #{title}, #{content}, #{likeCnt}, #{workoutTime})
 	</insert>
 	
 	<!-- 루틴 수정 -->
