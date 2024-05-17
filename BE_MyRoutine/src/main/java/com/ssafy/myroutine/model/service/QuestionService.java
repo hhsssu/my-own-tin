@@ -11,10 +11,10 @@ public interface QuestionService {
 	Question registQuestion(Question question);
 
 	// 질문 수정
-	int modifyQuestion(Question question);
+	boolean modifyQuestion(Question question);
 
 	// 질문 삭제
-	int removeQuestion(int id);
+	boolean removeQuestion(int id);
 
 	// 질문 조회
 	List<Question> searchQuestion(SearchCondition con);

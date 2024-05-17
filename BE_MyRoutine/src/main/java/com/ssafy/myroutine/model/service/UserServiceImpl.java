@@ -30,14 +30,14 @@ public class UserServiceImpl implements UserService {
 
 	// 사용자 정보 수정
 	@Override
-	public int modifyUser(User user) {
-		return userDao.update(user);
+	public boolean modifyUser(User user) {
+		return userDao.update(user) == 1;
 	}
 
 	// 사용자 회원 탈퇴
 	@Override
-	public int cancelUser(int id) {
-		return userDao.delete(id);
+	public boolean cancelUser(int id) {
+		return userDao.delete(id) == 1;
 	}
 
 }

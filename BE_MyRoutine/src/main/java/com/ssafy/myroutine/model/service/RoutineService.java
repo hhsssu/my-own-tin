@@ -11,10 +11,10 @@ public interface RoutineService {
 	Routine registRoutine(Routine routine);
 
 	// 루틴 수정
-	int modifyRoutine(Routine routine);
+	boolean modifyRoutine(Routine routine);
 
 	// 루틴 삭제
-	int removeRoutine(int id);
+	boolean removeRoutine(int id);
 
 	// 루틴 조회
 	List<Routine> searchRoutine(SearchCondition con);
