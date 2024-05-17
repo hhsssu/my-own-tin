@@ -6,22 +6,29 @@
 
 	<!-- 루틴 등록 -->
 	<insert id="insert" parameterType="Routine">
-		INSERT INTO routines
-		VALUES (#{userId}, #{originUserId}, #{writer}, #{title}, #{content}, #{likeCnt}, #{workoutTime})
+		INSERT INTO routines (users_user_id, origin_user_id, writer, part_1, part_2, title, content, like_cnt, workout_time)
+		VALUES (#{userId}, #{originUserId}, #{writer}, #{part1}, #{part2}, #{title}, #{content}, #{likeCnt}, #{workoutTime})
 	</insert>
 	
 	<!-- 루틴 수정 -->
 	<update id="update" parameterType="Routine">
 		UPDATE routines
-		SET (수정될 내용)
+		SET part_1 = #{part1}, part_2 = #{part2}, title = #{title}, content = #{content}, workout_time = #{workoutTime}
 		WHERE routine_id = #{id}
 	</update>
 	
 	<!-- 루틴 삭제 -->
-	<delete id="delete" parameterType="int">
+	<!-- <delete id="delete" parameterType="int">
 		DELETE FROM routines
 		WHERE routine_id = #{id}
-	</delete>
+	</delete> -->
+	<!-- delete_at 만 현재 시각으로 변경하는 쪽으로 구현 -->
+	<update id="delete" parameterType="int">
+		UPDATE routines
+		SET delete_at = now()
+		WHERE routine_id = #{id}
+	</update>
+	
 	
 	<!-- 루틴 조회 -->
 	<select id="select" parameterType="SearchCondition">

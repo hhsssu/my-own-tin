@@ -103,6 +103,8 @@ DROP TABLE IF EXISTS `myroutine`.`routines` ;
 CREATE TABLE IF NOT EXISTS `myroutine`.`routines` (
   `routine_id` INT NOT NULL AUTO_INCREMENT COMMENT '루틴고유번호',
   `writer` VARCHAR(20) NOT NULL COMMENT '작성자(닉네임)',
+  `part_1` VARCHAR(10) NOT NULL COMMENT '운동부위 1번',
+  `part_2` VARCHAR(10) NULL COMMENT '운동부위 2번',
   `title` VARCHAR(50) NOT NULL COMMENT '루틴제목',
   `content` TEXT NOT NULL COMMENT '루틴내용',
   `like_cnt` INT NOT NULL COMMENT '좋아요수',
