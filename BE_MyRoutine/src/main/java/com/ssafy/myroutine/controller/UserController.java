@@ -1,6 +1,7 @@
 package com.ssafy.myroutine.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/myroutine/user")
 @Tag(name = "UserController", description = "사용자 CRUD")
-// @CrossOrigin 추가 예정
+@CrossOrigin("http://localhost:5173")
 public class UserController {
 
 	private final UserService userService;
