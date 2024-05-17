@@ -8,7 +8,7 @@ import com.ssafy.myroutine.model.dto.SearchCondition;
 public interface QuestionDao {
 
 	// 질문 등록
-	Question insert(Question question);
+	int insert(Question question);
 
 	// 질문 수정
 	int update(Question question);

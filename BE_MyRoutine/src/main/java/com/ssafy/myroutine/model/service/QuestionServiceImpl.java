@@ -19,8 +19,8 @@ public class QuestionServiceImpl implements QuestionService {
 	
 	// 질문 등록
 	@Override
-	public Question registQuestion(Question question) {
-		return questionDao.insert(question);
+	public boolean registQuestion(Question question) {
+		return questionDao.insert(question) == 1;
 	}
 
 	// 질문 수정
