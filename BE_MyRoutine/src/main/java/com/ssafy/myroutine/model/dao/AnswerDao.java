@@ -7,7 +7,7 @@ import com.ssafy.myroutine.model.dto.Answer;
 public interface AnswerDao {
 	
 	// 답변 등록
-	Answer insert(Answer answer);
+	int insert(Answer answer);
 	
 	// 답변 수정
 	int update(Answer answer);
@@ -16,5 +16,5 @@ public interface AnswerDao {
 	int delete(int id);
 	
 	// 답변 전체 조회
-	List<Answer> selectAll(int questionId);
+	List<Answer> selectAll();
 }

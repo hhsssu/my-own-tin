@@ -18,8 +18,8 @@ public class AnswerServiceImpl implements AnswerService {
 	
 	// 답변 등록
 	@Override
-	public Answer registAnswer(Answer answer) {
-		return answerDao.insert(answer);
+	public boolean registAnswer(Answer answer) {
+		return answerDao.insert(answer) == 1;
 	}
 
 	// 답변 수정
@@ -36,8 +36,8 @@ public class AnswerServiceImpl implements AnswerService {
 
 	// 답변 전체 조회
 	@Override
-	public List<Answer> selectAllAnswer(int questionId) {
-		return answerDao.selectAll(questionId);
+	public List<Answer> selectAllAnswer() {
+		return answerDao.selectAll();
 	}
 
 }

@@ -8,7 +8,7 @@ import com.ssafy.myroutine.model.dto.SearchCondition;
 public interface QuestionService {
 
 	// 질문 등록
-	Question registQuestion(Question question);
+	boolean registQuestion(Question question);
 
 	// 질문 수정
 	boolean modifyQuestion(Question question);
