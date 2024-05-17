@@ -12,7 +12,7 @@
 	</insert>
 
 	<!-- 사용자 로그인 -->
-	<select id="login" parameterType="Map" resultType="User">
+	<select id="selectOne" parameterType="Map" resultType="User">
 		SELECT *
 		FROM users
 		WHERE email = #{email} AND password = #{password}
@@ -36,9 +36,6 @@
 		SET delete_at = now()
 		WHERE user_id = #{id}
 	</update>
-
-	<!-- 사용자 정보 조회 -->
-	<!-- <select id="selectOne"></select> -->
 
 
 </mapper>

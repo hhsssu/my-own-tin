@@ -31,7 +31,7 @@
 	
 	
 	<!-- 루틴 조회 -->
-	<select id="select" parameterType="SearchCondition">
+	<select id="search" parameterType="SearchCondition" resultType="Routine">
 		SELECT *
 		FROM routines
 		<if test="key != null">
@@ -40,6 +40,13 @@
 		<if test="orderBy != null">
 			ORDER BY ${orderBy} ${orderByDir}
 		</if>
+	</select>
+	
+	<!-- 루틴 상세 조회 -->
+	<select id="searchById" parameterType="int" resultType="Routine">
+		SELECT *
+		FROM routines
+		WHERE routine_id = #{id}
 	</select>
 
 
