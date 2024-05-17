@@ -8,7 +8,7 @@
 	<!-- 회원가입 폼에 따라 값 다르게 넣어야 함 -->
 	<insert id="insert" parameterType="User">
 		INSERT INTO users (email, nickname, password, gender, age, isPublic, joinDate)
-		VALUES (email = #{email}, nickname = #{nickname}, password = #{password}, gender = #{gender}, age = #{age}, is_public = #{isPublic}, now())
+		VALUES (#{email}, #{nickname}, #{password}, #{gender}, #{age}, #{isPublic}, now())
 	</insert>
 
 	<!-- 사용자 로그인 -->
