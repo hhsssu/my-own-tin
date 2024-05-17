@@ -18,8 +18,8 @@ public class UserServiceImpl implements UserService {
 
 	// 사용자 회원가입
 	@Override
-	public User registUser(User user) {
-		return userDao.insert(user);
+	public boolean registUser(User user) {
+		return userDao.insert(user) == 1;
 	}
 
 	// 사용자 로그인 = 사용자 정보 조회

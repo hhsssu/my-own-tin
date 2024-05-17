@@ -7,8 +7,10 @@
 	<!-- 사용자 회원가입 -->
 	<!-- 회원가입 폼에 따라 값 다르게 넣어야 함 -->
 	<insert id="insert" parameterType="User">
-		INSERT INTO users (email, nickname, password, gender, age, is_public, is_admin, is_expert)
-		VALUES (#{email}, #{nickname}, #{password}, #{gender}, #{age}, #{isPublic}, #{isAdmin}, #{isExpert})
+		INSERT INTO users (email,
+		nickname, password, gender, age, is_public, is_admin, is_expert)
+		VALUES (#{email}, #{nickname}, #{password}, #{gender}, #{age},
+		#{isPublic}, #{isAdmin}, #{isExpert})
 	</insert>
 
 	<!-- 사용자 로그인 -->
@@ -21,15 +23,17 @@
 	<!-- 사용자 정보 수정 -->
 	<update id="update" parameterType="User">
 		UPDATE users
-		SET password = #{password}, age = #{age}, gender = #{gender}
+		<set>
+			<if test="password != null">password = #{password},</if>
+			<if test="age != null">age = #{age},</if>
+			<if test="gender != null">gender = #{gender},</if>
+		</set>
 		WHERE user_id = #{id}
 	</update>
 
 	<!-- 사용자 회원탈퇴 -->
-	<!-- <delete id="delete" parameterType="int">
-		DELETE FROM users
-		WHERE user_id = #{id}
-	</delete> -->
+	<!-- <delete id="delete" parameterType="int"> DELETE FROM users WHERE user_id 
+		= #{id} </delete> -->
 	<!-- delete_at 만 현재 시각으로 변경하는 쪽으로 구현 -->
 	<update id="delete" parameterType="int">
 		UPDATE users

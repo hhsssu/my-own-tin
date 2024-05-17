@@ -7,7 +7,7 @@ import com.ssafy.myroutine.model.dto.User;
 public interface UserDao {
 	
 	// 사용자 회원가입
-	User insert(User user);
+	int insert(User user);
 	
 	// 사용자 로그인 = 사용자 정보 조회
 	User selectOne(Map<String, String> user);
