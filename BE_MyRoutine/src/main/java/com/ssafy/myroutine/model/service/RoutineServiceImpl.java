@@ -19,8 +19,8 @@ public class RoutineServiceImpl implements RoutineService {
 	
 	// 루틴 등록
 	@Override
-	public Routine registRoutine(Routine routine) {
-		return routineDao.insert(routine);
+	public boolean registRoutine(Routine routine) {
+		return routineDao.insert(routine) == 1;
 	}
 
 	// 루틴 수정
