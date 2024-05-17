@@ -8,15 +8,18 @@ import com.ssafy.myroutine.model.dto.SearchCondition;
 public interface QuestionDao {
 	
 	// 질문 등록
-	Question insert(Question question);
+	Question insertQuestion(Question question);
 	
 	// 질문 수정
-	int update(Question question);
+	int updateQuestion(Question question);
 	
 	// 질문 삭제
-	int delete(int id);
+	int deleteQuestion(int id);
 	
-	// 질문 조회
-	List<Question> select(SearchCondition con);
+	// 질문 검색 조회
+	List<Question> searchQuestion(SearchCondition con);
+	
+	// 질문 상세
+	Question getQuestion(int id);
 	
 }
