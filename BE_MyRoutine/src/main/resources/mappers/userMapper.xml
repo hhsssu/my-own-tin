@@ -7,29 +7,35 @@
 	<!-- 사용자 회원가입 -->
 	<!-- 회원가입 폼에 따라 값 다르게 넣어야 함 -->
 	<insert id="insert" parameterType="User">
-		INSERT INTO users (email, nickname, password, gender, age, isPublic, joinDate)
-		VALUES (#{email}, #{nickname}, #{password}, #{gender}, #{age}, #{isPublic}, now())
+		INSERT INTO users (email, nickname, password, gender, age, is_public, is_admin, is_expert)
+		VALUES (#{email}, #{nickname}, #{password}, #{gender}, #{age}, #{isPublic}, #{isAdmin}, #{isExpert})
 	</insert>
 
 	<!-- 사용자 로그인 -->
 	<select id="login" parameterType="Map" resultType="User">
 		SELECT *
 		FROM users
-		WHERE user_id = #{id} AND password = #{password}
+		WHERE email = #{email} AND password = #{password}
 	</select>
 
 	<!-- 사용자 정보 수정 -->
 	<update id="update" parameterType="User">
 		UPDATE users
-		SET (수정될 내용)
+		SET password = #{password}, age = #{age}, gender = #{gender}
 		WHERE user_id = #{id}
 	</update>
 
 	<!-- 사용자 회원탈퇴 -->
-	<delete id="delete" parameterType="int">
+	<!-- <delete id="delete" parameterType="int">
 		DELETE FROM users
 		WHERE user_id = #{id}
-	</delete>
+	</delete> -->
+	<!-- delete_at 만 현재 시각으로 변경하는 쪽으로 구현 -->
+	<update id="delete" parameterType="int">
+		UPDATE users
+		SET delete_at = now()
+		WHERE user_id = #{id}
+	</update>
 
 	<!-- 사용자 정보 조회 -->
 	<!-- <select id="selectOne"></select> -->

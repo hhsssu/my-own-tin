@@ -7,6 +7,8 @@ public class Routine {
 	private int userId;
 	private int originUserId;
 	private String writer;
+	private String part1;
+	private String part2;
 	private String title;
 	private String content;
 	private int likeCnt;
@@ -18,10 +20,12 @@ public class Routine {
 	public Routine() {
 	}
 
-	public Routine(int userId, int originUserId, String writer, String title, String content, int likeCnt, int workoutTime) {
+	public Routine(int userId, int originUserId, String writer, String part1, String part2, String title, String content, int likeCnt, int workoutTime) {
 		this.userId = userId;
 		this.originUserId = originUserId;
 		this.writer = writer;
+		this.part1 = part1;
+		this.part2 = part2;
 		this.title = title;
 		this.content = content;
 		this.likeCnt = likeCnt;
@@ -58,6 +62,22 @@ public class Routine {
 
 	public void setWriter(String writer) {
 		this.writer = writer;
+	}
+
+	public String getPart1() {
+		return part1;
+	}
+
+	public void setPart1(String part1) {
+		this.part1 = part1;
+	}
+
+	public String getPart2() {
+		return part2;
+	}
+
+	public void setPart2(String part2) {
+		this.part2 = part2;
 	}
 
 	public String getTitle() {
@@ -119,8 +139,9 @@ public class Routine {
 	@Override
 	public String toString() {
 		return "Routine [id=" + id + ", userId=" + userId + ", originUserId=" + originUserId + ", writer=" + writer
-				+ ", title=" + title + ", content=" + content + ", likeCnt=" + likeCnt + ", workoutTime=" + workoutTime
-				+ ", createAt=" + createAt + ", updateAt=" + updateAt + ", deleteAt=" + deleteAt + "]";
+				+ ", part1=" + part1 + ", part2=" + part2 + ", title=" + title + ", content=" + content + ", likeCnt="
+				+ likeCnt + ", workoutTime=" + workoutTime + ", createAt=" + createAt + ", updateAt=" + updateAt
+				+ ", deleteAt=" + deleteAt + "]";
 	}
 
 }
