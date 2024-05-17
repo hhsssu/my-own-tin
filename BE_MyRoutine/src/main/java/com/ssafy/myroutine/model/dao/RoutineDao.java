@@ -18,8 +18,8 @@ public interface RoutineDao {
 
 	// 루틴 조회
 	List<Routine> search(SearchCondition con);
-
-	// 루틴 상세
+	
+	// 루틴 상세 조회
 	Routine searchById(int id);
 
 	// 조회수 증가

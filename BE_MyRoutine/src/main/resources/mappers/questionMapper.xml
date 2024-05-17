@@ -6,28 +6,32 @@
 
 	<!-- 질문 등록 -->
 	<insert id="insert" parameterType="Question">
-		INSERT INTO questions
-		(user_id, writer, title, content, like_cnt)
-		VALUES (#{userId},
-		#{writer}, #{title}, #{content}, #{likeCnt})
+		INSERT INTO questions (users_user_id, writer, title, content, like_cnt)
+		VALUES (#{userId}, #{writer}, #{title}, #{content}, #{likeCnt})
 	</insert>
 
 	<!-- 질문 수정 -->
 	<update id="update" parameterType="Question">
 		UPDATE questions
-		SET (수정될 내용)
+		SET title = #{title}, content = #{content}
 		WHERE question_id = #{id}
 	</update>
 
 	<!-- 질문 삭제 -->
-	<delete id="delete" parameterType="int">
+	<!-- <delete id="delete" parameterType="int">
 		DELETE FROM questions
-		WHERE
-		question_id = #{id}
-	</delete>
-
-	<!-- 질문 조회 -->
-	<select id="select" parameterType="SearchCondition">
+		WHERE question_id = #{id}
+	</delete> -->
+  
+	<!-- delete_at 만 현재 시각으로 변경하는 쪽으로 구현 -->
+	<update id="delete" parameterType="int">
+		UPDATE questions
+		SET delete_at = now()
+		WHERE question_id = #{id}
+	</update>
+	
+	<!-- 질문 검색 조회 -->
+	<select id="search" parameterType="SearchCondition" resultType="Question">
 		SELECT *
 		FROM questions
 		<if test="key != null">
@@ -36,6 +40,13 @@
 		<if test="orderBy != null">
 			ORDER BY ${orderBy} ${orderByDir}
 		</if>
+	</select>
+	
+	<!-- 질문 상세 조회 -->
+	<select id="searchById" parameterType="int" resultType="Question">
+		SELECT *
+		FROM questions
+		WHERE question_id = #{id}
 	</select>
 
 	<!-- 조회수 증가 -->
