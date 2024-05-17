@@ -7,6 +7,11 @@ import QnAView from "@/views/QnAView.vue";
 import LoginView from "@/views/LoginView.vue";
 import JoinView from "@/views/JoinView.vue";
 
+import RoutineList from "@/components/routine/RoutineList.vue";
+import RoutineCreate from "@/components/routine/RoutineCreate.vue";
+import RoutineDetail from "@/components/routine/RoutineDetail.vue";
+import RoutineUpdate from "@/components/routine/RoutineUpdate.vue";
+
 import SearchList from "@/components/search/SearchList.vue";
 import SearchDetail from "@/components/search/SearchDetail.vue";
 
@@ -14,6 +19,8 @@ import QnADetail from '@/components/qna/QnADetail.vue';
 import QnAList from '@/components/qna/QnAList.vue';
 import QnACreate from '@/components/qna/QnACreate.vue';
 import QnAUpdate from '@/components/qna/QnAUpdate.vue';
+
+import AnswerCreate from '@/components/qna/AnswerCreate.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -106,11 +113,11 @@ const router = createRouter({
         },
       ]
     },
-    { // 로그인
-      path: '/login',
-      name: 'loginView',
-      component: LoginView,
-    },
+    // { // 로그인
+    //   path: '/login',
+    //   name: 'loginView',
+    //   component: LoginView,
+    // },
     { // 회원가입
       path: '/join',
       name: 'joinView',
