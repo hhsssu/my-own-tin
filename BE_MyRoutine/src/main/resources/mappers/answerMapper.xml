@@ -30,7 +30,7 @@
 	</update>
 	
 	<!-- 답변 전체 조회 -->
-	<select id="selectAll" parameterType="questionId" resultType="Answer">
+	<select id="selectAll" parameterType="int" resultType="Answer">
 		SELECT *
 		FROM answers
 		WHERE questions_question_id = #{questionId}
