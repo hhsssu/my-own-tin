@@ -53,7 +53,8 @@ public class AnswerController {
 	@Transactional
 	@PutMapping("/")
 	@Operation(summary = "답변 수정", description = "답변 수정 기능")
-	public ResponseEntity<?> update(@RequestBody Answer ans) {
+	public ResponseEntity<?> update(@RequestParam int id, @RequestBody Answer ans) {
+		ans.setId(id);
 		if(ansService.modifyAnswer(ans))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
@@ -72,8 +73,9 @@ public class AnswerController {
 	
 	// 답변 전체 조회
 	@GetMapping("/")
-	public ResponseEntity<?> list(@ModelAttribute SearchCondition con) {
-		List<Answer> list = ansService.selectAllAnswer();
+	@Operation(summary = "답변 전체 조회", description = "질문에 해당하는 답변 조회 기능")
+	public ResponseEntity<?> list(@RequestParam int questionId) {
+		List<Answer> list = ansService.selectAllAnswer(questionId);
 		if(list == null || list.size() == 0)
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<Answer>>(list, HttpStatus.OK);

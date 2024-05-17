@@ -13,7 +13,7 @@
 	<!-- 답변 수정 -->
 	<update id="update" parameterType="Answer">
 		UPDATE answers
-		SET content = #{content}, update_at = now()
+		SET content = #{content}
 		WHERE answer_id = #{id}
 	</update>
 	

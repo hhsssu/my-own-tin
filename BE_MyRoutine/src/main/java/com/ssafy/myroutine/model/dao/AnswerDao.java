@@ -16,5 +16,5 @@ public interface AnswerDao {
 	int delete(int id);
 	
 	// 답변 전체 조회
-	List<Answer> selectAll();
+	List<Answer> selectAll(int questionId);
 }

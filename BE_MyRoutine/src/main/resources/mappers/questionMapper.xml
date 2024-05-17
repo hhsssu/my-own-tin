@@ -54,7 +54,7 @@
 		UPDATE questions
 		SET
 		view_cnt = view_cnt + 1
-		WHERE id = #{id};
+		WHERE question_id = #{id};
 	</update>
 
 </mapper>

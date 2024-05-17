@@ -16,5 +16,5 @@ public interface AnswerService {
 	boolean removeAnswer(int id);
 	
 	// 답변 전체 조회
-	List<Answer> selectAllAnswer();
+	List<Answer> selectAllAnswer(int questionId);
 }

@@ -56,7 +56,8 @@ public class QuestionController {
 //	@PutMapping("/{id}") --> PathVariable 처리와 ID 추가 작업 필요
 	@PutMapping("/")
 	@Operation(summary = "질문 수정", description = "질문 수정 기능")
-	public ResponseEntity<?> update(@RequestBody Question que) {
+	public ResponseEntity<?> update(@RequestParam int id, @RequestBody Question que) {
+		que.setId(id);
 		if(queService.modifyQuestion(que)) // true
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
