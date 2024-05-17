@@ -36,8 +36,8 @@ public class AnswerServiceImpl implements AnswerService {
 
 	// 답변 전체 조회
 	@Override
-	public List<Answer> selectAllAnswer() {
-		return answerDao.selectAll();
+	public List<Answer> selectAllAnswer(int questionId) {
+		return answerDao.selectAll(questionId);
 	}
 
 }
