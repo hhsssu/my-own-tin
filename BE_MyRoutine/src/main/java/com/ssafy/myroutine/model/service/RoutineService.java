@@ -8,7 +8,7 @@ import com.ssafy.myroutine.model.dto.SearchCondition;
 public interface RoutineService {
 
 	// 루틴 등록
-	Routine registRoutine(Routine routine);
+	boolean registRoutine(Routine routine);
 
 	// 루틴 수정
 	boolean modifyRoutine(Routine routine);
