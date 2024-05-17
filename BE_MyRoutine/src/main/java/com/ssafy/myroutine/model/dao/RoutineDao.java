@@ -8,18 +8,20 @@ import com.ssafy.myroutine.model.dto.SearchCondition;
 public interface RoutineDao {
 
 	// 루틴 등록
-	Routine insertRoutine(Routine routine);
+	Routine insert(Routine routine);
 
 	// 루틴 수정
-	int updateRoutine(Routine routine);
+	int update(Routine routine);
 
 	// 루틴 삭제
-	int deleteRoutine(int id);
+	int delete(int id);
 
 	// 루틴 조회
-	List<Routine> searchRoutine(SearchCondition con);
-	
-	// 루틴 상세
-	Routine getRoutine(int id);
+	List<Routine> search(SearchCondition con);
 
+	// 루틴 상세
+	Routine searchById(int id);
+
+	// 조회수 증가
+//	public int updateViewCnt(int id);
 }
