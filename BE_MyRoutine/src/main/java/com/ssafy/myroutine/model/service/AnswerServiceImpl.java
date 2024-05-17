@@ -24,14 +24,14 @@ public class AnswerServiceImpl implements AnswerService {
 
 	// 답변 수정
 	@Override
-	public int modifyAnswer(Answer answer) {
-		return answerDao.update(answer);
+	public boolean modifyAnswer(Answer answer) {
+		return answerDao.update(answer) == 1;
 	}
 
 	// 답변 삭제
 	@Override
-	public int removeAnswer(int id) {
-		return answerDao.delete(id);
+	public boolean removeAnswer(int id) {
+		return answerDao.delete(id) == 1;
 	}
 
 	// 답변 전체 조회

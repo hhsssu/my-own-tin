@@ -14,6 +14,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "RoutineController", description = "루틴 CRUD")
 @CrossOrigin("http://localhost:5173")
 public class RoutineController {
+	private static final String SUCCESS = "success";
+	private static final String FAIL = "fail";
 
 	private final RoutineService routineService;
 	
@@ -23,7 +25,7 @@ public class RoutineController {
 	}
 	
 	// 루틴 등록
-
+	
 	// 루틴 수정
 
 	// 루틴 삭제

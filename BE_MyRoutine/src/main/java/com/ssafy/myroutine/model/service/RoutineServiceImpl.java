@@ -25,14 +25,14 @@ public class RoutineServiceImpl implements RoutineService {
 
 	// 루틴 수정
 	@Override
-	public int modifyRoutine(Routine routine) {
-		return routineDao.update(routine);
+	public boolean modifyRoutine(Routine routine) {
+		return routineDao.update(routine) == 1;
 	}
 
 	// 루틴 삭제
 	@Override
-	public int removeRoutine(int id) {
-		return routineDao.delete(id);
+	public boolean removeRoutine(int id) {
+		return routineDao.delete(id) == 1;
 	}
 
 	// 루틴 검색 조회

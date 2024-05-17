@@ -25,14 +25,14 @@ public class QuestionServiceImpl implements QuestionService {
 
 	// 질문 수정
 	@Override
-	public int modifyQuestion(Question question) {
-		return questionDao.update(question);
+	public boolean modifyQuestion(Question question) {
+		return questionDao.update(question) == 1;
 	}
 
 	// 질문 삭제
 	@Override
-	public int removeQuestion(int id) {
-		return questionDao.delete(id);
+	public boolean removeQuestion(int id) {
+		return questionDao.delete(id) == 1;
 	}
 
 	// 질문 검색 조회

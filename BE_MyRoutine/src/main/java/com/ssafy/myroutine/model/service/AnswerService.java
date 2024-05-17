@@ -10,10 +10,10 @@ public interface AnswerService {
 	Answer registAnswer(Answer answer);
 
 	// 답변 수정
-	int modifyAnswer(Answer answer);
+	boolean modifyAnswer(Answer answer);
 	
 	// 답변 삭제
-	int removeAnswer(int id);
+	boolean removeAnswer(int id);
 	
 	// 답변 전체 조회
 	List<Answer> selectAllAnswer(int questionId);

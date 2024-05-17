@@ -13,9 +13,9 @@ public interface UserService {
 	User getUser(Map<String, String> user);
 
 	// 사용자 정보 수정
-	int modifyUser(User user);
+	boolean modifyUser(User user);
 
 	// 사용자 회원 탈퇴
-	int cancelUser(int id);
+	boolean cancelUser(int id);
 
 }
