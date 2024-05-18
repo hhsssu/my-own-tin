@@ -16,8 +16,11 @@
 <script setup>
 import { ref } from "vue";
 import { useUserStore } from "@/stores/user";
+import { useRouter } from "vue-router";
+
 
 const store = useUserStore();
+const router = useRouter();
 
 const id = ref("");
 const pw = ref("");
@@ -27,6 +30,7 @@ const login = function () {
 };
 const join = function () {
   console.log("join");
+  router.push({name: 'joinView'})
 };
 </script>
 
