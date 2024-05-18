@@ -32,7 +32,7 @@ const router = createRouter({
     },
     { // 루틴 페이지
       path: '/routine',
-      name: 'routineView',
+      name: 'routine',
       component: RoutineView,
       children: [ // RoutineView 컴포넌트 내부의 <RouterView/>에서 렌더링됨.
         { // 루틴 리스트
@@ -59,12 +59,12 @@ const router = createRouter({
     },
     { // 마이페이지
       path: '/mypage',
-      name: 'mypageView',
+      name: 'mypage',
       component: MyPageView,
     },
     { // 질문답변 페이지
       path: '/qna',
-      name: 'qnaView',
+      name: 'qna',
       component: QnAView,
       children: [ // QnAView 컴포넌트 내부의 <RouterView/>에서 렌더링됨.
         { // 질문 리스트
@@ -98,7 +98,7 @@ const router = createRouter({
     },
     { // 검색 페이지
       path: '/search',
-      name: 'searchView',
+      name: 'search',
       component: SearchView,
       children: [ // SearchView 컴포넌트 내부의 <RouterView/>에서 렌더링됨.
         { // 루틴 검색 리스트
@@ -120,7 +120,7 @@ const router = createRouter({
     // },
     { // 회원가입
       path: '/join',
-      name: 'joinView',
+      name: 'join',
       component: JoinView,
     },
   ]
