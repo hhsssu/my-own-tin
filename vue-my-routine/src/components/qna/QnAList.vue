@@ -52,13 +52,14 @@
             <!-- 상단 작성자 프로필 -->
             <div class="qna-list-card-profile">
                 <!-- 작성자 프로필 사진 -->
-                <img src="/src/assets/img/profile.png" class="qna-list-card-pic">
-                <div class="qna-list-card-name">익명</div>
+                <img src="/src/assets/img/profile_male.png" class="qna-list-card-pic">
+                <div class="qna-list-card-name">힘세진</div>
+                <div class="qna-list-card-level">Lv. 2</div>
                 <div class="qna-list-card-tag">20대</div>
-                <div class="qna-list-card-tag">여성</div>
+                <div class="qna-list-card-tag">남성</div>
             </div>
             <!-- 질문 제목 -->
-            <div class="qna-list-card-title">헬스장 초보자 루틴 추천 좀 해주세요!!!!🚨🚨🚨</div>
+            <div class="qna-list-card-title">추가로 할 운동 추천해주세요</div>
         </div>
     </div>
   </div>
@@ -132,6 +133,13 @@
     padding: 3px 10px;
     margin: 0px 5px;
     font-size: 18px;
+}
+
+.qna-list-card-level {
+    background-color: #FAE6B1;
+    padding: 3px 10px;
+    margin: 0px 5px;
+    border-radius: 3px;
 }
 
 .qna-list-card-tag {
