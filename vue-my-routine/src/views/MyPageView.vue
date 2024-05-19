@@ -48,22 +48,26 @@
                 <div class="profile-title">회원정보 수정</div>
                 <div class="profile-modify-user">바로가기</div>
             </div>
-            <a href="#" class="profile-out-btn">로그아웃</a>
-            <a href="#" class="profile-out-btn">회원탈퇴</a>
         </div>
-
+        
         <!-- 마이페이지 오른쪽 메뉴 선택 시 나올 부분 -->
         <div class="mypage-click-container">
             <!-- 프로필 페이지에 있는 메뉴들 클릭 시 띄울 화면 구현 -->
             <!-- <div v-if="">
             </div> -->
-            <MypageModifyUser />
+            <MypageModifyProfile />
+            <!-- <MypagePoint /> -->
+            <!-- <MypageRoutineBox /> -->
+            <!-- <MypageModifyUser /> -->
         </div>
     </div>
 </template>
 
 <script setup>
 import TheHeaderNav from '@/components/common/TheHeaderNav.vue';
+import MypageModifyProfile from '@/components/mypage/MypageModifyProfile.vue';
+import MypagePoint from '@/components/mypage/MypagePoint.vue';
+import MypageRoutineBox from '@/components/mypage/MypageRoutineBox.vue';
 import MypageModifyUser from '@/components/mypage/MypageModifyUser.vue';
 
 </script>
@@ -73,6 +77,7 @@ import MypageModifyUser from '@/components/mypage/MypageModifyUser.vue';
     width: 1000px;
     margin: 0 auto;
     display: flex;
+    font-family: 'Pretendard';
 }
 
 .mypage-profile-container {
@@ -96,8 +101,8 @@ import MypageModifyUser from '@/components/mypage/MypageModifyUser.vue';
 /* 프로필 닉네임 스타일 */
 .profile-name {
     color: #555;
-    font-weight: bold;
-    font-size: 1.3em;
+    font-weight: 800;
+    font-size: 1.5em;
     margin: 0 5px 20px 0;
 }
 
@@ -106,7 +111,7 @@ import MypageModifyUser from '@/components/mypage/MypageModifyUser.vue';
     background-color: #FAE6B1;
     font-size: 0.8em;
     color: #333;
-    font-weight: bold;
+    font-weight: 500;
     padding: 4px 5px;
     margin-bottom: 20px;
     border-radius: 3px;
@@ -130,7 +135,7 @@ import MypageModifyUser from '@/components/mypage/MypageModifyUser.vue';
 .routine-tag {
     background-color: #aaa;
     color: white;
-    font-weight: normal;
+    font-weight: 300;
 }
 
 /* 각 프로필 박스 스타일 */
@@ -144,7 +149,7 @@ import MypageModifyUser from '@/components/mypage/MypageModifyUser.vue';
 
 /* 프로필 클릭 박스의 타이틀 스타일 */
 .profile-title {
-    font-weight: bold;
+    font-weight: 700;
     font-size: 0.9em;
     margin-bottom: 15px;
 }
@@ -174,7 +179,7 @@ import MypageModifyUser from '@/components/mypage/MypageModifyUser.vue';
 
 /* 숫자 스타일 */
 .num {
-    font-weight: bold;
+    font-weight: 700;
     font-size: 2em;
     text-align: center;
 }
@@ -183,23 +188,16 @@ import MypageModifyUser from '@/components/mypage/MypageModifyUser.vue';
 .profile-modify-user {
     color: #777;
     text-align: center;
-    font-weight: bold;
+    font-weight: 700;
 }
 
-.profile-out-btn {
-    color: #777;
-    width: 50%;
-    text-decoration: none;
-    font-size: 0.8em;
-    text-align: center;
-    margin:0 auto;
-}
+
 
 
 
 .mypage-click-container {
     width: 50%;
-    background-color: #c6dfff;
+    background-color: #d7ffda;
     height: 500px;
     padding: 0 50px 0 20px;
 }
