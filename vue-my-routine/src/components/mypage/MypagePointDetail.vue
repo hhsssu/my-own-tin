@@ -1,0 +1,124 @@
+<template>
+    <div class="mypage-point-detail-container">
+        <h2 class="view-title">포인트/마일리지 적립 내역</h2>
+        <div class="point-detail-total-box">
+            <div class="point-detail-total">포인트 : {{ point }}P</div>
+            <div class="point-detail-total">마일리지 : {{ mile }}M</div>
+        </div>
+
+        <table class="point-detail-table">
+            <thead>
+                <tr class="point-detail-table-header">
+                    <th>거래일</th>
+                    <th>이용 내역</th>
+                    <th>적립/사용</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr v-for="item in items"> -->
+                <tr class="point-detail-table-content">
+                    <td class="point-detail-table-date">{{ date }}</td>
+                    <td class="point-detail-table-detail">{{ detail }}</td>
+                    <td class="point-detail-table-saveuse">{{ saveuse }}</td>
+                </tr>
+                <tr class="point-detail-table-content">
+                    <td class="point-detail-table-date">{{ date }}</td>
+                    <td class="point-detail-table-detail">{{ detail }}</td>
+                    <td class="point-detail-table-saveuse">{{ saveuse }}</td>
+                </tr>
+                <tr class="point-detail-table-content">
+                    <td class="point-detail-table-date">{{ date }}</td>
+                    <td class="point-detail-table-detail">{{ detail }}</td>
+                    <td class="point-detail-table-saveuse">{{ saveuse }}</td>
+                </tr>
+                <tr class="point-detail-table-content">
+                    <td class="point-detail-table-date">{{ date }}</td>
+                    <td class="point-detail-table-detail">{{ detail }}</td>
+                    <td class="point-detail-table-saveuse">{{ saveuse }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const point = ref(1900);
+const mile = ref(500);
+
+const date = ref('2024.05.19');
+const detail = ref('루틴 완료');
+const saveuse = ref('+100P');
+
+// 해당하는 회원의 포인트 내역 (날짜, 설명, 쌓인 금액) 불러오기
+// -값은 색상 변경
+
+</script>
+
+<style scoped>
+.mypage-point-detail-container {
+}
+
+
+
+/* 포인트, 마일리지 총 금액 레이아웃 정렬 */
+.point-detail-total-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 포인트, 마일리지 총 금액 */
+.point-detail-total {
+    margin: 0 15px 30px;
+    font-weight: 600;
+    color: #555;
+    font-size: 1.1em;
+}
+
+/* 포인트 상세 내역 테이블 */
+.point-detail-table {
+    text-align: center;
+    margin: 20px auto;
+}
+
+/* 테이블 헤더 */
+.point-detail-table-header {
+    font-weight: 600;
+    font-size: 1.1em;
+    border-bottom: 1px solid #999;
+}
+
+th {
+    padding-bottom: 7px;
+}
+
+/* 테이블 각 한줄 컬럼 */
+.point-detail-table-content {
+}
+
+/* 테이블 콘텐츠 */
+td {
+    padding: 15px 40px;
+}
+
+/* 거래일 */
+.point-detail-table-date {
+    color: #777;
+    font-weight: 400;
+
+}
+
+/* 이용내역 */
+.point-detail-table-detail {
+    font-weight: 400;
+}
+
+/* 적립/사용 포인트 */
+.point-detail-table-saveuse {
+    color: #FFA101;
+    font-weight: 500;
+}
+
+</style>
