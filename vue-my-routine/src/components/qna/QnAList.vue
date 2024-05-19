@@ -2,6 +2,7 @@
   <div class="qna-list">
     <div class="qna-list-container">
       <div><h1>질문 상담</h1></div>
+      <button class="qna-list-create-button" @click="createQnA">질문 등록</button>
       <!-- 질문 목록 페이지 내 검색 기능 -->
       <div class="qna-list-search">
         <div class="qna-list-search-input">
@@ -66,12 +67,36 @@
         </div>
       </div>
     </div>
-    <QnADetail />
+    <div v-if="showQnADetail">
+      <QnADetail />
+    </div>
+    <div v-else>
+      <QnACreate />
+    </div>
   </div>
 </template>
 
 <script setup>
+import { useRouter } from "vue-router";
+import QnACreate from "./QnACreate.vue";
 import QnADetail from "./QnADetail.vue";
+import { onMounted, ref } from "vue";
+
+const router = useRouter();
+const showQnADetail = ref(false);
+
+const createQnA = function () {
+  showQnADetail.value = false;
+  router.push({ name: "qnaCreate" });
+};
+
+onMounted(() => {
+  if(sessionStorage.getItem('selectedQnA')) {
+    showQnADetail.value = true;
+  } else {
+    showQnADetail.value = false;
+  }
+})
 </script>
 
 <style scoped>
@@ -80,11 +105,20 @@ import QnADetail from "./QnADetail.vue";
   /* width: 100%; */
 }
 
+/* 질문 등록 버튼 */
+.qna-list-create-button {
+  background-color: #ffa101;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
 .qna-list-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 600px;
+  width: 650px;
   border-right: 1px solid #777;
   padding-right: 15px;
 }
