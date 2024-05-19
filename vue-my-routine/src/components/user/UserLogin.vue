@@ -30,7 +30,7 @@ const login = function () {
 };
 const join = function () {
   console.log("join");
-  router.push({name: 'joinView'})
+  router.push({name: 'join'})
 };
 </script>
 
