@@ -70,7 +70,7 @@
     <div v-if="showQnADetail">
       <QnADetail />
     </div>
-    <div v-else>
+    <div v-else-if="showQnACreate">
       <QnACreate />
     </div>
   </div>
@@ -84,16 +84,20 @@ import { onMounted, ref } from "vue";
 
 const router = useRouter();
 const showQnADetail = ref(false);
+const showQnACreate = ref(false);
 
 const createQnA = function () {
   showQnADetail.value = false;
+  showQnACreate.value = true;
   router.push({ name: "qnaCreate" });
 };
 
 onMounted(() => {
   if(sessionStorage.getItem('selectedQnA')) {
+    showQnACreate.value = false;
     showQnADetail.value = true;
   } else {
+    showQnACreate.value = false;
     showQnADetail.value = false;
   }
 })
