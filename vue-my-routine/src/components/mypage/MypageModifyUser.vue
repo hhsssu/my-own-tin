@@ -1,20 +1,109 @@
 <template>
     <div>
-        <a href="#" class="profile-out-btn">회원탈퇴</a>
+        <div class="view-title">회원 정보수정</div>
+        <div class="mypage-modify-detail-container">
+            <div class="flex-box flex-box-end">
+                <div class="input-label">e-mail</div>
+                <input class="input-text input-email-readonly" type="text" value="strong123@ssafy.com" readonly>
+            </div>
+            <div class="flex-box flex-box-end">
+                <div class="input-label">새 비밀번호</div>
+                <input class="input-text" type="password" placeholder="8자 이상 15자 이하">
+            </div>
+            <div class="flex-box flex-box-end">
+                <div class="input-label">비밀번호 확인</div>
+                <input class="input-text" type="password" placeholder="8자 이상 15자 이하">
+            </div>
+            <div class="flex-box flex-box-end">
+                <div class="input-label">나이</div>
+                <input class="input-text" type="number" value="27">
+            </div>
+            <div class="flex-box flex-box-end">
+                <div class="input-label">성별</div>
+                <label for="gender">
+                    <input class="input-radio" type="radio" name="gender" v-model="gender" value="male" />
+                    <span>남성</span>
+                </label>
+                <label for="gender">
+                    <input class="input-radio" type="radio" name="gender" v-model="gender" value="female" :checked="true"/>
+                    <span>여성</span>
+                </label>
+            </div>
+            <div class="display-block">
+                <button type="button" class="modify-fin-btn">수정 완료</button>
+            </div>
+        </div>
+        <div class="profile-out-btn">
+            <span class="span-out-btn">회원탈퇴</span>
+        </div>
     </div>
 </template>
 
 <script setup>
+// 수정완료 클릭하면 제대로 작성하였는지 여부에 따라
+// 수정 완료 알림창 띄워줌
+// v-model로 값 보내줌
 
 </script>
 
 <style scoped>
+.mypage-modify-detail-container {
+    margin: 0 auto;
+}
+
 .profile-out-btn {
     color: #777;
     width: 50%;
     text-decoration: none;
-    font-size: 0.8em;
+    font-size: 0.9em;
     text-align: center;
-    margin:0 auto;
+    margin: 170px auto;
 }
+
+.span-out-btn {
+    cursor: pointer;
+}
+
+.input-label {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 0 30px 50px 0;
+}
+
+.input-text {
+    margin: 0 50px 50px 0;
+    padding: 10px 45px;
+    border: none;
+    border-bottom: 1px solid #999;
+    font-size: 1.1em;
+}
+
+.input-email-readonly {
+    background-color: #ddd;
+    font-style: italic;
+    font-weight: 600;
+    color: #555;
+}
+
+label {
+    font-weight: 600;
+    font-size: 1.1em;
+    margin: 0 125px 50px 0;
+}
+
+[type="radi0"], span {
+    vertical-align: middle;
+}
+
+.modify-fin-btn {
+    border: none;
+    font-size: 1.2em;
+    font-weight: 600;
+    background-color: #31525B;
+    color: #fff;
+    border-radius: 3px;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
 </style>

@@ -1,2 +1,44 @@
 @import "./reset.css";
 @import "./font.css";
+
+
+.view-title {
+    font-size: 2em;
+    font-weight: 700;
+    text-align: center;
+    color: #31525B;
+    margin-bottom: 70px;
+}
+
+/* flex 스타일 주는 클래스 */
+.flex-box {
+    display: flex;
+    align-items: center;
+}
+
+.flex-box-end {
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.display-block {
+    text-align: center;
+}
+
+/* 기본 박스 스타일 */
+.content-box {
+    background-color: #F9F9F9;
+    border-radius: 5px;
+    box-shadow: 3px 4px 20px -5px #ccc;
+    margin: 50px 30px 50px 10px;
+    padding: 25px 20px;
+}
+
+select {
+    margin-right: 15px;
+    padding: 5px 10px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    font-weight: 600;
+    color: #555;
+}
