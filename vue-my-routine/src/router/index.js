@@ -22,6 +22,8 @@ import QnAUpdate from '@/components/qna/QnAUpdate.vue';
 
 import AnswerCreate from '@/components/qna/AnswerCreate.vue';
 
+import { useHeaderStore } from '@/stores/header';
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -29,6 +31,16 @@ const router = createRouter({
       path: '/',
       name: 'main',
       component: MainView,
+    },
+    { // 로그인
+      path: '/login',
+      name: 'loginView',
+      component: LoginView,
+    },
+    { // 회원가입
+      path: '/join',
+      name: 'join',
+      component: JoinView,
     },
     { // 루틴 페이지
       path: '/routine',
@@ -113,17 +125,14 @@ const router = createRouter({
         },
       ]
     },
-    // { // 로그인
-    //   path: '/login',
-    //   name: 'loginView',
-    //   component: LoginView,
-    // },
-    { // 회원가입
-      path: '/join',
-      name: 'join',
-      component: JoinView,
-    },
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  const headerStore = useHeaderStore()
+  const hideHeaderRoutes = ['/', '/login', '/join']
+  headerStore.toggleHeader(!hideHeaderRoutes.includes(to.path))
+  next()
 })
 
 export default router
