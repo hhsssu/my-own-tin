@@ -84,7 +84,7 @@ import QnADetail from "./QnADetail.vue";
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 600px;
+  width: 650px;
   border-right: 1px solid #777;
   padding-right: 15px;
 }
