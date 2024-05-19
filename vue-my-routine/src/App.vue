@@ -1,15 +1,19 @@
 <template>
-  <div>
-    <!-- <TheHeaderNav/> -->
-    <RouterView />
+  <div id="app">
+    <TheHeaderNav v-if="showHeader" />
+    <router-view />
   </div>
 </template>
 
-  <script setup>
-  import { RouterLink, RouterView } from 'vue-router'
-  import TheHeaderNav from "@/components/common/TheHeaderNav.vue";
-  </script>
+<script setup>
+import { computed } from 'vue';
+import { useHeaderStore } from '@/stores/header';
+import TheHeaderNav from "@/components/common/TheHeaderNav.vue";
 
-<style scoped>
+const headerStore = useHeaderStore();
 
-</style>
+const showHeader = computed(() => headerStore.showHeader);
+
+</script>
+
+<style scoped></style>
