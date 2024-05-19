@@ -1,16 +1,31 @@
 <template>
     <div class="header-container">
-        <RouterLink :to="{name: 'search'}">검색</RouterLink>
-        <RouterLink :to="{name: 'qna'}">질문상담</RouterLink>
+        <div class="header-nav-container">
+            <RouterLink :to="{name: 'search'}">검색</RouterLink>
+            <RouterLink :to="{name: 'qna'}">질문상담</RouterLink>
+        </div>
         <RouterLink :to="{name: 'routine'}">
             <img src="@/assets/img/logo2.png" alt="MOT로고" class="img-header-logo">
         </RouterLink>
-        <RouterLink :to="{name: 'mypage'}">마이페이지</RouterLink>
-        <button type="button" class="logout-btn">로그아웃</button>
+        <div class="header-nav-container">
+            <RouterLink :to="{name: 'mypage'}">마이페이지</RouterLink>
+            <div class="logout-btn" @click="logout">로그아웃</div>
+        </div>
     </div>
 </template>
 
 <script setup>
+import { ref } from "vue";
+import { useUserStore } from "@/stores/user";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const logout = function() {
+    console.log("로그아웃");
+    // 로그아웃 전으로 재진입 불가
+    router.replace({name: 'main'});
+};
 
 </script>
 
@@ -21,23 +36,32 @@
     padding: 7px 0;
     text-align: center;
     border-bottom: 1px solid #777;
+    font-family: 'Pretendard';
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-nav-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 18%;
 }
 
 .img-header-logo {
     width: 150px;
-    margin: 0 150px;
 }
 
 a, .logout-btn {
     text-decoration: none;
     color: #777;
     font-size: 1em;
-    margin: 0 20px 0 0;
 }
 
+/* 로그아웃 커서 모양 변경 */
 .logout-btn {
-    border: none;
-    background-color: #fff;
-    padding: 0;
+    cursor: pointer;
 }
 </style>
