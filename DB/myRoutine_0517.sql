@@ -28,9 +28,9 @@ CREATE TABLE IF NOT EXISTS `myroutine`.`users` (
   `password` VARCHAR(20) NOT NULL COMMENT '비밀번호',
   `gender` VARCHAR(4) NOT NULL COMMENT '성별',
   `age` INT NOT NULL COMMENT '나이',
-  `is_public` TINYINT NOT NULL COMMENT '공개여부',
-  `is_admin` TINYINT NOT NULL COMMENT '관리자여부',
-  `is_expert` TINYINT NOT NULL COMMENT '전문가여부',
+  `is_public` TINYINT NOT NULL DEFAULT 1 COMMENT '공개여부',
+  `is_admin` TINYINT NOT NULL DEFAULT 0 COMMENT '관리자여부',
+  `is_expert` TINYINT NOT NULL DEFAULT 0 COMMENT '전문가여부',
   `join_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '가입일',
   `update_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '회원정보수정일',
   `delete_at` TIMESTAMP NULL DEFAULT NULL COMMENT '회원탈퇴일',
@@ -180,6 +180,47 @@ CREATE TABLE IF NOT EXISTS `myroutine`.`user_routine_box` (
     REFERENCES `myroutine`.`routines` (`routine_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+
+-- -----------------------------------------------------
+-- Table `myroutine`.`point`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `myroutine`.`point` ;
+
+CREATE TABLE IF NOT EXISTS `myroutine`.`point` (
+  `point_id` INT NOT NULL COMMENT '포인트 고유번호',
+  `record` VARCHAR(255) NOT NULL COMMENT '포인트 내역',
+  `amount` INT NOT NULL COMMENT '포인트 값',
+  `create_at` TIMESTAMP NOT NULL COMMENT '포인트 내역 일자',
+  `users_user_id` INT NOT NULL,
+  PRIMARY KEY (`point_id`),
+  CONSTRAINT `fk_point_users1`
+    FOREIGN KEY (`users_user_id`)
+    REFERENCES `myroutine`.`users` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `myroutine`.`mile`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `myroutine`.`mile` ;
+
+CREATE TABLE IF NOT EXISTS `myroutine`.`mile` (
+  `mile_id` INT NOT NULL COMMENT '마일리지 고유번호',
+  `record` VARCHAR(255) NOT NULL COMMENT '마일리지 내역',
+  `amount` INT NOT NULL COMMENT '마일리지 값',
+  `create_at` TIMESTAMP NOT NULL COMMENT '마일리지 내역 일자',
+  `users_user_id` INT NOT NULL,
+  PRIMARY KEY (`mile_id`),
+  CONSTRAINT `fk_mile_users1`
+    FOREIGN KEY (`users_user_id`)
+    REFERENCES `myroutine`.`users` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
