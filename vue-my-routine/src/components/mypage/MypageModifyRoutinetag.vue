@@ -17,7 +17,8 @@
                 <div>
                     <!-- 운동 부위 1 -->
                     <div>운동부위1</div>
-                    <select name="part1" id="part1" size="3">
+                    <select name="part1" id="part1" size="3" v-model="part1">
+                        <option value="">선택안함</option>
                         <option value="유산소" selected>유산소</option>
                         <option value="하체">하체</option>
                         <option value="상체">상체</option>
@@ -30,8 +31,8 @@
                     <!-- 운동 부위 2 -->
                     <!-- 운동 부위 1을 선택해야 선택할 수 있도록 함(value != null) -->
                     <div>운동부위2</div>
-                    <select name="part2" id="part2" size="3" disabled>
-                        <option value="none">선택안함</option>
+                    <select name="part2" id="part2" size="3" :disabled="!part1" v-model="part2">
+                        <option value="">선택안함</option>
                         <option value="유산소">유산소</option>
                         <option value="하체">하체</option>
                         <option value="상체">상체</option>
@@ -43,7 +44,8 @@
                 <div>
                     <!-- 운동 시간 -->
                     <div>총 운동 시간</div>
-                    <select name="time" id="time" size="3">
+                    <select name="time" id="time" size="3" v-model="time">
+                        <option value="">선택안함</option>
                         <option value="10m">10분</option>
                         <option value="20m">20분</option>
                         <option value="30m">30분</option>
@@ -68,6 +70,14 @@
 // select 창으로 설정하도록 함..!
 // 회원 나이(age)가 27세면 20세에 자동으로 선택되어있도록 함.
 // 성별도 마찬가지.
+import { ref } from 'vue';
+import { useRoutineStore } from '@/stores/routine';
+
+const store = useRoutineStore();
+
+const part1 = ref('유산소');
+const part2 = ref('');
+const time = ref('1h');
 
 </script>
 

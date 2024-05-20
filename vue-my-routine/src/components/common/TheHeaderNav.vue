@@ -5,7 +5,7 @@
             <RouterLink :to="{name: 'qna'}">질문상담</RouterLink>
         </div>
         <RouterLink :to="{name: 'routine'}">
-            <img src="@/assets/img/logo2.png" alt="MOT로고" class="img-header-logo">
+            <img src="@/assets/img/logo1.png" alt="MOT로고" class="img-header-logo">
         </RouterLink>
         <div class="header-nav-container">
             <RouterLink :to="{name: 'mypage'}">마이페이지</RouterLink>
@@ -35,7 +35,8 @@ const logout = function() {
     margin: 30px auto;
     padding: 7px 0;
     text-align: center;
-    border-bottom: 1px solid #777;
+    /* border-bottom: 1.5px solid #ddd; */
+    /* box-shadow: 0px 13px 10px -12px #ddd; */
     font-family: 'Pretendard';
     font-weight: 600;
     display: flex;

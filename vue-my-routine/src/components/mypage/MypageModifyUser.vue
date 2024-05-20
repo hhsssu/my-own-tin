@@ -64,20 +64,23 @@
     cursor: pointer;
 }
 
+/* input의 label 부분 */
 .input-label {
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: 600;
     margin: 0 30px 50px 0;
 }
 
+/* input 부분 */
 .input-text {
     margin: 0 50px 50px 0;
     padding: 10px 45px;
     border: none;
     border-bottom: 1px solid #999;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
+/* 이메일 input 부분(readonly) */
 .input-email-readonly {
     background-color: #ddd;
     font-style: italic;
@@ -85,19 +88,22 @@
     color: #555;
 }
 
+/* 셀렉트 라벨 */
 label {
     font-weight: 600;
-    font-size: 1.1em;
-    margin: 0 125px 50px 0;
+    font-size: 1em;
+    margin: 0 120px 50px 0;
 }
 
+/* 라디오 버튼 가운데 정렬 */
 [type="radi0"], span {
     vertical-align: middle;
 }
 
+/* 수정 완료 버튼 */
 .modify-fin-btn {
     border: none;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 600;
     background-color: #31525B;
     color: #fff;

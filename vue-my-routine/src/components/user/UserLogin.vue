@@ -1,7 +1,8 @@
 <template>
   <div class="login-container">
-    <!-- 추후 로고 들어갈 예정 -->
-    <div class="login-logo"><h1>MyOwnTin</h1></div>
+    <div class="login-logo">
+      <img src="@/assets/img/logo1.png" alt="메인페이지 로고" class="img-login-logo">
+    </div>
     <div class="login-input">
       <input type="text" placeholder="e-mail" v-model.trim="id" />
       <input type="password" placeholder="password" v-model.trim="pw" />
@@ -37,9 +38,13 @@ const join = function () {
 <style scoped>
 .login-container {
   width: 1000px;
-  margin: 0 auto;
+  margin: 200px auto;
   text-align: center;
   /* background: #adf; */
+}
+
+.img-login-logo {
+  width: 150px;
 }
 
 .login-input {
