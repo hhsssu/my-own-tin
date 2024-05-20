@@ -1,6 +1,6 @@
 <template>
   <div class="search-container">
-    <div class="search-filter">
+    <div class="search-list">
       <div class="search-title">둘러보기</div>
       <!-- 검색창 -->
       <div>
@@ -125,21 +125,39 @@
           </div>
         </div>
       </div>
-    </div>
     <!-- 루틴 검색 결과 리스트 -->
     <SearchList />
+    </div>
+    <!-- 세션에 selectedSearch 있는 경우에 SearchDetail 보임 -->
+    <div v-if="showSearchDetail" class="search-detail-container">
+        <SearchDetail />
+    </div>
   </div>
 </template>
 
 <script setup>
 import SearchList from "@/components/search/SearchList.vue";
-import { ref } from "vue";
+import SearchDetail from "@/components/search/SearchDetail.vue";
+import { onMounted, ref } from "vue";
 
 const filterCheckboxes = ref(false);
+const showSearchDetail = ref(false);
 
 const handleSearchOptionChange = (event) => {
   filterCheckboxes.value = event.target.value === "ON";
 };
+
+onMounted(() => {
+    if (sessionStorage.getItem('selectedSearch')) {
+        showSearchDetail.value = true;
+    } else {
+        // 기능 구현 후 수정 필요
+        // showSearchDetail.value = false;
+        showSearchDetail.value = true;
+    }
+});
+
+
 </script>
 
 <style scoped>
@@ -147,12 +165,13 @@ const handleSearchOptionChange = (event) => {
   width: 1000px;
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
-.search-filter {
-  width: 450px;
-  padding-right: 25px;
+.search-list {
+  /* width: 450px; */
+  width: 47%;
+  padding-right: 3%;
   border-right: 1px solid #AAA;
 }
 
@@ -161,6 +180,7 @@ const handleSearchOptionChange = (event) => {
   font-weight: 600;
   color: #31525b;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .search-list-input {
@@ -168,7 +188,9 @@ const handleSearchOptionChange = (event) => {
   border-bottom: 2px solid lightgray;
   font-size: 25px;
   color: #ffa101;
-  width: 400px;
+  /* width: 400px; */
+  width: 100%;
+  margin-right: 25px;
   margin-bottom: 10px;
 }
 
@@ -177,7 +199,8 @@ const handleSearchOptionChange = (event) => {
   font-size: 15px;
   color: gray;
   margin: 5px 10px;
-  width: 350px;
+  /* width: 350px; */
+  width: 90%;
 }
 
 .search-list-input svg {
@@ -219,5 +242,9 @@ const handleSearchOptionChange = (event) => {
 
 .filter-checkboxes input {
   margin-right: 10px;
+}
+
+.search-detail-container {
+    width: 50%;
 }
 </style>
