@@ -47,7 +47,7 @@ import AnswerCreate from './AnswerCreate.vue';
 
 <style scoped>
 .qna-detail-container {
-  width: 600px;
+  width: 400px;
   margin-left: 15px;
   padding: 20px 30px;
 }
@@ -66,8 +66,8 @@ import AnswerCreate from './AnswerCreate.vue';
 .qna-detail-profile-name {
   padding: 3px 10px;
   margin: 0px 5px;
-  font-size: 18px;
-  width: 300px;
+  font-size: 1em;
+  width: 120px;
 }
 
 .qna-detail-profile-level {
@@ -75,6 +75,7 @@ import AnswerCreate from './AnswerCreate.vue';
   padding: 3px 10px;
   margin: 0px 5px;
   border-radius: 3px;
+  font-size: 1em;
 }
 
 .qna-detail-profile-tag {
@@ -83,22 +84,23 @@ import AnswerCreate from './AnswerCreate.vue';
   margin: 0px 5px;
   border-radius: 3px;
   color: white;
+  font-size: 1em;
 }
 
 .qna-detail-title {
-  font-size: 30px;
+  font-size: 1.5em;
   margin-bottom: 30px;
 }
 
 .qna-detail-content {
-  font-size: 20px;
+  font-size: 1em;
 }
 
 .qna-detail-routine {
   background-color: #fff9e8;
   padding: 10px 25px;
   /* padding-bottom: 50px; */
-  height: 100px;
+  height: 80px;
   box-shadow: 5px 5px 10px lightgray;
   border-radius: 5px;
 }
@@ -109,7 +111,7 @@ import AnswerCreate from './AnswerCreate.vue';
 }
 
 .qna-detail-routine-title {
-  font-size: 25px;
+  font-size: 1em;
   font-weight: 600;
   margin-right: 10px;
 }
@@ -118,7 +120,7 @@ import AnswerCreate from './AnswerCreate.vue';
   padding: 3px 8px;
   margin: 0px 5px;
   color: white;
-  font-size: 13px;
+  font-size: 1em;
   background-color: #aaa;
   border-radius: 3px;
 }
@@ -127,7 +129,7 @@ import AnswerCreate from './AnswerCreate.vue';
   padding: 3px 8px;
   margin: 0px 5px;
   color: white;
-  font-size: 13px;
+  font-size: 1em;
   background-color: #31525b;
   border-radius: 3px;
 }

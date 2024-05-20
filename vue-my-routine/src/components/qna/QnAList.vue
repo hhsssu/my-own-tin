@@ -67,12 +67,13 @@
         </div>
       </div>
     </div>
-    <div v-if="showQnADetail">
+    <!-- <div v-if="showQnADetail"> -->
+    <div>
       <QnADetail />
     </div>
-    <div v-else-if="showQnACreate">
+    <!-- <div v-else-if="showQnACreate">
       <QnACreate />
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -93,20 +94,20 @@ const createQnA = function () {
 };
 
 onMounted(() => {
-  if(sessionStorage.getItem('selectedQnA')) {
+  if (sessionStorage.getItem("selectedQnA")) {
     showQnACreate.value = false;
     showQnADetail.value = true;
   } else {
     showQnACreate.value = false;
     showQnADetail.value = false;
   }
-})
+});
 </script>
 
 <style scoped>
 .qna-list {
   display: flex;
-  /* width: 100%; */
+  width: 500px;
 }
 
 /* 질문 등록 버튼 */
@@ -122,7 +123,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 650px;
+  width: 100%;
   border-right: 1px solid #777;
   padding-right: 15px;
 }
@@ -134,14 +135,14 @@ onMounted(() => {
 .qna-list-search-input {
   display: flex;
   border-bottom: 2px solid lightgray;
-  font-size: 30px;
+  font-size: 25px;
   color: #ffa101;
-  width: 500px;
+  width: 400px;
 }
 
 .qna-list-search-input input {
   border: transparent;
-  font-size: 20px;
+  font-size: 15px;
   color: gray;
   margin: 5px 10px;
   width: 450px;
@@ -164,7 +165,7 @@ onMounted(() => {
   padding: 15px;
   margin-bottom: 30px;
   border-radius: 5px;
-  width: 550px;
+  width: 450px;
   height: 100px;
   box-shadow: 5px 5px 10px lightgray;
 }
@@ -182,7 +183,7 @@ onMounted(() => {
 .qna-list-card-name {
   padding: 3px 10px;
   margin: 0px 5px;
-  font-size: 18px;
+  font-size: 1em;
 }
 
 .qna-list-card-level {
@@ -201,7 +202,7 @@ onMounted(() => {
 }
 
 .qna-list-card-title {
-  font-size: 25px;
+  font-size: 1em;
   padding: 15px 10px 0px 10px;
 }
 </style>
