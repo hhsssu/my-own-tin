@@ -6,15 +6,15 @@
 
 	<!-- 루틴 등록 -->
 	<insert id="insert" parameterType="Routine">
-		INSERT INTO routines (users_user_id, writer, part_1, part_2, title, content, workout_time)
+		INSERT INTO routines (user_id, writer, part1, part2, title, content, workout_time)
 		VALUES (#{userId}, #{writer}, #{part1}, #{part2}, #{title}, #{content}, #{workoutTime})
 	</insert>
 	
 	<!-- 루틴 수정 -->
 	<update id="update" parameterType="Routine">
 		UPDATE routines
-		SET part_1 = #{part1}, part_2 = #{part2}, title = #{title}, content = #{content}, workout_time = #{workoutTime}
-		WHERE routine_id = #{id}
+		SET part1 = #{part1}, part2 = #{part2}, title = #{title}, content = #{content}, workout_time = #{workoutTime}
+		WHERE id = #{id}
 	</update>
 	
 	<!-- 루틴 삭제 -->
@@ -26,7 +26,7 @@
 	<update id="delete" parameterType="int">
 		UPDATE routines
 		SET delete_at = now()
-		WHERE routine_id = #{id}
+		WHERE id = #{id}
 	</update>
 	
 	
@@ -35,10 +35,10 @@
 		SELECT *
 		FROM routines
 		WHERE delete_at = null
-		<if test="key != null">
+		<if test="key != ''">
 			AND ${key} LIKE CONCAT('%', #{word}, '%')
 		</if>
-		<if test="orderBy != null">
+		<if test="orderBy != ''">
 			ORDER BY ${orderBy} ${orderByDir}
 		</if>
 	</select>
@@ -47,7 +47,7 @@
 	<select id="searchById" parameterType="int" resultType="Routine">
 		SELECT *
 		FROM routines
-		WHERE routine_id = #{id} AND delete_at = null
+		WHERE id = #{id} AND delete_at = null
 	</select>
 	
 	<!-- 루틴 보관함 조회 is_marked -->

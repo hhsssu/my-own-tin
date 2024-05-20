@@ -6,7 +6,7 @@
 
 	<!-- 마일리지 등록 -->
 	<insert id="insert" parameterType="Mile">
-		INSERT INTO mile (users_user_id, amount, record)
+		INSERT INTO mile (user_id, amount, record)
 		VALUES (#{userId}, #{amount}, #{record})
 	</insert>
 	
@@ -21,14 +21,14 @@
 	<select id="selectAll" parameterType="int">
 		SELECT *
 		FROM mile
-		WHERE users_user_id = #{userId}
+		WHERE user_id = #{userId}
 	</select>
 		
 	<!-- 총 마일리지 조회 -->
 	<select id="getTotalMile" parameterType="int">
 		SELECT SUM(amount)
 		FROM mile
-		WHERE users_user_id = #{userId}
+		WHERE user_id = #{userId}
 	</select>
 
 </mapper>
