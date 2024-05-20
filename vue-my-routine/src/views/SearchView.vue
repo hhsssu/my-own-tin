@@ -1,6 +1,6 @@
 <template>
   <div class="search-container">
-    <div class="search-filter">
+    <div class="search-list">
       <div class="search-title">둘러보기</div>
       <!-- 검색창 -->
       <div>
@@ -125,9 +125,9 @@
           </div>
         </div>
       </div>
-    </div>
     <!-- 루틴 검색 결과 리스트 -->
     <SearchList />
+    </div>
   </div>
 </template>
 
@@ -150,9 +150,10 @@ const handleSearchOptionChange = (event) => {
   flex-direction: column;
 }
 
-.search-filter {
-  width: 450px;
-  padding-right: 25px;
+.search-list {
+  /* width: 450px; */
+  width: 47%;
+  padding-right: 3%;
   border-right: 1px solid #AAA;
 }
 
@@ -161,6 +162,7 @@ const handleSearchOptionChange = (event) => {
   font-weight: 600;
   color: #31525b;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .search-list-input {
@@ -168,7 +170,9 @@ const handleSearchOptionChange = (event) => {
   border-bottom: 2px solid lightgray;
   font-size: 25px;
   color: #ffa101;
-  width: 400px;
+  /* width: 400px; */
+  width: 100%;
+  margin-right: 25px;
   margin-bottom: 10px;
 }
 
@@ -177,7 +181,8 @@ const handleSearchOptionChange = (event) => {
   font-size: 15px;
   color: gray;
   margin: 5px 10px;
-  width: 350px;
+  /* width: 350px; */
+  width: 90%;
 }
 
 .search-list-input svg {
