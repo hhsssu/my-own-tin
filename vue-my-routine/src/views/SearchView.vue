@@ -128,18 +128,36 @@
     <!-- 루틴 검색 결과 리스트 -->
     <SearchList />
     </div>
+    <!-- 세션에 selectedSearch 있는 경우에 SearchDetail 보임 -->
+    <div v-if="showSearchDetail" class="search-detail-container">
+        <SearchDetail />
+    </div>
   </div>
 </template>
 
 <script setup>
 import SearchList from "@/components/search/SearchList.vue";
-import { ref } from "vue";
+import SearchDetail from "@/components/search/SearchDetail.vue";
+import { onMounted, ref } from "vue";
 
 const filterCheckboxes = ref(false);
+const showSearchDetail = ref(false);
 
 const handleSearchOptionChange = (event) => {
   filterCheckboxes.value = event.target.value === "ON";
 };
+
+onMounted(() => {
+    if (sessionStorage.getItem('selectedSearch')) {
+        showSearchDetail.value = true;
+    } else {
+        // 기능 구현 후 수정 필요
+        // showSearchDetail.value = false;
+        showSearchDetail.value = true;
+    }
+});
+
+
 </script>
 
 <style scoped>
@@ -147,7 +165,7 @@ const handleSearchOptionChange = (event) => {
   width: 1000px;
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
 .search-list {
@@ -224,5 +242,9 @@ const handleSearchOptionChange = (event) => {
 
 .filter-checkboxes input {
   margin-right: 10px;
+}
+
+.search-detail-container {
+    width: 50%;
 }
 </style>
