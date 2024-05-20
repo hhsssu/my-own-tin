@@ -10,7 +10,7 @@ export const useUserStore = defineStore('user', () => {
 
     const loginUserId = ref(null);
 
-    // 로그인
+    // 로그인 (JWT)
     const userLogin = function (id, password) {
         axios.post(`${REST_USER_API}/login`, {
             id: id,
@@ -49,7 +49,7 @@ export const useUserStore = defineStore('user', () => {
     // 회원 정보 표시
     const loginUser = ref({});
     const getLoginUser = function () {
-        axios.get(`${REST_USER_API}/`)
+        axios.get('REST_USER_API')
             .then((response) => {
                 loginUser.value = response.data
             })

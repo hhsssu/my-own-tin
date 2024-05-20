@@ -1,27 +1,48 @@
 <template>
     <!-- 나의 루틴 태그 영역 -->
     <section class="profile-click-box content-box">
-        <div class="flex-box">
-            <div class="routine-title">평일 주 3회</div>
-            <div class="routine-tag">20대</div>
-            <div class="routine-tag">여성</div>
-            <div class="routine-tag">유산소</div>
-            <div class="routine-tag">하체</div>
-            <div class="routine-tag">1시간</div>
+        <div
+        class="flex-box"
+        v-for="routine in store.getRoutineList"
+        :key="routine.id">
+            <div class="routine-title">{{ routine.title }}</div>
+            <div class="routine-tag" v-if="routine.age < 20">10대</div>
+            <div class="routine-tag" v-else-if="routine.age > 19">20대</div>
+            <div class="routine-tag" v-else-if="routine.age > 29">30대</div>
+            <div class="routine-tag" v-else-if="routine.age > 39">40대</div>
+            <div class="routine-tag" v-else-if="routine.age > 49">50대</div>
+            <div class="routine-tag" v-else-if="routine.age > 59">60대 이상</div>
+            <div class="routine-tag">{{ routine.gender }}</div>
+            <div class="routine-tag">{{ routine.part1 }}</div>
+            <div class="routine-tag" v-if="routine.part2 != null">{{ routine.part2 }}</div>
+            <div class="routine-tag">{{ routine.workout_time }}</div>
         </div>
         <div>
-            <p>실내 사이클 30분, 땅끄부부 칼소폭 10분, 스쿼트20회 3세트, 스트레칭 10분</p>
+            <p>
+                {{ routine.content }}
+                실내 사이클 30분, 땅끄부부 칼소폭 10분, 스쿼트20회 3세트, 스트레칭 10분
+            </p>
         </div>
     </section>
 </template>
 
 <script setup>
+import { useRoutineStore } from "@/stores/routine";
+import { onMounted } from "vue";
+import { useRoute } from "vue-router";
+
+const store = useRoutineStore();
+const route = useRoute();
+
+onMounted(() => {
+    store.getRoutineList(route.params.userId);
+});
 
 </script>
 
 <style scoped>
 .routine-tag {
-    background-color: #FAE6B1;
+    background-color: #fae6b1;
     font-size: 0.8em;
     color: #333;
     font-weight: 500;

@@ -25,7 +25,7 @@
 	</select>
 
 	<!-- 총 포인트 조회 -->
-	<select id="getTotalPoint" parameterMap="int">
+	<select id="getTotalPoint" parameterType="int">
 		SELECT SUM(amount)
 		FROM point
 		WHERE user_id = #{userId}
