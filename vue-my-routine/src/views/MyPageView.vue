@@ -5,7 +5,7 @@
         <div class="mypage-profile-container">
             <div class="flex-box">
                 <!-- 프로필 이미지 -->
-                <img src="@/assets/img/IMG_4616.JPG" alt="MOT로고" class="img-mypage-profile">
+                <img src="@/assets/img/profile_female.png" alt="프로필 이미지" class="img-mypage-profile">
                 <!-- 프로필 닉네임, 레벨 표시 부분 -->
                 <div>
                     <div class="flex-box">
@@ -107,7 +107,7 @@ const showComponent = (componentName) => {
 .mypage-profile-container {
     width: 50%;
     /* background-color: rgb(255, 235, 251); */
-    border-right: 1px solid #777;
+    border-right: 1.5px solid #ccc;
     padding-top: 30px;
 }
 
