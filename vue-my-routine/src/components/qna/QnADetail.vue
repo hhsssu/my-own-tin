@@ -89,7 +89,7 @@ import AnswerCreate from './AnswerCreate.vue';
 
 .qna-detail-title {
   font-size: 1.5em;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .qna-detail-content {

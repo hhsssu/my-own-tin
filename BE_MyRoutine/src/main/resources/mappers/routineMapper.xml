@@ -6,8 +6,8 @@
 
 	<!-- 루틴 등록 -->
 	<insert id="insert" parameterType="Routine">
-		INSERT INTO routines (users_user_id, origin_user_id, writer, part_1, part_2, title, content, workout_time)
-		VALUES (#{userId}, #{originUserId}, #{writer}, #{part1}, #{part2}, #{title}, #{content}, #{workoutTime})
+		INSERT INTO routines (users_user_id, writer, part_1, part_2, title, content, workout_time)
+		VALUES (#{userId}, #{writer}, #{part1}, #{part2}, #{title}, #{content}, #{workoutTime})
 	</insert>
 	
 	<!-- 루틴 수정 -->
