@@ -74,10 +74,18 @@ const verifyPassword = function () {};
   /* background: lightblue; */
   padding: 20px;
   border-radius: 8px;
+  width: 1000px;
 }
 
 .join-form {
   margin-bottom: 20px;
+  width: 1000px;
+  margin-left: 500px;
+}
+
+.join-form form {
+  width: 100%;
+  text-align: center;
 }
 
 .join-form-group {
@@ -89,11 +97,11 @@ const verifyPassword = function () {};
 .join-form-group label {
   width: 120px; /* 고정된 너비를 설정 */
   text-align: right; /* 목업과 같이 label을 오른쪽 정렬 */
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 .join-gender-check {
-    text-align: left !important;
+  text-align: left !important;
 }
 
 .join-form-group input[type="text"],
@@ -102,15 +110,19 @@ const verifyPassword = function () {};
 .join-form-group input[type="number"] {
   /* flex: 1; 입력 필드를 가능한 최대 너비로 설정 */
   width: 200px;
+  height: 30px;
   padding: 5px;
+  border: none;
+  border-bottom: 1px solid #000;
+  font-size: 1em;
 }
 
 .join-form-group input[type="checkbox"] {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .join-form-group button {
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 .join-buttons {
