@@ -9,7 +9,7 @@
                 <!-- 프로필 닉네임, 레벨 표시 부분 -->
                 <div>
                     <div class="flex-box">
-                        <div class="profile-name">강해진</div>
+                        <div class="profile-name">{{ user.nickname }}</div>
                         <div class="profile-level">Lv.1</div>
                     </div>
                     <!-- 프로필 해시태그(성격) 표시 부분 -->
@@ -34,6 +34,13 @@
 import RoutineDetail from '@/components/routine/RoutineDetail.vue';
 import RoutineList from '@/components/routine/RoutineList.vue';
 
+import { useRoutineStore } from '@/stores/routine';
+import { useUserStore } from '@/stores/user';
+
+const store = useRoutineStore();
+const userStore = useUserStore();
+
+const user = userStore.getLoginUser();
 
 
 </script>

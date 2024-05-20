@@ -9,7 +9,7 @@
     </div>
     <div class="login-buttons">
       <button @click="login">로그인</button>
-      <button @click="join">회원가입</button>
+      <button @click="joinpage">회원가입</button>
     </div>
   </div>
 </template>
@@ -26,12 +26,22 @@ const router = useRouter();
 const id = ref("");
 const pw = ref("");
 
-const login = function () {
-  console.log("login");
+// 비동기 함수를 선언을 위한 async 키워드 사용
+const login = async function () {
+  // 로그인 요청 보내기
+  try {
+    store.userLogin(id.value, pw.value);
+    // 로그인 후 페이지 이동
+    console.log("login 성공");
+    await router.push({ name: 'routine' });
+  } catch (error) {
+    console.log(error);
+  }
 };
-const join = function () {
-  console.log("join");
-  router.push({name: 'join'})
+
+const joinpage = function () {
+  console.log("회원가입 페이지 이동");
+  router.push({name: 'join'});
 };
 </script>
 
@@ -81,6 +91,7 @@ const join = function () {
 /* 버튼에 마우스 커서 올렸을 시 */
 .login-buttons button:hover {
   background-color: lightgray;
+  cursor: pointer;
 }
 
 /* 버튼 클릭 시 */
