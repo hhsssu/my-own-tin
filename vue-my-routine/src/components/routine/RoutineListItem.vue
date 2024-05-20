@@ -6,22 +6,22 @@
         v-for="routine in store.getRoutineList"
         :key="routine.id">
             <div class="routine-title">{{ routine.title }}</div>
-            <div class="routine-tag" v-if="routine.age < 20">10대</div>
-            <div class="routine-tag" v-else-if="routine.age > 19">20대</div>
-            <div class="routine-tag" v-else-if="routine.age > 29">30대</div>
-            <div class="routine-tag" v-else-if="routine.age > 39">40대</div>
-            <div class="routine-tag" v-else-if="routine.age > 49">50대</div>
-            <div class="routine-tag" v-else-if="routine.age > 59">60대 이상</div>
+            <div class="routine-tag" v-if="routine.user.age < 20">10대</div>
+            <div class="routine-tag" v-else-if="routine.user.age > 19">20대</div>
+            <div class="routine-tag" v-else-if="routine.user.age > 29">30대</div>
+            <div class="routine-tag" v-else-if="routine.user.age > 39">40대</div>
+            <div class="routine-tag" v-else-if="routine.user.age > 49">50대</div>
+            <div class="routine-tag" v-else-if="routine.user.age > 59">60대 이상</div>
             <div class="routine-tag">{{ routine.gender }}</div>
             <div class="routine-tag">{{ routine.part1 }}</div>
             <div class="routine-tag" v-if="routine.part2 != null">{{ routine.part2 }}</div>
             <div class="routine-tag">{{ routine.workout_time }}</div>
-        </div>
-        <div>
             <p>
                 {{ routine.content }}
                 실내 사이클 30분, 땅끄부부 칼소폭 10분, 스쿼트20회 3세트, 스트레칭 10분
             </p>
+        </div>
+        <div>
         </div>
     </section>
 </template>
@@ -36,6 +36,7 @@ const route = useRoute();
 
 onMounted(() => {
     store.getRoutineList(route.params.userId);
+    // store.getRoutineList(11);
 });
 
 </script>
