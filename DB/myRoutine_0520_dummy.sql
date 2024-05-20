@@ -2,31 +2,31 @@ INSERT INTO users (user_id, email, nickname, password, gender, age, is_public, i
 VALUES (1, "woo01@ssafy.com", "관리자1", "1234", "여성", 27, 1, 1, 1),
 (2, "hong01@ssafy.com", "관리자2", "1234", "여성", 29, 1, 1, 1);
 
+INSERT INTO users (email, nickname, password, gender, age, is_expert)
+VALUES ("dokgo11@ssafy.com", "독고수", "1234", "남성", 45, 1),
+("yoga11@ssafy.com", "요가영", "1234", "여성", 36, 1);
+
 INSERT INTO users (email, nickname, password, gender, age)
 VALUES ("strong123@ssafy.com", "강해진", "1234", "여성", 27),
 ("powerful11@ssafy.com", "힘세진", "1234", "남성", 24),
 ("vally11@ssafy.com", "배구빈", "1234", "여성", 31),
 ("baseball11@ssafy.com", "야구민", "1234", "남성", 22);
 
-INSERT INTO users (email, nickname, password, gender, age, is_expert)
-VALUES ("dokgo11@ssafy.com", "독고수", "1234", "남성", 45, 1),
-("yoga11@ssafy.com", "요가영", "1234", "여성", 36, 1);
-
 -- delete from users where user_id = 1;
 -- ------------------------------------------------------
 	SELECT * from users;
 -- ------------------------------------------------------
 
-INSERT INTO routines (writer, title, content, part1, part2, workout_time, origin_user_id, users_user_id)
-VALUES ("강해진", "평일 3회", "실내 사이클 30분, 땅끄부부 칼소폭 10분, 스쿼트20회 3세트, 스트레칭 10분", "유산소", "전신", 60, 13, 13),
-("강해진", "주말 루틴", "실내 사이클 30분, 스쿼트20회 3세트, 런지 20회 3세트, 스트레칭 10분", "유산소", "하체", 60, 13, 13),
-("힘세진", "평일 등어깨", "등 어깨 등등 어깨어깨", "등", "어깨", 90, 14, 14);
+INSERT INTO routines (writer, title, content, part1, part2, workout_time, users_user_id)
+VALUES ("강해진", "평일 3회", "실내 사이클 30분, 땅끄부부 칼소폭 10분, 스쿼트20회 3세트, 스트레칭 10분", "유산소", "전신", 60, 13),
+("강해진", "주말 루틴", "실내 사이클 30분, 스쿼트20회 3세트, 런지 20회 3세트, 스트레칭 10분", "유산소", "하체", 60, 13),
+("힘세진", "평일 등어깨", "등 어깨 등등 어깨어깨", "등", "어깨", 90, 14);
 
-INSERT INTO routines (writer, title, content, part1, workout_time, origin_user_id, users_user_id)
-VALUES ("힘세진", "주말", "상체 하체 럴럴럴", "전신", 120, 14, 14),
-("야구민", "주말", "상체 하체 럴럴럴", "전신", 120, 14, 16),
-("요가영", "주말 전신 순환", "전신 순환", "전신", 40, 12, 12),
-("배구빈", "주말 전신 순환", "전신 순환", "전신", 40, 12, 15);
+INSERT INTO routines (writer, title, content, part1, workout_time, users_user_id)
+VALUES ("힘세진", "주말", "상체 하체 럴럴럴", "전신", 120, 14),
+("야구민", "주말", "상체 하체 랄랄라", "전신", 120, 16),
+("요가영", "주말 전신 순환~", "전신 순환", "전신", 40, 12),
+("배구빈", "주말 전신 순환 배구빈", "전신 순환", "전신", 40, 15);
 
 -- ------------------------------------------------------
 	SELECT * FROM routines;
