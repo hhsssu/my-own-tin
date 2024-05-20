@@ -9,13 +9,14 @@ public class User {
 	private String password;
 	private String gender;
 	private int age;
+	private int level;
 	private boolean isPublic;
 	private boolean isAdmin;
 	private boolean isExpert;
 	private Date joinAt;
 	private Date updateAt;
 	private Date deleteAt;
-	
+
 	public User() {
 	}
 
@@ -77,6 +78,14 @@ public class User {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 	public boolean isPublic() {
