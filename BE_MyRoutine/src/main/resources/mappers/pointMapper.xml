@@ -6,7 +6,7 @@
 
 	<!-- 포인트 등록 -->
 	<insert id="insert" parameterType="Point">
-		INSERT INTO point (users_user_id, amount, record)
+		INSERT INTO point (user_id, amount, record)
 		VALUES (#{userId}, #{amount}, #{record})
 	</insert>
 	
@@ -14,7 +14,7 @@
 	<!-- 추후 createAt으로부터 3달 뒤 삭제되도록 수정 예정 -->
 	<delete id="delete" parameterType="int">
 		DELETE FROM point
-		WHERE point_id = #{id}
+		WHERE id = #{id}
 	</delete>
 	
 	<!-- 포인트 전체 조회 -->
