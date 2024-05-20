@@ -12,9 +12,9 @@ public interface MileDao {
 	int delete(int id);
 
 	// 마일리지 전체 조회
-	List<Mile> selectAll();
+	List<Mile> selectAll(int userId);
 
 	// 총 마일리지 조회
-	int getTotalMile();
+	int getTotalMile(int userId);
 
 }

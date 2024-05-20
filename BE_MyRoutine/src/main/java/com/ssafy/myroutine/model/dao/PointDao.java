@@ -12,9 +12,9 @@ public interface PointDao {
 	int delete(int id);
 
 	// 포인트 전체 조회
-	List<Point> selectAll();
+	List<Point> selectAll(int userId);
 
 	// 총 포인트 조회
-	int getTotalPoint();
+	int getTotalPoint(int userId);
 
 }
