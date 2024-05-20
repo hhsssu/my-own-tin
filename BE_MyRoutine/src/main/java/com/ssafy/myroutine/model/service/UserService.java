@@ -18,4 +18,6 @@ public interface UserService {
 	// 사용자 회원 탈퇴
 	boolean cancelUser(int id);
 
+	// id를 통한 사용자 조회
+	User getUserById(int id);
 }

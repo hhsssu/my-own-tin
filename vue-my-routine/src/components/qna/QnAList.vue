@@ -8,11 +8,11 @@
         <!-- 작성자 프로필 사진 -->
         <img src="/src/assets/img/profile.png" class="qna-list-card-pic" />
         <div class="qna-list-card-name">{{ qna.writer }}</div>
-        <div class="qna-list-card-tag">20대</div>
+        <div class="qna-list-card-tag">{{ qna.userAge }}</div>
         <div class="qna-list-card-tag">여성</div>
       </div>
       <!-- 질문 제목 -->
-      <div class="qna-list-card-title">{{ qna.content }}</div>
+      <div class="qna-list-card-title">{{ qna.title }}</div>
     </div>
   </div>
 </template>
@@ -41,6 +41,10 @@ const createQnA = function () {
   router.push({ name: "qnaCreate" });
 };
 
+// const fetchDetails = async () => {
+//     await store.getQnAList(searchCondition.value);
+// };
+
 onMounted(() => {
   if (sessionStorage.getItem("selectedQnA")) {
     showQnACreate.value = false;
@@ -50,7 +54,6 @@ onMounted(() => {
     showQnADetail.value = false;
   }
 
-  // console.log(searchCondition);
   store.getQnAList(searchCondition.value);
 });
 </script>
