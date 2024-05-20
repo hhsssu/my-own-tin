@@ -40,9 +40,9 @@
   /* border: 1px solid gray; */
   padding: 30px;
   margin: 20px;
-  width: 500px;
+  /* width: 500px; */
   height: 570px;
-  font-size: 20px;
+  font-size: 1em;
   color: #777;
   box-shadow: 5px 5px 10px lightgray;
 }
@@ -68,13 +68,17 @@
 .qna-create-title input {
   border: none;
   border-bottom: 1px solid #999;
-  width: 390px;
-  font-size: 17px;
+  width: 290px;
+  font-size: 1em;
   padding: 5px;
 }
 
 .qna-create-title input:focus {
   outline: none;
+}
+
+.qna-create-content {
+    width: 400px;
 }
 
 .qna-create-content label {
@@ -84,9 +88,9 @@
 .qna-create-content textarea {
   border: 1px solid #999;
   border-radius: 5px;
-  width: 390px;
+  width: 290px;
   height: 300px;
-  font-size: 17px;
+  font-size: 1em;
   padding: 5px;
 }
 
@@ -104,7 +108,7 @@
   border-radius: 5px;
   background-color: #aaa;
   color: white;
-  font-size: 17px;
+  font-size: 1em;
   padding: 5px 20px;
   margin-left: auto;
   margin-right: 30px;
@@ -125,7 +129,7 @@
   padding: 5px 20px;
   margin-left: 10px;
   color: white;
-  font-size: 19px;
+  font-size: 1em;
   border: none;
   border-radius: 3px;
 }

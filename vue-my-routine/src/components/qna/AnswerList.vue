@@ -58,7 +58,7 @@
   border-bottom: 2px solid #777;
   padding-bottom: 10px;
   padding-left: 10px;
-  font-size: 17px;
+  font-size: 1em;
   color: #31525b;
 }
 
@@ -79,7 +79,7 @@
 }
 
 .qna-detail-comment-profile-name {
-  font-size: 18px;
+  font-size: 1em;
   /* margin: 0px 5px; */
   padding: 0px 5px;
 }

@@ -26,8 +26,8 @@
   margin: 20px 0px 10px 0px;
   border: 1px solid #777;
   border-radius: 5px;
-  font-size: 17px;
-  width: 550px;
+  font-size: 1em;
+  width: 350px;
 }
 
 .qna-detail-comment-button {
