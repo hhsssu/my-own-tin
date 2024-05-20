@@ -88,15 +88,26 @@ public class RoutineController {
 		return new ResponseEntity<Routine>(HttpStatus.NOT_FOUND);
 	}
 	
-	// 마이페이지 내 나의 루틴 불러오기
+	// 루틴페이지 내 나의 루틴 불러오기
 	// 만약 search 메서드로 가능하다면 사용 X
 	@GetMapping("/mine")
-	@Operation(summary = "나의 루틴", description = "마이페이지 내 나의 루틴 불러오기")
+	@Operation(summary = "나의 루틴", description = "루틴 페이지 나의 루틴 불러오기")
 	public ResponseEntity<?> getMine(@RequestParam int userId) {
 		SearchCondition con = new SearchCondition();
 		con.setKey("users_user_Id");
 		con.setWord(Integer.toString(userId));
 		List<Routine> list = routineService.searchRoutine(con);
+		return new ResponseEntity<List<Routine>>(list, HttpStatus.OK);
+	}
+	
+	// 마이페이지 내 나의 루틴 보관함 불러오기
+	// 만약 search 메서드로 가능하다면 사용 X
+	@GetMapping("/marked")
+	@Operation(summary = "나의 루틴 보관함", description = "마이페이지 내 나의 보관함 불러오기")
+	public ResponseEntity<?> getMarked(@RequestParam int userId) {
+		List<Routine> list = routineService.searchRoutineMarked(userId);
+		if (list == null || list.size() == 0)
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<Routine>>(list, HttpStatus.OK);
 	}
 	
