@@ -7,7 +7,7 @@
         <div class="search-list-input">
           <div>#</div>
           <input type="text" placeholder="검색어를 입력하세요" />
-          <div class="qna-list-search-button">
+          <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -125,12 +125,12 @@
           </div>
         </div>
       </div>
-    <!-- 루틴 검색 결과 리스트 -->
-    <SearchList />
+      <!-- 루틴 검색 결과 리스트 -->
+      <SearchList />
     </div>
     <!-- 세션에 selectedSearch 있는 경우에 SearchDetail 보임 -->
     <div v-if="showSearchDetail" class="search-detail-container">
-        <SearchDetail />
+      <SearchDetail />
     </div>
   </div>
 </template>
@@ -148,16 +148,14 @@ const handleSearchOptionChange = (event) => {
 };
 
 onMounted(() => {
-    if (sessionStorage.getItem('selectedSearch')) {
-        showSearchDetail.value = true;
-    } else {
-        // 기능 구현 후 수정 필요
-        // showSearchDetail.value = false;
-        showSearchDetail.value = true;
-    }
+  if (sessionStorage.getItem("selectedSearch")) {
+    showSearchDetail.value = true;
+  } else {
+    // 기능 구현 후 수정 필요
+    // showSearchDetail.value = false;
+    showSearchDetail.value = true;
+  }
 });
-
-
 </script>
 
 <style scoped>
@@ -172,7 +170,7 @@ onMounted(() => {
   /* width: 450px; */
   width: 47%;
   padding-right: 3%;
-  border-right: 1px solid #AAA;
+  border-right: 1px solid #aaa;
 }
 
 .search-title {
@@ -245,6 +243,6 @@ onMounted(() => {
 }
 
 .search-detail-container {
-    width: 50%;
+  width: 50%;
 }
 </style>
