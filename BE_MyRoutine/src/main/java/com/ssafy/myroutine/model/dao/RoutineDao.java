@@ -21,6 +21,9 @@ public interface RoutineDao {
 	
 	// 루틴 상세 조회
 	Routine searchById(int id);
+	
+	// 루틴 보관함 조회
+	List<Routine> searchMarked(int id);
 
 	// 조회수 증가
 //	public int updateViewCnt(int id);
