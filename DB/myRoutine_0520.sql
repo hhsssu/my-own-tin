@@ -20,7 +20,6 @@ USE `myroutine` ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `myroutine`.`users` ;
 
-
 CREATE TABLE IF NOT EXISTS `myroutine`.`users` (
   `user_id` INT NOT NULL AUTO_INCREMENT COMMENT '회원고유번호',
   `email` VARCHAR(255) NOT NULL COMMENT '이메일(아이디)',
@@ -45,6 +44,34 @@ ENGINE = InnoDB;
 ALTER TABLE `myroutine`.`users` AUTO_INCREMENT = 11;
 
 -- -----------------------------------------------------
+-- Table `myroutine`.`routines`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `myroutine`.`routines` ;
+
+CREATE TABLE IF NOT EXISTS `myroutine`.`routines` (
+  `routine_id` INT NOT NULL AUTO_INCREMENT COMMENT '루틴고유번호',
+  `writer` VARCHAR(20) NOT NULL COMMENT '작성자(닉네임)',
+  `title` VARCHAR(50) NOT NULL COMMENT '루틴제목',
+  `content` TEXT NOT NULL COMMENT '루틴내용',
+  `likeCnt` INT NOT NULL DEFAULT 0 COMMENT '좋아요수',
+  `part1` VARCHAR(20) NOT NULL COMMENT '운동부위1',
+  `part2` VARCHAR(20) NULL COMMENT '운동부위2',
+  `workout_time` INT NOT NULL COMMENT '운동시간',
+  `create_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록일',
+  `update_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일',
+  `delete_at` TIMESTAMP NULL DEFAULT NULL COMMENT '삭제일',
+  `is_marked` TINYINT NULL DEFAULT 0 COMMENT '북마크 표시',
+  `users_user_id` INT NOT NULL COMMENT '현재작성회원',
+  PRIMARY KEY (`routine_id`),
+  CONSTRAINT `fk_routines_users1`
+    FOREIGN KEY (`users_user_id`)
+    REFERENCES `myroutine`.`users` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `myroutine`.`questions`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `myroutine`.`questions` ;
@@ -55,10 +82,9 @@ CREATE TABLE IF NOT EXISTS `myroutine`.`questions` (
   `title` VARCHAR(50) NOT NULL COMMENT '제목',
   `content` TEXT NOT NULL COMMENT '내용',
   `like_cnt` INT NOT NULL DEFAULT 0 COMMENT '좋아요수',
-  `view_cnt` INT NOT NULL DEFAULT 0 COMMENT '조회수',
   `create_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록일',
   `update_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일',
-  `delete_at` TIMESTAMP NULL DEFAULT NULL COMMENT '삭제일',
+  `delete_at` TIMESTAMP NULL COMMENT '삭제일',
   `users_user_id` INT NOT NULL COMMENT '회원고유번호',
   `routines_routine_id` INT NULL COMMENT '루틴고유번호',
   PRIMARY KEY (`question_id`),
@@ -67,13 +93,12 @@ CREATE TABLE IF NOT EXISTS `myroutine`.`questions` (
     REFERENCES `myroutine`.`users` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-    CONSTRAINT `fk_questions_routines1`
+  CONSTRAINT `fk_questions_routines1`
     FOREIGN KEY (`routines_routine_id`)
     REFERENCES `myroutine`.`routines` (`routine_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 
 -- -----------------------------------------------------
@@ -85,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `myroutine`.`answers` (
   `answer_id` INT NOT NULL AUTO_INCREMENT COMMENT '답변고유번호',
   `writer` VARCHAR(20) NOT NULL COMMENT '작성자',
   `content` TEXT NOT NULL COMMENT '내용',
-  `is_picked` TINYINT NULL COMMENT '답변채택여부',
+  `is_picked` TINYINT NULL DEFAULT 0 COMMENT '답변채택여부',
   `create_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록일',
   `update_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일',
   `delete_at` TIMESTAMP NULL DEFAULT NULL COMMENT '삭제일',
@@ -100,36 +125,8 @@ CREATE TABLE IF NOT EXISTS `myroutine`.`answers` (
   CONSTRAINT `fk_answers_users1`
     FOREIGN KEY (`users_user_id`)
     REFERENCES `myroutine`.`users` (`user_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `myroutine`.`routines`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `myroutine`.`routines` ;
-
-CREATE TABLE IF NOT EXISTS `myroutine`.`routines` (
-  `routine_id` INT NOT NULL AUTO_INCREMENT COMMENT '루틴고유번호',
-  `writer` VARCHAR(20) NOT NULL COMMENT '작성자(닉네임)',
-  `title` VARCHAR(50) NOT NULL COMMENT '루틴제목',
-  `content` TEXT NOT NULL COMMENT '루틴내용',
-  `like_cnt` INT NOT NULL DEFAULT 0 COMMENT '좋아요수',
-  `part1` VARCHAR(20) NOT NULL COMMENT '운동부위1',
-  `part2` VARCHAR(20) NULL COMMENT '운동부위2',
-  `workout_time` INT NOT NULL COMMENT '운동시간',
-  `create_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록일',
-  `update_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일',
-  `delete_at` TIMESTAMP NULL DEFAULT NULL COMMENT '삭제일',
-  `origin_user_id` INT NOT NULL COMMENT '원본작성회원',
-  `users_user_id` INT NOT NULL COMMENT '현재작성회원',
-  PRIMARY KEY (`routine_id`),
-  CONSTRAINT `fk_routines_users1`
-    FOREIGN KEY (`users_user_id`)
-    REFERENCES `myroutine`.`users` (`user_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -139,58 +136,16 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `myroutine`.`user_keyword` ;
 
 CREATE TABLE IF NOT EXISTS `myroutine`.`user_keyword` (
-  `user_keyword_id` INT NOT NULL AUTO_INCREMENT COMMENT '회원키워드고유번호',
+  `user_keyword_id` INT NOT NULL COMMENT '회원키워드고유번호',
   `keyword` VARCHAR(10) NOT NULL COMMENT '키워드명',
   `users_user_id` INT NOT NULL COMMENT '회원고유번호',
-  PRIMARY KEY (`user_keyword_id`, `users_user_id`),
+  PRIMARY KEY (`user_keyword_id`),
   CONSTRAINT `fk_user_keyword_users1`
     FOREIGN KEY (`users_user_id`)
     REFERENCES `myroutine`.`users` (`user_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `myroutine`.`part_keyword`
--- -----------------------------------------------------
--- DROP TABLE IF EXISTS `myroutine`.`part_keyword` ;
-
--- CREATE TABLE IF NOT EXISTS `myroutine`.`part_keyword` (
---   `part_keyword_id` INT NOT NULL AUTO_INCREMENT COMMENT '운동부위키워드고유번호',
---   `keyword` VARCHAR(10) NOT NULL COMMENT '운동부위키워드',
---   `routines_routine_id` INT NOT NULL COMMENT '루틴고유번호',
---   PRIMARY KEY (`part_keyword_id`, `routines_routine_id`),
---   CONSTRAINT `fk_part_keyword_routines1`
---     FOREIGN KEY (`routines_routine_id`)
---     REFERENCES `myroutine`.`routines` (`routine_id`)
---     ON DELETE CASCADE
---     ON UPDATE CASCADE)
--- ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `myroutine`.`user_routine_box`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `myroutine`.`user_routine_box` ;
-
-CREATE TABLE IF NOT EXISTS `myroutine`.`user_routine_box` (
-  `mybox_id` INT NOT NULL AUTO_INCREMENT COMMENT '내보관함고유번호',
-  `users_user_id` INT NOT NULL COMMENT '회원고유번호',
-  `routines_routine_id` INT NOT NULL COMMENT '루틴고유번호',
-  PRIMARY KEY (`mybox_id`),
-  CONSTRAINT `fk_mybox_users1`
-    FOREIGN KEY (`users_user_id`)
-    REFERENCES `myroutine`.`users` (`user_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_mybox_routines1`
-    FOREIGN KEY (`routines_routine_id`)
-    REFERENCES `myroutine`.`routines` (`routine_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
 
 
 -- -----------------------------------------------------
