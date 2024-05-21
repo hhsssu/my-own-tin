@@ -66,7 +66,7 @@
         <!-- 마이페이지 오른쪽 메뉴 선택 시 나올 부분 -->
         <div class="mypage-click-container">
             <!-- 프로필 페이지에 있는 메뉴들 클릭 시 띄울 화면 구현 -->
-            <component :is="activeComponent"/>
+            <component :is="activeComponent" :mile-total="mileTotal" :point-total="pointTotal"/>
         </div>
     </div>
 </template>
