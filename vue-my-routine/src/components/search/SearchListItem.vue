@@ -1,12 +1,13 @@
 <template>
-  <div class="search-item" @click="showDetail">
+  <div class="search-item" @click="handleClick">
     <!-- 루틴 말머리 (정보) -->
     <div class="search-item-head">
-      <div class="search-item-title">어깨 루틴</div>
-      <div class="search-item-tag">20대</div>
-      <div class="search-item-tag">남성</div>
-      <div class="search-item-tag">어깨</div>
-      <div class="search-item-tag">30분</div>
+      <div class="search-item-title">{{ routine.title }}</div>
+      <div class="search-item-tag">{{ routine.userAge }}</div>
+      <div class="search-item-tag">{{ routine.userGender }}</div>
+      <div class="search-item-tag">{{ routine.part1 }}</div>
+      <div class="search-item-tag" v-if="routine.part2 != null">{{ routine.part2 }}</div>
+      <div class="search-item-tag">{{ routine.workoutTime }}분</div>
       <div class="search-item-more" @click="showMore">...</div>
     </div>
     <!-- 루틴 본문 -->
@@ -15,15 +16,25 @@
 </template>
 
 <script setup>
+import { defineProps } from "vue";
 
-const showDetail = function () {
-    console.log('디테일');
-}
+const props = defineProps({
+  routine: {
+    type: Object,
+    required: true,
+  },
+});
+
+const emits = defineEmits(["selectRoutine"]);
+
+const handleClick = () => {
+  emits("selectRoutine", props.routine.id);
+};
 
 const showMore = function () {
-    // 현재 showDetail과 중첩되는 상태
-    console.log('더보기');
-}
+  // 현재 검색 상세 페이지 조회와 겹치는 상황
+  console.log("더보기");
+};
 </script>
 
 <style scoped>
@@ -59,12 +70,12 @@ const showMore = function () {
 }
 
 .search-item-more {
-    /* 더보기 */
-    margin-left: auto;
+  /* 더보기 */
+  margin-left: auto;
 }
 
 .search-item-content {
-    font-size: 1em;
-    padding: 5px;
+  font-size: 1em;
+  padding: 5px;
 }
 </style>

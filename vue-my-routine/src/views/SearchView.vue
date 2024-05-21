@@ -126,11 +126,11 @@
         </div>
       </div>
       <!-- 루틴 검색 결과 리스트 -->
-      <SearchList />
+      <SearchList @selectRoutineId="handleSelectRoutine" />
     </div>
     <!-- 세션에 selectedSearch 있는 경우에 SearchDetail 보임 -->
-    <div v-if="showSearchDetail" class="search-detail-container">
-      <SearchDetail />
+    <div v-if="selectedRoutineId" class="search-detail-container">
+      <SearchDetail :routineId="selectedRoutineId" />
     </div>
   </div>
 </template>
@@ -142,6 +142,12 @@ import { onMounted, ref } from "vue";
 
 const filterCheckboxes = ref(false);
 const showSearchDetail = ref(false);
+
+const selectedRoutineId = ref(null);
+
+const handleSelectRoutine = (routineId) => {
+  selectedRoutineId.value = routineId;
+};
 
 const handleSearchOptionChange = (event) => {
   filterCheckboxes.value = event.target.value === "ON";

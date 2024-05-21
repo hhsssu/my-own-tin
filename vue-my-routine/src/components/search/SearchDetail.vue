@@ -1,15 +1,18 @@
 <template>
-  <div class="search-detail">
+  <div v-if="routine" class="search-detail">
     <!-- 루틴 말머리 (정보) -->
     <div class="search-detail-head">
-      <div class="search-detail-title">어깨 루틴</div>
-      <div class="search-detail-tag">20대</div>
-      <div class="search-detail-tag">남성</div>
-      <div class="search-detail-tag">어깨</div>
-      <div class="search-detail-tag">30분</div>
+      <div class="search-detail-title">{{ routine.title }}</div>
+      <div class="search-detail-tag">{{ routine.userAge }}</div>
+      <div class="search-detail-tag">{{ routine.userGender }}</div>
+      <div class="search-detail-tag">{{ routine.part1 }}</div>
+      <div class="search-detail-tag" v-if="routine.part2 != null">
+        {{ routine.part2 }}
+      </div>
+      <div class="search-detail-tag">{{ routine.workoutTime }}분</div>
     </div>
     <!-- 루틴 본문 -->
-    <div class="search-detail-content">내용</div>
+    <div class="search-detail-content">{{ routine.content }}</div>
     <!-- 버튼 -->
     <div class="search-detail-buttons">
       <button>담기</button>
@@ -18,7 +21,35 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref, watch, defineProps } from "vue";
+import { useRoutineStore } from "@/stores/routine";
+
+const props = defineProps({
+  routineId: {
+    type: Number,
+    required: true,
+  },
+});
+
+const store = useRoutineStore();
+const routine = ref(null);
+
+const fetchRoutineDetail = async (id) => {
+  const routineData = await store.getRoutine(id);
+  routine.value = routineData;
+};
+
+watch(
+  () => props.routineId,
+  async (newId) => {
+    if (newId) {
+      await fetchRoutineDetail(newId);
+    }
+  },
+  { immediate: true }
+);
+</script>
 
 <style scoped>
 .search-detail {
@@ -59,18 +90,17 @@
 }
 
 .search-detail-buttons {
-    margin-top: auto;
-    margin-left: auto;
-    margin-right: auto;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .search-detail-buttons button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 1.3em;
-    width: 100px;
-    border-radius: 5px;
-    border: 1px solid black;
-
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 1.3em;
+  width: 100px;
+  border-radius: 5px;
+  border: 1px solid black;
 }
 </style>

@@ -87,13 +87,25 @@ export const useRoutineStore = defineStore('routine', () => {
 
   // 루틴 검색 (전체 루틴)
   const searchRoutineList = function (con) {
-    axios.get(REST_ROUTINE_API, {
-      params: con,
-    })
+    const condition = {
+      key: con.key,
+      word: con.word,
+      orderBy: con.orderBy,
+      orderByDir: con.orderByDir
+    };
+
+    return axios.get(`${REST_ROUTINE_API}/`, { params: condition })
       .then((response) => {
-        routineList.value = response.con
+        routineList.value = response.data;
+        routineList.value.forEach((routine) => {
+          getUserDetails(routine, 'routine');
+        });
       })
-  }
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 
   // 루틴 수정
   const updateRoutine = function (id, updatedRoutine) {
@@ -143,7 +155,7 @@ export const useRoutineStore = defineStore('routine', () => {
         } else {
           item.userAge = '10대';
         }
-        
+
         item.userLevel = user.level;
         item.userGender = user.gender;
       })

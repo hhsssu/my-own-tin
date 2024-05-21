@@ -74,6 +74,8 @@ public class RoutineController {
 	@GetMapping("/")
 	@Operation(summary = "루틴 검색 조회", description = "루틴 검색 조회")
 	public ResponseEntity<?> search(@ModelAttribute SearchCondition con) {
+//		System.out.println(con.toString());
+//		System.out.println(con.getKey() == "");
 		List<Routine> list = routineService.searchRoutine(con);
 		if (list == null || list.size() == 0)
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
