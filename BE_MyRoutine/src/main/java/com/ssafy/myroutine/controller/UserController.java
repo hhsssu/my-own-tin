@@ -55,7 +55,10 @@ public class UserController {
 		Map<String, String> info = new HashMap<>();
 		info.put("email", user.getEmail());
 		info.put("password", user.getPassword());
+		
+		System.out.println(info.toString());
 		User loginUser = userService.getUser(info);
+
 		
 		if (session.getAttribute("loginUser") == null) {
 			if (loginUser != null) {

@@ -5,6 +5,20 @@
 </template>
 
 <script setup>
+import { useRoutineStore } from '@/stores/routine';
+import { useUserStore } from '@/stores/user';
+
+const store = useRoutineStore();
+const userStore = useUserStore();
+
+const user = userStore.getLoginUser();
+
+onMounted(() => {
+    // store.getRoutine(.id);
+});
+
+
+getRoutine
 
 </script>
 

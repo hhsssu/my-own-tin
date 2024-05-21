@@ -4,6 +4,10 @@ import axios from 'axios'
 import router from '@/router'
 import { useUserStore } from './user';
 
+// axios 기본 설정
+axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.withCredentials = true;
+
 const REST_ROUTINE_API = `http://localhost:8080/myroutine/routine`;
 const REST_USER_API = `http://localhost:8080/myroutine/user`;
 

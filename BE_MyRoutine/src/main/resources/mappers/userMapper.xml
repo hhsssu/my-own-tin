@@ -28,7 +28,7 @@
 			<if test="age != null">age = #{age},</if>
 			<if test="gender != null">gender = #{gender},</if>
 		</set>
-		WHERE user_id = #{id}
+		WHERE id = #{id}
 	</update>
 
 	<!-- 사용자 회원탈퇴 -->
@@ -38,7 +38,7 @@
 	<update id="delete" parameterType="int">
 		UPDATE users
 		SET delete_at = now()
-		WHERE user_id = #{id}
+		WHERE id = #{id}
 	</update>
 
 
