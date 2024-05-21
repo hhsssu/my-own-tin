@@ -25,10 +25,15 @@
                 @click="showComponent('MypageModifyRoutinetag')">
                 <div class="profile-title">나의 루틴 태그</div>
                 <div class="flex-box">
-                    <div class="routine-tag">20대</div>
-                    <div class="routine-tag">여성</div>
-                    <div class="routine-tag">유산소</div>
-                    <div class="routine-tag">1시간</div>
+                    <div class="routine-tag" v-if="user.age < 20">10대</div>
+                    <div class="routine-tag" v-else-if="user.age > 19">20대</div>
+                    <div class="routine-tag" v-else-if="user.age > 29">30대</div>
+                    <div class="routine-tag" v-else-if="user.age > 39">40대</div>
+                    <div class="routine-tag" v-else-if="user.age > 49">50대</div>
+                    <div class="routine-tag" v-else-if="user.age > 59">60대 이상</div>
+                    <div class="routine-tag">{{ user.gender }}</div>
+                    <div class="routine-tag">{{ user.part1 }}</div>
+                    <div class="routine-tag" v-if="workout_time !== null">{{ user.workout_time }}</div>
                 </div>
             </section>
             <!-- 포인트 마일리지 표기 영역 -->
@@ -77,8 +82,7 @@ import { useUserStore } from '@/stores/user';
 import { useRoutineStore } from '@/stores/routine';
 
 const userStore = useUserStore();
-
-const user = userStore.getLoginUser();
+const user = JSON.parse(sessionStorage.getItem('user'));
 
 import { ref } from 'vue';
 
