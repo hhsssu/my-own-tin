@@ -1,6 +1,9 @@
 package com.ssafy.myroutine.model.service;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -51,6 +54,14 @@ public class RoutineServiceImpl implements RoutineService {
 	@Override
 	public List<Routine> searchRoutineMarked(int userId) {
 		return routineDao.searchMarked(userId);
+	}
+
+	@Override
+	public List<Routine> findByDate(LocalDate date, int userId) {
+		Map<String, Object> params = new HashMap<>();
+        params.put("date", date);
+        params.put("userId", userId);
+        return routineDao.findByDateAndUserId(params);
 	}
 	
 }

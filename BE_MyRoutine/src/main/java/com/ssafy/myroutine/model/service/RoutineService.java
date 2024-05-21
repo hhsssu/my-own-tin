@@ -1,5 +1,6 @@
 package com.ssafy.myroutine.model.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.ssafy.myroutine.model.dto.Routine;
@@ -24,4 +25,7 @@ public interface RoutineService {
 	
 	// 루틴 보관함 조회
 	List<Routine> searchRoutineMarked(int userId);
+	
+	// 날짜별 나의 루틴 조회
+	List<Routine> findByDate(LocalDate date, int userId);
 }

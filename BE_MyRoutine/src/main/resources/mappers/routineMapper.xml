@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper 
-	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.myroutine.model.dao.RoutineDao">
 
 	<!-- 루틴 등록 -->
 	<insert id="insert" parameterType="Routine">
-		INSERT INTO routines (user_id, writer, part1, part2, title, content, workout_time)
-		VALUES (#{userId}, #{writer}, #{part1}, #{part2}, #{title}, #{content}, #{workoutTime})
+		INSERT INTO routines (user_id, writer, part1, part2, title, content,
+		workout_time)
+		VALUES (#{userId}, #{writer}, #{part1}, #{part2}, #{title}, #{content},
+		#{workoutTime})
 	</insert>
-	
+
 	<!-- 루틴 수정 -->
 	<update id="update" parameterType="Routine">
 		UPDATE routines
-		SET part1 = #{part1}, part2 = #{part2}, title = #{title}, content = #{content}, workout_time = #{workoutTime}
+		SET part1 = #{part1}, part2 = #{part2}, title = #{title}, content =
+		#{content}, workout_time = #{workoutTime}
 		WHERE id = #{id}
 	</update>
-	
+
 	<!-- 루틴 삭제 -->
 	<!-- <delete id="delete" parameterType="int">
 		DELETE FROM routines
@@ -28,33 +29,39 @@
 		SET delete_at = now()
 		WHERE id = #{id}
 	</update>
-	
-	
+
+
 	<!-- 루틴 조회 -->
 	<select id="search" parameterType="SearchCondition" resultType="Routine">
-		SELECT *
-		FROM routines
-		WHERE delete_at = null
-		<if test="key != ''">
+		SELECT * FROM routines WHERE delete_at = null <if test="key != ''">
 			AND ${key} LIKE CONCAT('%', #{word}, '%')
 		</if>
-		<if test="orderBy != ''">
+		<if
+			test="orderBy != ''">
 			ORDER BY ${orderBy} ${orderByDir}
 		</if>
 	</select>
-	
+
 	<!-- 루틴 상세 조회 -->
 	<select id="searchById" parameterType="int" resultType="Routine">
 		SELECT *
 		FROM routines
 		WHERE id = #{id} AND delete_at is null
 	</select>
-	
+
 	<!-- 루틴 보관함 조회 is_marked -->
 	<select id="searchMarked" parameterType="int" resultType="Routine">
 		SELECT *
 		FROM routines
 		WHERE routine_id = #{id} AND is_marked = 1 AND delete_at is null
+	</select>
+
+	<!-- 특정 날짜와 사용자 ID에 따른 루틴 조회 -->
+	<select id="findByDateAndUserId" parameterType="map" resultType="Routine">
+		SELECT *
+		FROM routines
+		WHERE DATE(create_at) = #{date} AND user_id = #{userId} AND delete_at IS
+		NULL
 	</select>
 
 </mapper>

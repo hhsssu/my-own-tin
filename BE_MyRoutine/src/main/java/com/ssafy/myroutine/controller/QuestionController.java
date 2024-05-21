@@ -47,6 +47,7 @@ public class QuestionController {
 	@PostMapping("/")
 	@Operation(summary = "질문 등록", description = "질문 등록 기능")
 	public ResponseEntity<?> write(@RequestBody Question que) {
+		System.out.println(que.toString());
 		queService.registQuestion(que);
 		return new ResponseEntity<Question>(que, HttpStatus.CREATED);
 	}

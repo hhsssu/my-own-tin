@@ -96,8 +96,10 @@ export const useQnAStore = defineStore('qna', () => {
                 .then((response) => {
                     const user = response.data;
                     question.writer = user.nickname;
+                    // question.routineId = selectedRoutine.id;
                 });
 
+                console.log(question);
             // 질문 등록 과정
             await axios({
                 url: QNA_REST_API,
@@ -105,7 +107,7 @@ export const useQnAStore = defineStore('qna', () => {
                 data: question
             });
 
-            router.replace({ name: 'questionList' });
+            router.push({ name: 'qnaList'});
         } catch (error) {
             console.error('Error creating question:', error);
         }

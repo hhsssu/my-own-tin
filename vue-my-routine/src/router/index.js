@@ -85,7 +85,7 @@ const router = createRouter({
           component: QnAList,
         },
         { // 질문 상세페이지
-          path: ':qustionId',
+          path: ':questionId',
           name: 'qnaDetail',
           component: QnADetail,
           children: [ // QnADetail 컴포넌트 내부의 <RouterView/>에서 렌더링됨.

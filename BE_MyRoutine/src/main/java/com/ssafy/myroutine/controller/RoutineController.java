@@ -1,8 +1,10 @@
 package com.ssafy.myroutine.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -110,6 +112,15 @@ public class RoutineController {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<Routine>>(list, HttpStatus.OK);
 	}
+	
+	// 날짜별 나의 루틴 불러오기
+	@GetMapping("/byDate")
+	@Operation(summary = "날짜별 나의 루틴 불러오기", description = "날짜별 나의 루틴 불러오기 기능")
+	public ResponseEntity<?> getRoutineByDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, @RequestParam("userId") int userId) {
+		List<Routine> routines = routineService.findByDate(date, userId);
+        return new ResponseEntity<>(routines, HttpStatus.OK);
+	}
+		
 	
 
 }
