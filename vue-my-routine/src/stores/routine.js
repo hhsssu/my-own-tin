@@ -37,7 +37,6 @@ export const useRoutineStore = defineStore('routine', () => {
 
   // 루틴 목록 불러오기 (내 루틴)
   const getRoutineList = function(userId) {
-    console.log(userId);
     axios.get(`${REST_ROUTINE_API}/mine`, {
       params: {
         userId: userId,
@@ -48,7 +47,6 @@ export const useRoutineStore = defineStore('routine', () => {
       routineList.value.forEach((routine) => {
         getUserDetails(routine, 'routine');
       })
-      console.log(routineList.value);
     })
   }
   

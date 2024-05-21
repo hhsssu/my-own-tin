@@ -85,7 +85,6 @@ export const useUserStore = defineStore('user', () => {
     const getLoginUser = function () {
         const login = sessionStorage.getItem('user');
         loginUser.value = JSON.parse(login);
-        console.log(loginUser.value);
     }
 
     // 회원 정보 수정
