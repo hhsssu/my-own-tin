@@ -82,10 +82,14 @@ export const useUserStore = defineStore('user', () => {
 
     // 회원 정보 수정
     const updateLoginUser = function (updatedUserInfo) {
-        axios.put(REST_USER_API, updatedUserInfo)
-            .then(() => {
+        const userId = updatedUserInfo.id;
+        axios.put(`${REST_USER_API}?id=${userId}`, updatedUserInfo)
+        .then(() => {
+                console.log("여기까지");
                 router.push({ name: 'mypage' })
-            })
+            }).catch(error => {
+                console.error("Error updating user:", error);
+            });
     }
 
     // 회원 탈퇴

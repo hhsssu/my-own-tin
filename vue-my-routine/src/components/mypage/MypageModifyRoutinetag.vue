@@ -12,7 +12,9 @@
                     <div class="routine-tag" v-else-if="user.age > 29">30대</div>
                     <div class="routine-tag" v-else-if="user.age > 39">40대</div>
                     <div class="routine-tag" v-else-if="user.age > 49">50대</div>
-                    <div class="routine-tag" v-else-if="user.age > 59">60대 이상</div>
+                    <div class="routine-tag" v-else-if="user.age > 59">60대</div>
+                    <div class="routine-tag" v-else-if="user.age > 69">70대</div>
+                    <div class="routine-tag" v-else-if="user.age > 79">80대⬆</div>
                     <div class="routine-tag">{{ user.gender }}</div>
             </div>
         </div>
@@ -22,11 +24,11 @@
                 <div>
                     <!-- 운동 부위 1 -->
                     <div>운동부위1</div>
-                    <select name="part1" id="part1" size="3" v-model="part1">
-                        <option value="" :selected="user.part1 === null">선택안함</option>
-                        <option value="유산소" :selected="user.part1 === '유산소'">유산소</option>
-                        <option value="하체" :selected="user.part1 === '하체'">하체</option>
-                        <option value="상체" :selected="user.part1 === '상체'">상체</option>
+                    <select name="part1" id="part1" size="3" v-model="selectedOption1" @change="saveOption">
+                        <option value="">선택안함</option>
+                        <option value="유산소">유산소</option>
+                        <option value="하체">하체</option>
+                        <option value="상체">상체</option>
                         <option value="어깨">어깨</option>
                         <option value="팔">팔</option>
                         <option value="허벅지">허벅지</option>
@@ -36,7 +38,7 @@
                     <!-- 운동 부위 2 -->
                     <!-- 운동 부위 1을 선택해야 선택할 수 있도록 함(value != null) -->
                     <div>운동부위2</div>
-                    <select name="part2" id="part2" size="3" :disabled="!part1" v-model="part2">
+                    <select name="part2" id="part2" size="3" :disabled="!selectedOption1" v-model="selectedOption2" @change="saveOption">
                         <option value="">선택안함</option>
                         <option value="유산소">유산소</option>
                         <option value="하체">하체</option>
@@ -49,24 +51,25 @@
                 <div>
                     <!-- 운동 시간 -->
                     <div>총 운동 시간</div>
-                    <select name="time" id="time" size="3" v-model="time">
+                    <select name="time" id="time" size="3" v-model="timeOption" @change="saveOption">
                         <option value="">선택안함</option>
-                        <option value="10m">10분</option>
-                        <option value="20m">20분</option>
-                        <option value="30m">30분</option>
-                        <option value="40m">40분</option>
-                        <option value="50m">50분</option>
-                        <option value="1h" selected>1시간</option>
-                        <option value="1h">1시간30분</option>
-                        <option value="2h">2시간</option>
-                        <option value="2h">2시간30분</option>
-                        <option value="3h">3시간</option>
-                        <option value="4h">4시간</option>
-                        <option value="5h">5시간 이상</option>
+                        <option value="10">10분</option>
+                        <option value="20">20분</option>
+                        <option value="30">30분</option>
+                        <option value="40">40분</option>
+                        <option value="50">50분</option>
+                        <option value="60">1시간</option>
+                        <option value="90">1시간30분</option>
+                        <option value="120">2시간</option>
+                        <option value="150">2시간30분</option>
+                        <option value="180">3시간</option>
+                        <option value="240">4시간</option>
+                        <option value="300">5시간 이상</option>
                     </select>
                 </div>
             </div>
         </div>
+        <button @click="modifyExTag">수정 완료</button>
     </div>
 </template>
 
@@ -76,12 +79,28 @@
 // 회원 나이(age)가 27세면 20세에 자동으로 선택되어있도록 함.
 // 성별도 마찬가지.
 import { ref } from 'vue';
+import { useUserStore } from '@/stores/user';
 import { useRoutineStore } from '@/stores/routine';
 
-const store = useRoutineStore();
+const userStore = useUserStore();
+const routineStore = useRoutineStore();
 
 const user = JSON.parse(sessionStorage.getItem('user'));
 
+const selectedOption1 = ref(user.part1);
+const selectedOption2 = ref(user.part2);
+const timeOption = ref(user.workoutTime);
+
+// 운동 부위, 시간 정보 수정
+const modifyExTag = () => {
+    const updatedUserInfo = {
+        id: user.id,
+        part1: selectedOption1.value,
+        part2: selectedOption2.value,
+        workoutTime: timeOption.value,
+    };
+    userStore.updateLoginUser(updatedUserInfo);
+}
 
 </script>
 
