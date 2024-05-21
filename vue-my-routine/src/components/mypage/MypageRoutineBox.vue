@@ -2,43 +2,44 @@
     <div>
         <h2 class="view-title">루틴 보관함</h2>
         <!-- 나의 루틴 태그 영역 -->
-        <section class="profile-click-box content-box">
+        <section class="profile-click-box content-box" v-for="item in routineList" :key="item.id">
             <div class="flex-box">
-                <div class="routine-title">평일 주 3회</div>
-                <div class="routine-tag">20대</div>
-                <div class="routine-tag">여성</div>
-                <div class="routine-tag">유산소</div>
-                <div class="routine-tag">하체</div>
-                <div class="routine-tag">1시간</div>
-                <!-- 추가 버튼 -->
-                <div class="routine-title">+</div>
+                <div class="routine-title">{{ routine.title }}</div>
+                <div class="routine-tag">{{ routine.userAge }}</div>
+                <div class="routine-tag">{{ routine.userGender }}</div>
+                <div class="routine-tag">{{ routine.part1 }}</div>
+                <div class="routine-tag" v-if="routine.part2 != null">{{ routine.part2 }}</div>
+                <div class="routine-tag">{{ routine.workoutTime }}분</div>
+                <!-- 더보기 버튼 -->
+                <div></div>
             </div>
-            <div>
-                <p>실내 사이클 30분, 땅끄부부 칼소폭 10분, 스쿼트20회 3세트, 스트레칭 10분</p>
-            </div>
-        </section>
-        <section class="profile-click-box content-box">
-            <div class="flex-box">
-                <div class="routine-title">주말 루틴</div>
-                <div class="routine-tag">20대</div>
-                <div class="routine-tag">여성</div>
-                <div class="routine-tag">유산소</div>
-                <div class="routine-tag">하체</div>
-                <div class="routine-tag">1시간</div>
-                <!-- 추가 버튼 -->
-                <div class="routine-title">+</div>
-            </div>
-            <div>
-                <p>실내 사이클 30분, 스쿼트20회 3세트, 런지 20회 3세트, 스트레칭 10분</p>
-            </div>
+            <p>
+                {{ routine.content }}
+            </p>
         </section>
     </div>
 </template>
 
 <script setup>
-// 나의 루틴, 담아온 루틴 보여주기
-// 다른사람의 루틴인지 확인할 수 있도록 함
-// 분류하여 보기..?
+// 담아둔 루틴 보여주기
+import { useRoutineStore } from "@/stores/routine";
+import { defineProps } from "vue";
+import { useRoute } from "vue-router";
+
+const store = useRoutineStore();
+const route = useRoute();
+
+const props = defineProps({
+    routine: {
+        type: Object,
+        required: true,
+    },
+});
+
+// 보관함에 담은 것만 뽑아내기 (user marked)
+
+
+
 </script>
 
 <style scoped>
