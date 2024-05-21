@@ -3,50 +3,49 @@
     <!-- 댓글 -->
     <div class="qna-detail-comment">
       <div class="count">댓글 2개</div>
-      <div class="qna-detail-comment-card">
+      <div class="qna-detail-comment-card" v-for="ans in store.ansList" :key="ans.id">
         <!-- 댓글 작성자 프로필 -->
         <div class="qna-detail-comment-profile">
           <img
             src="/src/assets/img/profile_gentleman.png"
             class="qna-detail-comment-profile-pic"
           />
-          <div class="qna-detail-comment-profile-name">독고수</div>
-          <div class="qna-detail-comment-profile-level">Lv.5</div>
-          <div class="qna-detail-comment-profile-tag">40대</div>
+          <div class="qna-detail-comment-profile-name">{{ ans.writer }}</div>
+          <div class="qna-detail-comment-profile-level">Lv.{{ ans.userLevel }}</div>
+          <div class="qna-detail-comment-profile-tag">{{ ans.userAge }}</div>
           <div class="qna-detail-comment-profile-tag">남성</div>
         </div>
         <!-- 댓글 내용 -->
         <div>
           <div class="qna-detail-comment-content">
-            충분히 잘 하고 계신 것 같습니다. 세트만 추가하세요^^
+            {{ ans.content }}
           </div>
         </div>
       </div>
 
-      <div class="qna-detail-comment-card">
-        <!-- 댓글 작성자 프로필 -->
-        <div class="qna-detail-comment-profile">
-          <img
-            src="/src/assets/img/profile_gentlelady.png"
-            class="qna-detail-comment-profile-pic"
-          />
-          <div class="qna-detail-comment-profile-name">요가영</div>
-          <div class="qna-detail-comment-profile-level">Lv.4</div>
-          <div class="qna-detail-comment-profile-tag">30대</div>
-          <div class="qna-detail-comment-profile-tag">여성</div>
-        </div>
-        <!-- 댓글 내용 -->
-        <div>
-          <div class="qna-detail-comment-content">
-            추가로 요가수업은 어떠신지요?ㅎㅎ 코어도 중요합니다.
-          </div>
-        </div>
-      </div>
+
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useQnAStore } from '@/stores/qna';
+import { defineProps, onMounted } from 'vue';
+
+const store = useQnAStore();
+
+const props = defineProps({
+  questionId: {
+    type: Number,
+    required: true
+  }
+});
+
+onMounted(() => {
+  store.getAnsList(props.questionId);
+})
+
+</script>
 
 <style scoped>
 .qna-detail-comment {
@@ -55,7 +54,7 @@
   margin-bottom: 10px;
 }
 .qna-detail-comment .count {
-  border-bottom: 2px solid #777;
+  border-bottom: 1.5px solid #777;
   padding-bottom: 10px;
   padding-left: 10px;
   font-size: 1em;

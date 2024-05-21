@@ -13,7 +13,17 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { defineProps } from 'vue';
+
+const props = defineProps({
+  questionId: {
+    type: Number,
+    required: true
+  }
+});
+
+</script>
 
 <style scoped>
 .qna-detail-comment-input {

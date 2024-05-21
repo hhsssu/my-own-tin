@@ -30,6 +30,9 @@ VALUES ("힘세진", "주말", "상체 하체 럴럴럴", "전신", 120, 14),
 
 -- ------------------------------------------------------
 	SELECT * FROM routines;
+    select * from routines where id = 3;
+    select * from routines where delete_at is null;
+    select * from routines where id = 3 and delete_at is null;
 -- ------------------------------------------------------
 
 INSERT INTO questions (writer, title, content, user_id)

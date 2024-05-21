@@ -81,7 +81,7 @@ public class RoutineController {
 	// 루틴 상세 조회
 	@GetMapping("/detail")
 	@Operation(summary = "루틴 상세 조회", description = "루틴 상세 조회")
-	public ResponseEntity<Routine> detail(@RequestParam int id) {
+	public ResponseEntity<Routine> detail(@RequestParam("routineId") int id) {
 		Routine routine = routineService.getRoutine(id);
 		if (routine != null)
 			return new ResponseEntity<Routine>(routine, HttpStatus.OK);

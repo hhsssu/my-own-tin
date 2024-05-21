@@ -5,6 +5,7 @@ import java.util.Date;
 public class Question {
 	private int id;
 	private int userId;
+	private int routineId;
 	private String writer;
 	private String title;
 	private String content;
@@ -16,10 +17,11 @@ public class Question {
 	public Question() {
 	}
 
-	public Question(int id, int userId, String writer, String title, String content, int likeCnt, Date createAt,
-			Date updateAt, Date deleteAt) {
+	public Question(int id, int userId, int routineId, String writer, String title, String content, int likeCnt,
+			Date createAt, Date updateAt, Date deleteAt) {
 		this.id = id;
 		this.userId = userId;
+		this.routineId = routineId;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
@@ -43,6 +45,14 @@ public class Question {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getRoutineId() {
+		return routineId;
+	}
+
+	public void setRoutineId(int routineId) {
+		this.routineId = routineId;
 	}
 
 	public String getWriter() {
@@ -103,9 +113,9 @@ public class Question {
 
 	@Override
 	public String toString() {
-		return "Question [id=" + id + ", userId=" + userId + ", writer=" + writer + ", title=" + title
-				+ ", content=" + content + ", likeCnt=" + likeCnt + ", createAt=" + createAt + ", updateAt=" + updateAt
-				+ ", deleteAt=" + deleteAt + "]";
+		return "Question [id=" + id + ", userId=" + userId + ", routineId=" + routineId + ", writer=" + writer
+				+ ", title=" + title + ", content=" + content + ", likeCnt=" + likeCnt + ", createAt=" + createAt
+				+ ", updateAt=" + updateAt + ", deleteAt=" + deleteAt + "]";
 	}
 
 }

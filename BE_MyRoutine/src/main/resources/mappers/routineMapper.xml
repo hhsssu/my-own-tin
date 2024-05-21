@@ -47,14 +47,14 @@
 	<select id="searchById" parameterType="int" resultType="Routine">
 		SELECT *
 		FROM routines
-		WHERE id = #{id} AND delete_at = null
+		WHERE id = #{id} AND delete_at is null
 	</select>
 	
 	<!-- 루틴 보관함 조회 is_marked -->
 	<select id="searchMarked" parameterType="int" resultType="Routine">
 		SELECT *
 		FROM routines
-		WHERE routine_id = #{id} AND is_marked = 1 AND delete_at = null
+		WHERE routine_id = #{id} AND is_marked = 1 AND delete_at is null
 	</select>
 
 </mapper>
