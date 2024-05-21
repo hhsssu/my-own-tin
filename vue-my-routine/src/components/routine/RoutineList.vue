@@ -4,16 +4,18 @@
     <RoutineListItem 
         v-for="routine in store.routineList"
         :key="routine.id"
-        :routine="routine" />
+        :routine="routine"
+        @selectRoutine="handleSelectRoutine" />
     <!-- </RoutineListItem> -->
 </template>
 
 <script setup>
 import RoutineListItem from '@/components/routine/RoutineListItem.vue';
 import { useRoutineStore } from '@/stores/routine';
-import { defineProps, onMounted } from 'vue';
+import { ref, defineProps, defineEmits, onMounted } from 'vue';
 
 const store = useRoutineStore();
+const selectedRoutineId = ref(null);
 
 const props = defineProps({
   userId: {
@@ -21,6 +23,13 @@ const props = defineProps({
     required: true
   }
 });
+
+const emits = defineEmits(['selectRoutineId']);
+
+const handleSelectRoutine = (routineId) => {
+  selectedRoutineId.value = routineId;
+  emits('selectRoutineId', selectedRoutineId.value);
+};
 
 onMounted(() => {
     store.getRoutineList(props.userId);

@@ -1,6 +1,6 @@
 <template>
   <!-- 나의 루틴 태그 영역 -->
-  <section class="profile-click-box content-box">
+  <section class="profile-click-box content-box" @click="handleClick">
     <div class="flex-box">
       <div class="routine-title">{{ routine.title }}</div>
       <div class="routine-tag">{{ routine.userAge }}</div>
@@ -13,14 +13,13 @@
     </div>
     <p>
       {{ routine.content }}
-      실내 사이클 30분, 땅끄부부 칼소폭 10분, 스쿼트20회 3세트, 스트레칭 10분
     </p>
     </section>
 </template>
 
 <script setup>
 import { useRoutineStore } from "@/stores/routine";
-import { defineProps } from "vue";
+import { defineProps, defineEmits } from "vue";
 import { useRoute } from "vue-router";
 
 const store = useRoutineStore();
@@ -32,6 +31,12 @@ const props = defineProps({
     required: true,
   },
 });
+
+const emits = defineEmits(['selectRoutine']);
+
+const handleClick = () => {
+  emits('selectRoutine', props.routine.id);
+};
 
 </script>
 

@@ -21,11 +21,11 @@
                 </div>
             </div>
             <!-- 루틴 리스트 -->
-            <RoutineList v-if="loginUser" :userId="loginUser.id" />
+            <RoutineList v-if="loginUser" :userId="loginUser.id" @selectRoutineId="handleSelectRoutine"/>
         </div>
         <div>
             <!-- 루틴 상세보기 -->
-            <RoutineDetail />
+            <RoutineDetail :routineId="selectedRoutineId" />
         </div>
     </div>
 </template>
@@ -36,17 +36,25 @@ import RoutineList from '@/components/routine/RoutineList.vue';
 
 import { useRoutineStore } from '@/stores/routine';
 import { useUserStore } from '@/stores/user';
-import { onMounted, computed } from 'vue';
+import { ref, onMounted, computed, watch } from 'vue';
 
 const store = useRoutineStore();
 const userStore = useUserStore();
+
+const selectedRoutineId = ref(null);
 
 onMounted(() => {
     userStore.getLoginUser();
 });
 
-// 컴퓨티드 프로퍼티로 userStore의 loginUser를 추적
 const loginUser = computed(() => userStore.loginUser);
+
+const handleSelectRoutine = (routineId) => {
+    // console.log('Selected Routine ID:', routineId);
+    selectedRoutineId.value = routineId;
+};
+
+
 
 </script>
 
