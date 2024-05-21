@@ -16,12 +16,15 @@ public class User {
 	private Date joinAt;
 	private Date updateAt;
 	private Date deleteAt;
+	private String part1;
+	private String part2;
+	private int workoutTime;
 
 	public User() {
 	}
 
 	public User(String email, String nickname, String password, String gender, int age, boolean isPublic,
-			boolean isAdmin, boolean isExpert) {
+			boolean isAdmin, boolean isExpert, String part1, String part2, int workoutTime) {
 		this.email = email;
 		this.nickname = nickname;
 		this.password = password;
@@ -30,6 +33,9 @@ public class User {
 		this.isPublic = isPublic;
 		this.isAdmin = isAdmin;
 		this.isExpert = isExpert;
+		this.part1 = part1;
+		this.part2 = part2;
+		this.workoutTime = workoutTime;
 	}
 
 	public int getId() {
@@ -135,12 +141,38 @@ public class User {
 	public void setDeleteAt(Date deleteAt) {
 		this.deleteAt = deleteAt;
 	}
+	
+
+	public String getPart1() {
+		return part1;
+	}
+
+	public void setPart1(String part1) {
+		this.part1 = part1;
+	}
+
+	public String getPart2() {
+		return part2;
+	}
+
+	public void setPart2(String part2) {
+		this.part2 = part2;
+	}
+
+	public int getWorkoutTime() {
+		return workoutTime;
+	}
+
+	public void setWorkoutTime(int workoutTime) {
+		this.workoutTime = workoutTime;
+	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", nickname=" + nickname + ", password=" + password + ", gender="
-				+ gender + ", age=" + age + ", isPublic=" + isPublic + ", isAdmin=" + isAdmin + ", isExpert=" + isExpert
-				+ ", joinAt=" + joinAt + ", updateAt=" + updateAt + ", deleteAt=" + deleteAt + "]";
+				+ gender + ", age=" + age + ", level=" + level + ", isPublic=" + isPublic + ", isAdmin=" + isAdmin
+				+ ", isExpert=" + isExpert + ", joinAt=" + joinAt + ", updateAt=" + updateAt + ", deleteAt=" + deleteAt
+				+ ", part1=" + part1 + ", part2=" + part2 + ", workoutTime=" + workoutTime + "]";
 	}
 
 }

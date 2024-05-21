@@ -13,6 +13,7 @@ VALUES ("strong123@ssafy.com", "강해진", "1234", "여성", 27),
 ("baseball11@ssafy.com", "야구민", "1234", "남성", 22);
 
 -- delete from users where user_id = 1;
+UPDATE users SET part1 = "유산소", workout_time=60 where id=13;
 -- ------------------------------------------------------
 	SELECT * from users;
 -- ------------------------------------------------------
