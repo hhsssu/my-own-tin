@@ -42,86 +42,86 @@
           >
             <div>
               <div>
-                <input type="radio" name="filter1" id="filter1-1" value="전체" checked />
-                <label for="filter1-1">전체</label>
+                <input type="radio" name="total" id="total-level" value="" checked />
+                <label for="total-level">전체</label>
               </div>
               <div>
-                <input type="radio" name="filter1" id="filter1-2" value="Lv 1" />
-                <label for="filter1-2">Lv 1</label>
+                <input type="radio" name="level1" id="level1" value="1" />
+                <label for="level1">Lv 1</label>
               </div>
               <div>
-                <input type="radio" name="filter1" id="filter1-3" value="Lv 2" />
-                <label for="filter1-3">Lv 2</label>
+                <input type="radio" name="level2" id="level2" value="2" />
+                <label for="level2">Lv 2</label>
               </div>
               <div>
-                <input type="radio" name="filter1" id="filter1-4" value="Lv 3" />
-                <label for="filter1-4">Lv 3</label>
+                <input type="radio" name="level3" id="level3" value="3" />
+                <label for="level3">Lv 3</label>
               </div>
               <div>
-                <input type="radio" name="filter1" id="filter1-5" value="Lv 4" />
-                <label for="filter1-5">Lv 4</label>
+                <input type="radio" name="level4" id="level4" value="4" />
+                <label for="level4">Lv 4</label>
               </div>
               <div>
-                <input type="radio" name="filter1" id="filter1-6" value="Lv 5" />
-                <label for="filter1-6">Lv 5</label>
+                <input type="radio" name="level5" id="level5" value="Lv 5" />
+                <label for="level5">Lv 5</label>
               </div>
               <div>
-                <input type="radio" name="filter1" id="filter1-7" value="Lv 6" />
-                <label for="filter1-7">Lv 6</label>
-              </div>
-            </div>
-            <div>
-              <div>
-                <input type="radio" name="filter2" id="filter2-1" value="전체" checked />
-                <label for="filter2-1">전체</label>
-              </div>
-              <div>
-                <input type="radio" name="filter2" id="filter2-2" value="좋아요순" />
-                <label for="filter2-2">좋아요순</label>
-              </div>
-              <div>
-                <input type="radio" name="filter2" id="filter2-3" value="최신순" />
-                <label for="filter2-3">최신순</label>
+                <input type="radio" name="level6" id="level6" value="Lv 6" />
+                <label for="level-6">Lv 6</label>
               </div>
             </div>
             <div>
               <div>
-                <input type="radio" name="filter3" id="filter3-1" value="전체" checked />
-                <label for="filter3-1">전체</label>
+                <input type="radio" name="total-order" id="total-order" value="" checked />
+                <label for="total-order">전체</label>
               </div>
               <div>
-                <input type="radio" name="filter3" id="filter3-2" value="남성" />
-                <label for="filter3-2">남성</label>
+                <input type="radio" name="like-cnt" id="like-cnt" value="like_cnt" />
+                <label for="like">좋아요순</label>
               </div>
               <div>
-                <input type="radio" name="filter3" id="filter3-3" value="여성" />
-                <label for="filter3-3">여성</label>
+                <input type="radio" name="create-at" id="create-at" value="create_at" />
+                <label for="recent">최신순</label>
               </div>
             </div>
             <div>
               <div>
-                <input type="radio" name="filter4" id="filter4-1" value="전체" checked />
-                <label for="filter4-1">전체</label>
+                <input type="radio" name="total-gender" id="total-gender" value="" checked />
+                <label for="total-gender">전체</label>
               </div>
               <div>
-                <input type="radio" name="filter4" id="filter4-2" value="10대" />
-                <label for="filter4-2">10대</label>
+                <input type="radio" name="male" id="male" value="male" />
+                <label for="male">남성</label>
               </div>
               <div>
-                <input type="radio" name="filter4" id="filter4-3" value="20대" />
-                <label for="filter4-3">20대</label>
+                <input type="radio" name="female" id="female" value="female" />
+                <label for="female">여성</label>
+              </div>
+            </div>
+            <div>
+              <div>
+                <input type="radio" name="total-age" id="total-age" value="" checked />
+                <label for="total-age">전체</label>
               </div>
               <div>
-                <input type="radio" name="filter4" id="filter4-4" value="30대" />
-                <label for="filter4-4">30대</label>
+                <input type="radio" name="ten" id="ten" value="10" />
+                <label for="ten">10대</label>
               </div>
               <div>
-                <input type="radio" name="filter4" id="filter4-5" value="40대" />
-                <label for="filter4-5">40대</label>
+                <input type="radio" name="twenty" id="twenty" value="20" />
+                <label for="twenty">20대</label>
               </div>
               <div>
-                <input type="radio" name="filter4" id="filter4-6" value="50대 이상" />
-                <label for="filter4-6">50대 이상</label>
+                <input type="radio" name="thirty" id="thirty" value="30" />
+                <label for="thirty">30대</label>
+              </div>
+              <div>
+                <input type="radio" name="fourty" id="fourty" value="40" />
+                <label for="fourty">40대</label>
+              </div>
+              <div>
+                <input type="radio" name="fifty" id="fifty" value="50" />
+                <label for="fifty">50대 이상</label>
               </div>
             </div>
           </div>
