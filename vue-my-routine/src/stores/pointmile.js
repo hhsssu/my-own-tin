@@ -81,7 +81,7 @@ export const usePointmileStore = defineStore('pointmile', () => {
             }
         })
         .then((response) => {
-            pointList.value = response.data;
+            mileList.value = response.data;
         })
     }
 

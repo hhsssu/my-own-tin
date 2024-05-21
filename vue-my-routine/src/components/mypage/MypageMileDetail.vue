@@ -2,7 +2,7 @@
     <div class="mypage-point-detail-container">
         <h2 class="view-title">마일리지 적립 내역</h2>
         <div class="point-detail-total-box">
-            <div class="point-detail-total">마일리지 : {{ mileTotal }}M</div>
+            <div class="point-detail-total">잔여 마일리지 : {{ mileTotal }}M</div>
         </div>
 
         <table class="point-detail-table">
@@ -15,10 +15,11 @@
             </thead>
             <tbody>
                 <!-- <tr v-for="item in items"> -->
-                <tr v-for="item in pointmileStore.mileList" class="point-detail-table-content">
-                    <td class="point-detail-table-date">{{ item.createAt }}</td>
+                <tr v-for="item in pointmileStore.mileList" :key="item.id" class="point-detail-table-content">
+                    <td class="point-detail-table-date">{{ formatDate(item.createAt) }}</td>
                     <td class="point-detail-table-detail">{{ item.record }}</td>
-                    <td class="point-detail-table-saveuse">{{ item.amount }}</td>
+                    <td class="point-detail-table-saveuse" v-if="item.amount > 0">+{{ item.amount }}</td>
+                    <td class="point-detail-table-saveuse" v-else-if="item.amount < 0">-{{ item.amount }}</td>
                 </tr>
             </tbody>
         </table>
@@ -29,26 +30,36 @@
 import { ref, onMounted, defineProps } from 'vue';
 import { usePointmileStore } from '@/stores/pointmile';
 
+const props = defineProps({
+    mileTotal: {
+        type: Number,
+        required: true
+    }
+})
 const pointmileStore = usePointmileStore();
 
 const user = JSON.parse(sessionStorage.getItem('user'));
 
-const props = defineProps({
-    mileTotal: Number
-})
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}/${month}/${day}`;
+}
 
 // 해당하는 회원의 포인트 내역 (날짜, 설명, 쌓인 금액) 불러오기
 // -값은 색상 변경 (if 음수면 색상변경 class 추가)
 
 onMounted(() => {
     pointmileStore.getMileList(user.id);
-})
+    console.log(pointmileStore.mileList);
+});
 
 </script>
 
 <style scoped>
-.mypage-point-detail-container {
-}
+.mypage-point-detail-container {}
 
 
 
@@ -87,8 +98,7 @@ th {
 }
 
 /* 테이블 각 한줄 컬럼 */
-.point-detail-table-content {
-}
+.point-detail-table-content {}
 
 /* 테이블 콘텐츠 */
 td {
@@ -112,5 +122,4 @@ td {
     color: #38ABBE;
     font-weight: 500;
 }
-
 </style>
