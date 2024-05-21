@@ -2,9 +2,12 @@ package com.ssafy.myroutine.model.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.ssafy.myroutine.model.dao.MileDao;
 import com.ssafy.myroutine.model.dto.Mile;
 
+@Service
 public class MileServiceImpl implements MileService {
 
 	private final MileDao mileDao;

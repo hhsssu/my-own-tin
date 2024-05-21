@@ -2,9 +2,12 @@ package com.ssafy.myroutine.model.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.ssafy.myroutine.model.dao.PointDao;
 import com.ssafy.myroutine.model.dto.Point;
 
+@Service
 public class PointServiceImpl implements PointService {
 
 	private final PointDao pointDao;
