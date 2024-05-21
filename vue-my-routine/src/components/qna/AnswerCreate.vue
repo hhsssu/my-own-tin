@@ -7,14 +7,18 @@
         cols="50"
         rows="4"
         placeholder="댓글을 작성하세요..."
+        v-model="answer.content"
       ></textarea>
-      <button class="qna-detail-comment-button">등록</button>
+      <button class="qna-detail-comment-button" @click="createAnswer">등록</button>
     </div>
   </div>
 </template>
 
 <script setup>
+import { useQnAStore } from '@/stores/qna';
 import { defineProps } from 'vue';
+
+const store = useQnAStore();
 
 const props = defineProps({
   questionId: {
@@ -22,6 +26,25 @@ const props = defineProps({
     required: true
   }
 });
+
+const answer = {
+  writer: '',
+  content: '',
+  questionId: '',
+  userId: ''
+}
+
+const createAnswer = function () {
+  const userItem = sessionStorage.getItem('loginUser');
+const userObj = JSON.parse(userItem);
+  // answer.userId = userObj.id;
+  answer.userId = 11;
+  console.log(props.questionId);
+  answer.questionId = props.questionId;
+  store.createAnswer(answer);
+}
+
+
 
 </script>
 

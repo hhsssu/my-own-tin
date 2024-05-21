@@ -1,6 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios';
+import router from '@/router';
 
 const QNA_REST_API = `http://localhost:8080/myroutine/que/`;
 const ANS_REST_API = `http://localhost:8080/myroutine/ans/`;
@@ -79,6 +80,18 @@ export const useQnAStore = defineStore('qna', () => {
         })
     }
 
+    const createAnswer = function (answer) {
+        // console.log(answer);
+        axios({
+            url: ANS_REST_API,
+            method: 'POST',
+            data: answer
+        })
+        .then(() => {
+            router.replace({ name: 'answerList', params: {questionId: questionId} });
+        })
+    }
+
 
     return { 
         qnaList,
@@ -87,6 +100,7 @@ export const useQnAStore = defineStore('qna', () => {
         getQnAList,
         getUserDetails,
         getRoutine,
-        getAnsList
+        getAnsList,
+        createAnswer
     };
 })
