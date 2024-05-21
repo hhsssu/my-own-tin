@@ -4,13 +4,13 @@
       <img src="@/assets/img/logo1.png" alt="메인페이지 로고" class="img-login-logo">
     </div>
     <div class="login-input">
-      <input type="text" placeholder="e-mail" v-model.trim="id" />
-      <input type="password" placeholder="password" v-model.trim="pw" />
+      <input type="email" placeholder="e-mail" v-model.trim="email" />
+      <input type="password" placeholder="password" v-model.trim="password" @keyup.enter="login" />
     </div>
     <div class="login-buttons">
       <button @click="login">로그인</button>
-      <button @click="joinpage">회원가입</button>
     </div>
+    <button @click="joinpage" class="join-btn">회원가입</button>
   </div>
 </template>
 
@@ -23,17 +23,15 @@ import { useRouter } from "vue-router";
 const store = useUserStore();
 const router = useRouter();
 
-const id = ref("");
-const pw = ref("");
+const email = ref("");
+const password = ref("");
 
 // 비동기 함수를 선언을 위한 async 키워드 사용
 const login = async function () {
   // 로그인 요청 보내기
   try {
-    store.userLogin(id.value, pw.value);
-    // 로그인 후 페이지 이동
-    console.log("login 성공");
-    await router.push({ name: 'routine' });
+    store.userLogin({email: email.value, password: password.value});
+    
   } catch (error) {
     console.log(error);
   }
@@ -78,7 +76,7 @@ const joinpage = function () {
 }
 
 .login-buttons button {
-  width: 200px;
+  width: 300px;
   padding: 10px;
   margin: 20px 10px;
   font-size: 18px;
@@ -88,9 +86,16 @@ const joinpage = function () {
   border-radius: 5px;
 }
 
+.join-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #777;
+}
+
 /* 버튼에 마우스 커서 올렸을 시 */
 .login-buttons button:hover {
-  background-color: lightgray;
+  background-color: #B3DEE5;
   cursor: pointer;
 }
 

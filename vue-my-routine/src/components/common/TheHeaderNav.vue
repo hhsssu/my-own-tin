@@ -20,11 +20,11 @@ import { useUserStore } from "@/stores/user";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
+const store = useUserStore();
 
 const logout = function() {
     console.log("로그아웃");
-    // 로그아웃 전으로 재진입 불가
-    router.replace({name: 'main'});
+    store.logoutUser();
 };
 
 </script>
