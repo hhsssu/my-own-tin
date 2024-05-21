@@ -9,6 +9,7 @@ const REST_USER_API = `http://localhost:8080/myroutine/user/`;
 export const useUserStore = defineStore('user', () => {
 
     const user = ref(null);
+    const loginUser = ref(null);
 
     // 로그인
     const userLogin = (loginUser) => {
@@ -70,15 +71,21 @@ export const useUserStore = defineStore('user', () => {
     }
 
     // 회원 정보 표시
+    // const getLoginUser = function () {
+    //     axios.get(REST_USER_API)
+    //         .then((response) => {
+    //             console.log(response.data);
+    //             user.value = response.data
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+    // };
+
     const getLoginUser = function () {
-        axios.get('REST_USER_API')
-            .then((response) => {
-                user.value = response.data
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
+        const login = sessionStorage.getItem('user');
+        loginUser.value = JSON.parse(login);
+    }
 
     // 회원 정보 수정
     const updateLoginUser = function (updatedUserInfo) {
@@ -104,6 +111,7 @@ export const useUserStore = defineStore('user', () => {
 
     return {
         user,
+        loginUser,
         userLogin,
         userJoin,
         getLoginUser,

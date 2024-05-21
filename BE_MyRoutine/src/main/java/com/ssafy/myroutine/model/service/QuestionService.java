@@ -17,7 +17,7 @@ public interface QuestionService {
 	boolean removeQuestion(int id);
 
 	// 질문 조회
-	List<Question> searchQuestion(SearchCondition con);
+	List<Question> searchQuestions(String queryConditions);
 
 	// 질문 상세
 	Question getQuestion(int id);

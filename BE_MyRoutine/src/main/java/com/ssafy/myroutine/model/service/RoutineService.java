@@ -22,6 +22,9 @@ public interface RoutineService {
 
 	// 루틴 상세
 	Routine getRoutine(int id);
+
+	// 사용자 루틴 조회
+	List<Routine> getRoutineByUserId(int userId);
 	
 	// 루틴 보관함 조회
 	List<Routine> searchRoutineMarked(int userId);

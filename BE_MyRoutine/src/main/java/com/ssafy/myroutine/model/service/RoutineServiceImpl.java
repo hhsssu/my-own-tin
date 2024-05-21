@@ -49,6 +49,11 @@ public class RoutineServiceImpl implements RoutineService {
 	public Routine getRoutine(int id) {
 		return routineDao.searchById(id);
 	}
+	
+	@Override
+	public List<Routine> getRoutineByUserId(int userId) {
+		return routineDao.searchByUserId(userId);
+	}
 
 	// 루틴 보관함 조회
 	@Override

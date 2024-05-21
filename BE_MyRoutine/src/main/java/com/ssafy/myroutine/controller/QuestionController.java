@@ -78,7 +78,12 @@ public class QuestionController {
 	@GetMapping("/")
 	@Operation(summary = "질문 검색", description = "질문 검색 기능")
 	public ResponseEntity<?> list(@ModelAttribute SearchCondition con) {
-		List<Question> list = queService.searchQuestion(con);
+		// SearchCondition 객체를 이용하여 적절한 쿼리 조건을 생성
+        String queryConditions = con.toQueryConditions();
+
+        // 검색 쿼리를 실행하여 질문을 검색
+        List<Question> list = queService.searchQuestions(queryConditions);
+
 		
 		if(list == null || list.size() == 0)
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

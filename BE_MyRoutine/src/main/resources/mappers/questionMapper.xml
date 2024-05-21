@@ -30,7 +30,8 @@
 
 	<!-- 질문 검색 조회 -->
 	<select id="search" parameterType="SearchCondition" resultType="Question">
-		SELECT * FROM questions <if test="key != ''">
+		SELECT * FROM questions 
+		<if test="key != ''">
 			WHERE ${key} LIKE CONCAT('%', #{word}, '%')
 		</if>
 		<if

@@ -23,6 +23,9 @@ public interface RoutineDao {
 	// 루틴 상세 조회
 	Routine searchById(int id);
 	
+	// 사용자 ID에 따른 루틴 조회
+	List<Routine> searchByUserId(int userId);	
+	
 	// 루틴 보관함 조회
 	List<Routine> searchMarked(int id);
 
