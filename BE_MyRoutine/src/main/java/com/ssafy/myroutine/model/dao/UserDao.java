@@ -18,4 +18,7 @@ public interface UserDao {
 	// 사용자 회원탈퇴
 	int delete(int id);
 	
+	// id를 통한 사용자 조회
+	User selectById(int id);
+	
 }

@@ -44,7 +44,7 @@ public class QuestionServiceImpl implements QuestionService {
 	// 질문 상세
 	@Override
 	public Question getQuestion(int id) {
-		questionDao.updateViewCnt(id);
+//		questionDao.updateViewCnt(id);
 		return questionDao.searchById(id);
 	}
 

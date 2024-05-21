@@ -47,6 +47,7 @@ public class QuestionController {
 	@PostMapping("/")
 	@Operation(summary = "질문 등록", description = "질문 등록 기능")
 	public ResponseEntity<?> write(@RequestBody Question que) {
+		System.out.println(que.toString());
 		queService.registQuestion(que);
 		return new ResponseEntity<Question>(que, HttpStatus.CREATED);
 	}
@@ -77,10 +78,8 @@ public class QuestionController {
 	@GetMapping("/")
 	@Operation(summary = "질문 검색", description = "질문 검색 기능")
 	public ResponseEntity<?> list(@ModelAttribute SearchCondition con) {
-		System.out.println(con.toString());
-		System.out.println(con.getKey() == "");
-		
 		List<Question> list = queService.searchQuestion(con);
+		
 		if(list == null || list.size() == 0)
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<Question>>(list, HttpStatus.OK);

@@ -41,5 +41,11 @@
 		WHERE id = #{id}
 	</update>
 
+	<!-- id를 통한 사용자 조회 -->
+	<select id="selectById" parameterType="int">
+		SELECT *
+		FROM users
+		WHERE id = #{id}
+	</select>
 
 </mapper>

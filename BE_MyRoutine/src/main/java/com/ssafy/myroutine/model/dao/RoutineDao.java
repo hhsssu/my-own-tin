@@ -1,6 +1,7 @@
 package com.ssafy.myroutine.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ssafy.myroutine.model.dto.Routine;
 import com.ssafy.myroutine.model.dto.SearchCondition;
@@ -27,4 +28,7 @@ public interface RoutineDao {
 
 	// 조회수 증가
 //	public int updateViewCnt(int id);
+	
+	// 날짜와 사용자 ID에 따른 루틴 조회
+    List<Routine> findByDateAndUserId(Map<String, Object> params);
 }

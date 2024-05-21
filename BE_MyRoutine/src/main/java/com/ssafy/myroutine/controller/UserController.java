@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -120,6 +121,17 @@ public class UserController {
 			return new ResponseEntity<String>(msg, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	// id를 통한 사용자 조회
+	@GetMapping("/{id}")
+	@Operation(summary = "ID를 통한 사용자 조회", description = "ID를 통한 사용자 조회 기능")
+	public ResponseEntity<User> getUserById(@PathVariable int id) {
+		User user = userService.getUserById(id);
+		if (user != null)
+			return new ResponseEntity<User>(user, HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
 	
 
 }

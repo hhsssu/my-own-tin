@@ -40,4 +40,10 @@ public class UserServiceImpl implements UserService {
 		return userDao.delete(id) == 1;
 	}
 
+	// id를 통한 사용자 조회
+	@Override
+	public User getUserById(int id) {
+		return userDao.selectById(id);
+	}
+
 }

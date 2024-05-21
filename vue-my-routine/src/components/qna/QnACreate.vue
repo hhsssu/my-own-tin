@@ -1,39 +1,94 @@
 <template>
   <div class="qna-create">
     <!-- 프로필 공개 여부 -->
-    <div class="qna-create-profile">
+    <!-- 사용자의 isPublic 여부에 따라 표시 -->
+    <!-- <div class="qna-create-profile">
       <label for="profile">프로필 공개 여부</label>
-      <input type="checkbox" id="public" value="public" v-model="isPublic" />
+      <input type="checkbox" id="public" value="true" v-model="isPublic" />
       <label for="public">예</label>
-      <input type="checkbox" id="private" value="private" v-model="isPublic" />
+      <input type="checkbox" id="private" value="false" v-model="isPublic" />
       <label for="private">아니오</label>
-    </div>
+    </div> -->
     <!-- 제목 -->
     <div class="qna-create-title">
       <label for="title">제목</label>
-      <input type="text" />
+      <input type="text" v-model="question.title" />
     </div>
     <!-- 내용 -->
     <div class="qna-create-content">
       <label for="content">내용</label>
-      <textarea name="content" id="content" cols="30" rows="10"></textarea>
+      <textarea
+        name="content"
+        id="content"
+        cols="30"
+        rows="10"
+        v-model="question.content"
+      ></textarea>
     </div>
     <!-- 루틴 인용 -->
     <div class="qna-create-routine">
       <label for="routine">루틴</label>
-      <!-- 선택된 날짜가 불러와져야 함 -->
-      <div>2024-05-23</div>
-      <button>날짜 선택</button>
+      <!-- 날짜 선택기 -->
+      <input type="date" v-model="selectedDate" @change="fetchRoutines" />
+      <!-- 루틴 목록 -->
+      <select v-if="routines.length" v-model="selectedRoutine">
+        <option v-for="routine in routines" :key="routine.id" :value="routine.id">
+          {{ routine.title }}
+        </option>
+      </select>
     </div>
     <!-- 등록 및 취소 버튼 -->
     <div class="qna-create-buttons">
-      <button>등록</button>
-      <button>취소</button>
+      <button @click="confirmCreate">등록</button>
+      <button @click="deleteCreate">취소</button>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import { useQnAStore } from "@/stores/qna";
+import { useRouter } from "vue-router";
+import axios from "axios";
+
+const store = useQnAStore();
+const router = useRouter();
+
+const question = {
+  userId: "",
+  routineId: "",
+  writer: "",
+  title: "",
+  content: "",
+};
+
+const selectedDate = ref('');
+const routines = ref([]);
+const selectedRoutine = ref(null);
+
+const fetchRoutines = async () => {
+  if (selectedDate.value) {
+    try {
+      // const userId = JSON.parse(sessionStorage.getItem("loginUser")).id;
+      const userId = 13;
+      const response = await axios.get(`http://localhost:8080/myroutine/routine/byDate`, { params: { date: selectedDate.value, userId: userId } });
+      routines.value = response.data;
+      console.log(routines.value);
+    } catch (error) {
+      console.error('Error fetching routines:', error);
+    }
+  }
+};
+
+const confirmCreate = function () {
+  const userItem = sessionStorage.getItem("loginUser");
+  const userObj = JSON.parse(userItem);
+  // answer.userId = userObj.id;
+  question.userId = 11;
+  question.routineId = selectedRoutine.value;
+  store.createQuestion(question);
+};
+</script>
 
 <style scoped>
 .qna-create {
@@ -78,7 +133,7 @@
 }
 
 .qna-create-content {
-    width: 400px;
+  width: 400px;
 }
 
 .qna-create-content label {

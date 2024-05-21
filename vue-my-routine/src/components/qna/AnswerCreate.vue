@@ -7,13 +7,46 @@
         cols="50"
         rows="4"
         placeholder="댓글을 작성하세요..."
+        v-model="answer.content"
       ></textarea>
-      <button class="qna-detail-comment-button">등록</button>
+      <button class="qna-detail-comment-button" @click="createAnswer">등록</button>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useQnAStore } from '@/stores/qna';
+import { defineProps } from 'vue';
+
+const store = useQnAStore();
+
+const props = defineProps({
+  questionId: {
+    type: Number,
+    required: true
+  }
+});
+
+const answer = {
+  writer: '',
+  content: '',
+  questionId: '',
+  userId: ''
+}
+
+const createAnswer = function () {
+  const userItem = sessionStorage.getItem('loginUser');
+const userObj = JSON.parse(userItem);
+  // answer.userId = userObj.id;
+  answer.userId = 11;
+  // console.log(props.questionId);
+  answer.questionId = props.questionId;
+  store.createAnswer(answer);
+}
+
+
+
+</script>
 
 <style scoped>
 .qna-detail-comment-input {
@@ -22,19 +55,19 @@
 }
 
 .qna-detail-comment-input textarea {
-  padding: 20px;
+  padding: 15px;
   margin: 20px 0px 10px 0px;
   border: 1px solid #777;
   border-radius: 5px;
   font-size: 1em;
-  width: 350px;
+  width: 90%;
 }
 
 .qna-detail-comment-button {
   background-color: #FFA101;
   color: white;
   font-size: 15px;
-  padding: 5px 12px;
+  padding: 5px 15px;
   border: none;
   border-radius: 5px;
   margin-left: auto;

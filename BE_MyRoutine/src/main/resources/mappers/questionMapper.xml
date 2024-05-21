@@ -4,8 +4,8 @@
 
 	<!-- 질문 등록 -->
 	<insert id="insert" parameterType="Question">
-		INSERT INTO questions (user_id, writer, title, content, like_cnt)
-		VALUES (#{userId}, #{writer}, #{title}, #{content}, #{likeCnt})
+		INSERT INTO questions (user_id, routine_id, writer, title, content, like_cnt)
+		VALUES (#{userId}, #{routineId}, #{writer}, #{title}, #{content}, #{likeCnt})
 	</insert>
 
 	<!-- 질문 수정 -->
@@ -30,8 +30,7 @@
 
 	<!-- 질문 검색 조회 -->
 	<select id="search" parameterType="SearchCondition" resultType="Question">
-		SELECT * FROM questions 
-		<if test="key != ''">
+		SELECT * FROM questions <if test="key != ''">
 			WHERE ${key} LIKE CONCAT('%', #{word}, '%')
 		</if>
 		<if
