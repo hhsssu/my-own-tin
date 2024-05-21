@@ -8,29 +8,29 @@
             </div>
             <div class="flex-box flex-box-end">
                 <div class="input-label">새 비밀번호</div>
-                <input class="input-text" type="password" placeholder="8자 이상 15자 이하">
+                <input class="input-text" type="password" placeholder="8자 이상 15자 이하" v-model="newPassword">
             </div>
             <div class="flex-box flex-box-end">
                 <div class="input-label">비밀번호 확인</div>
-                <input class="input-text" type="password" placeholder="8자 이상 15자 이하">
+                <input class="input-text" type="password" placeholder="8자 이상 15자 이하" v-model="confirmPassword">
             </div>
             <div class="flex-box flex-box-end">
                 <div class="input-label">나이</div>
-                <input class="input-text" type="number" value="27">
+                <input class="input-text" type="number" v-model="age">
             </div>
             <div class="flex-box flex-box-end">
                 <div class="input-label">성별</div>
                 <label for="gender">
-                    <input class="input-radio" type="radio" name="gender" v-model="gender" value="male" />
+                    <input class="input-radio" type="radio" name="gender" v-model="gender" value="남성" />
                     <span>남성</span>
                 </label>
                 <label for="gender">
-                    <input class="input-radio" type="radio" name="gender" v-model="gender" value="female" :checked="true"/>
+                    <input class="input-radio" type="radio" name="gender" v-model="gender" value="여성"/>
                     <span>여성</span>
                 </label>
             </div>
             <div class="display-block">
-                <button type="button" class="modify-fin-btn">수정 완료</button>
+                <button type="button" class="modify-fin-btn"@click="updateProfile">수정 완료</button>
             </div>
         </div>
         <div class="profile-out-btn">
@@ -43,6 +43,49 @@
 // 수정완료 클릭하면 제대로 작성하였는지 여부에 따라
 // 수정 완료 알림창 띄워줌
 // v-model로 값 보내줌
+
+import { useUserStore } from '@/stores/user';
+import { ref } from 'vue';
+
+const userStore = useUserStore();
+
+const user = JSON.parse(sessionStorage.getItem('user'));
+const newPassword = ref('');
+const confirmPassword = ref('');
+const age = ref(user.age);
+const gender = ref(user.gender);
+
+const updateProfile = () => {
+    if(newPassword.value !== confirmPassword.value){
+        alert('새 비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+        return;
+    }
+
+    if(!age.value || !gender.value) {
+        alert("필수 항목을 작성해주세요.");
+        return;
+    }
+    
+    // 비밀번호 업데이트 X
+    if(!newPassword.value && !confirmPassword.value) {
+        const updateUserInfo = {
+            id: user.id,
+            password: user.password,
+            age: age.value,
+            gender: gender.value,
+        }
+    } else {
+        const updateUserInfo = {
+            id: user.id,
+            password: newPassword.value,
+            age: age.value,
+            gender: gender.value,
+        }
+    }
+
+    userStore.updateLoginUser(updateUserInfo);
+}
+
 
 </script>
 
