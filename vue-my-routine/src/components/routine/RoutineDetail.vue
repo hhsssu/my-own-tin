@@ -27,7 +27,7 @@
     </div>
   </div>
   <div v-else>
-    <p>루틴을 선택하세요.</p>
+    <!-- <p>루틴을 선택하세요.</p> -->
   </div>
 </template>
 
