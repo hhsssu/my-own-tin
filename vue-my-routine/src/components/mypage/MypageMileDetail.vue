@@ -1,8 +1,8 @@
 <template>
     <div class="mypage-point-detail-container">
-        <h2 class="view-title">포인트 적립 내역</h2>
+        <h2 class="view-title">마일리지 적립 내역</h2>
         <div class="point-detail-total-box">
-            <div class="point-detail-total">포인트 : {{ point }}P</div>
+            <div class="point-detail-total">마일리지 : {{ mileTotal }}M</div>
         </div>
 
         <table class="point-detail-table">
@@ -15,25 +15,10 @@
             </thead>
             <tbody>
                 <!-- <tr v-for="item in items"> -->
-                <tr class="point-detail-table-content">
-                    <td class="point-detail-table-date">{{ date }}</td>
-                    <td class="point-detail-table-detail">{{ detail }}</td>
-                    <td class="point-detail-table-saveuse">{{ saveuse }}</td>
-                </tr>
-                <tr class="point-detail-table-content">
-                    <td class="point-detail-table-date">{{ date }}</td>
-                    <td class="point-detail-table-detail">{{ detail }}</td>
-                    <td class="point-detail-table-saveuse">{{ saveuse }}</td>
-                </tr>
-                <tr class="point-detail-table-content">
-                    <td class="point-detail-table-date">{{ date }}</td>
-                    <td class="point-detail-table-detail">{{ detail }}</td>
-                    <td class="point-detail-table-saveuse">{{ saveuse }}</td>
-                </tr>
-                <tr class="point-detail-table-content">
-                    <td class="point-detail-table-date">{{ date }}</td>
-                    <td class="point-detail-table-detail">{{ detail }}</td>
-                    <td class="point-detail-table-saveuse">{{ saveuse }}</td>
+                <tr v-for="item in pointmileStore.mileList" class="point-detail-table-content">
+                    <td class="point-detail-table-date">{{ item.createAt }}</td>
+                    <td class="point-detail-table-detail">{{ item.record }}</td>
+                    <td class="point-detail-table-saveuse">{{ item.amount }}</td>
                 </tr>
             </tbody>
         </table>
@@ -41,17 +26,23 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, defineProps } from 'vue';
+import { usePointmileStore } from '@/stores/pointmile';
 
-const point = ref(1900);
-const mile = ref(500);
+const pointmileStore = usePointmileStore();
 
-const date = ref('2024.05.19');
-const detail = ref('루틴 완료');
-const saveuse = ref('+100P');
+const user = JSON.parse(sessionStorage.getItem('user'));
+
+const props = defineProps({
+    mileTotal: Number
+})
 
 // 해당하는 회원의 포인트 내역 (날짜, 설명, 쌓인 금액) 불러오기
-// -값은 색상 변경
+// -값은 색상 변경 (if 음수면 색상변경 class 추가)
+
+onMounted(() => {
+    pointmileStore.getMileList(user.id);
+})
 
 </script>
 
@@ -91,6 +82,8 @@ const saveuse = ref('+100P');
 
 th {
     padding-bottom: 7px;
+    padding-right: 40px;
+    padding-left: 40px;
 }
 
 /* 테이블 각 한줄 컬럼 */
@@ -116,7 +109,7 @@ td {
 
 /* 적립/사용 포인트 */
 .point-detail-table-saveuse {
-    color: #FFA101;
+    color: #38ABBE;
     font-weight: 500;
 }
 

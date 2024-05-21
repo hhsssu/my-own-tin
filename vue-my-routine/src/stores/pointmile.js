@@ -3,8 +3,8 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 import router from '@/router';
 
-const REST_POINT_API = `http://localhost:8080/myroutine/point`;
-const REST_MILE_API = `http://localhost:8080/myroutine/mile`;
+const REST_POINT_API = `http://localhost:8080/myroutine/point/`;
+const REST_MILE_API = `http://localhost:8080/myroutine/mile/`;
 
 // 포인트 등록(적립), 내역 조회, 총합, 삭제 (CRD)
 // 마일리지 등록(적립), 내역 조회, 총합, 삭제 (CRD)
@@ -45,7 +45,7 @@ export const usePointmileStore = defineStore('pointmile', () => {
 
     // 포인트 총합 조회
     const getPointTotal = function(userId) {
-        axios.get(`${REST_POINT_API}/total`, {
+        axios.get(`${REST_POINT_API}total`, {
             params: {
                 userId: userId,
             }
@@ -87,7 +87,7 @@ export const usePointmileStore = defineStore('pointmile', () => {
 
     // 마일리지 총합 조회
     const getMileTotal = function(userId) {
-        axios.get(`${REST_MILE_API}/total`, {
+        axios.get(`${REST_MILE_API}total`, {
             params: {
                 userId: userId,
             }

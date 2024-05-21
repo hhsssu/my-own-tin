@@ -30,29 +30,30 @@
                     <div class="routine-tag" v-else-if="user.age > 29">30대</div>
                     <div class="routine-tag" v-else-if="user.age > 39">40대</div>
                     <div class="routine-tag" v-else-if="user.age > 49">50대</div>
-                    <div class="routine-tag" v-else-if="user.age > 59">60대 이상</div>
+                    <div class="routine-tag" v-else-if="user.age > 59">60대</div>
+                    <div class="routine-tag" v-else-if="user.age > 69">70대</div>
+                    <div class="routine-tag" v-else-if="user.age > 79">80대⬆</div>
                     <div class="routine-tag">{{ user.gender }}</div>
                     <div class="routine-tag">{{ user.part1 }}</div>
-                    <div class="routine-tag" v-if="workout_time !== null">{{ user.workout_time }}</div>
+                    <div class="routine-tag" v-if="user.workoutTime !== null">{{ workoutTimeFormat(user.workoutTime) }}</div>
                 </div>
             </section>
             <!-- 포인트 마일리지 표기 영역 -->
-            <section class="profile-click-box flex-box content-box"
-                @click="showComponent('MypagePoint')">
-                <div class="profile-point-box">
+            <section class="profile-click-box flex-box content-box">
+                <div class="profile-point-box" @click="showComponent('MypagePoint')">
                     <div class="profile-title">포인트</div>
-                    <div class="profile-point-amount num">1900</div>
+                    <div class="profile-point-amount num">{{ pointTotal }}</div>
                 </div>
-                <div class="profile-mile-box">
+                <div class="profile-mile-box" @click="showComponent('MypageMile')">
                     <div class="profile-title">마일리지</div>
-                    <div class="profile-mile-amount num">500</div>
+                    <div class="profile-mile-amount num">{{ mileTotal }}</div>
                 </div>
             </section>
             <!-- 루틴 보관함 영역 -->
             <section class="profile-click-box content-box"
                 @click="showComponent('MypageRoutineBox')">
                 <div class="profile-title">루틴 보관함</div>
-                <div class="profile-tinbox-amount num">{{ routineCnt }}</div>
+                <div class="profile-tinbox-amount num">{{ routineTotal }}</div>
             </section>
             <!-- 회원정보 수정 영역 -->
             <section class="profile-click-box content-box"
@@ -74,34 +75,74 @@
 import TheHeaderNav from '@/components/common/TheHeaderNav.vue';
 import MypageModifyProfile from '@/components/mypage/MypageModifyProfile.vue';
 import MypagePoint from '@/components/mypage/MypagePointDetail.vue';
+import MypageMile from '@/components/mypage/MypageMileDetail.vue';
 import MypageRoutineBox from '@/components/mypage/MypageRoutineBox.vue';
 import MypageModifyUser from '@/components/mypage/MypageModifyUser.vue';
 import MypageModifyRoutinetag from '@/components/mypage/MypageModifyRoutinetag.vue';
 
 import { useUserStore } from '@/stores/user';
 import { useRoutineStore } from '@/stores/routine';
+import { usePointmileStore } from '@/stores/pointmile';
+import { computed, ref, shallowRef, onMounted } from 'vue';
 
 const userStore = useUserStore();
+const routineStore = useRoutineStore();
+const pointmileStore = usePointmileStore();
+
 const user = JSON.parse(sessionStorage.getItem('user'));
 
-import { ref } from 'vue';
 
 const routineCnt = ref(17);
 
-const activeComponent = ref('');
+// 포인트 총합 조회
+const pointTotal = computed(() => pointmileStore.pointTotal);
 
+// 마일리지 총합 조회
+const mileTotal = computed(() => pointmileStore.mileTotal);
+
+// 나의 루틴 개수 조회
+const routineTotal = computed(() => routineStore.routineList.length);
+
+// 클릭 시 컴포넌트 변경
+const activeComponent = shallowRef(null);
 const components = {
     MypageModifyProfile,
     MypagePoint,
+    MypageMile,
     MypageRoutineBox,
     MypageModifyUser,
     MypageModifyRoutinetag,
 }
-
 const showComponent = (componentName) => {
     activeComponent.value = components[componentName];
     console.log(activeComponent.value);
 }
+
+// 운동 시간 태그
+const workoutTimeFormat = (workoutTime) => {
+    const hours = Math.floor(workoutTime / 60); // 시간
+    const minuties = workoutTime % 60; // 분
+    
+    let workout = '';
+    if(hours > 0) {
+        workout += `${hours}시간`;
+    }
+    if(minuties > 0) {
+        workout += `${minuties}분`;
+    }
+
+    return workout.trim();
+}
+
+const loadData = async () => {
+    await routineStore.getRoutineList(user.id);
+    await pointmileStore.getPointTotal(user.id);
+    await pointmileStore.getMileTotal(user.id);
+}
+
+onMounted(async () => {
+    await loadData();
+});
 
 </script>
 
