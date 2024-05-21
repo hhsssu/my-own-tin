@@ -27,6 +27,9 @@
 			<if test="password != null">password = #{password},</if>
 			<if test="age != null">age = #{age},</if>
 			<if test="gender != null">gender = #{gender},</if>
+			<if test="part1 != null">part1 = #{part1},</if>
+			<if test="part2 != null">part2 = #{part2},</if>
+			<if test="workout_time != null">workout_time = #{workoutTime},</if>
 		</set>
 		WHERE id = #{id}
 	</update>
