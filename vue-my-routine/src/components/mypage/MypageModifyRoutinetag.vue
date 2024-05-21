@@ -7,8 +7,13 @@
                 <div class="routinetag-explain">회원정보 수정에서 변경 가능합니다.</div>
             </div>
             <div class="flex-box">
-                <div class="routine-tag">20대</div>
-                <div class="routine-tag">여성</div>
+                <div class="routine-tag" v-if="user.age < 20">10대</div>
+                    <div class="routine-tag" v-else-if="user.age > 19">20대</div>
+                    <div class="routine-tag" v-else-if="user.age > 29">30대</div>
+                    <div class="routine-tag" v-else-if="user.age > 39">40대</div>
+                    <div class="routine-tag" v-else-if="user.age > 49">50대</div>
+                    <div class="routine-tag" v-else-if="user.age > 59">60대 이상</div>
+                    <div class="routine-tag">{{ user.gender }}</div>
             </div>
         </div>
         <div class="profile-click-box content-box">
@@ -18,10 +23,10 @@
                     <!-- 운동 부위 1 -->
                     <div>운동부위1</div>
                     <select name="part1" id="part1" size="3" v-model="part1">
-                        <option value="">선택안함</option>
-                        <option value="유산소" selected>유산소</option>
-                        <option value="하체">하체</option>
-                        <option value="상체">상체</option>
+                        <option value="" :selected="user.part1 === null">선택안함</option>
+                        <option value="유산소" :selected="user.part1 === '유산소'">유산소</option>
+                        <option value="하체" :selected="user.part1 === '하체'">하체</option>
+                        <option value="상체" :selected="user.part1 === '상체'">상체</option>
                         <option value="어깨">어깨</option>
                         <option value="팔">팔</option>
                         <option value="허벅지">허벅지</option>
@@ -75,9 +80,8 @@ import { useRoutineStore } from '@/stores/routine';
 
 const store = useRoutineStore();
 
-const part1 = ref('유산소');
-const part2 = ref('');
-const time = ref('1h');
+const user = JSON.parse(sessionStorage.getItem('user'));
+
 
 </script>
 
