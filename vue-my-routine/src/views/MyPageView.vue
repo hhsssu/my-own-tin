@@ -9,8 +9,8 @@
                 <!-- 프로필 닉네임, 레벨 표시 부분 -->
                 <div>
                     <div class="flex-box">
-                        <div class="profile-name">강해진</div>
-                        <div class="profile-level">Lv.1</div>
+                        <div class="profile-name">{{ user.nickname }}</div>
+                        <div class="profile-level">Lv.{{ user.level }}</div>
                     </div>
                     <!-- 프로필 해시태그(성격) 표시 부분 -->
                     <div class="flex-box">
@@ -72,6 +72,13 @@ import MypagePoint from '@/components/mypage/MypagePointDetail.vue';
 import MypageRoutineBox from '@/components/mypage/MypageRoutineBox.vue';
 import MypageModifyUser from '@/components/mypage/MypageModifyUser.vue';
 import MypageModifyRoutinetag from '@/components/mypage/MypageModifyRoutinetag.vue';
+
+import { useUserStore } from '@/stores/user';
+import { useRoutineStore } from '@/stores/routine';
+
+const userStore = useUserStore();
+
+const user = userStore.getLoginUser();
 
 import { ref } from 'vue';
 
