@@ -23,8 +23,8 @@ const router = useRouter();
 const store = useUserStore();
 
 const logout = function() {
-    console.log("로그아웃");
     store.logoutUser();
+    console.log("로그아웃");
 };
 
 </script>

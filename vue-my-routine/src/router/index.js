@@ -53,35 +53,16 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView,
-      beforeEnter: (to, from) => {
-        const userStore = useUserStore();
-        if (userStore.getLoginUser === !null) {
-          console.log('이미 로그인 상태입니다.')
-          return { name: 'routine' };
-        }
-      }
     },
     { // 회원가입
       path: '/join',
       name: 'join',
       component: JoinView,
-      beforeEnter: (to, from) => {
-        const userStore = useUserStore();
-        if (userStore.getLoginUser === !null) {
-          return { name: 'routine' };
-        }
-      }
     },
     { // 루틴 페이지
       path: '/routine',
       name: 'routine',
       component: RoutineView,
-      beforeEnter: (to, from) => {
-        const userStore = useUserStore();
-        if (userStore.getLoginUser === null) {
-          return { name: 'login' };
-        }
-      },
       children: [ // RoutineView 컴포넌트 내부의 <RouterView/>에서 렌더링됨.
         { // 루틴 리스트
           path: '',
@@ -110,23 +91,11 @@ const router = createRouter({
       path: '/mypage',
       name: 'mypage',
       component: MyPageView,
-      beforeEnter: (to, from) => {
-        const userStore = useUserStore();
-        if (userStore.getLoginUser === null) {
-          return { name: 'login' };
-        }
-      }
     },
     { // 질문답변 페이지
       path: '/qna',
       name: 'qna',
       component: QnAView,
-      beforeEnter: (to, from) => {
-        const userStore = useUserStore();
-        if (userStore.getLoginUser === null) {
-          return { name: 'login' };
-        }
-      },
       children: [ // QnAView 컴포넌트 내부의 <RouterView/>에서 렌더링됨.
         { // 질문 리스트
           path: '',
@@ -161,12 +130,6 @@ const router = createRouter({
       path: '/search',
       name: 'search',
       component: SearchView,
-      beforeEnter: (to, from) => {
-        const userStore = useUserStore();
-        if (userStore.getLoginUser === null) {
-          return { name: 'login' };
-        }
-      },
       children: [ // SearchView 컴포넌트 내부의 <RouterView/>에서 렌더링됨.
         { // 루틴 검색 리스트
           path: '',
@@ -185,7 +148,7 @@ const router = createRouter({
 
 // 헤더 안보이게 할 부분들
 router.beforeEach((to, from, next) => {
-  const headerStore = useHeaderStore()
+  const headerStore = useHeaderStore();
   const hideHeaderRoutes = ['/', '/login', '/join']
   headerStore.toggleHeader(!hideHeaderRoutes.includes(to.path))
   next()

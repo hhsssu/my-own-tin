@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 import router from '@/router';
 
-const REST_USER_API = `http://localhost:8080/myroutine/user`;
+const REST_USER_API = `http://localhost:8080/myroutine/user/`;
 
 // Login, Join, 마이페이지 회원정보 불러오기
 export const useUserStore = defineStore('user', () => {
@@ -17,7 +17,7 @@ export const useUserStore = defineStore('user', () => {
             email: loginUser.email,
             password: loginUser.password
         }
-        axios.post(`${REST_USER_API}/login`, userToSend)
+        axios.post(`${REST_USER_API}login`, userToSend)
             .then((response) => {
                 if (response.data) {
                     // 2. 데이터 받음 (응답 처리)
@@ -37,7 +37,7 @@ export const useUserStore = defineStore('user', () => {
                 if (error.response && error.response.status === 400) {
                     alert('아이디나 비밀번호를 확인해주세요');
                 } else {
-                    console.log(error.response.status);
+                    // console.log(error.response.status);
                     alert('서버 오류가 발생했습니다. 나중에 다시 시도하세요.');
                 }
                 console.log(error);
@@ -90,7 +90,7 @@ export const useUserStore = defineStore('user', () => {
 
     // 회원 탈퇴
     const deleteUser = function () {
-        axios.put(`${REST_USER_API}/delete`)
+        axios.put(`${REST_USER_API}delete`)
             .then(() => {
                 // 회원 탈퇴 성공 시 로그아웃을 수행하거나 다른 처리를 수행
                 logoutUser();
@@ -99,6 +99,8 @@ export const useUserStore = defineStore('user', () => {
                 console.log(error);
             });
     }
+
+    
 
     return {
         user,
