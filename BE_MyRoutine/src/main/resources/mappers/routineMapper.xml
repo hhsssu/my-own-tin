@@ -33,13 +33,19 @@
 
 	<!-- 루틴 조회 -->
 	<select id="search" parameterType="SearchCondition" resultType="Routine">
-		SELECT * FROM routines WHERE delete_at = null <if test="key != ''">
+		SELECT * FROM routines WHERE delete_at is null 
+		<if test="key != ''">
 			AND ${key} LIKE CONCAT('%', #{word}, '%')
 		</if>
 		<if
-			test="orderBy != ''">
+			test="orderBy != null">
 			ORDER BY ${orderBy} ${orderByDir}
 		</if>
+	</select>
+	
+	<select id="searchByUserId" parameterType="int" resultType="Routine">
+		SELECT * FROM routines
+		WHERE delete_at IS NULL AND user_id = #{userId}
 	</select>
 
 	<!-- 루틴 상세 조회 -->

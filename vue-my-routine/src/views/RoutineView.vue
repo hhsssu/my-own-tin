@@ -3,14 +3,14 @@
     <div class="mypage-container">
         <!-- 마이페이지 왼쪽 프로필 부분 -->
         <div class="mypage-profile-container">
-            <div class="flex-box">
+            <div class="flex-box" v-if="loginUser">
                 <!-- 프로필 이미지 -->
                 <img src="@/assets/img/profile_female.png" alt="프로필 이미지" class="img-mypage-profile">
                 <!-- 프로필 닉네임, 레벨 표시 부분 -->
                 <div>
                     <div class="flex-box">
-                        <div class="profile-name">{{ user.nickname }}</div>
-                        <div class="profile-level">Lv.1</div>
+                        <div class="profile-name">{{ loginUser.nickname }}</div>
+                        <div class="profile-level">Lv.{{ loginUser.level }}</div>
                     </div>
                     <!-- 프로필 해시태그(성격) 표시 부분 -->
                     <div class="flex-box">
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <!-- 루틴 리스트 -->
-            <RoutineList />
+            <RoutineList v-if="loginUser" :userId="loginUser.id" />
         </div>
         <div>
             <!-- 루틴 상세보기 -->
@@ -36,12 +36,17 @@ import RoutineList from '@/components/routine/RoutineList.vue';
 
 import { useRoutineStore } from '@/stores/routine';
 import { useUserStore } from '@/stores/user';
+import { onMounted, computed } from 'vue';
 
 const store = useRoutineStore();
 const userStore = useUserStore();
 
-const user = userStore.getLoginUser();
+onMounted(() => {
+    userStore.getLoginUser();
+});
 
+// 컴퓨티드 프로퍼티로 userStore의 loginUser를 추적
+const loginUser = computed(() => userStore.loginUser);
 
 </script>
 

@@ -7,6 +7,7 @@
 <script setup>
 import { useRoutineStore } from '@/stores/routine';
 import { useUserStore } from '@/stores/user';
+import { onMounted } from 'vue';
 
 const store = useRoutineStore();
 const userStore = useUserStore();
@@ -18,7 +19,7 @@ onMounted(() => {
 });
 
 
-getRoutine
+// getRoutine
 
 </script>
 

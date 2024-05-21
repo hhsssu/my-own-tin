@@ -22,7 +22,7 @@ export const useRoutineStore = defineStore('routine', () => {
   // 루틴 등록 (직접 등록, 다른 사람의 루틴을 스크랩하여 등록)
   const createRoutine = function (routine) {
     axios({
-      url: REST_ROUTINE_API,
+      url: `${REST_ROUTINE_API}/`,
       method: 'POST',
       data: routine
     })
@@ -37,6 +37,7 @@ export const useRoutineStore = defineStore('routine', () => {
 
   // 루틴 목록 불러오기 (내 루틴)
   const getRoutineList = function(userId) {
+    console.log(userId);
     axios.get(`${REST_ROUTINE_API}/mine`, {
       params: {
         userId: userId,
@@ -44,6 +45,10 @@ export const useRoutineStore = defineStore('routine', () => {
     })
     .then((response) => {
       routineList.value = response.data;
+      routineList.value.forEach((routine) => {
+        getUserDetails(routine, 'routine');
+      })
+      console.log(routineList.value);
     })
   }
   
@@ -114,6 +119,30 @@ export const useRoutineStore = defineStore('routine', () => {
       console.log(error)
     })
   }
+
+  // 사용자 정보 불러오기
+  const getUserDetails = (item, type) => {
+    axios.get(`${REST_USER_API}/${item.userId}`)
+        .then((response) => {
+            const user = response.data;
+            const age = user.age;
+
+            if (age >= 50) {
+                item.userAge = '50대';
+            } else if (age >= 40) {
+                item.userAge = '40대';
+            } else if (age >= 30) {
+                item.userAge = '30대';
+            } else if (age >= 20) {
+                item.userAge = '20대';
+            } else {
+                item.userAge = '10대';
+            }
+
+            item.userLevel = user.level;
+            item.userGender = user.gender;
+        })
+};
   
 
   return {
@@ -126,5 +155,6 @@ export const useRoutineStore = defineStore('routine', () => {
     searchRoutineList,
     updateRoutine,
     deleteRoutine,
+    getUserDetails
   }
 })

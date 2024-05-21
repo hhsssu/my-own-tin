@@ -113,7 +113,7 @@ public class UserController {
 	@Operation(summary = "사용자 정보 조회", description = "사용자 정보 조회 기능")
 	public ResponseEntity<?> detail(HttpSession session) {
 		// 로그인한 유저가 있는 경우 정보 조회 (마이 페이지)
-		User user = (User) session.getAttribute("loginUser");
+		User user = (User) session.getAttribute("user");
 		if (user != null) {
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		} else {

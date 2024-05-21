@@ -3,12 +3,13 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 import router from '@/router';
 
-const REST_USER_API = `http://localhost:8080/myroutine/user`;
+const REST_USER_API = `http://localhost:8080/myroutine/user/`;
 
 // Login, Join, 마이페이지 회원정보 불러오기
 export const useUserStore = defineStore('user', () => {
 
     const user = ref(null);
+    const loginUser = ref(null);
 
     // 로그인
     const userLogin = (loginUser) => {
@@ -17,7 +18,7 @@ export const useUserStore = defineStore('user', () => {
             email: loginUser.email,
             password: loginUser.password
         }
-        axios.post(`${REST_USER_API}/login`, userToSend)
+        axios.post(`${REST_USER_API}login`, userToSend)
             .then((response) => {
                 if (response.data) {
                     // 2. 데이터 받음 (응답 처리)
@@ -70,15 +71,22 @@ export const useUserStore = defineStore('user', () => {
     }
 
     // 회원 정보 표시
+    // const getLoginUser = function () {
+    //     axios.get(REST_USER_API)
+    //         .then((response) => {
+    //             console.log(response.data);
+    //             user.value = response.data
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+    // };
+
     const getLoginUser = function () {
-        axios.get('REST_USER_API')
-            .then((response) => {
-                user.value = response.data
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
+        const login = sessionStorage.getItem('user');
+        loginUser.value = JSON.parse(login);
+        console.log(loginUser.value);
+    }
 
     // 회원 정보 수정
     const updateLoginUser = function (updatedUserInfo) {
@@ -90,7 +98,7 @@ export const useUserStore = defineStore('user', () => {
 
     // 회원 탈퇴
     const deleteUser = function () {
-        axios.put(`${REST_USER_API}/delete`)
+        axios.put(`${REST_USER_API}delete`)
             .then(() => {
                 // 회원 탈퇴 성공 시 로그아웃을 수행하거나 다른 처리를 수행
                 logoutUser();
@@ -102,6 +110,7 @@ export const useUserStore = defineStore('user', () => {
 
     return {
         user,
+        loginUser,
         userLogin,
         userJoin,
         getLoginUser,
