@@ -8,12 +8,14 @@
       <div class="routine-tag">{{ routine.part1 }}</div>
       <div class="routine-tag" v-if="routine.part2 != null">{{ routine.part2 }}</div>
       <div class="routine-tag">{{ routine.workoutTime }}분</div>
+      <!-- 더보기 버튼 -->
+      <div></div>
     </div>
     <p>
       {{ routine.content }}
       실내 사이클 30분, 땅끄부부 칼소폭 10분, 스쿼트20회 3세트, 스트레칭 10분
     </p>
-  </section>
+    </section>
 </template>
 
 <script setup>
