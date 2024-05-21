@@ -2,7 +2,7 @@
   <div>
     <!-- 댓글 -->
     <div class="qna-detail-comment">
-      <div class="count">댓글 2개</div>
+      <div class="count">댓글 {{ store.ansList.length }}개</div>
       <div class="qna-detail-comment-card" v-for="ans in store.ansList" :key="ans.id">
         <!-- 댓글 작성자 프로필 -->
         <div class="qna-detail-comment-profile">
