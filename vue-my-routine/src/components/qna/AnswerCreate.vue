@@ -39,7 +39,7 @@ const createAnswer = function () {
 const userObj = JSON.parse(userItem);
   // answer.userId = userObj.id;
   answer.userId = 11;
-  console.log(props.questionId);
+  // console.log(props.questionId);
   answer.questionId = props.questionId;
   store.createAnswer(answer);
 }
@@ -55,19 +55,19 @@ const userObj = JSON.parse(userItem);
 }
 
 .qna-detail-comment-input textarea {
-  padding: 20px;
+  padding: 15px;
   margin: 20px 0px 10px 0px;
   border: 1px solid #777;
   border-radius: 5px;
   font-size: 1em;
-  width: 350px;
+  width: 90%;
 }
 
 .qna-detail-comment-button {
   background-color: #FFA101;
   color: white;
   font-size: 15px;
-  padding: 5px 12px;
+  padding: 5px 15px;
   border: none;
   border-radius: 5px;
   margin-left: auto;

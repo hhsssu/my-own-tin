@@ -16,23 +16,22 @@ export const useQnAStore = defineStore('qna', () => {
     const userDetails = ref({});
 
     const getQnAList = (searchCondition) => {
-        axios.get(QNA_REST_API, {params: searchCondition})
-        .then((response) => {
-            qnaList.value = response.data;
-            qnaList.value.forEach((qna) => {
-                qna.userAge = 0;
-                qna.userLevel = 1;
-                qna.userGender = 'NONE';
-                qna.routine = {};
+        axios.get(QNA_REST_API, { params: searchCondition })
+            .then((response) => {
+                qnaList.value = response.data;
+                qnaList.value.forEach((qna) => {
+                    qna.userAge = 0;
+                    qna.userLevel = 1;
+                    qna.userGender = 'NONE';
+                    qna.routine = {};
 
-                getUserDetails(qna, 'qna');
-                getRoutine(qna);
+                    getUserDetails(qna, 'qna');
+                    getRoutine(qna);
+                })
             })
-        })
     };
 
     const getUserDetails = (item, type) => {
-        console.log(type + ' ' + item.userId);
         axios.get(`${USER_REST_API}${item.userId}`)
             .then((response) => {
                 const user = response.data;
@@ -59,48 +58,92 @@ export const useQnAStore = defineStore('qna', () => {
             })
     };
 
+    const getNickname = (item, type) => {
+        axios.get(`${USER_REST_API}${item.userId}`)
+            .then((response) => {
+                const user = response.data;
+                const nickname = user.nickname;
+
+                item.writer = nickname;
+            })
+    }
+
     const getRoutine = function (qna) {
-        axios.get(`${ROUTINE_REST_API}detail`, {params: { routineId: qna.routineId }})
-        .then((response) => {
-            qna.routine = response.data;
-        })
+        axios.get(`${ROUTINE_REST_API}detail`, { params: { routineId: qna.routineId } })
+            .then((response) => {
+                qna.routine = response.data;
+            })
     }
 
     const getAnsList = function (questionId) {
-        axios.get(ANS_REST_API, {params: {questionId: questionId}})
-        .then((response) => {
-            ansList.value = response.data;
-            ansList.value.forEach((ans) => {
-                ans.userAge = 0;
-                ans.userLevel = 1;
-                ans.userGender = 'NONE';
+        axios.get(ANS_REST_API, { params: { questionId: questionId } })
+            .then((response) => {
+                ansList.value = response.data;
+                ansList.value.forEach((ans) => {
+                    ans.userAge = 0;
+                    ans.userLevel = 1;
+                    ans.userGender = 'NONE';
 
-                getUserDetails(ans, 'ans');
+                    getUserDetails(ans, 'ans');
+                })
             })
-        })
     }
 
-    const createAnswer = function (answer) {
-        // console.log(answer);
-        axios({
-            url: ANS_REST_API,
-            method: 'POST',
-            data: answer
-        })
-        .then(() => {
-            router.replace({ name: 'answerList', params: {questionId: questionId} });
-        })
+    const createQuestion = async function (question) {
+        try {
+            // getNickname을 기다려서 writer 설정
+            await axios.get(`${USER_REST_API}${question.userId}`)
+                .then((response) => {
+                    const user = response.data;
+                    question.writer = user.nickname;
+                });
+
+            // 질문 등록 과정
+            await axios({
+                url: QNA_REST_API,
+                method: 'POST',
+                data: question
+            });
+
+            router.replace({ name: 'questionList' });
+        } catch (error) {
+            console.error('Error creating question:', error);
+        }
+    };
+
+    const createAnswer = async function (answer) {
+        try {
+            // getNickname을 기다려서 writer 설정
+            await axios.get(`${USER_REST_API}${answer.userId}`)
+                .then((response) => {
+                    const user = response.data;
+                    answer.writer = user.nickname;
+                });
+
+            // 댓글 등록 과정
+            await axios({
+                url: ANS_REST_API,
+                method: 'POST',
+                data: answer
+            });
+
+            router.replace({ name: 'answerList', params: { questionId: answer.questionId } });
+        } catch (error) {
+            console.error('Error creating answer:', error);
+        }
     }
 
 
-    return { 
+    return {
         qnaList,
         ansList,
         userDetails,
         getQnAList,
         getUserDetails,
+        getNickname,
         getRoutine,
         getAnsList,
+        createQuestion,
         createAnswer
     };
 })

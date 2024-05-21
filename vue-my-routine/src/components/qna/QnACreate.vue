@@ -1,22 +1,29 @@
 <template>
   <div class="qna-create">
     <!-- 프로필 공개 여부 -->
-    <div class="qna-create-profile">
+    <!-- 사용자의 isPublic 여부에 따라 표시 -->
+    <!-- <div class="qna-create-profile">
       <label for="profile">프로필 공개 여부</label>
-      <input type="checkbox" id="public" value="public" v-model="isPublic" />
+      <input type="checkbox" id="public" value="true" v-model="isPublic" />
       <label for="public">예</label>
-      <input type="checkbox" id="private" value="private" v-model="isPublic" />
+      <input type="checkbox" id="private" value="false" v-model="isPublic" />
       <label for="private">아니오</label>
-    </div>
+    </div> -->
     <!-- 제목 -->
     <div class="qna-create-title">
       <label for="title">제목</label>
-      <input type="text" />
+      <input type="text" v-model="question.title" />
     </div>
     <!-- 내용 -->
     <div class="qna-create-content">
       <label for="content">내용</label>
-      <textarea name="content" id="content" cols="30" rows="10"></textarea>
+      <textarea
+        name="content"
+        id="content"
+        cols="30"
+        rows="10"
+        v-model="question.content"
+      ></textarea>
     </div>
     <!-- 루틴 인용 -->
     <div class="qna-create-routine">
@@ -27,13 +34,33 @@
     </div>
     <!-- 등록 및 취소 버튼 -->
     <div class="qna-create-buttons">
-      <button>등록</button>
-      <button>취소</button>
+      <button @click="confirmCreate">등록</button>
+      <button @click="deleteCreate">취소</button>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useQnAStore } from "@/stores/qna";
+
+const store = useQnAStore();
+
+const question = {
+  userId: "",
+  routineId: "",
+  writer: "",
+  title: "",
+  content: "",
+};
+
+const confirmCreate = function () {
+  const userItem = sessionStorage.getItem("loginUser");
+  const userObj = JSON.parse(userItem);
+  // answer.userId = userObj.id;
+  question.userId = 11;
+  store.createQuestion(question);
+};
+</script>
 
 <style scoped>
 .qna-create {
@@ -78,7 +105,7 @@
 }
 
 .qna-create-content {
-    width: 400px;
+  width: 400px;
 }
 
 .qna-create-content label {

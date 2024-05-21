@@ -2,6 +2,8 @@
   <div class="qna-container">
     <div class="qna-list">
       <div class="qna-title">질문 상담</div>
+      <!-- 질문 등록 버튼 -->
+      <button class="qna-create-button" @click="createQnA">질문 등록</button>
       <!-- 검색창 -->
       <div>
         <div class="qna-search">
@@ -134,15 +136,16 @@
       <QnADetail />
     </div>
     <!-- 질의응답 작성 페이지 -->
-    <!-- <div v-else-if="showQnACreate">
+    <div v-else-if="showQnACreate">
       <QnACreate />
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script setup>
 import QnAList from "@/components/qna/QnAList.vue";
 import QnADetail from "@/components/qna/QnADetail.vue";
+import QnACreate from "@/components/qna/QnACreate.vue";
 import { onMounted, onBeforeMount, ref } from "vue";
 
 const filterCheckboxes = ref(false);
@@ -196,6 +199,20 @@ window.addEventListener("DOMContentLoaded", checkSelectedQnA);
   color: #31525b;
   margin-bottom: 20px;
   text-align: center;
+}
+
+.qna-create-button {
+  font-size: 1em;
+  color: white;
+  background-color: #ffa101;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+}
+
+/* 버튼에 마우스 커서 올렸을 시 */
+.qna-create-button:hover {
+  background-color: gray;
 }
 
 .qna-search {
