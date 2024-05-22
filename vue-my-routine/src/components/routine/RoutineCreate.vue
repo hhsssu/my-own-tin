@@ -8,10 +8,39 @@
     <!-- 루틴 날짜 (생성날짜 X) -->
     <div class="routine-create-date">
       <label for="routineAt">날짜</label>
+      <input type="date" v-model="routine.routineAt" />
     </div>
     <!-- 운동 부위 -->
     <div class="routine-create-part">
       <label for="part">운동 부위</label>
+      <div class="flex-box">
+        <div>
+          <!-- 운동 부위 1 -->
+          <select name="part1" id="part1" v-model="routine.part1">
+            <option value="" disabled selected>운동부위1</option>
+            <option value="유산소">유산소</option>
+            <option value="하체">하체</option>
+            <option value="상체">상체</option>
+            <option value="어깨">어깨</option>
+            <option value="팔">팔</option>
+            <option value="허벅지">허벅지</option>
+          </select>
+        </div>
+        <div>
+          <!-- 운동 부위 2 -->
+          <!-- 운동 부위 1을 선택해야 선택할 수 있도록 함(value != null) -->
+          <select name="part2" id="part2" v-model="routine.part2">
+            <option value="" disabled selected>운동부위2</option>
+            <option value="null">선택안함</option>
+            <option value="유산소">유산소</option>
+            <option value="하체">하체</option>
+            <option value="상체">상체</option>
+            <option value="어깨">어깨</option>
+            <option value="팔">팔</option>
+            <option value="허벅지">허벅지</option>
+          </select>
+        </div>
+      </div>
     </div>
     <!-- 운동 시간 -->
     <div class="routine-create-workoutTime">
@@ -61,21 +90,17 @@ const confirmCreate = function () {
   routine.userId = userObj.id;
   routine.writer = userObj.nickname;
   console.log(routine.writer);
-  
+
   store.createRoutine(routine);
 };
 
-const cancelCreate = function () {
-
-};
-
+const cancelCreate = function () {};
 </script>
 
 <style scoped>
 .routine-create {
   padding: 30px;
   margin: 20px;
-  height: 570px;
   font-size: 1em;
   color: #777;
   box-shadow: 5px 5px 10px lightgray;
@@ -97,7 +122,8 @@ const cancelCreate = function () {
 }
 
 .routine-create-title input,
-.routine-create-workoutTime input {
+.routine-create-workoutTime input,
+.routine-create-date input {
   border: none;
   border-bottom: 1px solid #999;
   width: 290px;
@@ -107,8 +133,18 @@ const cancelCreate = function () {
 }
 
 .routine-create-title input:focus,
-.routine-create-workoutTime input:focus {
+.routine-create-workoutTime input:focus,
+.routine-create-date input:focus {
   outline: none;
+}
+
+.routine-create-part {
+  display: flex;
+  align-content: center;
+}
+
+.routine-create-part label {
+  vertical-align: center;
 }
 
 .routine-create-content {
