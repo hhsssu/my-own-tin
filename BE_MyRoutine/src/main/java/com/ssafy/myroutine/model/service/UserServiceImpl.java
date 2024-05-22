@@ -46,4 +46,14 @@ public class UserServiceImpl implements UserService {
 		return userDao.selectById(id);
 	}
 
+	@Override
+	public boolean checkEmail(String email) {
+		return userDao.selectEmail().contains(email);
+	}
+
+	@Override
+	public boolean checkNickname(String nickname) {
+		return userDao.selectNickname().contains(nickname);
+	}
+
 }

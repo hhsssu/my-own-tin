@@ -17,12 +17,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.WebUtils;
 
 import com.ssafy.myroutine.model.dto.User;
 import com.ssafy.myroutine.model.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
@@ -78,24 +81,46 @@ public class UserController {
 	// 사용자 로그아웃
 	@DeleteMapping("/logout")
 	@Operation(summary = "사용자 로그아웃", description = "사용자 로그아웃 기능")
-	public ResponseEntity<String> logout(HttpSession session) {
-		// 세션에서 사용자 정보 삭제
-		if (session.getAttribute("loginUser") != null) {
-			session.removeAttribute("loginUser");
-			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
-		} else {
-			String msg = "로그인이 되어있지 않습니다.";
-			return new ResponseEntity<String>(msg, HttpStatus.BAD_REQUEST);
-		}
-	}
+	public ResponseEntity<String> logout(HttpServletRequest request, HttpSession session) {
+        // 세션에서 사용자 정보 삭제
+        if (request.getSession(false) != null && request.getSession().getAttribute("loginUser") != null) {
+            request.getSession().removeAttribute("loginUser");
+//            System.out.println(session.getAttribute("loginUser"));
+            // 쿠키 삭제
+//            Cookie cookie = WebUtils.getCookie(request, "JSESSIONID");
+//            if (cookie != null) {
+//                cookie.setMaxAge(0);
+//                cookie.setPath("/");
+//            }
+            return ResponseEntity.ok("로그아웃 성공");
+        } else {
+            return ResponseEntity.badRequest().body("로그인이 되어있지 않습니다.");
+        }
+    }
+	
+//	// 사용자 로그아웃
+//	@DeleteMapping("/logout")
+//	@Operation(summary = "사용자 로그아웃", description = "사용자 로그아웃 기능")
+//	public ResponseEntity<String> logout(HttpSession session) {
+//		// 세션에서 사용자 정보 삭제
+//		if (session.getAttribute("loginUser") != null) {
+//			session.removeAttribute("loginUser");
+//			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+//		} else {
+//			String msg = "로그인이 되어있지 않습니다.";
+//			return new ResponseEntity<String>(msg, HttpStatus.BAD_REQUEST);
+//		}
+//	}
 
 	// 사용자 정보 수정
 	@PutMapping("/")
 	@Operation(summary = "사용자 정보 수정", description = "사용자 정보 수정 기능")
-	public ResponseEntity<String> update(@RequestParam int id, @RequestBody User user) {
+	public ResponseEntity<String> update(@RequestParam int id, @RequestBody User user, HttpSession session) {
 		user.setId(id);
-		if (userService.modifyUser(user)) 
+		if (userService.modifyUser(user)) {
+			session.setAttribute("loginUser", user); // 세션 갱신
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		}
 		return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
 	}
 
@@ -132,6 +157,25 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
+	// 이메일 중복 검사
+	@GetMapping("/email")
+	public ResponseEntity<?> checkEmail(@RequestParam String email) {
+		if(!userService.checkEmail(email)) {
+			System.out.println("가능한 이메일입니다.");
+			return new ResponseEntity<String>("ok", HttpStatus.OK);
+		}
+		System.out.println("중복된 이메일입니다.");
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
 	
-
+	// 닉네임 중복 검사
+	@GetMapping("/nick")
+	public ResponseEntity<?> checkNickname(@RequestParam String nickname) {
+		if(!userService.checkEmail(nickname)) {
+			System.out.println("가능한 닉네임입니다.");
+			return new ResponseEntity<String>("ok", HttpStatus.OK);
+		}
+		System.out.println("중복된 닉네임입니다.");
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
 }
