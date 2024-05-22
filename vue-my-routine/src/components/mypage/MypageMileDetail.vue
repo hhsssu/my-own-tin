@@ -2,7 +2,8 @@
     <div class="mypage-point-detail-container">
         <h2 class="view-title">마일리지 적립 내역</h2>
         <div class="point-detail-total-box">
-            <div class="point-detail-total">잔여 마일리지 : {{ mileTotal }}M</div>
+            <div class="point-detail-total" v-if="mileTotal > 0">잔여 마일리지 : {{ mileTotal }}M</div>
+            <div class="point-detail-total" v-else-if="mileTotal === 0 || mileTotal === null">잔여 마일리지 : 0 M</div>
         </div>
 
         <table class="point-detail-table">
