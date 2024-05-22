@@ -15,11 +15,11 @@ import com.ssafy.myroutine.model.dto.SearchCondition;
 public class RoutineServiceImpl implements RoutineService {
 
 	private final RoutineDao routineDao;
-	
+
 	public RoutineServiceImpl(RoutineDao routineDao) {
 		this.routineDao = routineDao;
 	}
-	
+
 	// 루틴 등록
 	@Override
 	public boolean registRoutine(Routine routine) {
@@ -41,18 +41,16 @@ public class RoutineServiceImpl implements RoutineService {
 	// 루틴 검색 조회
 	@Override
 	public List<Routine> searchRoutine(SearchCondition searchCondition) {
-	    String queryConditions = searchCondition.toQueryConditions();
-	    System.out.println(searchCondition.toString());
-	    System.out.println("queryConditions: " + queryConditions);
-	    return routineDao.search(queryConditions, searchCondition);
+		String queryConditions = searchCondition.toQueryConditions();
+		return routineDao.search(queryConditions, searchCondition);
 	}
-	
+
 	// 루틴 상세 조회
 	@Override
 	public Routine getRoutine(int id) {
 		return routineDao.searchById(id);
 	}
-	
+
 	@Override
 	public List<Routine> getRoutineByUserId(int userId) {
 		return routineDao.searchByUserId(userId);
@@ -67,9 +65,15 @@ public class RoutineServiceImpl implements RoutineService {
 	@Override
 	public List<Routine> findByDate(LocalDate date, int userId) {
 		Map<String, Object> params = new HashMap<>();
-        params.put("date", date);
-        params.put("userId", userId);
-        return routineDao.findByDateAndUserId(params);
+		params.put("date", date);
+		params.put("userId", userId);
+		return routineDao.findByDateAndUserId(params);
 	}
-	
+
+	// 좋아요 수 증가
+	@Override
+	public int updateLikeCnt(int id) {
+		return routineDao.updateLikeCnt(id);
+	}
+
 }

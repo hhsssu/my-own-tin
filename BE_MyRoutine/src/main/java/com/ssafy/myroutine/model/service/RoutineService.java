@@ -31,4 +31,7 @@ public interface RoutineService {
 	
 	// 날짜별 나의 루틴 조회
 	List<Routine> findByDate(LocalDate date, int userId);
+	
+	// 좋아요 수 증가
+	int updateLikeCnt(int id);
 }

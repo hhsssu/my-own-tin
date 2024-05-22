@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `myroutine`.`routines` (
   `writer` VARCHAR(20) NOT NULL COMMENT '작성자(닉네임)',
   `title` VARCHAR(50) NOT NULL COMMENT '루틴제목',
   `content` TEXT NOT NULL COMMENT '루틴내용',
-  `likeCnt` INT NOT NULL DEFAULT 0 COMMENT '좋아요수',
+  `like_cnt` INT NOT NULL DEFAULT 0 COMMENT '좋아요수',
   `part1` VARCHAR(20) NOT NULL COMMENT '운동부위1',
   `part2` VARCHAR(20) NULL COMMENT '운동부위2',
   `workout_time` INT NOT NULL COMMENT '운동시간',

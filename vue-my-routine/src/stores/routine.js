@@ -21,6 +21,9 @@ export const useRoutineStore = defineStore('routine', () => {
 
   // 루틴 등록 (직접 등록, 다른 사람의 루틴을 스크랩하여 등록)
   const createRoutine = function (routine) {
+    getUserDetails(routine, 'routine');
+
+    console.log(routine);
     axios({
       url: `${REST_ROUTINE_API}/`,
       method: 'POST',
@@ -158,6 +161,7 @@ export const useRoutineStore = defineStore('routine', () => {
           item.userAge = '10대';
         }
 
+        item.writer = user.nickname;
         item.userLevel = user.level;
         item.userGender = user.gender;
       })
