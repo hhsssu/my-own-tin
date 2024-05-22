@@ -42,8 +42,6 @@ public class RoutineServiceImpl implements RoutineService {
 	@Override
 	public List<Routine> searchRoutine(SearchCondition searchCondition) {
 		String queryConditions = searchCondition.toQueryConditions();
-		System.out.println(searchCondition.toString());
-		System.out.println("queryConditions: " + queryConditions);
 		return routineDao.search(queryConditions, searchCondition);
 	}
 

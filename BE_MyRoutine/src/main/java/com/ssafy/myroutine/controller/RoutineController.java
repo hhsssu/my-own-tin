@@ -109,13 +109,6 @@ public class RoutineController {
 	@GetMapping("/mine")
 	@Operation(summary = "나의 루틴", description = "루틴 페이지 나의 루틴 불러오기")
 	public ResponseEntity<?> getMine(@RequestParam("userId") int userId) {
-//		SearchCondition con = new SearchCondition();
-//		con.setKey("user_id");
-//		con.setWord(Integer.toString(userId));
-		
-		// check
-//		System.out.println(con.toString());
-		
 		List<Routine> list = routineService.getRoutineByUserId(userId);
 		return new ResponseEntity<List<Routine>>(list, HttpStatus.OK);
 	}
