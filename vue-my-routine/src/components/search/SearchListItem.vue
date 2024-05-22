@@ -11,7 +11,7 @@
       <div class="search-item-more" @click="showMore">...</div>
     </div>
     <!-- 루틴 본문 -->
-    <div class="search-item-content">내용</div>
+    <div class="search-item-content">{{ routine.content }}</div>
   </div>
 </template>
 

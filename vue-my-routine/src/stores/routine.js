@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, toRaw } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import router from '@/router'
@@ -76,7 +76,6 @@ export const useRoutineStore = defineStore('routine', () => {
       .then((response) => {
         routine.value = response.data;
         getUserDetails(routine.value, 'routine');
-        console.log(routine.value);
         return routine.value;
       })
       .catch((error) => {
@@ -86,23 +85,25 @@ export const useRoutineStore = defineStore('routine', () => {
   }
 
   // 루틴 검색 (전체 루틴)
-  const searchRoutineList = function (con) {
-    const condition = {
-      key: con.key,
-      word: con.word,
-      orderBy: con.orderBy,
-      orderByDir: con.orderByDir
-    };
+  const searchRoutineList = function (searchCondition) {
 
-    return axios.get(`${REST_ROUTINE_API}/`, { params: condition })
+    return axios.get(`${REST_ROUTINE_API}/search`, {params: {
+      level: searchCondition.level,
+      gender: searchCondition.gender,
+      ageRange: searchCondition.ageRange,
+      orderBy: searchCondition.orderBy
+    }})
       .then((response) => {
         routineList.value = response.data;
         routineList.value.forEach((routine) => {
           getUserDetails(routine, 'routine');
         });
+
+        return routineList.value;
       })
       .catch((error) => {
         console.log(error);
+        throw error;
       });
   };
 

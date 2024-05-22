@@ -40,8 +40,11 @@ public class RoutineServiceImpl implements RoutineService {
 
 	// 루틴 검색 조회
 	@Override
-	public List<Routine> searchRoutine(SearchCondition con) {
-		return routineDao.search(con);
+	public List<Routine> searchRoutine(SearchCondition searchCondition) {
+	    String queryConditions = searchCondition.toQueryConditions();
+	    System.out.println(searchCondition.toString());
+	    System.out.println("queryConditions: " + queryConditions);
+	    return routineDao.search(queryConditions, searchCondition);
 	}
 	
 	// 루틴 상세 조회

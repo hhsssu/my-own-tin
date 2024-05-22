@@ -6,11 +6,22 @@ public class SearchCondition {
 	private String orderBy;
 	private String orderByDir;
 	private String level;
-	private String age;
 	private String gender;
+	private String ageRange;
 
 	public SearchCondition() {
 	}
+	
+	
+
+	public SearchCondition(String level, String gender, String ageRange, String orderBy) {
+		this.level = level;
+		this.gender = gender;
+		this.ageRange = ageRange;
+		this.orderBy = orderBy;
+	}
+
+
 
 	public String getKey() {
 		return key;
@@ -44,46 +55,31 @@ public class SearchCondition {
 		this.orderByDir = orderByDir;
 	}
 
-	// 선택된 값들을 설정하는 메서드
-	public void setFilters(String level, String gender, String age) {
-		this.level = level;
-		this.gender = gender;
-		this.age = age;
-	}
-
 	// 선택된 값들을 적절한 쿼리 조건으로 변환하는 메서드
-	public String toQueryConditions() {
-		StringBuilder conditions = new StringBuilder();
+    public String toQueryConditions() {
+        StringBuilder conditions = new StringBuilder();
 
-		// 레벨이 선택된 경우
-		if (level != null && !level.isEmpty()) {
-			conditions.append("level = '").append(level).append("' AND ");
-		}
+        if (level != null && !level.isEmpty()) {
+            conditions.append("u.level = '").append(level).append("' AND ");
+        }
+        if (gender != null && !gender.isEmpty()) {
+            conditions.append("u.gender = '").append(gender).append("' AND ");
+        }
+        if (ageRange != null && !ageRange.isEmpty()) {
+            int startAge = Integer.parseInt(ageRange);
+            int endAge = startAge + 10;
+            conditions.append("u.age >= ").append(startAge).append(" AND age < ").append(endAge).append(" AND ");
+        }
+        if (conditions.length() > 0) {
+            conditions.delete(conditions.length() - 5, conditions.length());
+        }
+        return conditions.toString();
+    }
 
-		// 성별이 선택된 경우
-		if (gender != null && !gender.isEmpty()) {
-			conditions.append("gender = '").append(gender).append("' AND ");
-		}
-
-		// 연령대가 선택된 경우
-		if (age != null && !age.isEmpty()) {
-			conditions.append("age = '").append(age).append("' AND ");
-		}
-
-		// 필요에 따라 다른 조건들도 추가할 수 있습니다.
-
-		// 마지막 AND를 제거하고 반환
-		if (conditions.length() > 0) {
-			conditions.delete(conditions.length() - 5, conditions.length());
-		}
-
-		return conditions.toString();
-	}
-
-	@Override
-	public String toString() {
-		return "SearchCondition [key=" + key + ", word=" + word + ", orderBy=" + orderBy + ", orderByDir=" + orderByDir
-				+ "]";
-	}
+    @Override
+    public String toString() {
+        return "SearchCondition [key=" + key + ", word=" + word + ", orderBy=" + orderBy + ", orderByDir=" + orderByDir
+                + ", level=" + level + ", age=" + ageRange + ", gender=" + gender + "]";
+    }
 
 }
