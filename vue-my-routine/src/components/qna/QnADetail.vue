@@ -46,6 +46,7 @@
 <script setup>
 import AnswerList from "./AnswerList.vue";
 import AnswerCreate from "./AnswerCreate.vue";
+import axios from "axios";
 import { ref, watch, defineProps } from "vue";
 import { useQnAStore } from "@/stores/qna";
 import { useRouter } from "vue-router";
@@ -100,12 +101,11 @@ const updateQuestion = function () {
   console.log(store.question.title);
 }
 
-// const updateQuestion = function () {
-//   router.push({ name: 'qnaUpdate' });
-// };
-
 const deleteQuestion = function () {
-
+  axios.put(`http://localhost:8080/myroutine/que/delete?id=${store.question.id}`)
+  .then(() => {
+    router.push({ name: 'qna' });
+  })
 };
 
 </script>

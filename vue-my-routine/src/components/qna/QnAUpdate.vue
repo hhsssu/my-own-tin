@@ -77,7 +77,7 @@ const confirmUpdate = function () {
 
 const cancelUpdate = function () {
     console.log(store.question.id);
-    router.push({ name: 'qnaDetail', params: {questionId: store.question.id}})
+    router.push({ name: 'qnaDetail', params: {questionId: store.question.id}});
 };
 </script>
 
