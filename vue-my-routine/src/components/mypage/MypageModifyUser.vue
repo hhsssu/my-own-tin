@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="profile-out-btn">
-            <span class="span-out-btn">회원탈퇴</span>
+            <span class="span-out-btn" @click="deleteUser">회원탈퇴</span>
         </div>
     </div>
 </template>
@@ -45,8 +45,10 @@
 // v-model로 값 보내줌
 
 import { useUserStore } from '@/stores/user';
+import { useRouter } from "vue-router";
 import { ref } from 'vue';
 
+const router = useRouter();
 const userStore = useUserStore();
 
 const user = JSON.parse(sessionStorage.getItem('user'));
@@ -96,6 +98,9 @@ const updateProfile = () => {
     
 }
 
+const deleteUser = () => {
+    userStore.deleteUser(user.id);
+}
 
 </script>
 

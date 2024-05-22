@@ -25,7 +25,7 @@ export const useUserStore = defineStore('user', () => {
                     user.value = response.data;
                     // 3. 세션 스토리지 업데이트
                     sessionStorage.setItem('user', JSON.stringify(response.data));
-                    alert('로그인 되었습니다.');
+                    // alert('로그인 되었습니다.');
                     // 4. 로그인 완료되면 루틴페이지로 이동
                     router.replace({ name: 'routine' });
                 } else {
@@ -36,7 +36,7 @@ export const useUserStore = defineStore('user', () => {
             .catch((error) => {
                 console.log(loginUser);
                 if (error.response && error.response.status === 400) {
-                    alert('아이디나 비밀번호를 확인해주세요');
+                    alert('잘못된 아이디 혹은 비밀번호입니다!');
                 } else {
                     // console.log(error.response.status);
                     alert('서버 오류가 발생했습니다. 나중에 다시 시도하세요.');
@@ -70,6 +70,7 @@ export const useUserStore = defineStore('user', () => {
             data: user
         })
             .then(() => {
+                console.log(user.isPublic);
                 router.push({ name: 'login' })
             })
             .catch((error) => {
@@ -109,11 +110,14 @@ export const useUserStore = defineStore('user', () => {
     }
 
     // 회원 탈퇴
-    const deleteUser = function () {
-        axios.put(`${REST_USER_API}delete`)
+    const deleteUser = function (userId) {
+        console.log(userId);
+        axios.put(`${REST_USER_API}delete?id=${userId}`)
             .then(() => {
                 // 회원 탈퇴 성공 시 로그아웃을 수행하거나 다른 처리를 수행
                 logoutUser();
+                router.replace({name: 'main'});
+
             })
             .catch((error) => {
                 console.log(error);
@@ -140,7 +144,7 @@ export const useUserStore = defineStore('user', () => {
             console.log("이메일 중복검사 완료");
         })
         .catch((error) => {
-            console.log(error + "이메일 중복");
+            console.log(error);
         })
     }
 
@@ -151,7 +155,7 @@ export const useUserStore = defineStore('user', () => {
             console.log("닉네임 중복검사 완료");
         })
         .catch((error) => {
-            console.log(error + "닉네임 중복");
+            console.log(error);
         })
     }
 

@@ -28,6 +28,13 @@ const password = ref("");
 
 // 비동기 함수를 선언을 위한 async 키워드 사용
 const login = async function () {
+  if(!email.value) {
+    alert("이메일을 입력하세요!");
+    return;
+  } else if(!password.value) {
+    alert("비밀번호를 입력하세요!");
+    return;
+  }
   // 로그인 요청 보내기
   try {
     store.userLogin({email: email.value, password: password.value});
