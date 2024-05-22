@@ -14,7 +14,7 @@
 	<update id="update" parameterType="Routine">
 		UPDATE routines
 		SET part1 = #{part1}, part2 = #{part2}, title = #{title}, content =
-		#{content}, workout_time = #{workoutTime}
+		#{content}, workout_time = #{workoutTime}, routine_at = #{routineAt}
 		WHERE id = #{id}
 	</update>
 
@@ -33,8 +33,7 @@
 
 	<!-- 루틴 조회 -->
 	<select id="search" parameterType="SearchCondition" resultType="Routine">
-		SELECT * FROM routines WHERE delete_at is null 
-		<if test="key != ''">
+		SELECT * FROM routines WHERE delete_at is null <if test="key != ''">
 			AND ${key} LIKE CONCAT('%', #{word}, '%')
 		</if>
 		<if
@@ -42,7 +41,7 @@
 			ORDER BY ${orderBy} ${orderByDir}
 		</if>
 	</select>
-	
+
 	<select id="searchByUserId" parameterType="int" resultType="Routine">
 		SELECT * FROM routines
 		WHERE delete_at IS NULL AND user_id = #{userId}
@@ -66,7 +65,8 @@
 	<select id="findByDateAndUserId" parameterType="map" resultType="Routine">
 		SELECT *
 		FROM routines
-		WHERE DATE(routine_at) = #{date} AND user_id = #{userId} AND delete_at IS
+		WHERE DATE(routine_at) = #{date} AND user_id = #{userId} AND delete_at
+		IS
 		NULL
 	</select>
 

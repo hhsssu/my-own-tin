@@ -108,12 +108,8 @@ export const useRoutineStore = defineStore('routine', () => {
 
 
   // 루틴 수정
-  const updateRoutine = function (id, updatedRoutine) {
-    axios.put(REST_ROUTINE_API, updatedRoutine, {
-      params: {
-        id: id,
-      }
-    })
+  const updateRoutine = function (routineId) {
+    axios.put(`${REST_ROUTINE_API}/?id=${routineId}`, routine.value)
       .then(() => {
         router.push({ name: 'routine' })
       })

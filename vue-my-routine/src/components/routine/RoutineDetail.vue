@@ -60,6 +60,12 @@ watch(
   { immediate: true }
 );
 
+const emits = defineEmits(['isUpdate']);
+
+const updateRoutine = function () {
+  emits("isUpdate", true);
+}
+
 const clickForMarked = function () {
   // 추후 DB에서도 marked true(1) 로 바뀌도록
   routine.value.marked = true;
@@ -70,10 +76,6 @@ const clickForLike = function () {
   // 추후 DB에서도 likcCnt + 1 되도록
   routine.value.likeCnt = routine.value.likeCnt + 1;
   // console.log(routine.value.likeCnt);
-};
-
-const updateRoutine = function () {
-
 };
 
 const deleteRoutine = function () {
