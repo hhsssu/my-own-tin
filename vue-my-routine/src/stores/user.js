@@ -45,14 +45,21 @@ export const useUserStore = defineStore('user', () => {
             });
     }
 
-
     // 로그아웃
     const logoutUser = function () {
-        // 로그아웃 시 현재 로그인한 사용자 정보 삭제
-        user.value = null;
-        sessionStorage.removeItem('user');
-        // 로그아웃 전으로 재진입 불가
-        router.replace({name: 'main'});
+        axios.delete(`${REST_USER_API}logout`)
+        .then(response => {
+            // 로그아웃 시 현재 로그인한 사용자 정보 삭제
+            user.value = null;
+            sessionStorage.removeItem('user');
+            // 로그아웃 전으로 재진입 불가
+            router.replace({ name: 'main' });
+            // 서버로부터 받은 응답 로그
+            console.log(response.data); 
+        })
+        .catch(error => {
+            console.error('Error logging out:', error);
+        });
     }
 
     // 회원가입
@@ -89,11 +96,13 @@ export const useUserStore = defineStore('user', () => {
 
     // 회원 정보 수정
     const updateLoginUser = function (updatedUserInfo) {
-        const userId = updatedUserInfo.id;
-        axios.put(`${REST_USER_API}?id=${userId}`, updatedUserInfo)
-        .then(() => {
-                console.log("여기까지");
-                router.push({ name: 'mypage' })
+        // const userId = updatedUserInfo.id;
+        axios.put(`${REST_USER_API}?id=${updatedUserInfo.id}`, updatedUserInfo)
+            .then(() => {
+                console.log(updatedUserInfo);
+                updateSessionInfo(updatedUserInfo);
+                alert("수정이 완료되었습니다!");
+                router.replace({ name: 'mypage' });
             }).catch(error => {
                 console.error("Error updating user:", error);
             });
@@ -111,7 +120,41 @@ export const useUserStore = defineStore('user', () => {
             });
     }
 
-    
+    // 회원 정보 수정 후 세션 정보 업데이트
+    const updateSessionInfo = function (updatedUserInfo) {
+        const sessionUserInfo = JSON.parse(sessionStorage.getItem('user'));
+        if (sessionUserInfo) {
+            // 세션에서 사용자 정보 업데이트
+            const updatedSessionUserInfo = { ...sessionUserInfo, ...updatedUserInfo };
+            sessionStorage.setItem('user', JSON.stringify(updatedSessionUserInfo));
+        }
+    }
+
+    // 중복검사 결과 받을 변수
+    const result = ref(false);
+    // 이메일 중복 검사
+    const checkEmail = function (email) {
+        axios.get(REST_USER_API, email)
+        .then((response) => {
+            result.value = response.data;
+            console.log("이메일 중복검사 완료");
+        })
+        .catch((error) => {
+            console.log(error + "이메일 중복");
+        })
+    }
+
+    const checkNickname = function (nickname) {
+        axios.get(REST_USER_API, nickname)
+        .then((response) => {
+            result.value = response.data;
+            console.log("닉네임 중복검사 완료");
+        })
+        .catch((error) => {
+            console.log(error + "닉네임 중복");
+        })
+    }
+
 
     return {
         user,
@@ -122,5 +165,8 @@ export const useUserStore = defineStore('user', () => {
         updateLoginUser,
         logoutUser,
         deleteUser,
+        updateSessionInfo,
+        checkEmail,
+        checkNickname,
     }
 })

@@ -150,8 +150,14 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const headerStore = useHeaderStore();
   const hideHeaderRoutes = ['/', '/login', '/join']
-  headerStore.toggleHeader(!hideHeaderRoutes.includes(to.path))
-  next()
+  const sessionUserInfo = JSON.parse(sessionStorage.getItem('user'));
+
+  if (!sessionUserInfo && to.name !== 'login') {
+    next({ name: 'login' }); // 세션 정보가 없으면 로그인 페이지로 이동합니다.
+  } else {
+    next(); // 세션 정보가 있으면 다음으로 진행합니다.
+    headerStore.toggleHeader(!hideHeaderRoutes.includes(to.path));
+  }
 })
 
 export default router
