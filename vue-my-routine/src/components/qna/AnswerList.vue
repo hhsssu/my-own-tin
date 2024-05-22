@@ -30,7 +30,7 @@
 
 <script setup>
 import { useQnAStore } from '@/stores/qna';
-import { defineProps, onMounted } from 'vue';
+import { defineProps, ref, watch } from 'vue';
 
 const store = useQnAStore();
 
@@ -41,9 +41,26 @@ const props = defineProps({
   }
 });
 
-onMounted(() => {
-  store.getAnsList(props.questionId);
-})
+const answerList = ref([]);
+
+const fetchAnswerList = async (questionId) => {
+  try {
+    const answerListData = await store.getAnsList(questionId);
+    answerList.value = answerListData;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+watch(
+  () => props.questionId,
+  async (newId) => {
+    if (newId) {
+      await fetchAnswerList(newId);
+    }
+  },
+  { immediate: true }
+)
 
 </script>
 

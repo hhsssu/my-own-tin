@@ -1,5 +1,5 @@
 <template>
-  <div class="qna-detail-container" v-if="showQnADetail && question">
+  <div class="qna-detail-container" v-if="question">
     <!-- 작성자 프로필 -->
     <div class="qna-detail-profile">
       <img src="/src/assets/img/profile_male.png" class="qna-detail-profile-pic" />
@@ -15,7 +15,7 @@
         {{ question.content }}
       </div>
       <!-- 작성자 루틴 -->
-      <div class="qna-detail-routine">
+      <div class="qna-detail-routine" v-if="question.routine != null">
         <div class="qna-detail-routine-tag">
           <div class="qna-detail-routine-title">{{ question.routine.title }}</div>
           <div class="qna-detail-routine-info">{{ question.userAge }}</div>
@@ -30,42 +30,50 @@
 
     <!-- 댓글 -->
     <!-- AnswerList 로 이동 -->
-    <AnswerList :questionId="question.id"/>
+    <AnswerList :questionId="questionId"/>
 
     <!-- 댓글 작성 폼 -->
     <!-- AnswerCreate 로 이동 -->
-    <AnswerCreate :questionId="question.id"/>
+    <AnswerCreate :questionId="questionId"/>
   </div>
 </template>
 
 <script setup>
 import AnswerList from "./AnswerList.vue";
 import AnswerCreate from "./AnswerCreate.vue";
-import { ref, onMounted } from "vue";
+import { ref, watch, defineProps } from "vue";
 import { useQnAStore } from "@/stores/qna";
 
-const store = useQnAStore();
+const props = defineProps({
+  questionId: {
+    type: Number,
+    required: true,
+  },
+});
 
-const showQnADetail = ref(false);
-const showQnACreate = ref(false);
+const store = useQnAStore();
 const question = ref(null);
 
-const checkSelectedQnA = () => {
-  const selectedQnA = JSON.parse(sessionStorage.getItem("selectedQnA"));
-  if (selectedQnA) {
-    showQnACreate.value = false;
-    showQnADetail.value = true;
-    question.value = selectedQnA;
-  } else {
-    showQnACreate.value = false;
-    showQnADetail.value = false;
+const fetchQuestionDetail = async (id) => {
+  try {
+    const questionData = await store.getQuestion(id);
+    question.value = questionData;
+  } catch (error) {
+    console.error(error);
   }
 };
 
-onMounted(() => {
-  checkSelectedQnA();
-});
+watch(
+  () => props.questionId,
+  async (newId) => {
+    if (newId) {
+      await fetchQuestionDetail(newId);
+    }
+  },
+  { immediate: true }
+);
 </script>
+
 
 <style scoped>
 .qna-detail-container {

@@ -14,6 +14,7 @@ export const useQnAStore = defineStore('qna', () => {
     const qnaList = ref([]);
     const ansList = ref([]);
     const userDetails = ref({});
+    const question = ref({});
 
     const getQnAList = (searchCondition) => {
         axios.get(QNA_REST_API, { params: searchCondition })
@@ -30,6 +31,21 @@ export const useQnAStore = defineStore('qna', () => {
                 })
             })
     };
+
+    const getQuestion = function (questionId) {
+        return axios.get(`${QNA_REST_API}${questionId}`)
+            .then((response) => {
+                question.value = response.data;
+                question.value.routine = null;
+                getUserDetails(question.value, 'question');
+                getRoutine(question.value);
+                return question.value;
+            })
+            .catch((error) => {
+                console.log(error);
+                throw error;
+            })
+    }
 
     const getUserDetails = (item, type) => {
         axios.get(`${USER_REST_API}${item.userId}`)
@@ -72,11 +88,12 @@ export const useQnAStore = defineStore('qna', () => {
         axios.get(`${ROUTINE_REST_API}detail`, { params: { routineId: qna.routineId } })
             .then((response) => {
                 qna.routine = response.data;
+                console.log(qna.routine);
             })
     }
 
     const getAnsList = function (questionId) {
-        axios.get(ANS_REST_API, { params: { questionId: questionId } })
+        return axios.get(ANS_REST_API, { params: { questionId: questionId } })
             .then((response) => {
                 ansList.value = response.data;
                 ansList.value.forEach((ans) => {
@@ -85,6 +102,7 @@ export const useQnAStore = defineStore('qna', () => {
                     ans.userGender = 'NONE';
 
                     getUserDetails(ans, 'ans');
+                    return ansList.value;
                 })
             })
     }
@@ -99,7 +117,7 @@ export const useQnAStore = defineStore('qna', () => {
                     // question.routineId = selectedRoutine.id;
                 });
 
-                console.log(question);
+            console.log(question);
             // 질문 등록 과정
             await axios({
                 url: QNA_REST_API,
@@ -107,7 +125,7 @@ export const useQnAStore = defineStore('qna', () => {
                 data: question
             });
 
-            router.push({ name: 'qnaList'});
+            router.push({ name: 'qnaList' });
         } catch (error) {
             console.error('Error creating question:', error);
         }
@@ -137,10 +155,12 @@ export const useQnAStore = defineStore('qna', () => {
 
 
     return {
+        question,
         qnaList,
         ansList,
         userDetails,
         getQnAList,
+        getQuestion,
         getUserDetails,
         getNickname,
         getRoutine,

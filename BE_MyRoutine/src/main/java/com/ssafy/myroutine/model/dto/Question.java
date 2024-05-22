@@ -5,7 +5,7 @@ import java.util.Date;
 public class Question {
 	private int id;
 	private int userId;
-	private int routineId;
+	private Integer routineId;
 	private String writer;
 	private String title;
 	private String content;
@@ -17,7 +17,7 @@ public class Question {
 	public Question() {
 	}
 
-	public Question(int id, int userId, int routineId, String writer, String title, String content, int likeCnt,
+	public Question(int id, int userId, Integer routineId, String writer, String title, String content, int likeCnt,
 			Date createAt, Date updateAt, Date deleteAt) {
 		this.id = id;
 		this.userId = userId;
@@ -47,11 +47,11 @@ public class Question {
 		this.userId = userId;
 	}
 
-	public int getRoutineId() {
+	public Integer getRoutineId() {
 		return routineId;
 	}
 
-	public void setRoutineId(int routineId) {
+	public void setRoutineId(Integer routineId) {
 		this.routineId = routineId;
 	}
 

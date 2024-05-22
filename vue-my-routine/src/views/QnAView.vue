@@ -128,15 +128,15 @@
         </div>
       </div>
       <!-- 질의응답 리스트 -->
-      <QnAList />
+      <QnAList @selectQuestion="handleSelectQuesion"/>
     </div>
     <!-- 세션에 selectedQnA 있는 경우 QnADetail 보임 -->
-    <div v-if="showQnADetail">
+    <div v-if="selectedQuestionId">
       <!-- <div> -->
-      <QnADetail />
+      <QnADetail :questionId="selectedQuestionId" />
     </div>
     <!-- 질의응답 작성 페이지 -->
-    <div v-else-if="showQnACreate">
+    <div v-else-if="selectedQuestionId == null">
       <QnACreate />
     </div>
   </div>
@@ -146,15 +146,21 @@
 import QnAList from "@/components/qna/QnAList.vue";
 import QnADetail from "@/components/qna/QnADetail.vue";
 import QnACreate from "@/components/qna/QnACreate.vue";
-import { onMounted, onBeforeMount, ref } from "vue";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const filterCheckboxes = ref(false);
-const showQnADetail = ref(false);
-const showQnACreate = ref(false);
+
+const selectedQuestionId = ref(null);
+
+const handleSelectQuesion = (questionId) => {
+  selectedQuestionId.value = questionId;
+}
 
 const createQnA = function () {
-  showQnADetail.value = false;
-  showQnACreate.value = true;
+  selectedQuestionId.value = null;
   router.push({ name: "qnaCreate" });
 };
 
@@ -162,22 +168,6 @@ const handleSearchOptionChange = (event) => {
   filterCheckboxes.value = event.target.value === "ON";
 };
 
-onBeforeMount(() => {
-  checkSelectedQnA();
-});
-
-const checkSelectedQnA = () => {
-  if (sessionStorage.getItem("selectedQnA")) {
-    showQnACreate.value = false;
-    showQnADetail.value = true;
-  } else {
-    showQnACreate.value = false;
-    showQnADetail.value = false;
-  }
-};
-
-// 페이지 로드시마다 상태 업데이트
-window.addEventListener("DOMContentLoaded", checkSelectedQnA);
 </script>
 
 <style scoped>

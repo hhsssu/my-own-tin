@@ -15,37 +15,34 @@
 </template>
 
 <script setup>
-import { useQnAStore } from '@/stores/qna';
-import { defineProps } from 'vue';
+import { useQnAStore } from "@/stores/qna";
+import { defineProps } from "vue";
 
 const store = useQnAStore();
 
 const props = defineProps({
   questionId: {
     type: Number,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const answer = {
-  writer: '',
-  content: '',
-  questionId: '',
-  userId: ''
-}
+  writer: "",
+  content: "",
+  questionId: "",
+  userId: "",
+};
 
 const createAnswer = function () {
-  const userItem = sessionStorage.getItem('loginUser');
-const userObj = JSON.parse(userItem);
+  const userItem = sessionStorage.getItem("loginUser");
+  const userObj = JSON.parse(userItem);
   // answer.userId = userObj.id;
   answer.userId = 11;
   // console.log(props.questionId);
   answer.questionId = props.questionId;
   store.createAnswer(answer);
-}
-
-
-
+};
 </script>
 
 <style scoped>
@@ -64,7 +61,7 @@ const userObj = JSON.parse(userItem);
 }
 
 .qna-detail-comment-button {
-  background-color: #FFA101;
+  background-color: #ffa101;
   color: white;
   font-size: 15px;
   padding: 5px 15px;
@@ -73,4 +70,5 @@ const userObj = JSON.parse(userItem);
   margin-left: auto;
   margin-right: 10px;
   /* margin-left: 10px; */
-}</style>
+}
+</style>

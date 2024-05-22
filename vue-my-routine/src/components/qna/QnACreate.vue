@@ -69,8 +69,9 @@ const selectedRoutine = ref(null);
 const fetchRoutines = async () => {
   if (selectedDate.value) {
     try {
-      // const userId = JSON.parse(sessionStorage.getItem("loginUser")).id;
-      const userId = 13;
+      const userId = JSON.parse(sessionStorage.getItem("user")).id;
+      console.log(sessionStorage.getItem('user'));
+      // const userId = 13;
       const response = await axios.get(`http://localhost:8080/myroutine/routine/byDate`, { params: { date: selectedDate.value, userId: userId } });
       routines.value = response.data;
       console.log(routines.value);
@@ -81,10 +82,11 @@ const fetchRoutines = async () => {
 };
 
 const confirmCreate = function () {
-  const userItem = sessionStorage.getItem("loginUser");
+  const userItem = sessionStorage.getItem("user");
   const userObj = JSON.parse(userItem);
-  // answer.userId = userObj.id;
-  question.userId = 11;
+  question.userId = userObj.id;
+  // console.log(userObj.id);
+  // console.log(selectedRoutine.value);
   question.routineId = selectedRoutine.value;
   store.createQuestion(question);
 };
