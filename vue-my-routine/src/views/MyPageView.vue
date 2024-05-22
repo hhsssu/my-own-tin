@@ -26,27 +26,30 @@
                 <div class="profile-title">나의 루틴 태그</div>
                 <div class="flex-box">
                     <div class="routine-tag" v-if="user.age < 20">10대</div>
-                    <div class="routine-tag" v-else-if="user.age > 19">20대</div>
-                    <div class="routine-tag" v-else-if="user.age > 29">30대</div>
-                    <div class="routine-tag" v-else-if="user.age > 39">40대</div>
-                    <div class="routine-tag" v-else-if="user.age > 49">50대</div>
-                    <div class="routine-tag" v-else-if="user.age > 59">60대</div>
-                    <div class="routine-tag" v-else-if="user.age > 69">70대</div>
+                    <div class="routine-tag" v-else-if="user.age > 19 && user.age < 30">20대</div>
+                    <div class="routine-tag" v-else-if="user.age > 29 && user.age < 40">30대</div>
+                    <div class="routine-tag" v-else-if="user.age > 39 && user.age < 50">40대</div>
+                    <div class="routine-tag" v-else-if="user.age > 49 && user.age < 60">50대</div>
+                    <div class="routine-tag" v-else-if="user.age > 59 && user.age < 70">60대</div>
+                    <div class="routine-tag" v-else-if="user.age > 69 && user.age < 80">70대</div>
                     <div class="routine-tag" v-else-if="user.age > 79">80대⬆</div>
                     <div class="routine-tag">{{ user.gender }}</div>
-                    <div class="routine-tag">{{ user.part1 }}</div>
-                    <div class="routine-tag" v-if="user.workoutTime !== null">{{ workoutTimeFormat(user.workoutTime) }}</div>
+                    <div class="routine-tag" v-if="user.part1 !== null">{{ user.part1 }}</div>
+                    <div class="routine-tag" v-if="user.part2 !== null">{{ user.part2 }}</div>
+                    <div class="routine-tag" v-if="user.workoutTime !== 0">{{ workoutTimeFormat(user.workoutTime) }}</div>
                 </div>
             </section>
             <!-- 포인트 마일리지 표기 영역 -->
             <section class="profile-click-box flex-box content-box">
                 <div class="profile-point-box" @click="showComponent('MypagePoint')">
                     <div class="profile-title">포인트</div>
-                    <div class="profile-point-amount num">{{ pointTotal }}</div>
+                    <div class="profile-point-amount num" v-if="pointTotal > 0">{{ pointTotal }}</div>
+                    <div class="profile-point-amount num" v-else-if="pointTotal === 0 || pointTotal === null">0</div>
                 </div>
                 <div class="profile-mile-box" @click="showComponent('MypageMile')">
                     <div class="profile-title">마일리지</div>
-                    <div class="profile-mile-amount num">{{ mileTotal }}</div>
+                    <div class="profile-mile-amount num" v-if="mileTotal > 0">{{ mileTotal }}</div>
+                    <div class="profile-mile-amount num" v-else-if="mileTotal === 0 || mileTotal === null">0</div>
                 </div>
             </section>
             <!-- 루틴 보관함 영역 -->
@@ -92,8 +95,6 @@ const pointmileStore = usePointmileStore();
 const user = JSON.parse(sessionStorage.getItem('user'));
 
 
-const routineCnt = ref(17);
-
 // 포인트 총합 조회
 const pointTotal = computed(() => pointmileStore.pointTotal);
 
@@ -118,7 +119,7 @@ const showComponent = (componentName) => {
     console.log(activeComponent.value);
 }
 
-// 운동 시간 태그
+// 운동 시간 태그 (30 -> 30분, 60 -> 1시간, 90 -> 1시간30분)
 const workoutTimeFormat = (workoutTime) => {
     const hours = Math.floor(workoutTime / 60); // 시간
     const minuties = workoutTime % 60; // 분

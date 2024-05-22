@@ -2,7 +2,8 @@
     <div class="mypage-point-detail-container">
         <h2 class="view-title">포인트 적립 내역</h2>
         <div class="point-detail-total-box">
-            <div class="point-detail-total">잔여 포인트 : {{ pointTotal }}P</div>
+            <div class="point-detail-total" v-if="pointTotal > 0">잔여 포인트 : {{ pointTotal }}P</div>
+            <div class="point-detail-total" v-if="pointTotal === 0 || pointTotal === null">잔여 포인트 : 0 P</div>
         </div>
 
         <table class="point-detail-table">

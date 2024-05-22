@@ -25,11 +25,11 @@
 		UPDATE users
 		<set>
 			<if test="password != null">password = #{password},</if>
-			<if test="age != null">age = #{age},</if>
+			<if test="age != 0">age = #{age},</if>
 			<if test="gender != null">gender = #{gender},</if>
 			<if test="part1 != null">part1 = #{part1},</if>
 			<if test="part2 != null">part2 = #{part2},</if>
-			<if test="workout_time != null">workout_time = #{workoutTime},</if>
+			<if test="workoutTime != 0">workout_time = #{workoutTime},</if>
 		</set>
 		WHERE id = #{id}
 	</update>
@@ -45,10 +45,21 @@
 	</update>
 
 	<!-- id를 통한 사용자 조회 -->
-	<select id="selectById" parameterType="int">
+	<select id="selectById" parameterType="int" resultType="User">
 		SELECT *
 		FROM users
 		WHERE id = #{id}
 	</select>
 
+	<!-- email 조회 -->
+	<select id="selectEmail" resultType="String">
+		SELECT email
+		FROM users
+	</select>
+	
+	<!-- 닉네임 조회 -->
+	<select id="selectNickname" resultType="String">
+		SELECT nickname
+		FROM users
+	</select>
 </mapper>

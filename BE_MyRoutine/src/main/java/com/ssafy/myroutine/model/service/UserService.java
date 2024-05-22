@@ -20,4 +20,10 @@ public interface UserService {
 
 	// id를 통한 사용자 조회
 	User getUserById(int id);
+	
+	// 이메일 중복 조회
+	boolean checkEmail(String email);
+	
+	// 닉네임 중복 조회
+	boolean checkNickname(String nickname);
 }

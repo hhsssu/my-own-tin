@@ -4,7 +4,7 @@
         <div class="mypage-modify-detail-container">
             <div class="flex-box flex-box-end">
                 <div class="input-label">e-mail</div>
-                <input class="input-text input-email-readonly" type="text" value="strong123@ssafy.com" readonly>
+                <input class="input-text input-email-readonly" type="text" v-model="email" readonly>
             </div>
             <div class="flex-box flex-box-end">
                 <div class="input-label">새 비밀번호</div>
@@ -30,7 +30,7 @@
                 </label>
             </div>
             <div class="display-block">
-                <button type="button" class="modify-fin-btn"@click="updateProfile">수정 완료</button>
+                <button type="button" class="modify-fin-btn" @click="updateProfile">수정 완료</button>
             </div>
         </div>
         <div class="profile-out-btn">
@@ -50,40 +50,50 @@ import { ref } from 'vue';
 const userStore = useUserStore();
 
 const user = JSON.parse(sessionStorage.getItem('user'));
+const email = ref(user.email);
 const newPassword = ref('');
 const confirmPassword = ref('');
 const age = ref(user.age);
 const gender = ref(user.gender);
 
+// 수정 완료 버튼
 const updateProfile = () => {
-    if(newPassword.value !== confirmPassword.value){
-        alert('새 비밀번호와 비밀번호 확인이 일치하지 않습니다.');
-        return;
-    }
-
     if(!age.value || !gender.value) {
         alert("필수 항목을 작성해주세요.");
         return;
     }
-    
+    // 비밀번호 작성란 모두 공백
     // 비밀번호 업데이트 X
-    if(!newPassword.value && !confirmPassword.value) {
+    if(!newPassword.value && !confirmPassword.value) { 
         const updateUserInfo = {
             id: user.id,
+            email: user.email,
             password: user.password,
             age: age.value,
             gender: gender.value,
         }
-    } else {
+        console.log(updateUserInfo);
+        userStore.updateLoginUser(updateUserInfo);
+    } else { // 새 비밀번호로 변경 O
+        // 둘 중 하나라도 공백
+        if(!newPassword.value || !confirmPassword.value) { 
+            alert("비밀번호를 변경하시려면 빈칸을 모두 작성해주세요.");
+            return;
+        }// 둘 다 채워짐
+        if(newPassword.value !== confirmPassword.value){
+            alert('새 비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+            return;
+        }
         const updateUserInfo = {
             id: user.id,
+            email: user.email,
             password: newPassword.value,
             age: age.value,
             gender: gender.value,
         }
+        userStore.updateLoginUser(updateUserInfo);
     }
-
-    userStore.updateLoginUser(updateUserInfo);
+    
 }
 
 
