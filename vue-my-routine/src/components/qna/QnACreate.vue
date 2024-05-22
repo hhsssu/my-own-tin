@@ -76,7 +76,7 @@ const fetchRoutines = async () => {
       routines.value = response.data;
       console.log(routines.value);
     } catch (error) {
-      console.error('Error fetching routines:', error);
+      console.error(error);
     }
   }
 };
@@ -87,8 +87,9 @@ const confirmCreate = function () {
   question.userId = userObj.id;
   // console.log(userObj.id);
   // console.log(selectedRoutine.value);
-  question.routineId = selectedRoutine.value;
   store.createQuestion(question);
+
+  router.push({ name: 'qnaUpdate', params: { selectedRoutine: selectedRoutine.value } });
 };
 </script>
 

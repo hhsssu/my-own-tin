@@ -133,11 +133,15 @@
     <!-- 세션에 selectedQnA 있는 경우 QnADetail 보임 -->
     <div v-if="selectedQuestionId">
       <!-- <div> -->
-      <QnADetail :questionId="selectedQuestionId" />
+      <QnADetail :questionId="selectedQuestionId" @isUpdate="handleQuestionUpdate" />
     </div>
     <!-- 질의응답 작성 페이지 -->
-    <div v-else-if="selectedQuestionId == null">
+    <div v-else-if="selectedQuestionId == null && !updatedQuestion">
       <QnACreate />
+    </div>
+    <!-- 수정 버튼 눌렸을 시 QnaUpdate 보임 -->
+    <div v-else-if="updatedQuestion">
+      <QnAUpdate />
     </div>
   </div>
 </template>
@@ -146,6 +150,7 @@
 import QnAList from "@/components/qna/QnAList.vue";
 import QnADetail from "@/components/qna/QnADetail.vue";
 import QnACreate from "@/components/qna/QnACreate.vue";
+import QnAUpdate from "@/components/qna/QnAUpdate.vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
@@ -154,13 +159,24 @@ const router = useRouter();
 const filterCheckboxes = ref(false);
 
 const selectedQuestionId = ref(null);
+const updatedQuestion = ref(false);
 
 const handleSelectQuesion = (questionId) => {
   selectedQuestionId.value = questionId;
+  router.push({ name: 'qnaList' });
+}
+
+const handleQuestionUpdate = (isUpdate) => {
+  if (isUpdate == true) {
+    selectedQuestionId.value = null;
+    updatedQuestion.value = true;
+    router.push({ name: 'qnaUpdate'});
+  }
 }
 
 const createQnA = function () {
   selectedQuestionId.value = null;
+  updatedQuestion.value = false;
   router.push({ name: "qnaCreate" });
 };
 

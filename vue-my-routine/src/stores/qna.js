@@ -127,7 +127,7 @@ export const useQnAStore = defineStore('qna', () => {
 
             router.push({ name: 'qnaList' });
         } catch (error) {
-            console.error('Error creating question:', error);
+            console.error(error);
         }
     };
 
@@ -153,6 +153,13 @@ export const useQnAStore = defineStore('qna', () => {
         }
     }
 
+    const updateQuestion = function (questionId) {
+        axios.put(`${QNA_REST_API}?id=${questionId}`, question.value)
+        .then(() => {
+            router.push({ name: 'qna' });
+        })
+    }
+
 
     return {
         question,
@@ -166,6 +173,7 @@ export const useQnAStore = defineStore('qna', () => {
         getRoutine,
         getAnsList,
         createQuestion,
-        createAnswer
+        createAnswer,
+        updateQuestion
     };
 })

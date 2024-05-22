@@ -26,6 +26,11 @@
         </div>
         <div class="qna-detail-routine-content">{{ question.routine.content }}</div>
       </div>
+      <!-- 로그인된 유저가 작성자일 경우, 수정 / 삭제 버튼 활성화 -->
+      <div v-if="checkWriter(question.userId)">
+        <button @click="updateQuestion">수정</button>
+        <button @click="deleteQuestion">삭제</button>
+      </div>
     </div>
 
     <!-- 댓글 -->
@@ -43,15 +48,21 @@ import AnswerList from "./AnswerList.vue";
 import AnswerCreate from "./AnswerCreate.vue";
 import { ref, watch, defineProps } from "vue";
 import { useQnAStore } from "@/stores/qna";
+import { useRouter } from "vue-router";
 
 const props = defineProps({
   questionId: {
     type: Number,
     required: true,
   },
+  selectedQuestionId: {
+    type: Number,
+
+  }
 });
 
 const store = useQnAStore();
+const router = useRouter();
 const question = ref(null);
 
 const fetchQuestionDetail = async (id) => {
@@ -72,6 +83,31 @@ watch(
   },
   { immediate: true }
 );
+
+const checkWriter = function (userId) {
+  const loginUser = JSON.parse(sessionStorage.getItem('user'));
+  if (loginUser && loginUser.id === userId) {
+    return true;
+  }
+  return false;
+};
+
+const emits = defineEmits(['isUpdate']);
+
+const updateQuestion = function () {
+  emits("isUpdate", true);
+  console.log(store.question.userId);
+  console.log(store.question.title);
+}
+
+// const updateQuestion = function () {
+//   router.push({ name: 'qnaUpdate' });
+// };
+
+const deleteQuestion = function () {
+
+};
+
 </script>
 
 
