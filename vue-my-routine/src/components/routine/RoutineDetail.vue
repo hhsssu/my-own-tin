@@ -17,7 +17,7 @@
     <!-- 여기에 루틴의 상세 정보를 표시하는 나머지 코드 추가 -->
     <!-- 버튼 -->
     <div class="routine-detail-buttons">
-      <button @click="clickForMarked">담기</button>
+      <button @click="createMarkedRoutine">담기</button>
       <button @click="clickForLike">좋아요</button>
     </div>
     <!-- 루틴 작성자와 사용자의 id값 같은지 비교 후 표시 -->
@@ -76,10 +76,11 @@ const deleteRoutine = function () {
   })
 };
 
-const clickForMarked = function () {
-  // 추후 DB에서도 marked true(1) 로 바뀌도록
-  routine.value.marked = true;
-  // console.log(routine.value);
+const createMarkedRoutine = () => {
+  store.getRoutine(props.routineId);
+  const newRoutine = { ...store.routine, isMarked: 1 };
+  store.createRoutine(newRoutine); // 새로운 루틴 추가하는 메서드에 따라 변경
+  alert('북마크에 추가되었습니다!');
 };
 
 const clickForLike = function () {
