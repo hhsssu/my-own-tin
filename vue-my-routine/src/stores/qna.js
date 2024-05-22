@@ -2,6 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios';
 import router from '@/router';
+import { errorMessages } from '@vue/compiler-core';
 
 const QNA_REST_API = `http://localhost:8080/myroutine/que/`;
 const ANS_REST_API = `http://localhost:8080/myroutine/ans/`;
@@ -160,6 +161,28 @@ export const useQnAStore = defineStore('qna', () => {
         })
     }
 
+    const searchQuestionList = function (searchCondition) {
+        return axios.get(`${QNA_REST_API}`, {params: {
+            level: searchCondition.level,
+            gender: searchCondition.gender,
+            ageRange: searchCondition.ageRange,
+            orderBy: searchCondition.orderBy
+        }})
+        .then((response) => {
+            qnaList.value = response.data;
+            qnaList.value.forEach((qna) => {
+                getUserDetails(qna, 'qna');
+                getRoutine(qna);
+            });
+
+            return qnaList.value;
+        })
+        .catch((error) => {
+            console.log(error);
+            throw error;
+        })
+    }
+
 
     return {
         question,
@@ -174,6 +197,7 @@ export const useQnAStore = defineStore('qna', () => {
         getAnsList,
         createQuestion,
         createAnswer,
-        updateQuestion
+        updateQuestion,
+        searchQuestionList
     };
 })

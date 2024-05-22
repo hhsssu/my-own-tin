@@ -7,7 +7,7 @@
         <div class="search-list-input">
           <div>#</div>
           <input type="text" placeholder="검색어를 입력하세요" />
-          <div>
+          <button class="search-button" @click="clickSearch">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -20,7 +20,7 @@
                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
               />
             </svg>
-          </div>
+          </button>
         </div>
         <!-- 검색 기능 필터 -->
         <div class="search-list-option">
@@ -33,97 +33,113 @@
             <option value="OFF">검색 필터 OFF</option>
             <option value="ON">검색 필터 ON</option>
           </select>
-          <!-- </div> -->
+
+          <!-- 검색 상세 필터 div 시작 -->
           <div
             :class="['filter-checkboxes', { show: filterCheckboxes }]"
             id="filter-checkboxes"
           >
             <div>
               <div>
-                <input type="radio" name="filter1" id="filter1-1" value="전체" checked />
-                <label for="filter1-1">전체</label>
+                <input type="radio" name="level" id="total-level" value="" checked v-model="condition.word1" />
+                <label for="total-level">전체</label>
               </div>
               <div>
-                <input type="radio" name="filter1" id="filter1-2" value="Lv 1" />
-                <label for="filter1-2">Lv 1</label>
+                <input type="radio" name="level" id="level1" value="1" v-model="condition.word1" />
+                <label for="level1">Lv 1</label>
               </div>
               <div>
-                <input type="radio" name="filter1" id="filter1-3" value="Lv 2" />
-                <label for="filter1-3">Lv 2</label>
+                <input type="radio" name="level" id="level2" value="2" v-model="condition.word1" />
+                <label for="level2">Lv 2</label>
               </div>
               <div>
-                <input type="radio" name="filter1" id="filter1-4" value="Lv 3" />
-                <label for="filter1-4">Lv 3</label>
+                <input type="radio" name="level" id="level3" value="3" v-model="condition.word1" />
+                <label for="level3">Lv 3</label>
               </div>
               <div>
-                <input type="radio" name="filter1" id="filter1-5" value="Lv 4" />
-                <label for="filter1-5">Lv 4</label>
+                <input type="radio" name="level" id="level4" value="4" v-model="condition.word1" />
+                <label for="level4">Lv 4</label>
               </div>
               <div>
-                <input type="radio" name="filter1" id="filter1-6" value="Lv 5" />
-                <label for="filter1-6">Lv 5</label>
+                <input type="radio" name="level" id="level5" value="5" v-model="condition.word1" />
+                <label for="level5">Lv 5</label>
               </div>
               <div>
-                <input type="radio" name="filter1" id="filter1-7" value="Lv 6" />
-                <label for="filter1-7">Lv 6</label>
-              </div>
-            </div>
-            <div>
-              <div>
-                <input type="radio" name="filter2" id="filter2-1" value="전체" checked />
-                <label for="filter2-1">전체</label>
-              </div>
-              <div>
-                <input type="radio" name="filter2" id="filter2-2" value="좋아요순" />
-                <label for="filter2-2">좋아요순</label>
-              </div>
-              <div>
-                <input type="radio" name="filter2" id="filter2-3" value="최신순" />
-                <label for="filter2-3">최신순</label>
+                <input type="radio" name="level" id="level6" value="6" v-model="condition.word1" />
+                <label for="level6">Lv 6</label>
               </div>
             </div>
             <div>
               <div>
-                <input type="radio" name="filter3" id="filter3-1" value="전체" checked />
-                <label for="filter3-1">전체</label>
+                <input
+                  type="radio"
+                  name="orderBy"
+                  id="total-order"
+                  value=""
+                  checked
+                  v-model="condition.orderBy"
+                />
+                <label for="total-order">전체</label>
               </div>
               <div>
-                <input type="radio" name="filter3" id="filter3-2" value="남성" />
-                <label for="filter3-2">남성</label>
+                <input type="radio" name="orderBy" id="like-cnt" value="like_cnt" v-model="condition.orderBy" />
+                <label for="like">좋아요순</label>
               </div>
               <div>
-                <input type="radio" name="filter3" id="filter3-3" value="여성" />
-                <label for="filter3-3">여성</label>
+                <input type="radio" name="orderBy" id="routine-at" value="routine_at" v-model="condition.orderBy" />
+                <label for="recent">최신순</label>
               </div>
             </div>
             <div>
               <div>
-                <input type="radio" name="filter4" id="filter4-1" value="전체" checked />
-                <label for="filter4-1">전체</label>
+                <input
+                  type="radio"
+                  name="gender"
+                  id="total-gender"
+                  value=""
+                  checked
+                  v-model="condition.word2"
+                />
+                <label for="total-gender">전체</label>
               </div>
               <div>
-                <input type="radio" name="filter4" id="filter4-2" value="10대" />
-                <label for="filter4-2">10대</label>
+                <input type="radio" name="gender" id="male" value="남성" v-model="condition.word2" />
+                <label for="male">남성</label>
               </div>
               <div>
-                <input type="radio" name="filter4" id="filter4-3" value="20대" />
-                <label for="filter4-3">20대</label>
+                <input type="radio" name="gender" id="female" value="여성" v-model="condition.word2" />
+                <label for="female">여성</label>
+              </div>
+            </div>
+            <div>
+              <div>
+                <input type="radio" name="age" id="total-age" value="" checked v-model="condition.word3" />
+                <label for="total-age">전체</label>
               </div>
               <div>
-                <input type="radio" name="filter4" id="filter4-4" value="30대" />
-                <label for="filter4-4">30대</label>
+                <input type="radio" name="age" id="ten" value="10" v-model="condition.word3" />
+                <label for="ten">10대</label>
               </div>
               <div>
-                <input type="radio" name="filter4" id="filter4-5" value="40대" />
-                <label for="filter4-5">40대</label>
+                <input type="radio" name="age" id="twenty" value="20" v-model="condition.word3" />
+                <label for="twenty">20대</label>
               </div>
               <div>
-                <input type="radio" name="filter4" id="filter4-6" value="50대 이상" />
-                <label for="filter4-6">50대 이상</label>
+                <input type="radio" name="age" id="thirty" value="30" v-model="condition.word3" />
+                <label for="thirty">30대</label>
+              </div>
+              <div>
+                <input type="radio" name="age" id="fourty" value="40" v-model="condition.word3" />
+                <label for="fourty">40대</label>
+              </div>
+              <div>
+                <input type="radio" name="age" id="fifty" value="50" v-model="condition.word3" />
+                <label for="fifty">50대 이상</label>
               </div>
             </div>
           </div>
         </div>
+        <!-- 검색 상세 필터 div 끝 -->
       </div>
       <!-- 루틴 검색 결과 리스트 -->
       <SearchList @selectRoutineId="handleSelectRoutine" />
@@ -139,6 +155,9 @@
 import SearchList from "@/components/search/SearchList.vue";
 import SearchDetail from "@/components/search/SearchDetail.vue";
 import { onMounted, ref } from "vue";
+import { useRoutineStore } from "@/stores/routine";
+
+const store = useRoutineStore();
 
 const filterCheckboxes = ref(false);
 const showSearchDetail = ref(false);
@@ -151,6 +170,32 @@ const handleSelectRoutine = (routineId) => {
 
 const handleSearchOptionChange = (event) => {
   filterCheckboxes.value = event.target.value === "ON";
+};
+
+const condition = {
+  // 작성자 아이디를 기반으로 user 정보 조회
+  word1: "", // level 
+  word2: "", // gender
+  word3: "", // ageRange
+  orderBy: "", // 좋아요순 or 최신순(routineAt 기준)
+}
+
+// 검색 버튼 입력
+const clickSearch = function () {
+  // console.log(condition); // 객체 형태로 잘 넘어옴
+  const searchCondition = {
+    key: null,
+    word: null,
+    orderByDir: "asc",
+    level: condition.word1,
+    gender: condition.word2,
+    ageRange: condition.word3,
+    orderBy: condition.orderBy
+  }
+
+  console.log(searchCondition);
+
+  store.searchRoutineList(searchCondition);
 };
 
 onMounted(() => {
@@ -185,6 +230,16 @@ onMounted(() => {
   color: #31525b;
   margin-bottom: 20px;
   text-align: center;
+}
+
+.search-button {
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.search-button:hover {
+  background-color: #ffa101;
 }
 
 .search-list-input {

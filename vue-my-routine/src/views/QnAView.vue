@@ -9,7 +9,7 @@
         <div class="qna-search">
           <div>#</div>
           <input type="text" placeholder="검색어를 입력하세요" />
-          <div>
+          <button @click="clickSearch">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -22,7 +22,7 @@
                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
               />
             </svg>
-          </div>
+          </button>
         </div>
         <!-- 검색 기능 필터 -->
         <div class="qna-search-option">
@@ -36,96 +36,112 @@
             <option value="ON">검색 필터 ON</option>
           </select>
           <!-- </div> -->
+          <!-- 검색 상세 필터 div 시작 -->
           <div
             :class="['filter-checkboxes', { show: filterCheckboxes }]"
             id="filter-checkboxes"
           >
             <div>
               <div>
-                <input type="radio" name="total" id="total-level" value="" checked />
+                <input type="radio" name="level" id="total-level" value="" checked v-model="condition.word1" />
                 <label for="total-level">전체</label>
               </div>
               <div>
-                <input type="radio" name="level1" id="level1" value="1" />
+                <input type="radio" name="level" id="level1" value="1" v-model="condition.word1" />
                 <label for="level1">Lv 1</label>
               </div>
               <div>
-                <input type="radio" name="level2" id="level2" value="2" />
+                <input type="radio" name="level" id="level2" value="2" v-model="condition.word1" />
                 <label for="level2">Lv 2</label>
               </div>
               <div>
-                <input type="radio" name="level3" id="level3" value="3" />
+                <input type="radio" name="level" id="level3" value="3" v-model="condition.word1" />
                 <label for="level3">Lv 3</label>
               </div>
               <div>
-                <input type="radio" name="level4" id="level4" value="4" />
+                <input type="radio" name="level" id="level4" value="4" v-model="condition.word1" />
                 <label for="level4">Lv 4</label>
               </div>
               <div>
-                <input type="radio" name="level5" id="level5" value="Lv 5" />
+                <input type="radio" name="level" id="level5" value="5" v-model="condition.word1" />
                 <label for="level5">Lv 5</label>
               </div>
               <div>
-                <input type="radio" name="level6" id="level6" value="Lv 6" />
-                <label for="level-6">Lv 6</label>
+                <input type="radio" name="level" id="level6" value="6" v-model="condition.word1" />
+                <label for="level6">Lv 6</label>
               </div>
             </div>
             <div>
               <div>
-                <input type="radio" name="total-order" id="total-order" value="" checked />
+                <input
+                  type="radio"
+                  name="orderBy"
+                  id="total-order"
+                  value=""
+                  checked
+                  v-model="condition.orderBy"
+                />
                 <label for="total-order">전체</label>
               </div>
               <div>
-                <input type="radio" name="like-cnt" id="like-cnt" value="like_cnt" />
+                <input type="radio" name="orderBy" id="like-cnt" value="like_cnt" v-model="condition.orderBy" />
                 <label for="like">좋아요순</label>
               </div>
               <div>
-                <input type="radio" name="create-at" id="create-at" value="create_at" />
+                <input type="radio" name="orderBy" id="routine-at" value="routine_at" v-model="condition.orderBy" />
                 <label for="recent">최신순</label>
               </div>
             </div>
             <div>
               <div>
-                <input type="radio" name="total-gender" id="total-gender" value="" checked />
+                <input
+                  type="radio"
+                  name="gender"
+                  id="total-gender"
+                  value=""
+                  checked
+                  v-model="condition.word2"
+                />
                 <label for="total-gender">전체</label>
               </div>
               <div>
-                <input type="radio" name="male" id="male" value="male" />
+                <input type="radio" name="gender" id="male" value="남성" v-model="condition.word2" />
                 <label for="male">남성</label>
               </div>
               <div>
-                <input type="radio" name="female" id="female" value="female" />
+                <input type="radio" name="gender" id="female" value="여성" v-model="condition.word2" />
                 <label for="female">여성</label>
               </div>
             </div>
             <div>
               <div>
-                <input type="radio" name="total-age" id="total-age" value="" checked />
+                <input type="radio" name="age" id="total-age" value="" checked v-model="condition.word3" />
                 <label for="total-age">전체</label>
               </div>
               <div>
-                <input type="radio" name="ten" id="ten" value="10" />
+                <input type="radio" name="age" id="ten" value="10" v-model="condition.word3" />
                 <label for="ten">10대</label>
               </div>
               <div>
-                <input type="radio" name="twenty" id="twenty" value="20" />
+                <input type="radio" name="age" id="twenty" value="20" v-model="condition.word3" />
                 <label for="twenty">20대</label>
               </div>
               <div>
-                <input type="radio" name="thirty" id="thirty" value="30" />
+                <input type="radio" name="age" id="thirty" value="30" v-model="condition.word3" />
                 <label for="thirty">30대</label>
               </div>
               <div>
-                <input type="radio" name="fourty" id="fourty" value="40" />
+                <input type="radio" name="age" id="fourty" value="40" v-model="condition.word3" />
                 <label for="fourty">40대</label>
               </div>
               <div>
-                <input type="radio" name="fifty" id="fifty" value="50" />
+                <input type="radio" name="age" id="fifty" value="50" v-model="condition.word3" />
                 <label for="fifty">50대 이상</label>
               </div>
             </div>
           </div>
         </div>
+        <!-- 검색 상세 필터 div 끝 -->
       </div>
       <!-- 질의응답 리스트 -->
       <QnAList @selectQuestion="handleSelectQuesion"/>
@@ -153,7 +169,9 @@ import QnACreate from "@/components/qna/QnACreate.vue";
 import QnAUpdate from "@/components/qna/QnAUpdate.vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useQnAStore } from "@/stores/qna";
 
+const store = useQnAStore();
 const router = useRouter();
 
 const filterCheckboxes = ref(false);
@@ -182,6 +200,29 @@ const createQnA = function () {
 
 const handleSearchOptionChange = (event) => {
   filterCheckboxes.value = event.target.value === "ON";
+};
+
+const condition = {
+  word1: "",
+  word2: "",
+  word3: "",
+  orderBy: "",
+}
+
+const clickSearch = function () {
+  const searchCondition = {
+    key: null,
+    word: null,
+    orderByDir: "asc",
+    level: condition.word1,
+    gender: condition.word2,
+    ageRange: condition.word3,
+    orderBy: condition.orderBy
+  }
+
+  console.log(searchCondition);
+
+  store.searchQuestionList(searchCondition);
 };
 
 </script>
@@ -239,6 +280,16 @@ const handleSearchOptionChange = (event) => {
   margin: 5px 10px;
   /* width: 350px; */
   width: 90%;
+}
+
+.qna-search button {
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.qna-search button:hover {
+  background-color: #ffa101;
 }
 
 .qna-search svg {

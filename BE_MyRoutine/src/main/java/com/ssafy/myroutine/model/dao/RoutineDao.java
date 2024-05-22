@@ -18,7 +18,9 @@ public interface RoutineDao {
 	int delete(int id);
 
 	// 루틴 조회
-	List<Routine> search(SearchCondition con);
+//	List<Routine> search(SearchCondition con);
+    List<Routine> search(String queryConditions, SearchCondition searchCondition);
+
 	
 	// 루틴 상세 조회
 	Routine searchById(int id);

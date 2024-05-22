@@ -17,7 +17,7 @@ public interface QuestionDao {
 	int delete(int id);
 
 	// 질문 검색 조회
-	List<Question> search(String queryConditions);
+	List<Question> search(String queryConditions, SearchCondition searchCondition);
 
 	// 질문 상세
 	Question searchById(int id);

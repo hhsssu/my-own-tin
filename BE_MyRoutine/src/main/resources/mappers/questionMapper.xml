@@ -29,15 +29,19 @@
 	</update>
 
 	<!-- 질문 검색 조회 -->
-	<select id="search" parameterType="SearchCondition" resultType="Question">
-		SELECT * FROM questions WHERE delete_at IS NULL
-		<if test="key != ''">
-			AND ${key} LIKE CONCAT('%', #{word}, '%')
-		</if>
-		<if
-			test="orderBy != ''">
-			ORDER BY ${orderBy} ${orderByDir}
-		</if>
+	<select id="search" parameterType="map" resultType="Question">
+	    SELECT q.* FROM questions q
+	    JOIN users u ON q.user_id = u.id
+	    WHERE q.delete_at IS NULL
+	    <if test="searchCondition.key != null and searchCondition.key != ''">
+	        AND ${searchCondition.key} LIKE CONCAT('%', #{searchCondition.word}, '%')
+	    </if>
+	    <if test="queryConditions != null and queryConditions != ''">
+	        AND ${queryConditions}
+	    </if>
+	    <if test="searchCondition.orderBy != null and searchCondition.orderBy != ''">
+	        ORDER BY ${searchCondition.orderBy} ${searchCondition.orderByDir}
+	    </if>
 	</select>
 
 	<!-- 질문 상세 조회 -->

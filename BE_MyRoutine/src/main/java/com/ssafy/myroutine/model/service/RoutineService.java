@@ -18,7 +18,7 @@ public interface RoutineService {
 	boolean removeRoutine(int id);
 
 	// 루틴 조회
-	List<Routine> searchRoutine(SearchCondition con);
+	List<Routine> searchRoutine(SearchCondition searchCondition);
 
 	// 루틴 상세
 	Routine getRoutine(int id);

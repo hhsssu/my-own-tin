@@ -5,16 +5,16 @@
 	<!-- 루틴 등록 -->
 	<insert id="insert" parameterType="Routine">
 		INSERT INTO routines (user_id, writer, part1, part2, title, content,
-		workout_time)
+		workout_time, routine_at)
 		VALUES (#{userId}, #{writer}, #{part1}, #{part2}, #{title}, #{content},
-		#{workoutTime})
+		#{workoutTime}, #{routineAt})
 	</insert>
 
 	<!-- 루틴 수정 -->
 	<update id="update" parameterType="Routine">
 		UPDATE routines
 		SET part1 = #{part1}, part2 = #{part2}, title = #{title}, content =
-		#{content}, workout_time = #{workoutTime}
+		#{content}, workout_time = #{workoutTime}, routine_at = #{routineAt}
 		WHERE id = #{id}
 	</update>
 
@@ -32,8 +32,9 @@
 
 
 	<!-- 루틴 조회 -->
-	<select id="search" parameterType="SearchCondition" resultType="Routine">
-		SELECT * FROM routines WHERE delete_at is null 
+	<!-- <select id="search" parameterType="SearchCondition"
+	resultType="Routine">
+		SELECT * FROM routines WHERE delete_at IS NULL
 		<if test="key != ''">
 			AND ${key} LIKE CONCAT('%', #{word}, '%')
 		</if>
@@ -41,8 +42,25 @@
 			test="orderBy != ''">
 			ORDER BY ${orderBy} ${orderByDir}
 		</if>
+	</select> -->
+
+	<!-- 루틴 조회 -->
+	<select id="search" parameterType="map" resultType="Routine">
+	    SELECT r.* FROM routines r
+	    JOIN users u ON r.user_id = u.id
+	    WHERE r.delete_at IS NULL
+	    <if test="searchCondition.key != null and searchCondition.key != ''">
+	        AND ${searchCondition.key} LIKE CONCAT('%', #{searchCondition.word}, '%')
+	    </if>
+	    <if test="queryConditions != null and queryConditions != ''">
+	        AND ${queryConditions}
+	    </if>
+	    <if test="searchCondition.orderBy != null and searchCondition.orderBy != ''">
+	        ORDER BY ${searchCondition.orderBy} ${searchCondition.orderByDir}
+	    </if>
 	</select>
-	
+
+
 	<select id="searchByUserId" parameterType="int" resultType="Routine">
 		SELECT * FROM routines
 		WHERE delete_at IS NULL AND user_id = #{userId} AND is_marked = 0

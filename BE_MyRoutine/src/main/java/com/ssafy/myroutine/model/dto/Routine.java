@@ -12,6 +12,7 @@ public class Routine {
 	private String content;
 	private int likeCnt;
 	private int workoutTime;
+	private Date routineAt;
 	private Date createAt;
 	private Date updateAt;
 	private Date deleteAt;
@@ -21,7 +22,7 @@ public class Routine {
 	}
 
 	public Routine(int userId, String writer, String part1, String part2, String title, String content, int likeCnt,
-			int workoutTime, boolean isMarked) {
+			int workoutTime, Date routineAt, boolean isMarked) {
 		this.userId = userId;
 		this.writer = writer;
 		this.part1 = part1;
@@ -30,6 +31,7 @@ public class Routine {
 		this.content = content;
 		this.likeCnt = likeCnt;
 		this.workoutTime = workoutTime;
+		this.routineAt = routineAt;
 		this.isMarked = isMarked;
 	}
 
@@ -105,6 +107,14 @@ public class Routine {
 		this.workoutTime = workoutTime;
 	}
 
+	public Date getRoutineAt() {
+		return routineAt;
+	}
+
+	public void setRoutineAt(Date routineAt) {
+		this.routineAt = routineAt;
+	}
+
 	public Date getCreateAt() {
 		return createAt;
 	}
@@ -141,8 +151,8 @@ public class Routine {
 	public String toString() {
 		return "Routine [id=" + id + ", userId=" + userId + ", writer=" + writer + ", part1=" + part1 + ", part2="
 				+ part2 + ", title=" + title + ", content=" + content + ", likeCnt=" + likeCnt + ", workoutTime="
-				+ workoutTime + ", createAt=" + createAt + ", updateAt=" + updateAt + ", deleteAt=" + deleteAt
-				+ ", isMarked=" + isMarked + "]";
+				+ workoutTime + ", routineAt=" + routineAt + ", createAt=" + createAt + ", updateAt=" + updateAt
+				+ ", deleteAt=" + deleteAt + ", isMarked=" + isMarked + "]";
 	}
 
 }

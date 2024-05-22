@@ -37,9 +37,10 @@ public class QuestionServiceImpl implements QuestionService {
 
 	// 질문 검색 조회
 	@Override
-    public List<Question> searchQuestions(String queryConditions) {
+    public List<Question> searchQuestions(SearchCondition searchCondition) {
+		String queryConditions = searchCondition.toQueryConditions();
         // 검색 조건에 따라 적절한 쿼리를 생성하여 DAO에 전달하여 검색
-        return questionDao.search(queryConditions);
+        return questionDao.search(queryConditions, searchCondition);
     }
 
 	// 질문 상세
