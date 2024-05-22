@@ -37,9 +37,14 @@
     </div>
     <div>
       <!-- 루틴 상세보기 -->
-      <div v-if="selectedRoutineId != null">
-        <RoutineDetail :routineId="selectedRoutineId" />
+      <div v-if="selectedRoutineId != null && !isUpdateRoutine">
+        <RoutineDetail :routineId="selectedRoutineId" @isUpdate="handleUpdateRoutine" />
       </div>
+      <!-- 루틴 수정하기 -->
+      <div v-else-if="selectedRoutineId == null && isUpdateRoutine">
+        <RoutineUpdate :routineId="selectedRoutineId" />
+      </div>
+      <!-- 루틴 등록하기 -->
       <div v-else>
         <RoutineCreate />
       </div>
@@ -51,6 +56,7 @@
 import RoutineDetail from "@/components/routine/RoutineDetail.vue";
 import RoutineList from "@/components/routine/RoutineList.vue";
 import RoutineCreate from "@/components/routine/RoutineCreate.vue";
+import RoutineUpdate from "@/components/routine/RoutineUpdate.vue";
 
 import { useRoutineStore } from "@/stores/routine";
 import { useUserStore } from "@/stores/user";
@@ -62,6 +68,7 @@ const userStore = useUserStore();
 const router = useRouter();
 
 const selectedRoutineId = ref(null);
+const isUpdateRoutine = ref(false);
 
 onMounted(() => {
   userStore.getLoginUser();
@@ -73,6 +80,14 @@ const handleSelectRoutine = (routineId) => {
   // console.log('Selected Routine ID:', routineId);
   selectedRoutineId.value = routineId;
 };
+
+const handleUpdateRoutine = (isUpdate) => {
+  if (isUpdate == true) {
+    selectedRoutineId.value = null;
+    isUpdateRoutine.value = true;
+    router.push({ name: 'routineUpdate' });
+  }
+}
 
 const createRoutine = function () {
   selectedRoutineId.value = null;

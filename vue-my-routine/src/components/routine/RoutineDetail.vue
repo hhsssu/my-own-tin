@@ -34,6 +34,8 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
 import { useRoutineStore } from "@/stores/routine";
+import { useRouter } from "vue-router";
+import axios from "axios";
 
 const props = defineProps({
   routineId: {
@@ -43,6 +45,7 @@ const props = defineProps({
 });
 
 const store = useRoutineStore();
+const router = useRouter()
 const routine = ref(null);
 
 const fetchRoutineDetail = async (id) => {
@@ -60,6 +63,19 @@ watch(
   { immediate: true }
 );
 
+const emits = defineEmits(['isUpdate']);
+
+const updateRoutine = function () {
+  emits("isUpdate", true);
+}
+
+const deleteRoutine = function () {
+  axios.put(`http://localhost:8080/myroutine/routine/delete?id=${store.routine.id}`)
+  .then(() => {
+    router.push({ name: 'routine' });
+  })
+};
+
 const clickForMarked = function () {
   // 추후 DB에서도 marked true(1) 로 바뀌도록
   routine.value.marked = true;
@@ -72,13 +88,6 @@ const clickForLike = function () {
   // console.log(routine.value.likeCnt);
 };
 
-const updateRoutine = function () {
-
-};
-
-const deleteRoutine = function () {
-
-};
 </script>
 
 <style scoped>
