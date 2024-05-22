@@ -87,11 +87,7 @@ public class RoutineController {
     @Operation(summary = "루틴 검색 조회", description = "루틴 검색 조회")
     public ResponseEntity<?> search(@RequestParam("level") String level, @RequestParam("gender") String gender, @RequestParam("ageRange") String ageRange, @RequestParam("orderBy") String orderBy) {
         SearchCondition searchCondition = new SearchCondition(level, gender, ageRange, orderBy);
-        // 확인용
-        System.out.println("controller: " + searchCondition.toString());
-
     	List<Routine> list = routineService.searchRoutine(searchCondition);
-        
         
         if (list == null || list.isEmpty())
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

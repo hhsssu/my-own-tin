@@ -30,13 +30,6 @@ const handleSelectRoutine = (routineId) => {
   emits("selectRoutineId", selectedRoutineId.value);
 };
 
-const con = ref({
-  key: "",
-  word: "",
-  orderBy: "",
-  orderByDir: "",
-});
-
 const isLoading = ref(false);
 
 onMounted(() => {
