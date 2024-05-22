@@ -24,7 +24,7 @@
                 <div>
                     <!-- 운동 부위 1 -->
                     <div>운동부위1</div>
-                    <select name="part1" id="part1" size="5" v-model="selectedOption1" @change="saveOption">
+                    <select name="part1" id="part1" size="5" v-model="selectedOption1">
                         <option value="null">선택안함</option>
                         <option value="유산소">유산소</option>
                         <option value="하체">하체</option>
@@ -38,7 +38,7 @@
                     <!-- 운동 부위 2 -->
                     <!-- 운동 부위 1을 선택해야 선택할 수 있도록 함(value != null) -->
                     <div>운동부위2</div>
-                    <select name="part2" id="part2" size="5" :disabled="isPart2Disabled" v-model="selectedOption2" @change="saveOption">
+                    <select name="part2" id="part2" size="5" :disabled="isPart2Disabled" v-model="selectedOption2">
                         <option value="null">선택안함</option>
                         <option value="유산소">유산소</option>
                         <option value="하체">하체</option>
@@ -51,7 +51,7 @@
                 <div>
                     <!-- 운동 시간 -->
                     <div>총 운동 시간</div>
-                    <select name="time" id="time" size="5" v-model="timeOption" @change="saveOption">
+                    <select name="time" id="time" size="5" v-model="timeOption">
                         <option value="0">선택안함</option>
                         <option value="10">10분</option>
                         <option value="20">20분</option>
@@ -100,9 +100,6 @@ watch(selectedOption1, (newValue) => {
     }
 });
 
-const saveOption = () => {
-    // 필요한 동작 수행
-};
 
 // 운동 부위, 시간 정보 수정
 const modifyExTag = () => {
