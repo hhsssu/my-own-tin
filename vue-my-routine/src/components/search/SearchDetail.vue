@@ -24,6 +24,8 @@
 <script setup>
 import { ref, watch, defineProps, isMemoSame } from "vue";
 import { useRoutineStore } from "@/stores/routine";
+import axios from "axios";
+import { useRouter } from "vue-router";
 
 const props = defineProps({
   routineId: {
@@ -33,6 +35,7 @@ const props = defineProps({
 });
 
 const store = useRoutineStore();
+const router = useRouter();
 const routine = ref(null);
 
 const fetchRoutineDetail = async (id) => {
@@ -52,17 +55,26 @@ watch(
 
 const createBookmark = function () {
   store.getRoutine(props.routineId);
-  const loginUser = JSON.parse(sessionStorage.getItem('user'));
+  const loginUser = JSON.parse(sessionStorage.getItem("user"));
   // console.log(loginUserId);
-  const newRoutine = {...store.routine, isMarked: 1, userId: loginUser.id, writer: loginUser.nickname };
+  const newRoutine = {
+    ...store.routine,
+    isMarked: 1,
+    userId: loginUser.id,
+    writer: loginUser.nickname,
+  };
   store.createRoutine(newRoutine);
-  alert('북마크에 추가되었습니다!');
-}
+  alert("북마크에 추가되었습니다!");
+};
 
 const clickForLike = function () {
-
-}
-
+  axios
+    .put(`http://localhost:8080/myroutine/routine/like?id=${props.routineId}`)
+    .then(() => {
+      alert("좋아요를 눌렀습니다!");
+      router.push({ name: "search" });
+    });
+};
 </script>
 
 <style scoped>
