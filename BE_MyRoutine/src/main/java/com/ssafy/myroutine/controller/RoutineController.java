@@ -138,7 +138,14 @@ public class RoutineController {
 		List<Routine> routines = routineService.findByDate(date, userId);
         return new ResponseEntity<>(routines, HttpStatus.OK);
 	}
-		
+	
+	// 좋아요 수 증가
+	@PutMapping("/like")
+	@Operation(summary = "좋아요 수 증가", description = "좋아요 수 증가 기능")
+	public ResponseEntity<?> like(@RequestParam("id") int id) {
+		int result = routineService.updateLikeCnt(id);
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
 	
 
 }

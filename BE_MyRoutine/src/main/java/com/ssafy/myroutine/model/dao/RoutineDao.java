@@ -21,7 +21,6 @@ public interface RoutineDao {
 //	List<Routine> search(SearchCondition con);
     List<Routine> search(String queryConditions, SearchCondition searchCondition);
 
-	
 	// 루틴 상세 조회
 	Routine searchById(int id);
 	
@@ -36,4 +35,7 @@ public interface RoutineDao {
 	
 	// 날짜와 사용자 ID에 따른 루틴 조회
     List<Routine> findByDateAndUserId(Map<String, Object> params);
+    
+    // 좋아요 수 증가
+    int updateLikeCnt(int id);
 }

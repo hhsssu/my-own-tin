@@ -84,9 +84,11 @@ const createMarkedRoutine = () => {
 };
 
 const clickForLike = function () {
-  // 추후 DB에서도 likcCnt + 1 되도록
-  routine.value.likeCnt = routine.value.likeCnt + 1;
-  // console.log(routine.value.likeCnt);
+  axios.put(`http://localhost:8080/myroutine/routine/like?id=${props.routineId}`)
+  .then(() => {
+    alert('좋아요를 눌렀습니다!');
+    router.push({ name: 'routine' })
+  })
 };
 
 </script>

@@ -45,19 +45,21 @@
 	</select> -->
 
 	<!-- 루틴 조회 -->
-	<select id="search" parameterType="map" resultType="Routine">
-	    SELECT r.* FROM routines r
-	    JOIN users u ON r.user_id = u.id
-	    WHERE r.delete_at IS NULL
-	    <if test="searchCondition.key != null and searchCondition.key != ''">
-	        AND ${searchCondition.key} LIKE CONCAT('%', #{searchCondition.word}, '%')
-	    </if>
-	    <if test="queryConditions != null and queryConditions != ''">
-	        AND ${queryConditions}
-	    </if>
-	    <if test="searchCondition.orderBy != null and searchCondition.orderBy != ''">
-	        ORDER BY ${searchCondition.orderBy} ${searchCondition.orderByDir}
-	    </if>
+	<select id="search" parameterType="map" resultType="Routine"> SELECT r.*
+		FROM routines r JOIN users u ON r.user_id = u.id WHERE r.delete_at IS
+		NULL <if
+			test="searchCondition.key != null and searchCondition.key != ''">
+			AND ${searchCondition.key} LIKE CONCAT('%', #{searchCondition.word},
+		'%')
+		</if>
+	    <if
+			test="queryConditions != null and queryConditions != ''">
+			AND ${queryConditions}
+		</if>
+	    <if
+			test="searchCondition.orderBy != null and searchCondition.orderBy != ''">
+		ORDER BY ${searchCondition.orderBy} ${searchCondition.orderByDir}
+		</if>
 	</select>
 
 
@@ -88,5 +90,13 @@
 		IS
 		NULL
 	</select>
+
+	<!-- 조회수 증가 -->
+	<update id="updateLikeCnt" parameterType="int">
+		UPDATE routines
+		SET
+		like_cnt = like_cnt + 1
+		WHERE id = #{id};
+	</update>
 
 </mapper>
