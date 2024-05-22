@@ -70,6 +70,7 @@
         <div class="mypage-click-container">
             <!-- 프로필 페이지에 있는 메뉴들 클릭 시 띄울 화면 구현 -->
             <component :is="activeComponent" :mile-total="mileTotal" :point-total="pointTotal"/>
+            <MypageModifyProfile />
         </div>
     </div>
 </template>
