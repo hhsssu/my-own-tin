@@ -20,10 +20,10 @@
         </div>
         <div class="profile-click-box content-box">
             <div class="profile-title">운동 정보 태그 설정</div>
-            <div class="flex-box">
+            <div class="flex-box flex-justify-content">
                 <div>
                     <!-- 운동 부위 1 -->
-                    <div>운동부위1</div>
+                    <div class="bold-title">운동부위1</div>
                     <select name="part1" id="part1" size="5" v-model="selectedOption1">
                         <option value="null">선택안함</option>
                         <option value="유산소">유산소</option>
@@ -37,7 +37,7 @@
                 <div>
                     <!-- 운동 부위 2 -->
                     <!-- 운동 부위 1을 선택해야 선택할 수 있도록 함(value != null) -->
-                    <div>운동부위2</div>
+                    <div class="bold-title">운동부위2</div>
                     <select name="part2" id="part2" size="5" :disabled="isPart2Disabled" v-model="selectedOption2">
                         <option value="null">선택안함</option>
                         <option value="유산소">유산소</option>
@@ -50,7 +50,7 @@
                 </div>
                 <div>
                     <!-- 운동 시간 -->
-                    <div>총 운동 시간</div>
+                    <div class="bold-title">총 운동 시간</div>
                     <select name="time" id="time" size="5" v-model="timeOption">
                         <option value="0">선택안함</option>
                         <option value="10">10분</option>
@@ -141,4 +141,15 @@ const modifyExTag = () => {
     color: #777;
     margin-bottom: 15px;
 }
+
+.flex-justify-content {
+    justify-content: space-around;
+}
+
+.bold-title {
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
 </style>

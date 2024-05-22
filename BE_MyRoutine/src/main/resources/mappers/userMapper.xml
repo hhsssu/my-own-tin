@@ -17,7 +17,7 @@
 	<select id="selectOne" parameterType="Map" resultType="User">
 		SELECT *
 		FROM users
-		WHERE email = #{email} AND password = #{password}
+		WHERE email = #{email} AND password = #{password} AND delete_at is null
 	</select>
 
 	<!-- 사용자 정보 수정 -->
@@ -49,6 +49,7 @@
 		SELECT *
 		FROM users
 		WHERE id = #{id}
+		AND delete_at is null
 	</select>
 
 	<!-- email 조회 -->

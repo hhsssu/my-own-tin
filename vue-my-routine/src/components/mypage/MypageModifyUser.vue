@@ -113,7 +113,7 @@ const deleteUser = () => {
     color: #777;
     width: 50%;
     text-decoration: none;
-    font-size: 0.9em;
+    font-size: 0.9rem;
     text-align: center;
     margin: 170px auto;
 }
@@ -124,7 +124,7 @@ const deleteUser = () => {
 
 /* input의 label 부분 */
 .input-label {
-    font-size: 1em;
+    font-size: 1rem;
     font-weight: 600;
     margin: 0 30px 50px 0;
 }
@@ -135,7 +135,7 @@ const deleteUser = () => {
     padding: 10px 45px;
     border: none;
     border-bottom: 1px solid #999;
-    font-size: 1em;
+    font-size: 1rem;
 }
 
 /* 이메일 input 부분(readonly) */
@@ -149,7 +149,7 @@ const deleteUser = () => {
 /* 셀렉트 라벨 */
 label {
     font-weight: 600;
-    font-size: 1em;
+    font-size: 1rem;
     margin: 0 120px 50px 0;
 }
 
@@ -161,7 +161,7 @@ label {
 /* 수정 완료 버튼 */
 .modify-fin-btn {
     border: none;
-    font-size: 1.1em;
+    font-size: 1.1rem;
     font-weight: 600;
     background-color: #31525B;
     color: #fff;

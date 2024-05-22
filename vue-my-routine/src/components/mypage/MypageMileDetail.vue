@@ -76,7 +76,7 @@ onMounted(() => {
     margin: 0 15px 30px;
     font-weight: 600;
     color: #555;
-    font-size: 1.1em;
+    font-size: 1.1rem;
 }
 
 /* 포인트 상세 내역 테이블 */
@@ -88,7 +88,7 @@ onMounted(() => {
 /* 테이블 헤더 */
 .point-detail-table-header {
     font-weight: 600;
-    font-size: 1.1em;
+    font-size: 1.1rem;
     border-bottom: 1px solid #999;
 }
 

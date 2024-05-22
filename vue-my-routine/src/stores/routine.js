@@ -57,8 +57,14 @@ export const useRoutineStore = defineStore('routine', () => {
         userId: userId,
       }
     })
-      .then((response) => {
-        routineList.value = response.data
+    .then((response) => {
+      routineList.value = response.data;
+        routineList.value.forEach((routine) => {
+          getUserDetails(routine, 'routine');
+        })
+    })
+    .catch((error) => {
+        console.log(error);
       })
   }
 
