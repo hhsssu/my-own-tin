@@ -2,7 +2,7 @@
   <div class="qna-list-container">
     <!-- 질문 목록 본문 -->
     <!-- 질문 카드 -->
-    <div class="qna-list-card" v-for="qna in store.qnaList" :key="qna.id" @click="setSelectedQnA(qna)">
+    <div class="qna-list-card" v-for="qna in store.qnaList" :key="qna.id" @click="handleClick(qna)">
       <!-- 상단 작성자 프로필 -->
       <div class="qna-list-card-profile">
         <!-- 작성자 프로필 사진 -->
@@ -19,7 +19,7 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, defineEmits } from "vue";
 import { useQnAStore } from "@/stores/qna";
 
 const store = useQnAStore();
@@ -35,30 +35,13 @@ const searchCondition = ref({
   orderByDir: ''
 });
 
-const createQnA = function () {
-  showQnADetail.value = false;
-  showQnACreate.value = true;
-  router.push({ name: "qnaCreate" });
-};
+const emits = defineEmits(["selectQuestion"]);
 
-// const fetchDetails = async () => {
-//     await store.getQnAList(searchCondition.value);
-// };
-
-const setSelectedQnA = function (qna) {
-  sessionStorage.setItem('selectedQnA', JSON.stringify(qna));
-  // console.log(qna);
+const handleClick = function (qna) {
+  emits("selectQuestion", qna.id);
 }
 
 onMounted(() => {
-  if (sessionStorage.getItem("selectedQnA")) {
-    showQnACreate.value = false;
-    showQnADetail.value = true;
-  } else {
-    showQnACreate.value = false;
-    showQnADetail.value = false;
-  }
-
   store.getQnAList(searchCondition.value);
 });
 </script>

@@ -30,9 +30,9 @@
 
 	<!-- 질문 검색 조회 -->
 	<select id="search" parameterType="SearchCondition" resultType="Question">
-		SELECT * FROM questions 
+		SELECT * FROM questions WHERE delete_at IS NULL
 		<if test="key != ''">
-			WHERE ${key} LIKE CONCAT('%', #{word}, '%')
+			AND ${key} LIKE CONCAT('%', #{word}, '%')
 		</if>
 		<if
 			test="orderBy != ''">
@@ -44,7 +44,7 @@
 	<select id="searchById" parameterType="int" resultType="Question">
 		SELECT *
 		FROM questions
-		WHERE id = #{id}
+		WHERE id = #{id} AND delete_at IS NULL
 	</select>
 
 	<!-- 조회수 증가 -->
