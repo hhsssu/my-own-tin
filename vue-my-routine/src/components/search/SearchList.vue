@@ -37,12 +37,19 @@ const con = ref({
   orderByDir: "",
 });
 
-const isLoading = ref(true);
+const isLoading = ref(false);
 
 onMounted(() => {
-  store.searchRoutineList(con.value).then(() => {
-    isLoading.value = false;
-  });
+ if (store.routineList.length == 0) {
+  const searchCondition = {
+    level: "",
+    gender: "",
+    ageRange: "",
+    orderBy: ""
+  }
+  store.searchRoutineList(searchCondition);
+ }
+ 
 });
 
 // watch 사용하여 routineList 변경 감지

@@ -62,12 +62,12 @@
                 <label for="level4">Lv 4</label>
               </div>
               <div>
-                <input type="radio" name="level5" id="level5" value="Lv 5" />
+                <input type="radio" name="level5" id="level5" value="5" />
                 <label for="level5">Lv 5</label>
               </div>
               <div>
-                <input type="radio" name="level6" id="level6" value="Lv 6" />
-                <label for="level-6">Lv 6</label>
+                <input type="radio" name="level6" id="level6" value="6" />
+                <label for="level6">Lv 6</label>
               </div>
             </div>
             <div>
@@ -90,11 +90,11 @@
                 <label for="total-gender">전체</label>
               </div>
               <div>
-                <input type="radio" name="male" id="male" value="male" />
+                <input type="radio" name="male" id="male" value="남성" />
                 <label for="male">남성</label>
               </div>
               <div>
-                <input type="radio" name="female" id="female" value="female" />
+                <input type="radio" name="female" id="female" value="여성" />
                 <label for="female">여성</label>
               </div>
             </div>
