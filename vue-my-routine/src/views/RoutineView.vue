@@ -23,6 +23,10 @@
             <div class="profile-hashtag">#헬스장</div>
           </div>
         </div>
+        <!-- 루틴 등록하기 버튼 -->
+        <div>
+          <button @click="createRoutine">등록하기</button>
+        </div>
       </div>
       <!-- 루틴 리스트 -->
       <RoutineList
@@ -33,11 +37,11 @@
     </div>
     <div>
       <!-- 루틴 상세보기 -->
-      <div v-if="selectedRoutineId">
+      <div v-if="selectedRoutineId != null">
         <RoutineDetail :routineId="selectedRoutineId" />
       </div>
       <div v-else>
-        <!-- <RoutineCreate /> -->
+        <RoutineCreate />
       </div>
     </div>
   </div>
@@ -51,9 +55,11 @@ import RoutineCreate from "@/components/routine/RoutineCreate.vue";
 import { useRoutineStore } from "@/stores/routine";
 import { useUserStore } from "@/stores/user";
 import { ref, onMounted, computed, watch } from "vue";
+import { useRouter } from "vue-router";
 
 const store = useRoutineStore();
 const userStore = useUserStore();
+const router = useRouter();
 
 const selectedRoutineId = ref(null);
 
@@ -67,6 +73,11 @@ const handleSelectRoutine = (routineId) => {
   // console.log('Selected Routine ID:', routineId);
   selectedRoutineId.value = routineId;
 };
+
+const createRoutine = function () {
+  selectedRoutineId.value = null;
+  router.push({ name: 'routineCreate'});
+}
 </script>
 
 <style scoped>
