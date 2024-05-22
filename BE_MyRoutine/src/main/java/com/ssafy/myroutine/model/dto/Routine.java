@@ -16,13 +16,13 @@ public class Routine {
 	private Date createAt;
 	private Date updateAt;
 	private Date deleteAt;
-	private boolean isMarked;
+	private int isMarked;
 
 	public Routine() {
 	}
 
 	public Routine(int userId, String writer, String part1, String part2, String title, String content, int likeCnt,
-			int workoutTime, Date routineAt, boolean isMarked) {
+			int workoutTime, Date routineAt, int isMarked) {
 		this.userId = userId;
 		this.writer = writer;
 		this.part1 = part1;
@@ -139,11 +139,11 @@ public class Routine {
 		this.deleteAt = deleteAt;
 	}
 
-	public boolean isMarked() {
+	public int getIsMarked() {
 		return isMarked;
 	}
 
-	public void setMarked(boolean isMarked) {
+	public void setIsMarked(int isMarked) {
 		this.isMarked = isMarked;
 	}
 
