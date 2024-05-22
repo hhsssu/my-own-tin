@@ -58,7 +58,7 @@ const logout = function() {
 a, .logout-btn {
     text-decoration: none;
     color: #777;
-    font-size: 1em;
+    font-size: 1rem;
 }
 
 /* 로그아웃 커서 모양 변경 */

@@ -124,7 +124,7 @@ public class RoutineController {
 	// 만약 search 메서드로 가능하다면 사용 X
 	@GetMapping("/marked")
 	@Operation(summary = "나의 루틴 보관함", description = "마이페이지 내 나의 보관함 불러오기")
-	public ResponseEntity<?> getMarked(@RequestParam int userId) {
+	public ResponseEntity<?> getMarked(@RequestParam("userId") int userId) {
 		List<Routine> list = routineService.searchRoutineMarked(userId);
 		if (list == null || list.size() == 0)
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

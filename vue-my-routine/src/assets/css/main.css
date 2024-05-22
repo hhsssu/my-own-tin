@@ -1,9 +1,8 @@
 @import "./reset.css";
 @import "./font.css";
 
-
 .view-title {
-    font-size: 2em;
+    font-size: 2rem;
     font-weight: 700;
     text-align: center;
     color: #31525B;
@@ -35,7 +34,6 @@
 }
 
 select {
-    margin-right: 15px;
     padding: 5px 10px;
     border: 1px solid #999;
     border-radius: 3px;

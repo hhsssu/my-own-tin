@@ -136,7 +136,7 @@ const workoutTimeFormat = (workoutTime) => {
 }
 
 const loadData = async () => {
-    await routineStore.getRoutineList(user.id);
+    await routineStore.getMarkedList(user.id);
     await pointmileStore.getPointTotal(user.id);
     await pointmileStore.getMileTotal(user.id);
 }

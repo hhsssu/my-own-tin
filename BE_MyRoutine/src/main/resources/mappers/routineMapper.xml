@@ -63,7 +63,7 @@
 
 	<select id="searchByUserId" parameterType="int" resultType="Routine">
 		SELECT * FROM routines
-		WHERE delete_at IS NULL AND user_id = #{userId}
+		WHERE delete_at IS NULL AND user_id = #{userId} AND is_marked = 0
 	</select>
 
 	<!-- 루틴 상세 조회 -->
@@ -77,16 +77,16 @@
 	<select id="searchMarked" parameterType="int" resultType="Routine">
 		SELECT *
 		FROM routines
-		WHERE routine_id = #{id} AND is_marked = 1 AND delete_at is null
+		WHERE user_id = #{userId} AND is_marked = 1 AND delete_at is null
 	</select>
 
 	<!-- 특정 날짜와 사용자 ID에 따른 루틴 조회 -->
 	<select id="findByDateAndUserId" parameterType="map" resultType="Routine">
 		SELECT *
 		FROM routines
-		WHERE DATE(routine_at) = #{date} AND user_id = #{userId} AND delete_at
-		IS
-		NULL
+		WHERE DATE(create_at) = #{date} AND user_id = #{userId} 
+		AND delete_at IS NULL
+		AND is_marked = 0
 	</select>
 
 </mapper>
