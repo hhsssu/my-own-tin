@@ -2,7 +2,12 @@
   <div class="qna-list-container">
     <!-- 질문 목록 본문 -->
     <!-- 질문 카드 -->
-    <div class="qna-list-card" v-for="qna in store.qnaList" :key="qna.id" @click="handleClick(qna)">
+    <div
+      class="qna-list-card"
+      v-for="qna in store.qnaList"
+      :key="qna.id"
+      @click="handleClick(qna)"
+    >
       <!-- 상단 작성자 프로필 -->
       <div class="qna-list-card-profile">
         <!-- 작성자 프로필 사진 -->
@@ -29,20 +34,30 @@ const showQnADetail = ref(false);
 const showQnACreate = ref(false);
 
 const searchCondition = ref({
-  key: '',
-  word: '',
-  orderBy: '',
-  orderByDir: ''
+  key: "",
+  word: "",
+  orderBy: "",
+  orderByDir: "",
 });
 
 const emits = defineEmits(["selectQuestion"]);
 
 const handleClick = function (qna) {
   emits("selectQuestion", qna.id);
-}
+};
 
 onMounted(() => {
-  store.getQnAList(searchCondition.value);
+  if (store.qnaList.length == 0) {
+    const searchCondition = {
+      level: "",
+      gender: "",
+      ageRange: "",
+      orderBy: "",
+    };
+    store.searchQuestionList(searchCondition);
+  }
+
+  // store.getQnAList(searchCondition.value);
 });
 </script>
 
