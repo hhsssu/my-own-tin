@@ -5,9 +5,9 @@
 	<!-- 루틴 등록 -->
 	<insert id="insert" parameterType="Routine">
 		INSERT INTO routines (user_id, writer, part1, part2, title, content,
-		workout_time, routine_at)
+		workout_time, routine_at, is_marked)
 		VALUES (#{userId}, #{writer}, #{part1}, #{part2}, #{title}, #{content},
-		#{workoutTime}, #{routineAt})
+		#{workoutTime}, #{routineAt}, #{isMarked})
 	</insert>
 
 	<!-- 루틴 수정 -->

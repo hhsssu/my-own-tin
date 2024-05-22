@@ -34,7 +34,6 @@ export const useRoutineStore = defineStore('routine', () => {
       })
   }
 
-
   // 루틴 목록 불러오기 (내 루틴)
   const getRoutineList = function (userId) {
     axios.get(`${REST_ROUTINE_API}/mine`, {
@@ -169,6 +168,6 @@ export const useRoutineStore = defineStore('routine', () => {
     searchRoutineList,
     updateRoutine,
     deleteRoutine,
-    getUserDetails
+    getUserDetails,
   }
 })
