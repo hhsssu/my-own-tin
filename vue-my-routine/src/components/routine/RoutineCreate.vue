@@ -7,7 +7,7 @@
     </div>
     <!-- 루틴 날짜 (생성날짜 X) -->
     <div class="routine-create-date">
-      <label for="date">날짜</label>
+      <label for="routineAt">날짜</label>
     </div>
     <!-- 운동 부위 -->
     <div class="routine-create-part">
@@ -48,7 +48,7 @@ const routine = {
   userId: "",
   title: "",
   writer: "",
-  // date: "",
+  routineAt: "",
   part1: "",
   part2: "",
   workoutTime: "",

@@ -5,9 +5,9 @@
 	<!-- 루틴 등록 -->
 	<insert id="insert" parameterType="Routine">
 		INSERT INTO routines (user_id, writer, part1, part2, title, content,
-		workout_time)
+		workout_time, routine_at)
 		VALUES (#{userId}, #{writer}, #{part1}, #{part2}, #{title}, #{content},
-		#{workoutTime})
+		#{workoutTime}, #{routineAt})
 	</insert>
 
 	<!-- 루틴 수정 -->
@@ -66,7 +66,7 @@
 	<select id="findByDateAndUserId" parameterType="map" resultType="Routine">
 		SELECT *
 		FROM routines
-		WHERE DATE(create_at) = #{date} AND user_id = #{userId} AND delete_at IS
+		WHERE DATE(routine_at) = #{date} AND user_id = #{userId} AND delete_at IS
 		NULL
 	</select>
 
