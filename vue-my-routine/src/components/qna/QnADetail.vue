@@ -2,7 +2,7 @@
   <div class="qna-detail-container" v-if="question">
     <!-- 작성자 프로필 -->
     <div class="qna-detail-profile">
-      <img src="/src/assets/img/profile_male.png" class="qna-detail-profile-pic" />
+      <img src="/src/assets/img/profile.png" class="qna-detail-profile-pic" />
       <div class="qna-detail-profile-name">{{ question.writer }}</div>
       <div class="routine-tag">Lv.{{ question.userLevel }}</div>
       <div class="routine-user-tag">{{ question.userAge }}</div>
@@ -28,8 +28,8 @@
       </div>
       <!-- 로그인된 유저가 작성자일 경우, 수정 / 삭제 버튼 활성화 -->
       <div v-if="checkWriter(question.userId)">
-        <button @click="updateQuestion">수정</button>
-        <button @click="deleteQuestion">삭제</button>
+        <button @click="updateQuestion" class="mp-create-btn">수정</button>
+        <button @click="deleteQuestion" class="mp-create-btn">삭제</button>
       </div>
     </div>
 
@@ -199,5 +199,15 @@ const workoutTimeFormat = (workoutTime) => {
 
 .qna-detail-routine-content {
   padding: 0px 0px 10px 0;
+}
+
+.mp-create-btn {
+  margin-right: 10px;
+  margin-bottom: 15px;
+  border: none;
+  background-color: #999;
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 3px;
 }
 </style>

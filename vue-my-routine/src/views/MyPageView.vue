@@ -17,6 +17,7 @@
                     <!-- 프로필 해시태그(성격) 표시 부분 -->
                     <div class="flex-box">
                         <div class="routine-tag profile-hashtag" v-if="user.character1 !== null">#{{ user.character1 }}</div>
+                        <div style="font-size: 0.8rem; color: #999;" v-else>태그를 추가해보세요!</div>
                         <div class="routine-tag profile-hashtag" v-if="user.character2 !== null">#{{ user.character2 }}</div>
                         <div class="routine-tag profile-hashtag" v-if="user.character3 !== null">#{{ user.character3 }}</div>
                     </div>

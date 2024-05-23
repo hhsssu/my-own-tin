@@ -131,7 +131,7 @@
         <!-- 검색 상세 필터 div 끝 -->
       </div>
       <!-- 질문 등록 버튼 -->
-      <button class="qna-create-button" @click="createQnA">질문 등록</button>
+        <div class="qna-create-button" @click="createQnA">나도 질문하기 +</div>
       <!-- 질의응답 리스트 -->
       <QnAList @selectQuestion="handleSelectQuesion"/>
     </div>
@@ -236,17 +236,22 @@ const clickSearch = function () {
 }
 
 .qna-create-button {
-  font-size: 1em;
+  font-size: 1.1rem;
   color: white;
-  background-color: #ffa101;
+  background-color: #777;
   border: none;
   border-radius: 5px;
-  padding: 5px 15px;
+  padding: 10px 15px;
+  margin: 20px auto 0;
+  width: 110px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
 }
 
 /* 버튼에 마우스 커서 올렸을 시 */
 .qna-create-button:hover {
-  background-color: gray;
+  background-color: #ffa101;
 }
 
 .qna-search {

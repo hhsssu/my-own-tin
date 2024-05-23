@@ -23,7 +23,9 @@
     <!-- 버튼 -->
     <div class="search-detail-buttons">
       <button @click="createBookmark">담기</button>
-      <button @click="clickForLike">좋아요</button>
+      <button @click="clickForLike">좋아요 <span style="color: red;">
+          {{ routine.likeCnt }}
+        </span></button>
     </div>
   </div>
 </template>
@@ -141,9 +143,9 @@ function formatDate(dateString) {
 .search-detail-buttons button {
   margin: 10px;
   padding: 10px 20px;
-  font-size: 1.3em;
-  width: 100px;
+  font-size: 1rem;
   border-radius: 5px;
   border: 1px solid black;
+  font-weight: 600;
 }
 </style>
