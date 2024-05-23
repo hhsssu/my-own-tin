@@ -9,7 +9,7 @@
                 <div>
                     <img src="@/assets/img/icon/free-icon-cross-11122367.png" alt="보관한 루틴 삭제버튼"
                         class="img-delete-btn"
-                        @click="deleteRoutine">
+                        @click="deleteRoutine(routine.id)">
                 </div>
                 </div>
                 <div class="flex-box">
@@ -56,8 +56,9 @@ const workoutTimeFormat = (workoutTime) => {
     return workout.trim();
 }
 
-const deleteRoutine = function () {
-  axios.put(`http://localhost:8080/myroutine/routine/delete?id=${store.routineList.id}`)
+const deleteRoutine = function (routineId) {
+    console.log(routineId);
+  axios.put(`http://localhost:8080/myroutine/routine/delete?id=${routineId}`)
   .then(() => {
     alert('삭제되었습니다!');
     router.go(0);

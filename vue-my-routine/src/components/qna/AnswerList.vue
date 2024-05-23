@@ -19,7 +19,7 @@
           <div class="routine-user-tag">{{ ans.userAge }}</div>
           <div class="routine-user-tag">남성</div>
           <!-- 답변 채택 버튼 (질문 작성자에게만 보임) -->
-          <div v-if="checkQueWriter(ans)" @click="pickAnswer(ans)">작성자</div>
+          <button v-if="checkQueWriter(ans)" @click="pickAnswer(ans)">채택</button>
           <!-- 답변 삭제 버튼 (답변 작성자에게만 보임) -->
           <div v-else-if="checkAnsWriter(ans.userId)" @click="deleteAnswer(ans)">
             답변 작성자
