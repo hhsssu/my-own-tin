@@ -16,9 +16,9 @@
                     </div>
                     <!-- 프로필 해시태그(성격) 표시 부분 -->
                     <div class="flex-box">
-                        <div class="routine-tag profile-hashtag">#체력UP</div>
-                        <div class="routine-tag profile-hashtag">#활발한</div>
-                        <div class="routine-tag profile-hashtag">#헬스장</div>
+                        <div class="routine-tag profile-hashtag" v-if="user.character1 !== null">#{{ user.character1 }}</div>
+                        <div class="routine-tag profile-hashtag" v-if="user.character2 !== null">#{{ user.character2 }}</div>
+                        <div class="routine-tag profile-hashtag" v-if="user.character3 !== null">#{{ user.character3 }}</div>
                     </div>
                 </div>
             </div>

@@ -126,7 +126,7 @@ export const useQnAStore = defineStore('qna', () => {
                 data: question
             });
 
-            router.go({ name: 'qnaList' });
+            router.go(-1);
         } catch (error) {
             console.error(error);
         }

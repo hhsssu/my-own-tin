@@ -4,8 +4,15 @@
         <!-- 나의 루틴 태그 영역 -->
         <!-- <div v-for="routine in store.routineList" :key="routine.id"> -->
             <section class="profile-click-box content-box" v-for="routine in store.routineList" :key="routine.id">
+                <div class="flex-box flex-space-between">
+                <div class="routine-title">{{ routine.title }}</div>
+                <div>
+                    <img src="@/assets/img/icon/free-icon-cross-11122367.png" alt="보관한 루틴 삭제버튼"
+                        class="img-delete-btn"
+                        @click="deleteRoutine">
+                </div>
+                </div>
                 <div class="flex-box">
-                    <div class="routine-title">{{ routine.title }}</div>
                     <div class="routine-user-tag">{{ routine.userAge }}</div>
                     <div class="routine-user-tag">{{ routine.userGender }}</div>
                     <div class="routine-tag">{{ routine.part1 }}</div>
@@ -26,10 +33,11 @@
 // 담아둔 루틴 보여주기
 import { useRoutineStore } from "@/stores/routine";
 import { onMounted } from "vue";
-import { useRoute } from "vue-router";
+import axios from "axios";
+import { useRouter } from "vue-router";
 
 const store = useRoutineStore();
-const route = useRoute();
+const router = useRouter();
 const user = JSON.parse(sessionStorage.getItem('user'));
 
 // 운동 시간 태그 (30 -> 30분, 60 -> 1시간, 90 -> 1시간30분)
@@ -48,6 +56,14 @@ const workoutTimeFormat = (workoutTime) => {
     return workout.trim();
 }
 
+const deleteRoutine = function () {
+  axios.put(`http://localhost:8080/myroutine/routine/delete?id=${store.routineList.id}`)
+  .then(() => {
+    alert('삭제되었습니다!');
+    router.go(0);
+  })
+};
+
 // 보관함에 담은 것만 뽑아내기 (user marked)
 onMounted(() => {
     store.getMarkedList(user.id);
@@ -63,5 +79,9 @@ onMounted(() => {
     font-size: 1.2rem;
     margin-bottom: 20px;
     margin-right: 15px;
+}
+
+.content-box {
+    cursor: default;
 }
 </style>
