@@ -14,7 +14,7 @@
     <div class="routine-create-part">
       <label for="part">운동 부위</label>
       <div class="flex-box">
-        <div>
+        <div style="margin-right: 20px">
           <!-- 운동 부위 1 -->
           <select name="part1" id="part1" size="3" v-model="selectedOption1">
             <option value="" disabled selected>운동부위1</option>
@@ -62,7 +62,6 @@
     <div class="routine-create-workoutTime">
       <label for="workoutTime">운동 시간</label>
       <select name="time" id="time" size="3" v-model="timeOption">
-        <option value="0">선택안함</option>
         <option value="10">10분</option>
         <option value="20">20분</option>
         <option value="30">30분</option>
@@ -139,6 +138,7 @@ const confirmCreate = function () {
   routine.part1 = selectedOption1.value;
   routine.part2 = selectedOption2.value;
 
+
   if (timeOption.value === "0") {
     routine.workoutTime = null;
   } else {
@@ -190,6 +190,7 @@ const cancelCreate = function () {};
 .routine-create-title label,
 .routine-create-part label,
 .routine-create-date label,
+.routine-create-workoutTime label,
 .routine-create-content label {
   margin-right: 30px;
   /* width: 200px; */
@@ -225,7 +226,8 @@ const cancelCreate = function () {};
   width: 400px;
 }
 
-.routine-create-content label {
+.routine-create-content label,
+.routine-create-workoutTime label  {
   vertical-align: top;
 }
 

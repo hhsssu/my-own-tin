@@ -3,6 +3,8 @@
   <div class="mypage-container">
     <!-- 마이페이지 왼쪽 프로필 부분 -->
     <div class="mypage-profile-container">
+      <div class="flex-box flex-space-between">
+
       <div class="flex-box" v-if="loginUser">
         <!-- 프로필 이미지 -->
         <img
@@ -24,8 +26,9 @@
           </div>
         </div>
         <!-- 루틴 등록하기 버튼 -->
+      </div>
         <div>
-          <button @click="createRoutine">등록하기</button>
+          <button @click="createRoutine" class="create-btn"><img src="@/assets/img/plus.png"></button>
         </div>
       </div>
       <!-- 루틴 리스트 -->
@@ -92,7 +95,6 @@ const handleUpdateRoutine = (isUpdate) => {
 // 루틴 등록하는 컴포넌트로 이동
 const createRoutine = function () {
   selectedRoutineId.value = null;
-  console.log(loginUser.character1);
   router.push({ name: 'routineCreate'});
 }
 </script>
@@ -107,14 +109,22 @@ const createRoutine = function () {
   font-family: "Pretendard";
 }
 
-
-
 /* 마이페이지 프로필 부분 */
 .mypage-profile-container {
   width: 50%;
   /* background-color: rgb(255, 235, 251); */
   border-right: 1px solid #ccc;
   padding-top: 30px;
+}
+
+.create-btn {
+  background-color: transparent;
+  border: none;
+  margin-right: 20px;
+}
+
+.create-btn img {
+  width: 20px;
 }
 
 /* 프로필 이미지 */

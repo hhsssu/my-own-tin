@@ -2,22 +2,23 @@
   <div class="qna-list-container">
     <!-- 질문 목록 본문 -->
     <!-- 질문 카드 -->
-    <div
-      v-for="qna in store.qnaList"
-      :key="qna.id"
-      @click="handleClick(qna)">
+    <div v-for="qna in store.qnaList" :key="qna.id" @click="handleClick(qna)">
       <div class="qna-list-card content-box">
-
         <!-- 상단 작성자 프로필 -->
-        <div class="flex-box">
+        <div class="flex-box flex-space-between">
           <!-- 작성자 프로필 사진 -->
-          <div>
-            <img src="/src/assets/img/profile.png" class="qna-list-card-pic" />
+          <div style="display: flex; align-items: center">
+            <div>
+              <img src="/src/assets/img/profile.png" class="qna-list-card-pic" />
+            </div>
+            <div class="qna-list-card-name">{{ qna.writer }}</div>
+            <div class="routine-tag qna-list-card-level">Lv.{{ qna.userLevel }}</div>
+            <div class="routine-tag">{{ qna.userAge }}</div>
+            <div class="routine-tag">{{ qna.userGender }}</div>
           </div>
-          <div class="qna-list-card-name">{{ qna.writer }}</div>
-          <div class="routine-tag qna-list-card-level">Lv.{{ qna.userLevel }}</div>
-          <div class="routine-tag">{{ qna.userAge }}</div>
-          <div class="routine-tag">{{ qna.userGender }}</div>
+          <div>
+            <div style="text-align: end; font-size: 0.8rem; color: #999;">{{ formatDate(qna.createAt) }}</div>
+          </div>
         </div>
         <!-- 질문 제목 -->
         <div class="qna-list-card-title">{{ qna.title }}</div>
@@ -57,13 +58,22 @@ onMounted(() => {
       gender: "",
       ageRange: "",
       orderBy: "",
-      word: ""
+      word: "",
     };
     store.searchQuestionList(searchCondition);
   }
 
   // store.getQnAList(searchCondition.value);
 });
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}/${month}/${day}`;
+}
+
 </script>
 
 <style scoped>
@@ -105,7 +115,6 @@ onMounted(() => {
   background-color: #fae6b1;
   color: #555;
 }
-
 
 .qna-list-card-tag {
   background: #aaa;
