@@ -46,8 +46,9 @@
 
 	<!-- 루틴 조회 -->
 	<select id="search" parameterType="map" resultType="Routine"> SELECT r.*
-		FROM routines r JOIN users u ON r.user_id = u.id WHERE r.delete_at IS
-		NULL <if
+		FROM routines r JOIN users u ON r.user_id = u.id
+		WHERE r.delete_at IS NULL AND r.is_marked = 0 
+		<if
 			test="searchCondition.key != null and searchCondition.key != ''">
 			AND ${searchCondition.key} LIKE CONCAT('%', #{searchCondition.word},
 		'%')
