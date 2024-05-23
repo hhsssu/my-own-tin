@@ -31,7 +31,7 @@ export const useRoutineStore = defineStore('routine', () => {
       data: routine
     })
       .then(() => {
-        router.push({ name: 'routine' })
+        router.go({ name: 'routineList' })
       })
       .catch((error) => {
         console.log(error);
@@ -141,7 +141,7 @@ export const useRoutineStore = defineStore('routine', () => {
   const updateRoutine = function (routineId) {
     axios.put(`${REST_ROUTINE_API}/?id=${routineId}`, routine.value)
       .then(() => {
-        router.push({ name: 'routine' })
+        router.go({ name: 'routineDetail' }, {params: {routineId: routineId}});
       })
       .catch((error) => {
         console.log(error)
@@ -150,13 +150,13 @@ export const useRoutineStore = defineStore('routine', () => {
 
   // 루틴 삭제 (delete_at update)
   const deleteRoutine = function (id) {
-    axios.put(`${REST_ROUTINE_API}/delete`, null, {
+    axios.put(`${REST_ROUTINE_API}/delete`, {
       params: {
         id: id,
       }
     })
       .then(() => {
-        router.push({ name: 'routine' })
+        router.go({ name: 'routineList' });
       })
       .catch((error) => {
         console.log(error)
