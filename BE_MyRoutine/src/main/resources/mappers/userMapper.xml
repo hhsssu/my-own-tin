@@ -8,9 +8,9 @@
 	<!-- 회원가입 폼에 따라 값 다르게 넣어야 함 -->
 	<insert id="insert" parameterType="User">
 		INSERT INTO users (email,
-		nickname, password, gender, age, is_public, is_admin, is_expert)
+		nickname, password, gender, age, is_public, is_admin, is_expert, character1, character2, character3)
 		VALUES (#{email}, #{nickname}, #{password}, #{gender}, #{age},
-		#{isPublic}, #{isAdmin}, #{isExpert})
+		#{isPublic}, #{isAdmin}, #{isExpert}, #{character1}, #{character2}, #{character3})
 	</insert>
 
 	<!-- 사용자 로그인 -->
@@ -29,6 +29,9 @@
 			<if test="gender != null">gender = #{gender},</if>
 			<if test="part1 != null">part1 = #{part1},</if>
 			<if test="part2 != null">part2 = #{part2},</if>
+			<if test="character1 != null">character1 = #{character1},</if>
+			<if test="character2 != null">character2 = #{character2},</if>
+			<if test="character3 != null">character3 = #{character3},</if>
 			<if test="workoutTime != 0">workout_time = #{workoutTime},</if>
 		</set>
 		WHERE id = #{id}
