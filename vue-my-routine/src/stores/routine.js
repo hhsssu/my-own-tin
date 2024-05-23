@@ -37,25 +37,6 @@ export const useRoutineStore = defineStore('routine', () => {
         console.log(error);
       })
 
-      // 포인트 생성
-      const point = {
-        userId: routine.userId,
-        amount: 100,
-        record: "루틴 완료"
-      }
-
-      axios({
-        url: `http://localhost:8080/myroutine/point/`,
-        method: 'POST',
-        data: point
-      })
-      .then(() => {
-        
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      
   }
 
   // 루틴 목록 불러오기 (내 루틴)
