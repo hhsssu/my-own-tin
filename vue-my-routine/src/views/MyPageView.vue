@@ -10,15 +10,15 @@
                 <div>
                     <div class="flex-box">
                         <div class="profile-name">{{ user.nickname }}</div>
-                        <div class="profile-level">Lv.{{ user.level }}</div>
+                        <div class="routine-tag profile-level">Lv.{{ user.level }}</div>
                         <img src="@/assets/img/icon/compose2.png" alt="프로필 수정 버튼" class="img-modify-btn" 
                             @click="showComponent('MypageModifyProfile')">
                     </div>
                     <!-- 프로필 해시태그(성격) 표시 부분 -->
                     <div class="flex-box">
-                        <div class="profile-hashtag">#체력UP</div>
-                        <div class="profile-hashtag">#활발한</div>
-                        <div class="profile-hashtag">#헬스장</div>
+                        <div class="routine-tag profile-hashtag">#체력UP</div>
+                        <div class="routine-tag profile-hashtag">#활발한</div>
+                        <div class="routine-tag profile-hashtag">#헬스장</div>
                     </div>
                 </div>
             </div>
@@ -27,15 +27,15 @@
                 @click="showComponent('MypageModifyRoutinetag')">
                 <div class="profile-title">나의 루틴 태그</div>
                 <div class="flex-box">
-                    <div class="routine-tag" v-if="user.age < 20">10대</div>
-                    <div class="routine-tag" v-else-if="user.age > 19 && user.age < 30">20대</div>
-                    <div class="routine-tag" v-else-if="user.age > 29 && user.age < 40">30대</div>
-                    <div class="routine-tag" v-else-if="user.age > 39 && user.age < 50">40대</div>
-                    <div class="routine-tag" v-else-if="user.age > 49 && user.age < 60">50대</div>
-                    <div class="routine-tag" v-else-if="user.age > 59 && user.age < 70">60대</div>
-                    <div class="routine-tag" v-else-if="user.age > 69 && user.age < 80">70대</div>
-                    <div class="routine-tag" v-else-if="user.age > 79">80대⬆</div>
-                    <div class="routine-tag">{{ user.gender }}</div>
+                    <div class="routine-user-tag" v-if="user.age < 20">10대</div>
+                    <div class="routine-user-tag" v-else-if="user.age > 19 && user.age < 30">20대</div>
+                    <div class="routine-user-tag" v-else-if="user.age > 29 && user.age < 40">30대</div>
+                    <div class="routine-user-tag" v-else-if="user.age > 39 && user.age < 50">40대</div>
+                    <div class="routine-user-tag" v-else-if="user.age > 49 && user.age < 60">50대</div>
+                    <div class="routine-user-tag" v-else-if="user.age > 59 && user.age < 70">60대</div>
+                    <div class="routine-user-tag" v-else-if="user.age > 69 && user.age < 80">70대</div>
+                    <div class="routine-user-tag" v-else-if="user.age > 79">80대⬆</div>
+                    <div class="routine-user-tag">{{ user.gender }}</div>
                     <div class="routine-tag" v-if="user.part1 !== null">{{ user.part1 }}</div>
                     <div class="routine-tag" v-if="user.part2 !== null">{{ user.part2 }}</div>
                     <div class="routine-tag" v-if="user.workoutTime !== 0">{{ workoutTimeFormat(user.workoutTime) }}</div>
@@ -69,7 +69,7 @@
         </div>
         
         <!-- 마이페이지 오른쪽 메뉴 선택 시 나올 부분 -->
-        <div class="mypage-click-container">
+        <div class="right-container mypage-click-container">
             <!-- 프로필 페이지에 있는 메뉴들 클릭 시 띄울 화면 구현 -->
             <component :is="activeComponent" :mile-total="mileTotal" :point-total="pointTotal"/>
         </div>
@@ -181,35 +181,25 @@ onMounted(async () => {
 }
 
 /* 레벨, 성격키워드, 루틴 태그 스타일 */
-.profile-level, .profile-hashtag, .routine-tag {
+.profile-level {
     background-color: #FAE6B1;
-    font-size: 0.8em;
     color: #333;
-    font-weight: 500;
-    padding: 4px 5px;
-    margin-bottom: 20px;
-    border-radius: 3px;
-    margin-right: 7px;
 }
 
 /* 프로필 성격 키워드 스타일 */
 .profile-hashtag:first-child {
     background-color: #E6B3CB;
+    color: #333;
 }
 
 .profile-hashtag:nth-child(2) {
     background-color: #B3DEE5;
+    color: #333;
 }
 
 .profile-hashtag:last-child {
     background-color: #B3E6D0;
-}
-
-/* 나의 루틴 태그 스타일 */
-.routine-tag {
-    background-color: #aaa;
-    color: white;
-    font-weight: 300;
+    color: #333;
 }
 
 /* 각 프로필 박스 클릭 커서 변경 */
@@ -271,9 +261,8 @@ onMounted(async () => {
 
 
 .mypage-click-container {
-    width: 50%;
     height: 500px;
-    padding-top: 30px;
+    padding-top: 35px;
     margin: 0 auto;
 }
 </style>

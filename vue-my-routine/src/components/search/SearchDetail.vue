@@ -1,15 +1,15 @@
 <template>
   <div v-if="routine" class="search-detail">
     <!-- 루틴 말머리 (정보) -->
+    <div class="routine-title">{{ routine.title }}</div>
     <div class="search-detail-head">
-      <div class="routine-title">{{ routine.title }}</div>
-      <div class="routine-tag search-detail-tag">{{ routine.userAge }}</div>
-      <div class="routine-tag search-detail-tag">{{ routine.userGender }}</div>
-      <div class="routine-tag search-detail-tag">{{ routine.part1 }}</div>
-      <div class="routine-tag search-detail-tag" v-if="routine.part2 != null">
+      <div class="routine-user-tag">{{ routine.userAge }}</div>
+      <div class="routine-user-tag">{{ routine.userGender }}</div>
+      <div class="routine-tag">{{ routine.part1 }}</div>
+      <div class="routine-tag" v-if="routine.part2 != null">
         {{ routine.part2 }}
       </div>
-      <div class="routine-tag search-detail-tag">{{ routine.workoutTime }}분</div>
+      <div class="routine-tag">{{ workoutTimeFormat(routine.workoutTime) }}</div>
     </div>
     <!-- 루틴 본문 -->
     <div class="search-detail-content">{{ routine.content }}</div>
@@ -72,9 +72,26 @@ const clickForLike = function () {
     .put(`http://localhost:8080/myroutine/routine/like?id=${props.routineId}`)
     .then(() => {
       alert("좋아요를 눌렀습니다!");
-      router.push({ name: "search" });
+      router.go({ name: "search" });
     });
 };
+
+// 운동 시간 태그 (30 -> 30분, 60 -> 1시간, 90 -> 1시간30분)
+const workoutTimeFormat = (workoutTime) => {
+    const hours = Math.floor(workoutTime / 60); // 시간
+    const minuties = workoutTime % 60; // 분
+    
+    let workout = '';
+    if(hours > 0) {
+        workout += `${hours}시간`;
+    }
+    if(minuties > 0) {
+        workout += `${minuties}분`;
+    }
+
+    return workout.trim();
+}
+
 </script>
 
 <style scoped>
@@ -93,10 +110,6 @@ const clickForLike = function () {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
-}
-
-.search-detail-tag {
-  background-color: #aaa;
 }
 
 .search-detail-content {

@@ -4,27 +4,27 @@
     <div class="qna-detail-profile">
       <img src="/src/assets/img/profile_male.png" class="qna-detail-profile-pic" />
       <div class="qna-detail-profile-name">{{ question.writer }}</div>
-      <div class="qna-detail-profile-level">Lv.{{ question.userLevel }}</div>
-      <div class="qna-detail-profile-tag">{{ question.userAge }}</div>
-      <div class="qna-detail-profile-tag">{{ question.userGender }}</div>
+      <div class="routine-tag">Lv.{{ question.userLevel }}</div>
+      <div class="routine-user-tag">{{ question.userAge }}</div>
+      <div class="routine-user-tag">{{ question.userGender }}</div>
     </div>
     <!-- 작성글 -->
     <div class="qna-detail-card">
       <div class="qna-detail-title">{{ question.title }}</div>
-      <div class="qna-detail-content">
+      <p class="qna-detail-content">
         {{ question.content }}
-      </div>
+      </p>
       <!-- 작성자 루틴 -->
       <div class="qna-detail-routine content-box" v-if="question.routine != null">
+        <div class="routine-title">{{ question.routine.title }}</div>
         <div class="flex-box">
-          <div class="qna-detail-routine-title">{{ question.routine.title }}</div>
-          <div class="routine-tag qna-detail-routine-info">{{ question.userAge }}</div>
-          <div class="routine-tag qna-detail-routine-info">{{ question.userGender }}</div>
+          <div class="routine-user-tag qna-detail-routine-info">{{ question.userAge }}</div>
+          <div class="routine-user-tag qna-detail-routine-info">{{ question.userGender }}</div>
           <div class="routine-tag qna-detail-routine-info2">{{ question.routine.part1 }}</div>
           <div v-if="question.routine.part2 != null" class="routine-tag qna-detail-routine-info2">{{ question.routine.part2 }}</div>
-          <div class="routine-tag qna-detail-routine-info2">{{ question.routine.workoutTime }}분</div>
+          <div class="routine-tag qna-detail-routine-info2">{{ workoutTimeFormat(question.routine.workoutTime) }}</div>
         </div>
-        <div class="qna-detail-routine-content">{{ question.routine.content }}</div>
+        <p class="qna-detail-routine-content">{{ question.routine.content }}</p>
       </div>
       <!-- 로그인된 유저가 작성자일 경우, 수정 / 삭제 버튼 활성화 -->
       <div v-if="checkWriter(question.userId)">
@@ -108,6 +108,21 @@ const deleteQuestion = function () {
   })
 };
 
+// 운동 시간 태그 (30 -> 30분, 60 -> 1시간, 90 -> 1시간30분)
+const workoutTimeFormat = (workoutTime) => {
+    const hours = Math.floor(workoutTime / 60); // 시간
+    const minuties = workoutTime % 60; // 분
+    
+    let workout = '';
+    if(hours > 0) {
+        workout += `${hours}시간`;
+    }
+    if(minuties > 0) {
+        workout += `${minuties}분`;
+    }
+
+    return workout.trim();
+}
 </script>
 
 
@@ -154,8 +169,9 @@ const deleteQuestion = function () {
 }
 
 .qna-detail-title {
-  font-size: 1.3em;
-  margin-bottom: 10px;
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding-bottom: 10px;
 }
 
 .qna-detail-content {
@@ -163,14 +179,13 @@ const deleteQuestion = function () {
 
 }
 
-.qna-detail-routine {
-  background-color: #fff9e8;
+.routine-tag {
+  background-color: #fae6b1;
+  color: #555;
 }
 
-.qna-detail-routine-title {
-  font-size: 1em;
-  font-weight: 600;
-  margin-right: 10px;
+.qna-detail-routine {
+  background-color: #fff9e8;
 }
 
 .qna-detail-routine-info {
@@ -179,9 +194,10 @@ const deleteQuestion = function () {
 
 .qna-detail-routine-info2 {
   background-color: #31525b;
+  color: #fff;
 }
 
 .qna-detail-routine-content {
-  padding: 20px 5px;
+  padding: 0px 0px 10px 0;
 }
 </style>

@@ -14,6 +14,12 @@ const headerStore = useHeaderStore();
 
 const showHeader = computed(() => headerStore.showHeader);
 
+
 </script>
 
-<style scoped></style>
+<style scoped>
+#app {
+  font-family: 'Pretendard';
+}
+
+</style>

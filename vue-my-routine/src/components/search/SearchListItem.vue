@@ -1,17 +1,17 @@
 <template>
   <div class="search-item content-box" @click="handleClick">
     <!-- 루틴 말머리 (정보) -->
-    <div class="search-item-head">
-      <div class="routine-title">{{ routine.title }}</div>
-      <div class="routine-tag">{{ routine.userAge }}</div>
-      <div class="routine-tag">{{ routine.userGender }}</div>
+    <div class="routine-title">{{ routine.title }}</div>
+    <div class="flex-box">
+      <div class="routine-user-tag">{{ routine.userAge }}</div>
+      <div class="routine-user-tag">{{ routine.userGender }}</div>
       <div class="routine-tag">{{ routine.part1 }}</div>
       <div class="routine-tag" v-if="routine.part2 != null">{{ routine.part2 }}</div>
-      <div class="routine-tag">{{ routine.workoutTime }}분</div>
+      <div class="routine-tag">{{ workoutTimeFormat(routine.workoutTime) }}</div>
       <div class="search-item-more" @click="showMore">...</div>
     </div>
     <!-- 루틴 본문 -->
-    <div class="search-item-content">{{ routine.content }}</div>
+    <p class="search-item-content">{{ routine.content }}</p>
   </div>
 </template>
 
@@ -35,6 +35,22 @@ const showMore = function () {
   // 현재 검색 상세 페이지 조회와 겹치는 상황
   console.log("더보기");
 };
+
+// 운동 시간 태그 (30 -> 30분, 60 -> 1시간, 90 -> 1시간30분)
+const workoutTimeFormat = (workoutTime) => {
+    const hours = Math.floor(workoutTime / 60); // 시간
+    const minuties = workoutTime % 60; // 분
+    
+    let workout = '';
+    if(hours > 0) {
+        workout += `${hours}시간`;
+    }
+    if(minuties > 0) {
+        workout += `${minuties}분`;
+    }
+
+    return workout.trim();
+}
 </script>
 
 <style scoped>
@@ -42,28 +58,9 @@ const showMore = function () {
   background-color: #fff9e8;
 }
 
-.search-item-head {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.search-item-title {
-  font-size: 1.2em;
-  font-weight: 600;
-  margin-right: 10px;
-}
-
-
-
 .search-item-more {
   /* 더보기 */
   margin-left: auto;
   margin-bottom: 20px;
-}
-
-.search-item-content {
-  font-size: 1em;
-  padding: 5px;
 }
 </style>

@@ -1,25 +1,14 @@
 <template>
   <div class="search-container">
-    <div class="search-list">
-      <div class="search-title">둘러보기</div>
+    <div class="right-container search-list">
+      <div class="view-title">검색</div>
       <!-- 검색창 -->
-      <div>
+      <div class="search-list-container">
         <div class="search-list-input">
           <div>#</div>
-          <input type="text" placeholder="내용으로 검색하세요." v-model="condition.word"/>
+          <input type="text" placeholder="내용으로 검색하세요." v-model="condition.word" @keyup.enter="clickSearch"/>
           <button class="search-button" @click="clickSearch">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-search"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
-              />
-            </svg>
+            <img src="@/assets/img/icon/search.png" alt="검색" class="search-icon">
           </button>
         </div>
         <!-- 검색 기능 필터 -->
@@ -145,7 +134,7 @@
       <SearchList @selectRoutineId="handleSelectRoutine" />
     </div>
     <!-- 세션에 selectedSearch 있는 경우에 SearchDetail 보임 -->
-    <div class="search-detail-container">
+    <div class="right-container">
       <div v-if="selectedRoutineId" >
         <SearchDetail :routineId="selectedRoutineId" />
       </div>
@@ -220,29 +209,21 @@ onMounted(() => {
   /* flex-direction: column; */
 }
 
-.search-list {
-  /* width: 450px; */
-  width: 50%;
-  border-right: 1px solid #ccc;
+.view-title {
+  margin-bottom: 40px;
 }
 
-.search-title {
-  font-size: 1.5em;
-  font-weight: 600;
-  color: #31525b;
-  margin-bottom: 20px;
-  text-align: center;
+.search-list {
+  border-right: 1px solid #ccc;
 }
 
 .search-button {
   background-color: white;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 }
 
-.search-button:hover {
-  background-color: #ffa101;
-}
 
 .search-list-input {
   display: flex;
@@ -305,7 +286,5 @@ onMounted(() => {
   margin-right: 10px;
 }
 
-.search-detail-container {
-  width: 50%;
-}
+
 </style>
