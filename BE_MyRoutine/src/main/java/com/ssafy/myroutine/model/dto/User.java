@@ -18,23 +18,35 @@ public class User {
 	private Date deleteAt;
 	private String part1;
 	private String part2;
+	private String character1;
+	private String character2;
+	private String character3;
 	private int workoutTime;
 
 	public User() {
 	}
 
-	public User(String email, String nickname, String password, String gender, int age, boolean isPublic,
-			boolean isAdmin, boolean isExpert, String part1, String part2, int workoutTime) {
+	public User(int id, String email, String nickname, String password, String gender, int age, int level,
+			boolean isPublic, boolean isAdmin, boolean isExpert, Date joinAt, Date updateAt, Date deleteAt,
+			String part1, String part2, String character1, String character2, String character3, int workoutTime) {
+		this.id = id;
 		this.email = email;
 		this.nickname = nickname;
 		this.password = password;
 		this.gender = gender;
 		this.age = age;
+		this.level = level;
 		this.isPublic = isPublic;
 		this.isAdmin = isAdmin;
 		this.isExpert = isExpert;
+		this.joinAt = joinAt;
+		this.updateAt = updateAt;
+		this.deleteAt = deleteAt;
 		this.part1 = part1;
 		this.part2 = part2;
+		this.character1 = character1;
+		this.character2 = character2;
+		this.character3 = character3;
 		this.workoutTime = workoutTime;
 	}
 
@@ -141,7 +153,6 @@ public class User {
 	public void setDeleteAt(Date deleteAt) {
 		this.deleteAt = deleteAt;
 	}
-	
 
 	public String getPart1() {
 		return part1;
@@ -159,6 +170,30 @@ public class User {
 		this.part2 = part2;
 	}
 
+	public String getCharacter1() {
+		return character1;
+	}
+
+	public void setCharacter1(String character1) {
+		this.character1 = character1;
+	}
+
+	public String getCharacter2() {
+		return character2;
+	}
+
+	public void setCharacter2(String character2) {
+		this.character2 = character2;
+	}
+
+	public String getCharacter3() {
+		return character3;
+	}
+
+	public void setCharacter3(String character3) {
+		this.character3 = character3;
+	}
+
 	public int getWorkoutTime() {
 		return workoutTime;
 	}
@@ -172,7 +207,8 @@ public class User {
 		return "User [id=" + id + ", email=" + email + ", nickname=" + nickname + ", password=" + password + ", gender="
 				+ gender + ", age=" + age + ", level=" + level + ", isPublic=" + isPublic + ", isAdmin=" + isAdmin
 				+ ", isExpert=" + isExpert + ", joinAt=" + joinAt + ", updateAt=" + updateAt + ", deleteAt=" + deleteAt
-				+ ", part1=" + part1 + ", part2=" + part2 + ", workoutTime=" + workoutTime + "]";
+				+ ", part1=" + part1 + ", part2=" + part2 + ", character1=" + character1 + ", character2=" + character2
+				+ ", character3=" + character3 + ", workoutTime=" + workoutTime + "]";
 	}
 
 }

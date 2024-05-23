@@ -6,11 +6,11 @@ INSERT INTO users (email, nickname, password, gender, age, is_expert)
 VALUES ("dokgo11@ssafy.com", "독고수", "1234", "남성", 45, 1),
 ("yoga11@ssafy.com", "요가영", "1234", "여성", 36, 1);
 
-INSERT INTO users (email, nickname, password, gender, age)
-VALUES ("strong123@ssafy.com", "강해진", "1234", "여성", 27),
-("powerful11@ssafy.com", "힘세진", "1234", "남성", 24),
-("vally11@ssafy.com", "배구빈", "1234", "여성", 31),
-("baseball11@ssafy.com", "야구민", "1234", "남성", 22);
+INSERT INTO users (email, nickname, password, gender, age, character1, character2, character3)
+VALUES ("strong123@ssafy.com", "강해진", "1234", "여성", 27, "체력UP", "활발한", "헬스장"),
+("powerful11@ssafy.com", "힘세진", "1234", "남성", 24, "체력UP", "활발한", "헬스장"),
+("vally11@ssafy.com", "배구빈", "1234", "여성", 31, "체력UP", "활발한", "헬스장"),
+("baseball11@ssafy.com", "야구민", "1234", "남성", 22, "체력UP", "활발한", "헬스장");
 
 -- delete from users where user_id = 1;
 UPDATE users SET part1 = "유산소", workout_time=60 where id=13;
