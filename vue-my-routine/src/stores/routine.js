@@ -120,7 +120,8 @@ export const useRoutineStore = defineStore('routine', () => {
       level: searchCondition.level,
       gender: searchCondition.gender,
       ageRange: searchCondition.ageRange,
-      orderBy: searchCondition.orderBy
+      orderBy: searchCondition.orderBy,
+      word: searchCondition.word
     }})
       .then((response) => {
         routineList.value = response.data;

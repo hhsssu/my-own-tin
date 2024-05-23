@@ -90,6 +90,10 @@ public class RoutineController {
 		System.out.println(word);
 		System.out.println(word == "");
 		SearchCondition searchCondition = new SearchCondition(level, gender, ageRange, orderBy);
+		if (word != "") {
+			searchCondition.setKey("content");
+			searchCondition.setWord(word);
+		}
 		List<Routine> list = routineService.searchRoutine(searchCondition);
 
 		if (list == null || list.isEmpty())

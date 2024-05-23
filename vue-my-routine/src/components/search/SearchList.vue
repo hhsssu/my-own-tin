@@ -38,7 +38,8 @@ onMounted(() => {
     level: "",
     gender: "",
     ageRange: "",
-    orderBy: ""
+    orderBy: "",
+    word: ""
   }
   store.searchRoutineList(searchCondition);
  }
