@@ -31,7 +31,7 @@ export const useRoutineStore = defineStore('routine', () => {
       data: routine
     })
       .then(() => {
-        router.go({ name: 'routineList' })
+        router.go(0)
       })
       .catch((error) => {
         console.log(error);

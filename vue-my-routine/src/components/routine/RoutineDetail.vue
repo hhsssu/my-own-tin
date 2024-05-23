@@ -74,7 +74,8 @@ const updateRoutine = function () {
 const deleteRoutine = function () {
   axios.put(`http://localhost:8080/myroutine/routine/delete?id=${store.routine.id}`)
   .then(() => {
-    router.go({ name: 'routineList' });
+    alert('삭제되었습니다!');
+    router.go(0);
   })
 };
 
@@ -82,14 +83,14 @@ const createMarkedRoutine = () => {
   store.getRoutine(props.routineId);
   const newRoutine = { ...store.routine, isMarked: 1 };
   store.createRoutine(newRoutine); // 새로운 루틴 추가하는 메서드에 따라 변경
-  alert('북마크에 추가되었습니다!');
+  alert('보관함에 저장되었습니다!');
 };
 
 const clickForLike = function () {
   axios.put(`http://localhost:8080/myroutine/routine/like?id=${props.routineId}`)
   .then(() => {
-    alert('좋아요를 눌렀습니다!');
-    router.pgo({ name: 'routineDetail', path:props.routineId })
+    alert("좋아요를 눌렀습니다!");
+    router.go(0)
     console.log(props.routineId);
   })
 };
