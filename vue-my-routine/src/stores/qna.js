@@ -126,7 +126,7 @@ export const useQnAStore = defineStore('qna', () => {
                 data: question
             });
 
-            router.push({ name: 'qnaList' });
+            router.go({ name: 'qnaList' });
         } catch (error) {
             console.error(error);
         }
@@ -148,16 +148,16 @@ export const useQnAStore = defineStore('qna', () => {
                 data: answer
             });
 
-            router.replace({ name: 'answerList', params: { questionId: answer.questionId } });
+            router.go({ name: 'answerList', params: { questionId: answer.questionId } });
         } catch (error) {
-            console.error('Error creating answer:', error);
+            console.error(error);
         }
     }
 
     const updateQuestion = function (questionId) {
         axios.put(`${QNA_REST_API}?id=${questionId}`, question.value)
         .then(() => {
-            router.push({ name: 'qna' });
+            router.go({ name: 'qnaDetail', params: {questionId: questionId} });
         })
     }
 
@@ -166,7 +166,8 @@ export const useQnAStore = defineStore('qna', () => {
             level: searchCondition.level,
             gender: searchCondition.gender,
             ageRange: searchCondition.ageRange,
-            orderBy: searchCondition.orderBy
+            orderBy: searchCondition.orderBy,
+            word: searchCondition.word
         }})
         .then((response) => {
             qnaList.value = response.data;

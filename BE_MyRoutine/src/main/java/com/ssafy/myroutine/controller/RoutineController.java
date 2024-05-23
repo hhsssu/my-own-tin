@@ -55,7 +55,7 @@ public class RoutineController {
 	@Operation(summary = "루틴 수정", description = "루틴 수정 기능")
 	public ResponseEntity<String> update(@RequestParam int id, @RequestBody Routine routine) {
 		routine.setId(id);
-		if (routineService.modifyRoutine(routine)) 
+		if (routineService.modifyRoutine(routine))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
 	}
@@ -81,19 +81,26 @@ public class RoutineController {
 //			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 //		return new ResponseEntity<List<Routine>>(list, HttpStatus.OK);
 //	}
-	
+
 	// 루틴 검색 조회
-    @GetMapping("/search")
-    @Operation(summary = "루틴 검색 조회", description = "루틴 검색 조회")
-    public ResponseEntity<?> search(@RequestParam("level") String level, @RequestParam("gender") String gender, @RequestParam("ageRange") String ageRange, @RequestParam("orderBy") String orderBy) {
-        SearchCondition searchCondition = new SearchCondition(level, gender, ageRange, orderBy);
-    	List<Routine> list = routineService.searchRoutine(searchCondition);
-        
-        if (list == null || list.isEmpty())
-            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-        return new ResponseEntity<List<Routine>>(list, HttpStatus.OK);
-    }
-	
+	@GetMapping("/search")
+	@Operation(summary = "루틴 검색 조회", description = "루틴 검색 조회")
+	public ResponseEntity<?> search(@RequestParam("level") String level, @RequestParam("gender") String gender,
+			@RequestParam("ageRange") String ageRange, @RequestParam("orderBy") String orderBy, @RequestParam("word") String word) {
+		System.out.println(word);
+		System.out.println(word == "");
+		SearchCondition searchCondition = new SearchCondition(level, gender, ageRange, orderBy);
+		if (word != "") {
+			searchCondition.setKey("content");
+			searchCondition.setWord(word);
+		}
+		List<Routine> list = routineService.searchRoutine(searchCondition);
+
+		if (list == null || list.isEmpty())
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<Routine>>(list, HttpStatus.OK);
+	}
+
 	// 루틴 상세 조회
 	@GetMapping("/detail")
 	@Operation(summary = "루틴 상세 조회", description = "루틴 상세 조회")
@@ -103,7 +110,7 @@ public class RoutineController {
 			return new ResponseEntity<Routine>(routine, HttpStatus.OK);
 		return new ResponseEntity<Routine>(HttpStatus.NOT_FOUND);
 	}
-	
+
 	// 루틴페이지 내 나의 루틴 불러오기
 	// 만약 search 메서드로 가능하다면 사용 X
 	@GetMapping("/mine")
@@ -112,7 +119,7 @@ public class RoutineController {
 		List<Routine> list = routineService.getRoutineByUserId(userId);
 		return new ResponseEntity<List<Routine>>(list, HttpStatus.OK);
 	}
-	
+
 	// 마이페이지 내 나의 루틴 보관함 불러오기
 	// 만약 search 메서드로 가능하다면 사용 X
 	@GetMapping("/marked")
@@ -123,15 +130,17 @@ public class RoutineController {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<Routine>>(list, HttpStatus.OK);
 	}
-	
+
 	// 날짜별 나의 루틴 불러오기
 	@GetMapping("/byDate")
 	@Operation(summary = "날짜별 나의 루틴 불러오기", description = "날짜별 나의 루틴 불러오기 기능")
-	public ResponseEntity<?> getRoutineByDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, @RequestParam("userId") int userId) {
+	public ResponseEntity<?> getRoutineByDate(
+			@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+			@RequestParam("userId") int userId) {
 		List<Routine> routines = routineService.findByDate(date, userId);
-        return new ResponseEntity<>(routines, HttpStatus.OK);
+		return new ResponseEntity<>(routines, HttpStatus.OK);
 	}
-	
+
 	// 좋아요 수 증가
 	@PutMapping("/like")
 	@Operation(summary = "좋아요 수 증가", description = "좋아요 수 증가 기능")
@@ -139,6 +148,5 @@ public class RoutineController {
 		int result = routineService.updateLikeCnt(id);
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
-	
 
 }

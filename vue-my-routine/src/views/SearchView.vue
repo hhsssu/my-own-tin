@@ -6,7 +6,7 @@
       <div>
         <div class="search-list-input">
           <div>#</div>
-          <input type="text" placeholder="검색어를 입력하세요" />
+          <input type="text" placeholder="내용으로 검색하세요." v-model="condition.word"/>
           <button class="search-button" @click="clickSearch">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -174,6 +174,7 @@ const handleSearchOptionChange = (event) => {
 
 const condition = {
   // 작성자 아이디를 기반으로 user 정보 조회
+  word: "", // 제목 검색어 word
   word1: "", // level 
   word2: "", // gender
   word3: "", // ageRange
@@ -185,7 +186,7 @@ const clickSearch = function () {
   // console.log(condition); // 객체 형태로 잘 넘어옴
   const searchCondition = {
     key: null,
-    word: null,
+    word: condition.word,
     orderByDir: "asc",
     level: condition.word1,
     gender: condition.word2,

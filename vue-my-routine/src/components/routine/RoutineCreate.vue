@@ -89,6 +89,11 @@ const confirmCreate = function () {
   const userObj = JSON.parse(userItem);
   routine.userId = userObj.id;
   routine.writer = userObj.nickname;
+
+  if(routine.part2 == "null") {
+    routine.part2 = null;
+  }
+
   console.log(routine.writer);
 
   store.createRoutine(routine);

@@ -72,7 +72,7 @@ const updateRoutine = function () {
 const deleteRoutine = function () {
   axios.put(`http://localhost:8080/myroutine/routine/delete?id=${store.routine.id}`)
   .then(() => {
-    router.push({ name: 'routine' });
+    router.go({ name: 'routineList' });
   })
 };
 
