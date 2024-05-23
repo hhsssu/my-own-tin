@@ -34,7 +34,13 @@
         <div>
           <!-- 운동 부위 2 -->
           <!-- 운동 부위 1을 선택해야 선택할 수 있도록 함(value != null) -->
-          <select name="part2" id="part2" size="3" :disabled="isPart2Disabled" v-model="selectedOption2">
+          <select
+            name="part2"
+            id="part2"
+            size="3"
+            :disabled="isPart2Disabled"
+            v-model="selectedOption2"
+          >
             <option value="" disabled selected>운동부위2</option>
             <option value="null">선택안함</option>
             <option value="유산소">유산소</option>
@@ -56,20 +62,20 @@
     <div class="routine-create-workoutTime">
       <label for="workoutTime">운동 시간</label>
       <select name="time" id="time" size="3" v-model="timeOption">
-            <option value="0">선택안함</option>
-            <option value="10">10분</option>
-            <option value="20">20분</option>
-            <option value="30">30분</option>
-            <option value="40">40분</option>
-            <option value="50">50분</option>
-            <option value="60">1시간</option>
-            <option value="90">1시간30분</option>
-            <option value="120">2시간</option>
-            <option value="150">2시간30분</option>
-            <option value="180">3시간</option>
-            <option value="240">4시간</option>
-            <option value="300">5시간 이상</option>
-          </select>
+        <option value="0">선택안함</option>
+        <option value="10">10분</option>
+        <option value="20">20분</option>
+        <option value="30">30분</option>
+        <option value="40">40분</option>
+        <option value="50">50분</option>
+        <option value="60">1시간</option>
+        <option value="90">1시간30분</option>
+        <option value="120">2시간</option>
+        <option value="150">2시간30분</option>
+        <option value="180">3시간</option>
+        <option value="240">4시간</option>
+        <option value="300">5시간 이상</option>
+      </select>
     </div>
     <!-- 내용 -->
     <div class="routine-create-content">
@@ -80,10 +86,7 @@
         cols="30"
         rows="10"
         v-model="routine.content"
-        style="min-width: 300px;
-        max-width: 300px;
-        min-height: 300px;
-        max-height: 300px;"
+        style="min-width: 300px; max-width: 300px; min-height: 300px; max-height: 300px"
       ></textarea>
     </div>
     <!-- 등록 / 취소 버튼 -->
@@ -98,7 +101,7 @@
 import { usePointmileStore } from "@/stores/pointmile";
 import { useRoutineStore } from "@/stores/routine";
 import { useUserStore } from "@/stores/user";
-import { ref, watch, computed } from 'vue';
+import { ref, watch, computed } from "vue";
 
 const store = useRoutineStore();
 const userStore = useUserStore();
@@ -133,11 +136,23 @@ const confirmCreate = function () {
   const user = JSON.parse(sessionStorage.getItem("user"));
   routine.userId = user.id;
   routine.writer = user.nickname;
+  routine.part1 = selectedOption1.value;
+  routine.part2 = selectedOption2.value;
 
   if (timeOption.value === "0") {
     routine.workoutTime = null;
   } else {
-    routine.workoutTime = parseInt(timeOption.value, 10)
+    routine.workoutTime = parseInt(timeOption.value, 10);
+  }
+
+  // 날짜를 선택하지 않으면, 해당 날짜의 00시 00일로 설정됨
+  // 현재 날짜를 YYYY-MM-DD 형식으로 설정
+  if (routine.routineAt === "") {
+    const now = new Date();
+    const year = now.getUTCFullYear();
+    const month = String(now.getUTCMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1 필요
+    const day = String(now.getUTCDate()).padStart(2, '0');
+    routine.routineAt = `${year}-${month}-${day}`;
   }
 
   store.createRoutine(routine);
