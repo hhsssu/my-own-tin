@@ -233,12 +233,13 @@ const clickSearch = function () {
   width: 1000px;
   margin: 0 auto;
   display: flex;
+  font-family: 'Pretendard';
 }
 
 .qna-list {
-  width: 47%;
+  width: 50%;
   padding-right: 3%;
-  border-right: 1px solid #aaa;
+  border-right: 1px solid #ccc;
 }
 
 .qna-title {

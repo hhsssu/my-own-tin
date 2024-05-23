@@ -35,7 +35,7 @@
         @selectRoutineId="handleSelectRoutine"
       />
     </div>
-    <div>
+    <div class="routine-write-detail-container">
       <!-- 루틴 상세보기 -->
       <div v-if="selectedRoutineId != null && !isUpdateRoutine">
         <RoutineDetail :routineId="selectedRoutineId" @isUpdate="handleUpdateRoutine" />
@@ -109,7 +109,7 @@ const createRoutine = function () {
 .mypage-profile-container {
   width: 50%;
   /* background-color: rgb(255, 235, 251); */
-  border-right: 1px solid #777;
+  border-right: 1px solid #ccc;
   padding-top: 30px;
 }
 
@@ -152,5 +152,10 @@ const createRoutine = function () {
 
 .profile-hashtag:last-child {
   background-color: #b3e6d0;
+}
+
+/* 오른쪽 화면 */
+.routine-write-detail-container {
+  width: 50%;
 }
 </style>

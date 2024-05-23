@@ -94,6 +94,7 @@ const clickForLike = function () {
 </script>
 
 <style scoped>
+
 .routine-detail-title {
   font-size: 1.5em;
   font-weight: 600;
@@ -101,12 +102,12 @@ const clickForLike = function () {
 }
 
 .routine-detail-tag {
-  background-color: #aaa;
+  background-color: #F28F79;
   color: white;
   font-size: 0.8em;
   font-weight: 300;
   padding: 4px 5px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   border-radius: 3px;
   margin-right: 7px;
 }
