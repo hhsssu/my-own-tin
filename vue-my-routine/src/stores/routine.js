@@ -141,7 +141,7 @@ export const useRoutineStore = defineStore('routine', () => {
   const updateRoutine = function (routineId) {
     axios.put(`${REST_ROUTINE_API}/?id=${routineId}`, routine.value)
       .then(() => {
-        router.go({ name: 'routineDetail' }, {params: {routineId: routineId}});
+        router.go({ name: 'routineDetail', params: {routineId: routineId}});
       })
       .catch((error) => {
         console.log(error)

@@ -8,7 +8,7 @@
       <div>
         <div class="qna-search">
           <div>#</div>
-          <input type="text" placeholder="검색어를 입력하세요" />
+          <input type="text" placeholder="검색어를 입력하세요" v-model="condition.word"/>
           <button @click="clickSearch">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -203,6 +203,7 @@ const handleSearchOptionChange = (event) => {
 };
 
 const condition = {
+  word: "",
   word1: "",
   word2: "",
   word3: "",
@@ -211,8 +212,8 @@ const condition = {
 
 const clickSearch = function () {
   const searchCondition = {
-    key: null,
-    word: null,
+    key: "title",
+    word: condition.word,
     orderByDir: "asc",
     level: condition.word1,
     gender: condition.word2,

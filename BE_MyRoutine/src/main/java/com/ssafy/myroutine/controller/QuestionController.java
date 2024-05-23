@@ -59,7 +59,7 @@ public class QuestionController {
 	@Operation(summary = "질문 수정", description = "질문 수정 기능")
 	public ResponseEntity<?> update(@RequestParam int id, @RequestBody Question que) {
 		que.setId(id);
-		if(queService.modifyQuestion(que)) // true
+		if (queService.modifyQuestion(que)) // true
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
 	}
@@ -69,32 +69,36 @@ public class QuestionController {
 	@PutMapping("/delete")
 	@Operation(summary = "질문 삭제", description = "질문 삭제 기능")
 	public ResponseEntity<?> delete(@RequestParam int id) {
-		if(queService.removeQuestion(id)) // true
+		if (queService.removeQuestion(id)) // true
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
 	}
-	
+
 	// 질문 검색 조회
 	@GetMapping("/")
 	@Operation(summary = "질문 검색", description = "질문 검색 기능")
-	public ResponseEntity<?> list(@RequestParam("level") String level, @RequestParam("gender") String gender, @RequestParam("ageRange") String ageRange, @RequestParam("orderBy") String orderBy) {
-        SearchCondition searchCondition = new SearchCondition(level, gender, ageRange, orderBy);
-        List<Question> list = queService.searchQuestions(searchCondition);
-		
-		if(list == null || list.size() == 0)
+	public ResponseEntity<?> list(@RequestParam("level") String level, @RequestParam("gender") String gender,
+			@RequestParam("ageRange") String ageRange, @RequestParam("orderBy") String orderBy, @RequestParam("word") String word) {
+		SearchCondition searchCondition = new SearchCondition(level, gender, ageRange, orderBy);
+		if (word != "") {
+			searchCondition.setKey("title");
+			searchCondition.setWord(word);
+		}
+		List<Question> list = queService.searchQuestions(searchCondition);
+
+		if (list == null || list.size() == 0)
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<Question>>(list, HttpStatus.OK);
 	}
-	
+
 	// 질문 상세 조회
 	@GetMapping("/{queId}")
 	@Operation(summary = "질문 상세 조회", description = "질문 상세 조회 기능")
 	public ResponseEntity<?> detail(@PathVariable("queId") int id) {
 		Question question = queService.getQuestion(id);
-		if(question != null)
+		if (question != null)
 			return new ResponseEntity<Question>(question, HttpStatus.OK);
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
-
 
 }

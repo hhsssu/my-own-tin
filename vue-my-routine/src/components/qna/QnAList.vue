@@ -53,6 +53,7 @@ onMounted(() => {
       gender: "",
       ageRange: "",
       orderBy: "",
+      word: ""
     };
     store.searchQuestionList(searchCondition);
   }
