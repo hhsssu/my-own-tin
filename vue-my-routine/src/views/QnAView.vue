@@ -8,7 +8,7 @@
       <div>
         <div class="qna-search">
           <div>#</div>
-          <input type="text" placeholder="검색어를 입력하세요" v-model="condition.word"/>
+          <input type="text" placeholder="제목으로 검색하세요." v-model="condition.word"/>
           <button @click="clickSearch">
             <svg
               xmlns="http://www.w3.org/2000/svg"
