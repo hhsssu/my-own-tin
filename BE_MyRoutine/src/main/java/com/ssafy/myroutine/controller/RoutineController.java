@@ -87,8 +87,6 @@ public class RoutineController {
 	@Operation(summary = "루틴 검색 조회", description = "루틴 검색 조회")
 	public ResponseEntity<?> search(@RequestParam("level") String level, @RequestParam("gender") String gender,
 			@RequestParam("ageRange") String ageRange, @RequestParam("orderBy") String orderBy, @RequestParam("word") String word) {
-		System.out.println(word);
-		System.out.println(word == "");
 		SearchCondition searchCondition = new SearchCondition(level, gender, ageRange, orderBy);
 		if (word != "") {
 			searchCondition.setKey("content");
