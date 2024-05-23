@@ -166,8 +166,8 @@ export const useQnAStore = defineStore('qna', () => {
         // answer.isPicked = 1;
         axios.put(`${ANS_REST_API}?id=${answer.id}`, answer)
         .then(() => {
-            console.log(answer.isPicked);
-            // router.go({ name: 'qnaList' });
+            // console.log(answer.isPicked);
+            router.go({ name: 'qnaList' });
         })
     }
 

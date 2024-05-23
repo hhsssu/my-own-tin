@@ -69,14 +69,9 @@ watch(
 // 해당 질문의 작성자인지 확인
 const checkQueWriter = function (ans) {
   // ans의 questionId를 통해 질문 작성자 아이디 알아내기
-  // store.getQuestion(ans.quesitonId);
   const question = store.question;
-  // console.log(question);
-
   const userId = question.userId;
-
-  // console.log('userId: ' + userId);
-
+  
   const loginUser = JSON.parse(sessionStorage.getItem('user'));
   if (loginUser && loginUser.id === userId) {
     console.log(true);
