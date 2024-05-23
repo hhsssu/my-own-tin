@@ -1,15 +1,15 @@
 <template>
     <div class="header-container">
         <div class="header-nav-container">
-            <RouterLink :to="{name: 'search'}">검색</RouterLink>
-            <RouterLink :to="{name: 'qna'}">질문상담</RouterLink>
+            <RouterLink :to="{name: 'search'}"><img class="img-header-nav" src="@/assets/img/search.png"></RouterLink>
+            <RouterLink :to="{name: 'qna'}"><img class="img-header-nav" src="@/assets/img/qna.png"></RouterLink>
         </div>
         <RouterLink :to="{name: 'routine'}">
             <img src="@/assets/img/logo1.png" alt="MOT로고" class="img-header-logo">
         </RouterLink>
         <div class="header-nav-container">
-            <RouterLink :to="{name: 'mypage'}">마이페이지</RouterLink>
-            <div class="logout-btn" @click="logout">로그아웃</div>
+            <RouterLink :to="{name: 'mypage'}"><img class="img-header-nav" src="@/assets/img/mypage.png"></RouterLink>
+            <div class="logout-btn" @click="logout"><img class="img-header-nav" src="@/assets/img/logout.png"></div>
         </div>
     </div>
 </template>
@@ -48,11 +48,16 @@ const logout = function() {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    width: 18%;
+    width: 24%;
 }
 
 .img-header-logo {
     width: 150px;
+}
+
+.img-header-nav {
+    /* width: 100px; */
+    height: 40px;
 }
 
 a, .logout-btn {
