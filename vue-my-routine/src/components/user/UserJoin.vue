@@ -1,7 +1,7 @@
 <template>
   <div class="join-container">
     <!-- 추후 로고 들어갈 예정 -->
-    <div><h1>회원가입</h1></div>
+    <h1 class="view-title">회원가입</h1>
     <div class="join-form">
       <form @submit.prevent="confirmJoin">
         <div class="join-form-group">
@@ -24,7 +24,7 @@
           <button @click="verifyPassword">확인</button>
         </div>
         <div class="join-form-group">
-          <div class="input-label">성별</div>
+          <label class="input-label">성별</label>
           <label for="gender">
             <input class="input-radio" type="radio" name="gender" v-model="user.gender" value="남성" />
             <span>남성</span>
@@ -151,6 +151,7 @@ const verifyPassword = function () {
   padding: 20px;
   border-radius: 8px;
   width: 1000px;
+  margin: 100px;
 }
 
 .join-form {
@@ -167,7 +168,7 @@ const verifyPassword = function () {
 .join-form-group {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 35px;
 }
 
 .join-form-group label {
@@ -185,7 +186,7 @@ const verifyPassword = function () {
 .join-form-group input[type="password"],
 .join-form-group input[type="number"] {
   /* flex: 1; 입력 필드를 가능한 최대 너비로 설정 */
-  width: 200px;
+  width: 300px;
   height: 30px;
   padding: 5px;
   border: none;
@@ -199,11 +200,34 @@ const verifyPassword = function () {
 
 .join-form-group button {
   margin-left: 15px;
+  background: #999;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px 7px;
+}
+.join-form-group button:hover {
+  background-color: #FFA101;
 }
 
 .join-buttons {
   display: flex;
-  gap: 10px;
+  gap: 50px;
   justify-content: center;
+}
+
+.join-buttons button {
+  background-color: #FFA101;
+  color: #fff;
+  border: none;
+  padding: 10px 50px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.join-buttons button:last-child {
+  background-color: #999;
+
 }
 </style>

@@ -7,7 +7,7 @@
         <!-- 댓글 작성자 프로필 -->
         <div class="qna-detail-comment-profile">
           <img
-            src="/src/assets/img/profile_gentleman.png"
+            src="/src/assets/img/profile.png"
             class="qna-detail-comment-profile-pic"
           />
           <div class="qna-detail-comment-profile-name">{{ ans.writer }}</div>

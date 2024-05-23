@@ -12,14 +12,12 @@
         <div class="routine-title">{{ routine.title }}</div>
         <!-- 등록 버튼 -->
         <div>
-            <button @click="createRoutine(routine.id)">등록</button>
-        </div>
+            <button @click="createRoutine(routine.id)" class="mp-create-btn">등록</button>
         <!-- 삭제 버튼 -->
-        <div>
           <!-- <img src="@/assets/img/icon/free-icon-cross-11122367.png" alt="보관한 루틴 삭제버튼"
                         class="img-delete-btn"
                         @click="deleteRoutine(routine.id)"> -->
-          <button @click="deleteRoutine(routine.id)">삭제</button>
+          <button @click="deleteRoutine(routine.id)" class="mp-create-btn">삭제</button>
         </div>
       </div>
       <div class="flex-box">
@@ -98,5 +96,15 @@ onMounted(() => {
 
 .content-box {
   cursor: default;
+}
+
+.mp-create-btn {
+  margin-right: 10px;
+  margin-bottom: 15px;
+  border: none;
+  background-color: #999;
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 3px;
 }
 </style>
