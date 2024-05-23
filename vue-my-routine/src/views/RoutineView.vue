@@ -18,9 +18,9 @@
           </div>
           <!-- 프로필 해시태그(성격) 표시 부분 -->
           <div class="flex-box">
-            <div class="profile-hashtag">#체력UP</div>
-            <div class="profile-hashtag">#활발한</div>
-            <div class="profile-hashtag">#헬스장</div>
+            <div class="routine-tag profile-hashtag" v-if="loginUser.character1 !== null">#{{ loginUser.character1 }}</div>
+            <div class="routine-tag profile-hashtag" v-if="loginUser.character2 !== null">#{{ loginUser.character2 }}</div>
+            <div class="routine-tag profile-hashtag" v-if="loginUser.character3 !== null">#{{ loginUser.character3 }}</div>
           </div>
         </div>
         <!-- 루틴 등록하기 버튼 -->
@@ -89,8 +89,10 @@ const handleUpdateRoutine = (isUpdate) => {
   }
 }
 
+// 루틴 등록하는 컴포넌트로 이동
 const createRoutine = function () {
   selectedRoutineId.value = null;
+  console.log(loginUser.character1);
   router.push({ name: 'routineCreate'});
 }
 </script>
