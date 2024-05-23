@@ -1,37 +1,24 @@
 <template>
   <div class="qna-container">
-    <div class="qna-list">
-      <div class="qna-title">질문 상담</div>
-      <!-- 질문 등록 버튼 -->
-      <button class="qna-create-button" @click="createQnA">질문 등록</button>
+    <div class="right-container qna-list">
+      <div class="view-title">질문 상담</div>
       <!-- 검색창 -->
-      <div>
+      <div class="search-list-container">
         <div class="qna-search">
           <div>#</div>
-          <input type="text" placeholder="제목으로 검색하세요." v-model="condition.word"/>
+          <input type="text" placeholder="제목으로 검색하세요." v-model="condition.word" @keyup.enter="clickSearch"/>
           <button @click="clickSearch">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-search"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
-              />
-            </svg>
-          </button>
-        </div>
-        <!-- 검색 기능 필터 -->
-        <div class="qna-search-option">
-          <select
-            name="search-option"
+            <img src="@/assets/img/icon/search.png" alt="검색" class="search-icon">
+        </button>
+      </div>
+      <!-- 검색 기능 필터 -->
+      <div class="qna-search-option">
+        <select
+        name="search-option"
             id="search-option"
             class="qna-search-option"
             @change="handleSearchOptionChange"
-          >
+            >
             <option value="OFF">검색 필터 OFF</option>
             <option value="ON">검색 필터 ON</option>
           </select>
@@ -40,7 +27,7 @@
           <div
             :class="['filter-checkboxes', { show: filterCheckboxes }]"
             id="filter-checkboxes"
-          >
+            >
             <div>
               <div>
                 <input type="radio" name="level" id="total-level" value="" checked v-model="condition.word1" />
@@ -74,12 +61,12 @@
             <div>
               <div>
                 <input
-                  type="radio"
-                  name="orderBy"
-                  id="total-order"
-                  value=""
-                  checked
-                  v-model="condition.orderBy"
+                type="radio"
+                name="orderBy"
+                id="total-order"
+                value=""
+                checked
+                v-model="condition.orderBy"
                 />
                 <label for="total-order">전체</label>
               </div>
@@ -95,34 +82,34 @@
             <div>
               <div>
                 <input
-                  type="radio"
-                  name="gender"
+                type="radio"
+                name="gender"
                   id="total-gender"
                   value=""
                   checked
                   v-model="condition.word2"
-                />
-                <label for="total-gender">전체</label>
+                  />
+                  <label for="total-gender">전체</label>
+                </div>
+                <div>
+                  <input type="radio" name="gender" id="male" value="남성" v-model="condition.word2" />
+                  <label for="male">남성</label>
+                </div>
+                <div>
+                  <input type="radio" name="gender" id="female" value="여성" v-model="condition.word2" />
+                  <label for="female">여성</label>
+                </div>
               </div>
               <div>
-                <input type="radio" name="gender" id="male" value="남성" v-model="condition.word2" />
-                <label for="male">남성</label>
-              </div>
-              <div>
-                <input type="radio" name="gender" id="female" value="여성" v-model="condition.word2" />
-                <label for="female">여성</label>
-              </div>
-            </div>
-            <div>
-              <div>
-                <input type="radio" name="age" id="total-age" value="" checked v-model="condition.word3" />
-                <label for="total-age">전체</label>
-              </div>
-              <div>
-                <input type="radio" name="age" id="ten" value="10" v-model="condition.word3" />
-                <label for="ten">10대</label>
-              </div>
-              <div>
+                <div>
+                  <input type="radio" name="age" id="total-age" value="" checked v-model="condition.word3" />
+                  <label for="total-age">전체</label>
+                </div>
+                <div>
+                  <input type="radio" name="age" id="ten" value="10" v-model="condition.word3" />
+                  <label for="ten">10대</label>
+                </div>
+                <div>
                 <input type="radio" name="age" id="twenty" value="20" v-model="condition.word3" />
                 <label for="twenty">20대</label>
               </div>
@@ -143,22 +130,26 @@
         </div>
         <!-- 검색 상세 필터 div 끝 -->
       </div>
+      <!-- 질문 등록 버튼 -->
+      <button class="qna-create-button" @click="createQnA">질문 등록</button>
       <!-- 질의응답 리스트 -->
       <QnAList @selectQuestion="handleSelectQuesion"/>
     </div>
-    <!-- 세션에 selectedQnA 있는 경우 QnADetail 보임 -->
-    <div v-if="selectedQuestionId">
-      <!-- <div> -->
-      <QnADetail :questionId="selectedQuestionId" @isUpdate="handleQuestionUpdate" />
-    </div>
-    <!-- 질의응답 작성 페이지 -->
-    <div v-else-if="selectedQuestionId == null && !updatedQuestion">
-      <QnACreate />
-    </div>
-    <!-- 수정 버튼 눌렸을 시 QnaUpdate 보임 -->
-    <div v-else-if="updatedQuestion">
-      <QnAUpdate />
-    </div>
+    <div class="right-container">
+      <!-- 세션에 selectedQnA 있는 경우 QnADetail 보임 -->
+      <div v-if="selectedQuestionId">
+        <!-- <div> -->
+          <QnADetail :questionId="selectedQuestionId" @isUpdate="handleQuestionUpdate" />
+        </div>
+        <!-- 질의응답 작성 페이지 -->
+        <div v-else-if="selectedQuestionId == null && !updatedQuestion">
+          <QnACreate />
+        </div>
+        <!-- 수정 버튼 눌렸을 시 QnaUpdate 보임 -->
+        <div v-else-if="updatedQuestion">
+          <QnAUpdate />
+        </div>
+      </div>
   </div>
 </template>
 
@@ -236,18 +227,12 @@ const clickSearch = function () {
   font-family: 'Pretendard';
 }
 
-.qna-list {
-  width: 50%;
-  padding-right: 3%;
-  border-right: 1px solid #ccc;
+.view-title {
+  margin-bottom: 40px;
 }
 
-.qna-title {
-  font-size: 1.5em;
-  font-weight: 600;
-  color: #31525b;
-  margin-bottom: 20px;
-  text-align: center;
+.qna-list {
+  border-right: 1px solid #ccc;
 }
 
 .qna-create-button {
@@ -269,9 +254,6 @@ const clickSearch = function () {
   border-bottom: 2px solid lightgray;
   font-size: 25px;
   color: #ffa101;
-  /* width: 400px; */
-  width: 100%;
-  margin-right: 25px;
   margin-bottom: 10px;
 }
 
@@ -288,10 +270,7 @@ const clickSearch = function () {
   background-color: white;
   border: none;
   border-radius: 5px;
-}
-
-.qna-search button:hover {
-  background-color: #ffa101;
+  cursor: pointer;
 }
 
 .qna-search svg {

@@ -23,6 +23,10 @@
         cols="30"
         rows="10"
         v-model="question.content"
+        style="min-width: 300px;
+        max-width: 300px;
+        min-height: 300px;
+        max-height: 300px;"
       ></textarea>
     </div>
     <!-- 루틴 인용 -->
@@ -95,14 +99,14 @@ const confirmCreate = function () {
 
 <style scoped>
 .qna-create {
-  /* border: 1px solid gray; */
   padding: 30px;
   margin: 20px;
-  /* width: 500px; */
   height: 570px;
   font-size: 1em;
-  color: #777;
-  box-shadow: 5px 5px 10px lightgray;
+  color: #555;
+  box-shadow: 3px 4px 20px -5px #ccc;
+  border-radius: 5px;
+
 }
 
 .qna-create-profile,

@@ -11,9 +11,13 @@
             class="qna-detail-comment-profile-pic"
           />
           <div class="qna-detail-comment-profile-name">{{ ans.writer }}</div>
-          <div class="qna-detail-comment-profile-level">Lv.{{ ans.userLevel }}</div>
-          <div class="qna-detail-comment-profile-tag">{{ ans.userAge }}</div>
-          <div class="qna-detail-comment-profile-tag">남성</div>
+
+          <div class="routine-tag" 
+          style="background-color: #fae6b1;
+                  color: #555;">
+                  Lv.{{ ans.userLevel }}</div>
+          <div class="routine-user-tag">{{ ans.userAge }}</div>
+          <div class="routine-user-tag">남성</div>
           <!-- 답변 채택 버튼 (질문 작성자에게만 보임) -->
           <div v-if="checkQueWriter(ans)" @click="pickAnswer(ans)">작성자</div>
           <!-- 답변 삭제 버튼 (답변 작성자에게만 보임) -->
@@ -23,9 +27,9 @@
         </div>
         <!-- 댓글 내용 -->
         <div>
-          <div class="qna-detail-comment-content">
+          <p class="qna-detail-comment-content">
             {{ ans.content }}
-          </div>
+          </p>
         </div>
       </div>
     </div>

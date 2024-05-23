@@ -35,7 +35,7 @@
         @selectRoutineId="handleSelectRoutine"
       />
     </div>
-    <div class="routine-write-detail-container">
+    <div class="right-container">
       <!-- 루틴 상세보기 -->
       <div v-if="selectedRoutineId != null && !isUpdateRoutine">
         <RoutineDetail :routineId="selectedRoutineId" @isUpdate="handleUpdateRoutine" />
@@ -105,6 +105,8 @@ const createRoutine = function () {
   font-family: "Pretendard";
 }
 
+
+
 /* 마이페이지 프로필 부분 */
 .mypage-profile-container {
   width: 50%;
@@ -154,8 +156,5 @@ const createRoutine = function () {
   background-color: #b3e6d0;
 }
 
-/* 오른쪽 화면 */
-.routine-write-detail-container {
-  width: 50%;
-}
+
 </style>

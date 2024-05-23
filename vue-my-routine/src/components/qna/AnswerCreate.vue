@@ -4,10 +4,12 @@
       <textarea
         name=""
         id=""
-        cols="50"
-        rows="4"
         placeholder="댓글을 작성하세요..."
         v-model="answer.content"
+        style="min-width: 90%;
+        max-width: 90%;
+        min-height: 100px;
+        max-height: 80px;"
       ></textarea>
       <button class="qna-detail-comment-button" @click="createAnswer">등록</button>
     </div>

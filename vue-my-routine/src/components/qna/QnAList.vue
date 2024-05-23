@@ -3,22 +3,25 @@
     <!-- 질문 목록 본문 -->
     <!-- 질문 카드 -->
     <div
-      class="qna-list-card content-box"
       v-for="qna in store.qnaList"
       :key="qna.id"
-      @click="handleClick(qna)"
-    >
-      <!-- 상단 작성자 프로필 -->
-      <div class="qna-list-card-profile">
-        <!-- 작성자 프로필 사진 -->
-        <img src="/src/assets/img/profile.png" class="qna-list-card-pic" />
-        <div class="qna-list-card-name">{{ qna.writer }}</div>
-        <div class="routine-tag qna-list-card-level">Lv {{ qna.userLevel }}</div>
-        <div class="routine-tag">{{ qna.userAge }}</div>
-        <div class="routine-tag">{{ qna.userGender }}</div>
+      @click="handleClick(qna)">
+      <div class="qna-list-card content-box">
+
+        <!-- 상단 작성자 프로필 -->
+        <div class="flex-box">
+          <!-- 작성자 프로필 사진 -->
+          <div>
+            <img src="/src/assets/img/profile.png" class="qna-list-card-pic" />
+          </div>
+          <div class="qna-list-card-name">{{ qna.writer }}</div>
+          <div class="routine-tag qna-list-card-level">Lv.{{ qna.userLevel }}</div>
+          <div class="routine-tag">{{ qna.userAge }}</div>
+          <div class="routine-tag">{{ qna.userGender }}</div>
+        </div>
+        <!-- 질문 제목 -->
+        <div class="qna-list-card-title">{{ qna.title }}</div>
       </div>
-      <!-- 질문 제목 -->
-      <div class="qna-list-card-title">{{ qna.title }}</div>
     </div>
   </div>
 </template>
@@ -78,40 +81,31 @@ onMounted(() => {
   text-decoration: none;
 }
 
-.qna-list-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  /* border-right: 1px solid #777; */
-  padding-top: 15px;
-  padding-right: 15px;
-}
-
 .qna-list-card {
   background-color: #eafafd;
 }
 
-.qna-list-card-profile {
-  display: flex;
-  align-items: center;
-}
-
 .qna-list-card-pic {
   width: 50px;
-  height: 50px;
+  margin-right: 7px;
+  margin-bottom: 20px;
 }
 
 .qna-list-card-name {
-  padding: 3px 10px;
-  margin: 0px 5px;
-  font-size: 1em;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  margin-right: 15px;
 }
 
+.routine-tag {
+  background: #aaa;
+}
 .qna-list-card-level {
   background-color: #fae6b1;
   color: #555;
 }
+
 
 .qna-list-card-tag {
   background: #aaa;
@@ -122,7 +116,8 @@ onMounted(() => {
 }
 
 .qna-list-card-title {
-  font-size: 1em;
-  padding: 15px 10px 0px 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding-bottom: 10px;
 }
 </style>

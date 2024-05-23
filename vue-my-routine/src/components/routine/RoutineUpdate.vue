@@ -16,28 +16,38 @@
       <div class="flex-box">
         <div>
           <!-- 운동 부위 1 -->
-          <select name="part1" id="part1" v-model="store.routine.part1">
+          <select name="part1" id="part1" size="3" v-model="store.routine.part1">
             <option value="" disabled selected>운동부위1</option>
             <option value="유산소">유산소</option>
-            <option value="하체">하체</option>
             <option value="상체">상체</option>
             <option value="어깨">어깨</option>
+            <option value="등">등</option>
             <option value="팔">팔</option>
+            <option value="코어">코어</option>
+            <option value="복부">복부</option>
+            <option value="하체">하체</option>
+            <option value="다리">다리</option>
             <option value="허벅지">허벅지</option>
+            <option value="엉덩이">엉덩이</option>
           </select>
         </div>
         <div>
           <!-- 운동 부위 2 -->
           <!-- 운동 부위 1을 선택해야 선택할 수 있도록 함(value != null) -->
-          <select name="part2" id="part2" v-model="store.routine.part2">
+          <select name="part2" id="part2" size="3" v-model="store.routine.part2">
             <option value="" disabled selected>운동부위2</option>
             <option value="null">선택안함</option>
             <option value="유산소">유산소</option>
-            <option value="하체">하체</option>
             <option value="상체">상체</option>
             <option value="어깨">어깨</option>
+            <option value="등">등</option>
             <option value="팔">팔</option>
+            <option value="코어">코어</option>
+            <option value="복부">복부</option>
+            <option value="하체">하체</option>
+            <option value="다리">다리</option>
             <option value="허벅지">허벅지</option>
+            <option value="엉덩이">엉덩이</option>
           </select>
         </div>
       </div>

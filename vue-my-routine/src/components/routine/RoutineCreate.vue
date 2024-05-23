@@ -16,28 +16,38 @@
       <div class="flex-box">
         <div>
           <!-- 운동 부위 1 -->
-          <select name="part1" id="part1" v-model="routine.part1">
+          <select name="part1" id="part1" size="3" v-model="selectedOption1">
             <option value="" disabled selected>운동부위1</option>
             <option value="유산소">유산소</option>
-            <option value="하체">하체</option>
             <option value="상체">상체</option>
             <option value="어깨">어깨</option>
+            <option value="등">등</option>
             <option value="팔">팔</option>
+            <option value="코어">코어</option>
+            <option value="복부">복부</option>
+            <option value="하체">하체</option>
+            <option value="다리">다리</option>
             <option value="허벅지">허벅지</option>
+            <option value="엉덩이">엉덩이</option>
           </select>
         </div>
         <div>
           <!-- 운동 부위 2 -->
           <!-- 운동 부위 1을 선택해야 선택할 수 있도록 함(value != null) -->
-          <select name="part2" id="part2" v-model="routine.part2">
+          <select name="part2" id="part2" size="3" :disabled="isPart2Disabled" v-model="selectedOption2">
             <option value="" disabled selected>운동부위2</option>
             <option value="null">선택안함</option>
             <option value="유산소">유산소</option>
-            <option value="하체">하체</option>
             <option value="상체">상체</option>
             <option value="어깨">어깨</option>
+            <option value="등">등</option>
             <option value="팔">팔</option>
+            <option value="코어">코어</option>
+            <option value="복부">복부</option>
+            <option value="하체">하체</option>
+            <option value="다리">다리</option>
             <option value="허벅지">허벅지</option>
+            <option value="엉덩이">엉덩이</option>
           </select>
         </div>
       </div>
@@ -45,7 +55,21 @@
     <!-- 운동 시간 -->
     <div class="routine-create-workoutTime">
       <label for="workoutTime">운동 시간</label>
-      <input type="number" v-model="routine.workoutTime" />
+      <select name="time" id="time" size="3" v-model="timeOption">
+            <option value="0">선택안함</option>
+            <option value="10">10분</option>
+            <option value="20">20분</option>
+            <option value="30">30분</option>
+            <option value="40">40분</option>
+            <option value="50">50분</option>
+            <option value="60">1시간</option>
+            <option value="90">1시간30분</option>
+            <option value="120">2시간</option>
+            <option value="150">2시간30분</option>
+            <option value="180">3시간</option>
+            <option value="240">4시간</option>
+            <option value="300">5시간 이상</option>
+          </select>
     </div>
     <!-- 내용 -->
     <div class="routine-create-content">
@@ -56,6 +80,10 @@
         cols="30"
         rows="10"
         v-model="routine.content"
+        style="min-width: 300px;
+        max-width: 300px;
+        min-height: 300px;
+        max-height: 300px;"
       ></textarea>
     </div>
     <!-- 등록 / 취소 버튼 -->
@@ -70,30 +98,46 @@
 import { usePointmileStore } from "@/stores/pointmile";
 import { useRoutineStore } from "@/stores/routine";
 import { useUserStore } from "@/stores/user";
+import { ref, watch, computed } from 'vue';
 
 const store = useRoutineStore();
 const userStore = useUserStore();
 const pointMileStore = usePointmileStore();
+
+const user = JSON.parse(sessionStorage.getItem("user"));
+
+const selectedOption1 = ref(user.part1);
+const selectedOption2 = ref(user.part2);
+const timeOption = ref(user.workoutTime);
 
 const routine = {
   userId: "",
   title: "",
   writer: "",
   routineAt: "",
-  part1: "",
-  part2: "",
-  workoutTime: "",
+  part1: selectedOption1.value,
+  part2: selectedOption2.value,
+  workoutTime: timeOption.value,
   content: "",
 };
 
-const confirmCreate = function () {
-  const userItem = sessionStorage.getItem("user");
-  const userObj = JSON.parse(userItem);
-  routine.userId = userObj.id;
-  routine.writer = userObj.nickname;
+const isPart2Disabled = computed(() => selectedOption1.value === "null");
 
-  if (routine.part2 == "null") {
-    routine.part2 = null;
+watch(selectedOption1, (newValue) => {
+  if (newValue === "null") {
+    selectedOption2.value = null;
+  }
+});
+
+const confirmCreate = function () {
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  routine.userId = user.id;
+  routine.writer = user.nickname;
+
+  if (timeOption.value === "0") {
+    routine.workoutTime = null;
+  } else {
+    routine.workoutTime = parseInt(timeOption.value, 10)
   }
 
   store.createRoutine(routine);
@@ -116,8 +160,9 @@ const cancelCreate = function () {};
   padding: 30px;
   margin: 20px;
   font-size: 1em;
-  color: #777;
-  box-shadow: 5px 5px 10px lightgray;
+  color: #555;
+  box-shadow: 3px 4px 20px -5px #ccc;
+  border-radius: 5px;
 }
 
 .routine-create-title,
