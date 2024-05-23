@@ -13,8 +13,8 @@
 	<!-- 답변 수정 -->
 	<update id="update" parameterType="Answer">
 		UPDATE answers
-		SET content = #{content}
-		WHERE answer_id = #{id}
+		SET content = #{content}, is_picked = #{isPicked}
+		WHERE id = #{id}
 	</update>
 	
 	<!-- 답변 삭제 -->

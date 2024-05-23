@@ -14,6 +14,10 @@
           <div class="qna-detail-comment-profile-level">Lv.{{ ans.userLevel }}</div>
           <div class="qna-detail-comment-profile-tag">{{ ans.userAge }}</div>
           <div class="qna-detail-comment-profile-tag">남성</div>
+          <!-- 답변 채택 버튼 (질문 작성자에게만 보임) -->
+          <div v-if="checkQueWriter(ans)" @click="pickAnswer(ans)">작성자</div>
+          <!-- 답변 삭제 버튼 (답변 작성자에게만 보임) -->
+          <div v-else-if="checkAnsWriter(ans.userId)" @click="deleteAnswer"></div>
         </div>
         <!-- 댓글 내용 -->
         <div>
@@ -62,6 +66,49 @@ watch(
   { immediate: true }
 )
 
+// 해당 질문의 작성자인지 확인
+const checkQueWriter = function (ans) {
+  // ans의 questionId를 통해 질문 작성자 아이디 알아내기
+  // store.getQuestion(ans.quesitonId);
+  const question = store.question;
+  // console.log(question);
+
+  const userId = question.userId;
+
+  // console.log('userId: ' + userId);
+
+  const loginUser = JSON.parse(sessionStorage.getItem('user'));
+  if (loginUser && loginUser.id === userId) {
+    console.log(true);
+    return true;
+  }
+  return false;
+};
+
+// 해당 답변의 작성자인지 확인
+const checkAnsWriter = function (userId) {
+  const loginUser = JSON.parse(sessionStorage.getItem('user'));
+  if (loginUser && loginUser.id === userId) {
+    return true;
+  }
+  return false;
+}
+
+// 답변 채택 (질문 작성자 입장)
+const pickAnswer = function (answer) {
+  const updateAns = { ...answer, isPicked: 1 };
+
+  console.log(updateAns);
+
+  store.updateAnswer(updateAns);
+  // 확인용 (isPicked 가 1이 되어있어야 함)
+  console.log(updateAns);
+}
+
+// 답변 삭제 (답변 작성자 입장)
+const deleteAnswer = function () {
+
+}
 </script>
 
 <style scoped>
