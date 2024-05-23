@@ -22,17 +22,29 @@
         <input type="text" v-model="character2">
         <input type="text" v-model="character3">
     </div>
+    
+    <!-- 성격 태그 추천받기 - ChatGPT -->
+    <div>{{ promptmsg }}</div>
+    
     <button @click="modifyExTag">수정 완료</button>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 
+const promptmsg = ref("");
+// PromiseResult
+const hint = () => {
+  promptmsg.value = OpenApiUtil.prompt("성격 추천해줘")
+  .then((res) => {
+    promptmsg.value = res;
+  });
+};
 </script>
 
 <style scoped>
 .img-profile {
     width: 100px;
 }
-
 
 </style>
