@@ -89,7 +89,7 @@ export const useQnAStore = defineStore('qna', () => {
         axios.get(`${ROUTINE_REST_API}detail`, { params: { routineId: qna.routineId } })
             .then((response) => {
                 qna.routine = response.data;
-                console.log(qna.routine);
+                // console.log(qna.routine);
             })
     }
 
@@ -161,6 +161,21 @@ export const useQnAStore = defineStore('qna', () => {
         })
     }
 
+    const updateAnswer = function (answer) {
+        axios.put(`${ANS_REST_API}?id=${answer.id}`, answer)
+        .then(() => {
+            router.go({ name: 'qnaList' });
+        })
+    }
+
+    const deleteAnswer = function (answer) {
+        console.log(answer);
+        axios.put(`${ANS_REST_API}delete?id=${answer.id}`)
+        .then(() => {
+            router.go({ name: 'qnaList' });
+        })
+    }
+
     const searchQuestionList = function (searchCondition) {
         return axios.get(`${QNA_REST_API}`, {params: {
             level: searchCondition.level,
@@ -199,6 +214,8 @@ export const useQnAStore = defineStore('qna', () => {
         createQuestion,
         createAnswer,
         updateQuestion,
+        updateAnswer,
+        deleteAnswer,
         searchQuestionList
     };
 })

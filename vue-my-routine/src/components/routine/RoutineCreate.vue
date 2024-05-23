@@ -95,12 +95,14 @@
 </template>
 
 <script setup>
+import { usePointmileStore } from "@/stores/pointmile";
 import { useRoutineStore } from "@/stores/routine";
 import { useUserStore } from "@/stores/user";
 import { ref, watch, computed } from 'vue';
 
 const store = useRoutineStore();
 const userStore = useUserStore();
+const pointMileStore = usePointmileStore();
 
 const user = JSON.parse(sessionStorage.getItem("user"));
 
@@ -127,7 +129,6 @@ watch(selectedOption1, (newValue) => {
   }
 });
 
-
 const confirmCreate = function () {
   const user = JSON.parse(sessionStorage.getItem("user"));
   routine.userId = user.id;
@@ -139,9 +140,16 @@ const confirmCreate = function () {
     routine.workoutTime = parseInt(timeOption.value, 10)
   }
 
-  console.log(routine.writer);
-
   store.createRoutine(routine);
+
+  // 포인트 생성
+  const point = {
+    userId: routine.userId,
+    amount: 100,
+    record: "루틴 완료",
+  };
+
+  pointMileStore.createPoint(point);
 };
 
 const cancelCreate = function () {};

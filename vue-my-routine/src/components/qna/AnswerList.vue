@@ -11,12 +11,19 @@
             class="qna-detail-comment-profile-pic"
           />
           <div class="qna-detail-comment-profile-name">{{ ans.writer }}</div>
+
           <div class="routine-tag" 
           style="background-color: #fae6b1;
                   color: #555;">
                   Lv.{{ ans.userLevel }}</div>
           <div class="routine-user-tag">{{ ans.userAge }}</div>
           <div class="routine-user-tag">남성</div>
+          <!-- 답변 채택 버튼 (질문 작성자에게만 보임) -->
+          <div v-if="checkQueWriter(ans)" @click="pickAnswer(ans)">작성자</div>
+          <!-- 답변 삭제 버튼 (답변 작성자에게만 보임) -->
+          <div v-else-if="checkAnsWriter(ans.userId)" @click="deleteAnswer(ans)">
+            답변 작성자
+          </div>
         </div>
         <!-- 댓글 내용 -->
         <div>
@@ -25,23 +32,23 @@
           </p>
         </div>
       </div>
-
-
     </div>
   </div>
 </template>
 
 <script setup>
-import { useQnAStore } from '@/stores/qna';
-import { defineProps, ref, watch } from 'vue';
+import { usePointmileStore } from "@/stores/pointmile";
+import { useQnAStore } from "@/stores/qna";
+import { defineProps, ref, watch } from "vue";
 
 const store = useQnAStore();
+const pointMileStore = usePointmileStore();
 
 const props = defineProps({
   questionId: {
     type: Number,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const answerList = ref([]);
@@ -53,7 +60,7 @@ const fetchAnswerList = async (questionId) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 watch(
   () => props.questionId,
@@ -63,8 +70,61 @@ watch(
     }
   },
   { immediate: true }
-)
+);
 
+// 해당 질문의 작성자인지 확인
+const checkQueWriter = function (ans) {
+  // ans의 questionId를 통해 질문 작성자 아이디 알아내기
+  const question = store.question;
+  const userId = question.userId;
+
+  const loginUser = JSON.parse(sessionStorage.getItem("user"));
+  if (loginUser && loginUser.id === userId) {
+    console.log(true);
+    return true;
+  }
+  return false;
+};
+
+// 해당 답변의 작성자인지 확인
+const checkAnsWriter = function (userId) {
+  const loginUser = JSON.parse(sessionStorage.getItem("user"));
+  if (loginUser && loginUser.id === userId) {
+    return true;
+  }
+  return false;
+};
+
+// 답변 채택 (질문 작성자 입장)
+const pickAnswer = function (answer) {
+  const updateAns = { ...answer, isPicked: 1 };
+
+  store.updateAnswer(updateAns);
+
+  // 답변자 채택 포인트 생성
+  const point = {
+    userId: answer.userId,
+    amount: 500,
+    record: "답변 채택",
+  };
+
+  // 질문자 채택 포인트 생성
+  const question = store.question;
+  const userId = question.userId;
+  const point2 = {
+    userId: userId,
+    amount: 300,
+    record: "질문 답변 채택 완료",
+  }
+
+  pointMileStore.createPoint(point);
+  pointMileStore.createPoint(point2);
+};
+
+// 답변 삭제 (답변 작성자 입장)
+const deleteAnswer = function (answer) {
+  store.deleteAnswer(answer);
+};
 </script>
 
 <style scoped>

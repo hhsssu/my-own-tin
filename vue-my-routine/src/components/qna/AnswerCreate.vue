@@ -37,11 +37,9 @@ const answer = {
 };
 
 const createAnswer = function () {
-  const userItem = sessionStorage.getItem("loginUser");
+  const userItem = sessionStorage.getItem("user");
   const userObj = JSON.parse(userItem);
-  // answer.userId = userObj.id;
-  answer.userId = 11;
-  // console.log(props.questionId);
+  answer.userId = userObj.id;
   answer.questionId = props.questionId;
   store.createAnswer(answer);
 };

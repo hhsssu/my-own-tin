@@ -8,7 +8,7 @@ public class Answer {
 	private int questionId;
 	private String writer;
 	private String content;
-	private boolean isPicked;
+	private int isPicked;
 	private Date createAt;
 	private Date updateAt;
 	private Date deleteAt;
@@ -16,7 +16,7 @@ public class Answer {
 	public Answer() {
 	}
 
-	public Answer(int userId, int questionId, String writer, String content, boolean isPicked) {
+	public Answer(int userId, int questionId, String writer, String content, int isPicked) {
 		this.userId = userId;
 		this.questionId = questionId;
 		this.writer = writer;
@@ -64,11 +64,11 @@ public class Answer {
 		this.content = content;
 	}
 
-	public boolean isPicked() {
+	public int getIsPicked() {
 		return isPicked;
 	}
 
-	public void setPicked(boolean isPicked) {
+	public void setIsPicked(int isPicked) {
 		this.isPicked = isPicked;
 	}
 

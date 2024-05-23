@@ -13,8 +13,8 @@
 	<!-- 답변 수정 -->
 	<update id="update" parameterType="Answer">
 		UPDATE answers
-		SET content = #{content}
-		WHERE answer_id = #{id}
+		SET is_picked = #{isPicked}
+		WHERE id = #{id}
 	</update>
 	
 	<!-- 답변 삭제 -->
@@ -33,7 +33,7 @@
 	<select id="selectAll" parameterType="int" resultType="Answer">
 		SELECT *
 		FROM answers
-		WHERE question_id = #{questionId}
+		WHERE question_id = #{questionId} AND delete_at IS NULL
 	</select>
 
 
