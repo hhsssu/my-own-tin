@@ -67,11 +67,13 @@
 </template>
 
 <script setup>
+import { usePointmileStore } from "@/stores/pointmile";
 import { useRoutineStore } from "@/stores/routine";
 import { useUserStore } from "@/stores/user";
 
 const store = useRoutineStore();
 const userStore = useUserStore();
+const pointMileStore = usePointmileStore();
 
 const routine = {
   userId: "",
@@ -90,13 +92,20 @@ const confirmCreate = function () {
   routine.userId = userObj.id;
   routine.writer = userObj.nickname;
 
-  if(routine.part2 == "null") {
+  if (routine.part2 == "null") {
     routine.part2 = null;
   }
 
-  console.log(routine.writer);
-
   store.createRoutine(routine);
+
+  // 포인트 생성
+  const point = {
+    userId: routine.userId,
+    amount: 100,
+    record: "루틴 완료",
+  };
+
+  pointMileStore.createPoint(point);
 };
 
 const cancelCreate = function () {};
