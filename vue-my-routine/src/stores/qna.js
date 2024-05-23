@@ -162,11 +162,16 @@ export const useQnAStore = defineStore('qna', () => {
     }
 
     const updateAnswer = function (answer) {
-        console.log(answer);
-        // answer.isPicked = 1;
         axios.put(`${ANS_REST_API}?id=${answer.id}`, answer)
         .then(() => {
-            // console.log(answer.isPicked);
+            router.go({ name: 'qnaList' });
+        })
+    }
+
+    const deleteAnswer = function (answer) {
+        console.log(answer);
+        axios.put(`${ANS_REST_API}delete?id=${answer.id}`)
+        .then(() => {
             router.go({ name: 'qnaList' });
         })
     }
@@ -210,6 +215,7 @@ export const useQnAStore = defineStore('qna', () => {
         createAnswer,
         updateQuestion,
         updateAnswer,
+        deleteAnswer,
         searchQuestionList
     };
 })

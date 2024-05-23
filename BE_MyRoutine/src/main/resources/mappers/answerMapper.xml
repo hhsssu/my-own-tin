@@ -33,7 +33,7 @@
 	<select id="selectAll" parameterType="int" resultType="Answer">
 		SELECT *
 		FROM answers
-		WHERE question_id = #{questionId}
+		WHERE question_id = #{questionId} AND delete_at IS NULL
 	</select>
 
 

@@ -17,7 +17,7 @@
           <!-- 답변 채택 버튼 (질문 작성자에게만 보임) -->
           <div v-if="checkQueWriter(ans)" @click="pickAnswer(ans)">작성자</div>
           <!-- 답변 삭제 버튼 (답변 작성자에게만 보임) -->
-          <div v-else-if="checkAnsWriter(ans.userId)" @click="deleteAnswer"></div>
+          <div v-else-if="checkAnsWriter(ans.userId)" @click="deleteAnswer(ans)">답변 작성자</div>
         </div>
         <!-- 댓글 내용 -->
         <div>
@@ -71,7 +71,7 @@ const checkQueWriter = function (ans) {
   // ans의 questionId를 통해 질문 작성자 아이디 알아내기
   const question = store.question;
   const userId = question.userId;
-  
+
   const loginUser = JSON.parse(sessionStorage.getItem('user'));
   if (loginUser && loginUser.id === userId) {
     console.log(true);
@@ -101,8 +101,8 @@ const pickAnswer = function (answer) {
 }
 
 // 답변 삭제 (답변 작성자 입장)
-const deleteAnswer = function () {
-
+const deleteAnswer = function (answer) {
+  store.deleteAnswer(answer);
 }
 </script>
 
