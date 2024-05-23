@@ -12,11 +12,12 @@ export const OpenApiUtil = {
         const completion = await openai.chat.completions.create({
           messages: [{ role: "system", content: msg }],
           model: "gpt-4o",
+          // gpt-4o 적용 안될 때
           // model: "gpt-3.5-turbo",
 
         });
     
-        console.log(completion.choices[0].message.content);
+        // console.log(completion.choices[0].message.content);
         return completion.choices[0].message.content
       }
 };
