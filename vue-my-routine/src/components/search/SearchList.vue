@@ -58,6 +58,6 @@ watch(
 
 <style scoped>
 .search-list-item {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 </style>

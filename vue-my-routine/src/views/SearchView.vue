@@ -145,8 +145,10 @@
       <SearchList @selectRoutineId="handleSelectRoutine" />
     </div>
     <!-- 세션에 selectedSearch 있는 경우에 SearchDetail 보임 -->
-    <div v-if="selectedRoutineId" class="search-detail-container">
-      <SearchDetail :routineId="selectedRoutineId" />
+    <div class="search-detail-container">
+      <div v-if="selectedRoutineId" >
+        <SearchDetail :routineId="selectedRoutineId" />
+      </div>
     </div>
   </div>
 </template>
@@ -220,9 +222,8 @@ onMounted(() => {
 
 .search-list {
   /* width: 450px; */
-  width: 47%;
-  padding-right: 3%;
-  border-right: 1px solid #aaa;
+  width: 50%;
+  border-right: 1px solid #ccc;
 }
 
 .search-title {

@@ -40,3 +40,21 @@ select {
     font-weight: 600;
     color: #555;
 }
+
+.routine-tag {
+    background-color: #F28F79;
+    font-size: 0.8em;
+    color: #fff;
+    font-weight: 500;
+    padding: 4px 5px;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    margin-right: 7px;
+}
+
+.routine-title {
+    font-weight: 700;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    margin-right: 15px;
+}

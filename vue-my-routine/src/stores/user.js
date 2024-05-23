@@ -103,7 +103,7 @@ export const useUserStore = defineStore('user', () => {
                 console.log(updatedUserInfo);
                 updateSessionInfo(updatedUserInfo);
                 alert("수정이 완료되었습니다!");
-                router.replace({ name: 'mypage' });
+                router.go({ name: 'mypage' });
             }).catch(error => {
                 console.error("Error updating user:", error);
             });

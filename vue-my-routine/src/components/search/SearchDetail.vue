@@ -2,14 +2,14 @@
   <div v-if="routine" class="search-detail">
     <!-- 루틴 말머리 (정보) -->
     <div class="search-detail-head">
-      <div class="search-detail-title">{{ routine.title }}</div>
-      <div class="search-detail-tag">{{ routine.userAge }}</div>
-      <div class="search-detail-tag">{{ routine.userGender }}</div>
-      <div class="search-detail-tag">{{ routine.part1 }}</div>
-      <div class="search-detail-tag" v-if="routine.part2 != null">
+      <div class="routine-title">{{ routine.title }}</div>
+      <div class="routine-tag search-detail-tag">{{ routine.userAge }}</div>
+      <div class="routine-tag search-detail-tag">{{ routine.userGender }}</div>
+      <div class="routine-tag search-detail-tag">{{ routine.part1 }}</div>
+      <div class="routine-tag search-detail-tag" v-if="routine.part2 != null">
         {{ routine.part2 }}
       </div>
-      <div class="search-detail-tag">{{ routine.workoutTime }}분</div>
+      <div class="routine-tag search-detail-tag">{{ routine.workoutTime }}분</div>
     </div>
     <!-- 루틴 본문 -->
     <div class="search-detail-content">{{ routine.content }}</div>
@@ -95,19 +95,8 @@ const clickForLike = function () {
   margin-bottom: 15px;
 }
 
-.search-detail-title {
-  font-size: 1.2em;
-  font-weight: 600;
-  margin-right: 10px;
-}
-
 .search-detail-tag {
-  font-size: 0.8em;
-  color: white;
   background-color: #aaa;
-  border-radius: 3px;
-  padding: 3px 7px;
-  margin: 0px 5px;
 }
 
 .search-detail-content {
