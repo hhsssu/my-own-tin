@@ -31,7 +31,7 @@ export const useRoutineStore = defineStore('routine', () => {
       data: routine
     })
       .then(() => {
-        router.go(0)
+        // router.go(0)
       })
       .catch((error) => {
         console.log(error);
@@ -78,6 +78,7 @@ export const useRoutineStore = defineStore('routine', () => {
 
   // 루틴 상세보기
   const getRoutine = function (id) {
+    console.log(id);
     return axios.get(`${REST_ROUTINE_API}/detail`, {
       params: {
         routineId: id,
@@ -86,6 +87,7 @@ export const useRoutineStore = defineStore('routine', () => {
       .then((response) => {
         routine.value = response.data;
         getUserDetails(routine.value, 'routine');
+        console.log(routine.value);
         return routine.value;
       })
       .catch((error) => {
