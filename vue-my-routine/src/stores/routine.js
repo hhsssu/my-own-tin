@@ -10,6 +10,7 @@ axios.defaults.withCredentials = true;
 
 const REST_ROUTINE_API = `http://localhost:8080/myroutine/routine`;
 const REST_USER_API = `http://localhost:8080/myroutine/user`;
+const REST_POINT_API = `http://localhost:8080/myrouinte/point`;
 
 // 루틴 불러오기, 등록, 수정, 삭제 (CRUD)
 // routine 페이지, 검색 페이지
@@ -35,6 +36,26 @@ export const useRoutineStore = defineStore('routine', () => {
       .catch((error) => {
         console.log(error);
       })
+
+      // 포인트 생성
+      const point = {
+        userId: routine.userId,
+        amount: 100,
+        record: "루틴 완료"
+      }
+
+      axios({
+        url: `http://localhost:8080/myroutine/point/`,
+        method: 'POST',
+        data: point
+      })
+      .then(() => {
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      
   }
 
   // 루틴 목록 불러오기 (내 루틴)

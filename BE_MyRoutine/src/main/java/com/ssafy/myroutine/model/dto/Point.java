@@ -11,6 +11,13 @@ public class Point {
 
 	public Point() {
 	}
+	
+	public Point(int userId, int amount, String record) {
+		super();
+		this.userId = userId;
+		this.amount = amount;
+		this.record = record;
+	}
 
 	public Point(int userId, int amount, String record, Date createAt) {
 		this.userId = userId;
