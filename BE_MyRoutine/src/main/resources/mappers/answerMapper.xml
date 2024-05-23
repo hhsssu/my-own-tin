@@ -13,7 +13,7 @@
 	<!-- 답변 수정 -->
 	<update id="update" parameterType="Answer">
 		UPDATE answers
-		SET content = #{content}, is_picked = #{isPicked}
+		SET is_picked = #{isPicked}
 		WHERE id = #{id}
 	</update>
 	

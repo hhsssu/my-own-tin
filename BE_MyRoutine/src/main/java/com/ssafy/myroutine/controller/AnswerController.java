@@ -54,9 +54,6 @@ public class AnswerController {
 	@PutMapping("/")
 	@Operation(summary = "답변 수정", description = "답변 수정 기능")
 	public ResponseEntity<?> update(@RequestParam int id, @RequestBody Answer ans) {
-		
-		System.out.println(ans.getIsPicked());
-		
 		ans.setId(id);
 		if(ansService.modifyAnswer(ans))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
