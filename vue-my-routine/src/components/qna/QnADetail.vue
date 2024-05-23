@@ -15,14 +15,14 @@
         {{ question.content }}
       </div>
       <!-- 작성자 루틴 -->
-      <div class="qna-detail-routine" v-if="question.routine != null">
-        <div class="qna-detail-routine-tag">
+      <div class="qna-detail-routine content-box" v-if="question.routine != null">
+        <div class="flex-box">
           <div class="qna-detail-routine-title">{{ question.routine.title }}</div>
-          <div class="qna-detail-routine-info">{{ question.userAge }}</div>
-          <div class="qna-detail-routine-info">{{ question.userGender }}</div>
-          <div class="qna-detail-routine-info2">{{ question.routine.part1 }}</div>
-          <div v-if="question.routine.part2 != null" class="qna-detail-routine-info2">{{ question.routine.part2 }}</div>
-          <div class="qna-detail-routine-info2">{{ question.routine.workoutTime }}분</div>
+          <div class="routine-tag qna-detail-routine-info">{{ question.userAge }}</div>
+          <div class="routine-tag qna-detail-routine-info">{{ question.userGender }}</div>
+          <div class="routine-tag qna-detail-routine-info2">{{ question.routine.part1 }}</div>
+          <div v-if="question.routine.part2 != null" class="routine-tag qna-detail-routine-info2">{{ question.routine.part2 }}</div>
+          <div class="routine-tag qna-detail-routine-info2">{{ question.routine.workoutTime }}분</div>
         </div>
         <div class="qna-detail-routine-content">{{ question.routine.content }}</div>
       </div>
@@ -165,17 +165,6 @@ const deleteQuestion = function () {
 
 .qna-detail-routine {
   background-color: #fff9e8;
-  padding: 10px 25px;
-  margin-top: 10px;
-  /* padding-bottom: 50px; */
-  height: 80px;
-  box-shadow: 5px 5px 10px lightgray;
-  border-radius: 5px;
-}
-
-.qna-detail-routine-tag {
-  display: flex;
-  align-items: center;
 }
 
 .qna-detail-routine-title {
@@ -185,21 +174,11 @@ const deleteQuestion = function () {
 }
 
 .qna-detail-routine-info {
-  padding: 3px 8px;
-  margin: 0px 5px;
-  color: white;
-  font-size: 0.8em;
   background-color: #aaa;
-  border-radius: 3px;
 }
 
 .qna-detail-routine-info2 {
-  padding: 3px 8px;
-  margin: 0px 5px;
-  color: white;
-  font-size: 0.8em;
   background-color: #31525b;
-  border-radius: 3px;
 }
 
 .qna-detail-routine-content {

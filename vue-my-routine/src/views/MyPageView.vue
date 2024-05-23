@@ -11,6 +11,8 @@
                     <div class="flex-box">
                         <div class="profile-name">{{ user.nickname }}</div>
                         <div class="profile-level">Lv.{{ user.level }}</div>
+                        <img src="@/assets/img/icon/compose2.png" alt="프로필 수정 버튼" class="img-modify-btn" 
+                            @click="showComponent('MypageModifyProfile')">
                     </div>
                     <!-- 프로필 해시태그(성격) 표시 부분 -->
                     <div class="flex-box">
@@ -70,7 +72,6 @@
         <div class="mypage-click-container">
             <!-- 프로필 페이지에 있는 메뉴들 클릭 시 띄울 화면 구현 -->
             <component :is="activeComponent" :mile-total="mileTotal" :point-total="pointTotal"/>
-            <MypageModifyProfile />
         </div>
     </div>
 </template>
@@ -259,7 +260,13 @@ onMounted(async () => {
     font-weight: 700;
 }
 
-
+/* 프로필 수정 버튼 스타일 */
+.img-modify-btn {
+    width: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
 
 
 

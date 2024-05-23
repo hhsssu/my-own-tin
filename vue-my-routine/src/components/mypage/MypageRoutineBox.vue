@@ -41,18 +41,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* 나의 루틴 태그 스타일 */
-.routine-tag {
-    font-size: 0.8rem;
-    padding: 4px 5px;
-    margin-bottom: 20px;
-    border-radius: 3px;
-    margin-right: 7px;
-    background-color: #aaa;
-    color: white;
-    font-weight: 300;
-}
-
 /* 프로필 클릭 박스의 타이틀 스타일 */
 .routine-title {
     font-weight: 700;

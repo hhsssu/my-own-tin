@@ -1,6 +1,6 @@
 <template>
   <!-- 나의 루틴 태그 영역 -->
-  <section class="profile-click-box content-box" @click="handleClick">
+  <div class="profile-click-box content-box" @click="handleClick">
     <div class="flex-box">
       <div class="routine-title">{{ routine.title }}</div>
       <div class="routine-tag">{{ routine.userAge }}</div>
@@ -9,12 +9,14 @@
       <div class="routine-tag" v-if="routine.part2 != null">{{ routine.part2 }}</div>
       <div class="routine-tag">{{ routine.workoutTime }}분</div>
       <!-- 더보기 버튼 -->
-      <button class="routine-more" @click="createMarkedRoutine"><img src="/src/assets/img/bookmark.png"></button>
+      <button class="routine-more" @click.stop="createMarkedRoutine">
+        <img src="@/assets/img/icon/free-icon-save-button-4443176.png">
+      </button>
     </div>
     <p>
       {{ routine.content }}
     </p>
-    </section>
+  </div>
 </template>
 
 <script setup>
@@ -38,29 +40,23 @@ const handleClick = () => {
   emits('selectRoutine', props.routine.id);
 };
 
+const isMarked = ref(false); // 북마크 여부
+
 const createMarkedRoutine = () => {
   const newRoutine = { ...props.routine, isMarked: 1 };
   store.createRoutine(newRoutine); // 새로운 루틴 추가하는 메서드에 따라 변경
+  isMarked.value = true; // 이미지 변경
   alert('북마크에 추가되었습니다!');
 };
 
 </script>
 
 <style scoped>
-.routine-tag {
-  background-color: #fae6b1;
-  font-size: 0.8em;
-  color: #333;
-  font-weight: 500;
-  padding: 4px 5px;
-  margin-bottom: 20px;
-  border-radius: 3px;
-  margin-right: 7px;
-}
+
 
 /* 나의 루틴 태그 스타일 */
 .routine-tag {
-  background-color: #aaa;
+  /* background-color: #aaa; */
   color: white;
   font-weight: 300;
 }
@@ -75,14 +71,13 @@ const createMarkedRoutine = () => {
 }
 
 .routine-more:hover {
-  background-color: #777;
   color: white;
-  cursor: pointer;;
+  cursor: pointer;
 }
 
 .routine-more img {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  margin-bottom: 20px;
 }
 
 /* 프로필 클릭 박스의 타이틀 스타일 */

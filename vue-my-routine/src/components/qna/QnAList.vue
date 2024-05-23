@@ -3,7 +3,7 @@
     <!-- 질문 목록 본문 -->
     <!-- 질문 카드 -->
     <div
-      class="qna-list-card"
+      class="qna-list-card content-box"
       v-for="qna in store.qnaList"
       :key="qna.id"
       @click="handleClick(qna)"
@@ -13,8 +13,9 @@
         <!-- 작성자 프로필 사진 -->
         <img src="/src/assets/img/profile.png" class="qna-list-card-pic" />
         <div class="qna-list-card-name">{{ qna.writer }}</div>
-        <div class="qna-list-card-tag">{{ qna.userAge }}</div>
-        <div class="qna-list-card-tag">{{ qna.userGender }}</div>
+        <div class="routine-tag qna-list-card-level">Lv {{ qna.userLevel }}</div>
+        <div class="routine-tag">{{ qna.userAge }}</div>
+        <div class="routine-tag">{{ qna.userGender }}</div>
       </div>
       <!-- 질문 제목 -->
       <div class="qna-list-card-title">{{ qna.title }}</div>
@@ -88,12 +89,6 @@ onMounted(() => {
 
 .qna-list-card {
   background-color: #eafafd;
-  padding: 15px;
-  margin-bottom: 30px;
-  border-radius: 5px;
-  width: 94%;
-  height: 100px;
-  box-shadow: 5px 5px 10px lightgray;
 }
 
 .qna-list-card-profile {
@@ -114,9 +109,7 @@ onMounted(() => {
 
 .qna-list-card-level {
   background-color: #fae6b1;
-  padding: 3px 10px;
-  margin: 0px 5px;
-  border-radius: 3px;
+  color: #555;
 }
 
 .qna-list-card-tag {
