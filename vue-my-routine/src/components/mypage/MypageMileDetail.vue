@@ -6,7 +6,7 @@
             <div class="point-detail-total" v-else-if="mileTotal === 0 || mileTotal === null">잔여 마일리지 : 0 M</div>
         </div>
 
-        <table class="point-detail-table">
+        <table class="point-detail-table" style="table-layout: fixed;">
             <thead>
                 <tr class="point-detail-table-header">
                     <th>거래일</th>
@@ -60,7 +60,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.mypage-point-detail-container {}
+.mypage-point-detail-container {
+    padding-top: 10px;
+}
 
 
 
@@ -94,8 +96,8 @@ onMounted(() => {
 
 th {
     padding-bottom: 7px;
-    padding-right: 40px;
-    padding-left: 40px;
+    padding-right: 50px;
+    padding-left: 50px;
 }
 
 /* 테이블 각 한줄 컬럼 */
@@ -103,7 +105,7 @@ th {
 
 /* 테이블 콘텐츠 */
 td {
-    padding: 15px 40px;
+    padding: 15px 0px;
 }
 
 /* 거래일 */

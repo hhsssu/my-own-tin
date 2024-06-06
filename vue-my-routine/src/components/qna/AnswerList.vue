@@ -19,7 +19,7 @@
           <div class="routine-user-tag">{{ ans.userAge }}</div>
           <div class="routine-user-tag">남성</div>
           <!-- 답변 채택 버튼 (질문 작성자에게만 보임) -->
-          <button v-if="checkQueWriter(ans)" @click="pickAnswer(ans)">채택</button>
+          <button class="routine-user-tag" v-if="checkQueWriter(ans)" @click="pickAnswer(ans)">채택</button>
           <!-- 답변 삭제 버튼 (답변 작성자에게만 보임) -->
           <div v-else-if="checkAnsWriter(ans.userId)" @click="deleteAnswer(ans)">
             답변 작성자
@@ -158,8 +158,7 @@ const deleteAnswer = function (answer) {
 }
 
 .qna-detail-comment-profile-name {
-  font-size: 1em;
-  /* margin: 0px 5px; */
+  font-weight: 600;
   padding: 0px 5px;
 }
 
@@ -181,7 +180,7 @@ const deleteAnswer = function (answer) {
 }
 
 .qna-detail-comment-content {
-  font-size: 17px;
+  font-size: 1rem;
   margin-top: 15px;
   margin-bottom: 15px;
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="search-container">
-    <div class="right-container search-list">
-      <div class="view-title">검색</div>
+    <div class="left-container">
+      <div class="view-title">루틴 검색</div>
       <!-- 검색창 -->
       <div class="search-list-container">
         <div class="search-list-input">
@@ -138,6 +138,9 @@
       <div v-if="selectedRoutineId" >
         <SearchDetail :routineId="selectedRoutineId" />
       </div>
+      <div v-else>
+        <TheCommonComponent />
+      </div>
     </div>
   </div>
 </template>
@@ -145,6 +148,8 @@
 <script setup>
 import SearchList from "@/components/search/SearchList.vue";
 import SearchDetail from "@/components/search/SearchDetail.vue";
+import TheCommonComponent from '@/components/common/TheCommonComponent.vue';
+
 import { onMounted, ref } from "vue";
 import { useRoutineStore } from "@/stores/routine";
 
@@ -211,10 +216,6 @@ onMounted(() => {
 
 .view-title {
   margin-bottom: 40px;
-}
-
-.search-list {
-  border-right: 1px solid #ccc;
 }
 
 .search-button {

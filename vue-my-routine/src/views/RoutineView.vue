@@ -2,7 +2,7 @@
   <!-- 마이페이지 전체 컨테이너 -->
   <div class="mypage-container">
     <!-- 마이페이지 왼쪽 프로필 부분 -->
-    <div class="mypage-profile-container">
+    <div class="left-container">
       <div class="flex-box flex-space-between">
 
       <div class="flex-box" v-if="loginUser">
@@ -14,9 +14,9 @@
         />
         <!-- 프로필 닉네임, 레벨 표시 부분 -->
         <div>
-          <div class="flex-box">
+          <div class="flex-box-mb">
             <div class="profile-name">{{ loginUser.nickname }}</div>
-            <div class="profile-level">Lv.{{ loginUser.level }}</div>
+            <div class="routine-tag profile-level">Lv.{{ loginUser.level }}</div>
           </div>
           <!-- 프로필 해시태그(성격) 표시 부분 -->
           <div class="flex-box">
@@ -100,22 +100,7 @@ const createRoutine = function () {
 </script>
 
 <style scoped>
-/* 마이페이지 전체 */
-.mypage-container {
-  width: 1000px;
-  height: 700px;
-  margin: 0 auto;
-  display: flex;
-  font-family: "Pretendard";
-}
 
-/* 마이페이지 프로필 부분 */
-.mypage-profile-container {
-  width: 50%;
-  /* background-color: rgb(255, 235, 251); */
-  border-right: 1px solid #ccc;
-  padding-top: 30px;
-}
 
 .create-btn {
   background-color: transparent;
@@ -126,47 +111,5 @@ const createRoutine = function () {
 .create-btn img {
   width: 20px;
 }
-
-/* 프로필 이미지 */
-.img-mypage-profile {
-  width: 100px;
-  margin-right: 15px;
-}
-
-/* 프로필 닉네임 스타일 */
-.profile-name {
-  color: #555;
-  font-weight: 800;
-  font-size: 1.5em;
-  margin: 0 5px 20px 0;
-}
-
-/* 레벨, 성격키워드, 루틴 태그 스타일 */
-.profile-level,
-.profile-hashtag,
-.routine-tag {
-  background-color: #fae6b1;
-  font-size: 0.8em;
-  color: #333;
-  font-weight: 500;
-  padding: 4px 5px;
-  margin-bottom: 20px;
-  border-radius: 3px;
-  margin-right: 7px;
-}
-
-/* 프로필 성격 키워드 스타일 */
-.profile-hashtag:first-child {
-  background-color: #e6b3cb;
-}
-
-.profile-hashtag:nth-child(2) {
-  background-color: #b3dee5;
-}
-
-.profile-hashtag:last-child {
-  background-color: #b3e6d0;
-}
-
 
 </style>

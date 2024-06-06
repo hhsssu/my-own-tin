@@ -112,11 +112,11 @@ function formatDate(dateString) {
 
 <style scoped>
 .search-detail {
-  margin-left: 4%;
-  padding: 15px;
+  background-color: #F9F9F9;
   border-radius: 5px;
-  box-shadow: 5px 5px 10px lightgray;
-  width: 90%;
+  box-shadow: 3px 4px 20px -5px #ccc;
+  margin: 20px 20px 32px;
+  padding: 25px 20px;
   height: 300px;
   display: flex;
   flex-direction: column;

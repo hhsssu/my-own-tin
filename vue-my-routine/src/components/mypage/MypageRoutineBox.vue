@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="my-modify-tag">
     <h2 class="view-title">루틴 보관함</h2>
     <!-- 나의 루틴 태그 영역 -->
     <!-- <div v-for="routine in store.routineList" :key="routine.id"> -->

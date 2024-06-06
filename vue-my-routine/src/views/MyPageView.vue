@@ -2,13 +2,13 @@
     <!-- 마이페이지 전체 컨테이너 -->
     <div class="mypage-container">
         <!-- 마이페이지 왼쪽 프로필 부분 -->
-        <div class="mypage-profile-container">
+        <div class="left-container">
             <div class="flex-box">
                 <!-- 프로필 이미지 -->
                 <img src="@/assets/img/profile_female.png" alt="프로필 이미지" class="img-mypage-profile">
                 <!-- 프로필 닉네임, 레벨 표시 부분 -->
                 <div>
-                    <div class="flex-box">
+                    <div class="flex-box-mb">
                         <div class="profile-name">{{ user.nickname }}</div>
                         <div class="routine-tag profile-level">Lv.{{ user.level }}</div>
                         <img src="@/assets/img/icon/compose2.png" alt="프로필 수정 버튼" class="img-modify-btn" 
@@ -85,6 +85,7 @@ import MypageMile from '@/components/mypage/MypageMileDetail.vue';
 import MypageRoutineBox from '@/components/mypage/MypageRoutineBox.vue';
 import MypageModifyUser from '@/components/mypage/MypageModifyUser.vue';
 import MypageModifyRoutinetag from '@/components/mypage/MypageModifyRoutinetag.vue';
+import TheCommonComponent from '@/components/common/TheCommonComponent.vue';
 
 import { useUserStore } from '@/stores/user';
 import { useRoutineStore } from '@/stores/routine';
@@ -108,7 +109,7 @@ const mileTotal = computed(() => pointmileStore.mileTotal);
 const routineTotal = computed(() => routineStore.routineList.length);
 
 // 클릭 시 컴포넌트 변경
-const activeComponent = shallowRef(null);
+const activeComponent = shallowRef(TheCommonComponent);
 const components = {
     MypageModifyProfile,
     MypagePoint,
@@ -151,57 +152,10 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-/* 마이페이지 전체 */
-.mypage-container {
-    width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    font-family: 'Pretendard';
-}
 
-/* 마이페이지 프로필 부분 */
-.mypage-profile-container {
-    width: 50%;
-    /* background-color: rgb(255, 235, 251); */
-    border-right: 1.5px solid #ccc;
-    padding-top: 30px;
-}
 
-/* 프로필 이미지 */
-.img-mypage-profile {
-    width: 100px;
-    margin-right: 15px;
-}
 
-/* 프로필 닉네임 스타일 */
-.profile-name {
-    color: #555;
-    font-weight: 800;
-    font-size: 1.5em;
-    margin: 0 5px 20px 0;
-}
 
-/* 레벨, 성격키워드, 루틴 태그 스타일 */
-.profile-level {
-    background-color: #FAE6B1;
-    color: #333;
-}
-
-/* 프로필 성격 키워드 스타일 */
-.profile-hashtag:first-child {
-    background-color: #E6B3CB;
-    color: #333;
-}
-
-.profile-hashtag:nth-child(2) {
-    background-color: #B3DEE5;
-    color: #333;
-}
-
-.profile-hashtag:last-child {
-    background-color: #B3E6D0;
-    color: #333;
-}
 
 /* 각 프로필 박스 클릭 커서 변경 */
 .profile-click-box {
@@ -254,7 +208,6 @@ onMounted(async () => {
 /* 프로필 수정 버튼 스타일 */
 .img-modify-btn {
     width: 20px;
-    margin-bottom: 20px;
     margin-left: 10px;
     cursor: pointer;
 }
@@ -262,8 +215,7 @@ onMounted(async () => {
 
 
 .mypage-click-container {
-    height: 500px;
-    padding-top: 35px;
+    height: 700px;
     margin: 0 auto;
 }
 </style>

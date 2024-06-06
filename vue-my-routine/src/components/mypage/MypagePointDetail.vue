@@ -6,7 +6,7 @@
             <div class="point-detail-total" v-if="pointTotal === 0 || pointTotal === null">잔여 포인트 : 0 P</div>
         </div>
 
-        <table class="point-detail-table">
+        <table class="point-detail-table" style="table-layout: fixed;">
             <thead>
                 <tr class="point-detail-table-header">
                     <th>거래일</th>
@@ -60,6 +60,7 @@ onMounted(() => {
 
 <style scoped>
 .mypage-point-detail-container {
+    padding-top: 10px;
 }
 
 
@@ -94,8 +95,8 @@ onMounted(() => {
 
 th {
     padding-bottom: 7px;
-    padding-right: 40px;
-    padding-left: 40px;
+    padding-right: 50px;
+    padding-left: 50px;
 }
 
 /* 테이블 각 한줄 컬럼 */
@@ -104,7 +105,7 @@ th {
 
 /* 테이블 콘텐츠 */
 td {
-    padding: 15px 40px;
+    padding: 15px 0px;
 }
 
 /* 거래일 */

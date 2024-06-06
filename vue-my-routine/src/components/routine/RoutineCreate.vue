@@ -85,7 +85,6 @@
         cols="30"
         rows="10"
         v-model="routine.content"
-        style="min-width: 300px; max-width: 300px; min-height: 300px; max-height: 300px"
       ></textarea>
     </div>
     <!-- 등록 / 취소 버튼 -->
@@ -234,10 +233,12 @@ const cancelCreate = function () {};
 .routine-create-content textarea {
   border: 1px solid #999;
   border-radius: 5px;
-  width: 290px;
-  height: 300px;
   font-size: 1em;
   padding: 5px;
+  min-width: 300px; 
+  max-width: 300px; 
+  min-height: 150px; 
+  max-height: 150px;
 }
 
 .routine-create-buttons {
