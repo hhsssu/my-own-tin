@@ -21,8 +21,8 @@
           <!-- 답변 채택 버튼 (질문 작성자에게만 보임) -->
           <button class="routine-user-tag" v-if="checkQueWriter(ans)" @click="pickAnswer(ans)">채택</button>
           <!-- 답변 삭제 버튼 (답변 작성자에게만 보임) -->
-          <div v-else-if="checkAnsWriter(ans.userId)" @click="deleteAnswer(ans)">
-            답변 작성자
+          <div class="routine-user-tag" style="background-color: #FFA101;" v-else-if="checkAnsWriter(ans.userId)" @click="deleteAnswer(ans)">
+            내댓글
           </div>
         </div>
         <!-- 댓글 내용 -->
