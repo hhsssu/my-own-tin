@@ -96,7 +96,7 @@ const modifyExTag = () => {
 }
 
 .modify-container {
-  padding: 0 20px;
+  padding: 35px 20px;
 }
 
 .flex-box {

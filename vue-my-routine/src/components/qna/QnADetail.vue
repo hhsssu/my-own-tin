@@ -14,6 +14,7 @@
       <p class="qna-detail-content">
         {{ question.content }}
       </p>
+      <div style="text-align: end; font-size: 0.8rem; color: #999;">{{ formatDate(question.createAt) }}</div>
       <!-- 작성자 루틴 -->
       <div class="qna-detail-routine content-box" v-if="question.routine != null">
         <div class="routine-title">{{ question.routine.title }}</div>
@@ -66,6 +67,7 @@ const store = useQnAStore();
 const router = useRouter();
 const question = ref(null);
 
+// 질문 번호 찾기
 const fetchQuestionDetail = async (id) => {
   try {
     const questionData = await store.getQuestion(id);
@@ -85,6 +87,7 @@ watch(
   { immediate: true }
 );
 
+// 유저 아이디와 질문 작성 유저가 같은지 확인
 const checkWriter = function (userId) {
   const loginUser = JSON.parse(sessionStorage.getItem('user'));
   if (loginUser && loginUser.id === userId) {
@@ -123,6 +126,17 @@ const workoutTimeFormat = (workoutTime) => {
 
     return workout.trim();
 }
+
+// 날짜 포맷
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}/${month}/${day}`;
+}
+
+
 </script>
 
 
@@ -147,8 +161,9 @@ const workoutTimeFormat = (workoutTime) => {
 .qna-detail-profile-name {
   padding: 3px 10px;
   margin: 0px 5px;
-  font-size: 1em;
+  font-size: 1.2rem;
   width: 120px;
+  font-weight: 700;
 }
 
 .qna-detail-profile-level {
@@ -165,7 +180,7 @@ const workoutTimeFormat = (workoutTime) => {
   margin: 0px 5px;
   border-radius: 3px;
   color: white;
-  font-size: 1em;
+  font-size: 1rem;
 }
 
 .qna-detail-title {
@@ -175,7 +190,7 @@ const workoutTimeFormat = (workoutTime) => {
 }
 
 .qna-detail-content {
-  font-size: 1em;
+  font-size: 1rem;
 
 }
 

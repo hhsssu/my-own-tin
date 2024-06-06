@@ -17,11 +17,11 @@
             <div class="routine-tag">{{ qna.userGender }}</div>
           </div>
           <div>
-            <div style="text-align: end; font-size: 0.8rem; color: #999;">{{ formatDate(qna.createAt) }}</div>
           </div>
         </div>
         <!-- 질문 제목 -->
         <div class="qna-list-card-title">{{ qna.title }}</div>
+        <div style="text-align: end; font-size: 0.8rem; color: #999;">{{ formatDate(qna.createAt) }}</div>
       </div>
     </div>
   </div>
@@ -98,13 +98,11 @@ function formatDate(dateString) {
 .qna-list-card-pic {
   width: 50px;
   margin-right: 7px;
-  margin-bottom: 20px;
 }
 
 .qna-list-card-name {
   font-weight: 700;
   font-size: 1rem;
-  margin-bottom: 20px;
   margin-right: 15px;
 }
 

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="my-modify-tag">
         <div class="view-title">회원 정보수정</div>
         <div class="mypage-modify-detail-container">
             <div class="flex-box flex-box-end">
@@ -158,16 +158,6 @@ label {
     vertical-align: middle;
 }
 
-/* 수정 완료 버튼 */
-.modify-fin-btn {
-    border: none;
-    font-size: 1.1rem;
-    font-weight: 600;
-    background-color: #31525B;
-    color: #fff;
-    border-radius: 3px;
-    padding: 10px 30px;
-    cursor: pointer;
-}
+
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="qna-container">
-    <div class="right-container qna-list">
+    <div class="left-container">
       <div class="view-title">질문 상담</div>
       <!-- 검색창 -->
       <div class="search-list-container">
@@ -229,10 +229,6 @@ const clickSearch = function () {
 
 .view-title {
   margin-bottom: 40px;
-}
-
-.qna-list {
-  border-right: 1px solid #ccc;
 }
 
 .qna-create-button {

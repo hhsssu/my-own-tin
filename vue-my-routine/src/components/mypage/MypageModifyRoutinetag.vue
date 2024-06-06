@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="my-modify-tag">
     <h2 class="view-title">나의 루틴 태그</h2>
     <div class="profile-click-box content-box">
       <div class="flex-box">
@@ -85,7 +85,9 @@
         </div>
       </div>
     </div>
-    <button @click="modifyExTag">수정 완료</button>
+    <div class="display-block">
+      <button @click="modifyExTag" class="modify-fin-btn">수정 완료</button>
+    </div>
   </div>
 </template>
 
@@ -129,6 +131,8 @@ const modifyExTag = () => {
 </script>
 
 <style scoped>
+
+
 /* 나의 루틴 태그 스타일 */
 .routine-tag {
   background-color: #aaa;

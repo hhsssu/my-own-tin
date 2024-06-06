@@ -74,15 +74,6 @@ function formatDate(dateString) {
 
 <style scoped>
 
-
-/* 나의 루틴 태그 스타일 */
-.routine-tag {
-  /* background-color: #aaa; */
-  color: white;
-  font-weight: 300;
-}
-
-
 /* 프로필 클릭 박스의 타이틀 스타일 */
 .routine-title {
   font-weight: 700;
