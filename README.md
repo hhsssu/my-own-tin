@@ -1,19 +1,43 @@
-# my-routine-PJT
-SSAFY 11st DJ04 team06 'My Routine' PJT
 
-### Name Candidate for Web Site
-- My Routine
-- Fit-Formation (fitForm)
-- Fit Mingle
+### 운동 루틴 공유 서비스 <My Own Tin - 나의 운동 루틴>
+**팀원**: 우혜지, 홍선주<br>
+**기간**: 2024.05 ~ 2024.06 <br>
+**프로젝트에 사용된 기술**: Java, SpringBoot, JavaScript, Vue.js, Pinia, MySQL, JDBC, MyBatis, Tomcat, Git, HTML, CSS
 
-### github Link (private)
-- https://github.com/SSAFY-11th-MyRoutine
 
-### Notion Link (private)
-- https://www.notion.so/ssafy-study-daejeon-class4/SSAFY-1-6-01628c4ca9c242ba8ac0db812bce1790?pvs=4
+**🚩건강을 위한 현대인들의 운동 습관 기르기로 시작된 프로젝트**
+<br>
+직접 운동 루틴을 짜기 힘든 운동 초보자들은 질문/상담을 통해 조언을 얻으며 자신만의 효과적인 운동 루틴을 만들어보고 운동을 습관화 할 수 있도록 합니다. <br>
+운동이 일상인 사람들에게도 본인이 얼마나 열심히 실천하고 있는지 확인할 수 있고, 자신만의 효과적인 루틴을 추천해주거나, 더 효과적인 루틴을 추천받을 수 있는 서비스를 제공하는 프로젝트입니다.
+<br><br>
+<br>
+✔️**담당 역할**
+- 페이지 레이아웃, 로고 등 전체적인 디자인 목업
+- 회원가입/로그인/로그아웃 기능, 마이페이지 내의 기능
+- 스크립트, CSS 등 전체적인 코드 통일 및 유지 보수
+<br><br>
 
-### 기능 명세서 Link (public)
-- https://docs.google.com/spreadsheets/d/11EZJF5lgvw5E4KorAu52hr5IM0QIYOIoJGyrvyBCuJ8/edit?pli=1#gid=0
+✔️**구현 사항**<br>
 
-### mock-up Figma Link (private)
-- https://www.figma.com/design/Af1jQDZu1fanZfpbCsiGWR/SSAFY_11st_PJT?node-id=0-1&t=XqK16YuLUJ1QunL0-0
+- **나만의 루틴 작성 & 공유 기능**
+    - 본인이 설정한 태그로 운동 루틴 공유
+    - 본인이 작성한 루틴이 괜찮으면 루틴보관함에 보관하여 템플릿처럼 사용 가능<br><br>
+
+ - **루틴 검색 기능**
+    - 다른 운동인들의 루틴을 둘러볼 수 있음
+    - 원하는 조건을 선택해서 검색 가능
+    - 마음에 드는 루틴은 좋아요를 누를 수 있음
+    - 담기 기능으로 나의 루틴 보관함에 담아서 사용 가능<br><br>
+
+- **루틴 보관함 기능**
+    - 다른 회원의 운동 루틴을 내 보관함에 담아서 템플릿처럼 사용 가능
+    - 나의 루틴으로 내 페이지에 업로드할 수 있음<br><br>
+
+- **질문/상담 게시판**
+    - 초보자들이 전문가의 조언을 받을 수 있도록 제작한 질문/상담 게시판
+    - 본인의 루틴을 추가하여 질문 등록 가능<br><br>
+ 
+- **마이페이지 루틴 기본 태그 설정 기능**
+    - 운동 정보를 미리 설정해두어 루틴 등록 시 계속 다시 입력해야하는 불편함을 감소
+ 
+<br><br>
